@@ -10,5 +10,7 @@ package context;
  * @author Hoang Phuc
  */
 public class NewClass {
+    private String coy;
+    
     
 }
