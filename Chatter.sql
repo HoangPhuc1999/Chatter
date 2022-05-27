@@ -1,5 +1,5 @@
-﻿create database chatter1 COLLATE Latin1_General_100_CI_AI_KS_WS_SC;
-USE [chatter1]
+﻿create database chatter COLLATE Latin1_General_100_CI_AI_KS_WS_SC;
+USE [chatter]
 GO
 SET ANSI_NULLS ON
 GO
@@ -198,7 +198,7 @@ create table products(
 	product_description varchar(max) NOT NULL
 );
 
-insert into products values (  )
+
 
 Insert into Products(Product_Name,product_price, product_title, product_description)
 Values ('hamburger', 5, 'Hamburger chicken', 'hamburger cuc ngon'),	
