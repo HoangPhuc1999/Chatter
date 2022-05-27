@@ -1,6 +1,5 @@
-﻿
-create database chatter COLLATE Latin1_General_100_CI_AI_KS_WS_SC;
-USE [chatter]
+﻿create database chatter1 COLLATE Latin1_General_100_CI_AI_KS_WS_SC;
+USE [chatter1]
 GO
 SET ANSI_NULLS ON
 GO
@@ -22,7 +21,7 @@ create table users_role(
 
 create table users_account(
 	users_id int references users(users_id) NOT NULL,
-	username varchar(50) NOT NULL,
+	username varchar(50) NOT NULL UNIQUE,
 	password varchar(50) NOT NULL
 );
 
@@ -88,13 +87,13 @@ create table products(
 	product_id int NOT NULL PRIMARY KEY IDENTITY(1,1),
 	product_name varchar(255) NOT NULL,
 	product_price float NOT NULL,
-	product_title varchar(255) NOT NULL,
-	product_description varchar(255) NOT NULL
+	product_title varchar(max) NOT NULL,
+	product_description varchar(max) NOT NULL
 );
 
 create table products_image(
 	product_id int references products(product_id),
-	product_image_path varchar(50) NOT NULL,
+	product_image_path varchar(max) NOT NULL,
 	modified_at datetime default current_timestamp
 );
 
@@ -164,7 +163,7 @@ Values(1,'user1','user1'),
 (2,'user2','user2'),
 (3,'user3','user3')
 
-insert into users_address(users_id,home,district,city)
+insert into users_address(users_id,home_address,district,city)
 Values(1,'12 hang bai','Hoan Kiem' ,'Hanoi'),
 (2,'55 Nguyen Hoang Ton','Bac Tu Liem' ,'Hanoi'),
 (3,'2 Nguyen Trai','Quan 1' ,'Ho Chi Minh city')
@@ -191,9 +190,19 @@ Values('foods'),
 ('drinks'),
 ('hats')
 
-Insert into Products(Product_Name,Product_Image,Product_Price,Product_Title,Product_Description)
-Values ('','images/food.jps',1400.00,'nike air','new',100,1,3),	
-('','images/',2600.00,'nike air','new',100,1,3)
+create table products(
+	product_id int NOT NULL PRIMARY KEY IDENTITY(1,1),
+	product_name varchar(255) NOT NULL,
+	product_price float NOT NULL,
+	product_title varchar(max) NOT NULL,
+	product_description varchar(max) NOT NULL
+);
+
+insert into products values (  )
+
+Insert into Products(Product_Name,product_price, product_title, product_description)
+Values ('hamburger', 5, 'Hamburger chicken', 'hamburger cuc ngon'),	
+('Beef burger', 7, 'Beef burger with cheses', 'very delicious')
 
 
 Insert into coupons(coupon_code,product_discount_id,Discount_Amount,Expire_Date)
@@ -202,14 +211,14 @@ Values('GIAM20',1,20,'2022-1-1'),
 
 ----friends
 insert into users_friends(users_id,friend_id)
-values('a1','a2'),
-('a2','a1'),
-('a1','a3'),
-('a3','a1'),
-('a4','a2'),
-('a2','a4'),
-('a1','a4'),
-('a4','a1')
+values('1','2'),
+('2','1'),
+('1','3'),
+('3','1'),
+('4','2'),
+('2','4'),
+('1','4'),
+('4','1')
 
 
 
@@ -315,4 +324,3 @@ where conversations_id= 1;
 
 delete from conversations 
 where id = 1;
-
