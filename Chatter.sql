@@ -79,7 +79,6 @@ create table groups(
 	avatar char(50)
 );
 
-
 create table category(
 	category_id int PRIMARY KEY IDENTITY(1,1),
 	category_name varchar(255) NOT NULL
@@ -143,13 +142,13 @@ expire_date datetime NOT NULL
 
 
 create table users_cart(
-	users_id varchar(50) references users(users_id) NOT NULL,
+	users_id int references users(users_id) NOT NULL,
 	product_id int NOT NULL references products(product_id),
 	order_amount int NOT NULL,
 	created_at datetime default current_timestamp
 );
 
------------------add data to users ---------------------
+----------------------------------add data to users -------------------------------------------
 Insert into users(firstname,lastname,email,gender,avatar)
 Values('mark','kass','user1@fpt.edu.vn',0,'images/girl.jpg'),
 ('john','viet','user2@fpt.edu.vn',1,'images/boy.jpg'),
@@ -187,38 +186,34 @@ Values('Ngân hàng Nông nghiệp và Phát triển Nông thôn VN','Agribank')
 
 
 
-
-
-
-
-
-
 Insert into Category(Category_Name)
 Values('foods'),
 ('drinks'),
 ('hats')
 
-Insert into Products(Product_Name,Product_Image,Product_Price,Product_Title,Product_Description,Product_Size,cateID,sell_ID)
-Values ('Nike Air Max 90','images/shoe1.jpg',1400.00,'nike air','new',100,1,3),	
-('Jordan I High OG','images/shoe2.jpg',2600.00,'nike air','new',100,1,3)
+Insert into Products(Product_Name,Product_Image,Product_Price,Product_Title,Product_Description)
+Values ('','images/food.jps',1400.00,'nike air','new',100,1,3),	
+('','images/',2600.00,'nike air','new',100,1,3)
 
 
-Insert into Coupon(CouponCode,product_discount_id,Discount_Amount,Expire_Date)
-Values('GIAM20',20,20,'2022-1-1'),
-('GIAM50',50,'2022-1-1')	
-
-
+Insert into coupons(coupon_code,product_discount_id,Discount_Amount,Expire_Date)
+Values('GIAM20',1,20,'2022-1-1'),
+('GIAM50',2,50,'2022-1-1')	
 
 ----friends
-
-insert into friends(user_id,friend_id) values('a1','a2'),
+insert into users_friends(users_id,friend_id)
+values('a1','a2'),
 ('a2','a1'),
 ('a1','a3'),
 ('a3','a1'),
 ('a4','a2'),
 ('a2','a4'),
 ('a1','a4'),
-('a4','a1');
+('a4','a1')
+
+
+
+
 
 select * from users;
 

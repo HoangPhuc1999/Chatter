@@ -84,9 +84,6 @@
                   <i class="fa fa-search" aria-hidden="true"></i>
                 </button>
               </form>
-              <a href="" class="order_online">
-                Order Online
-              </a>
             </div>
           </div>
         </nav>
@@ -106,14 +103,26 @@
       <div class="row">
         <div class="col-md-6">
           <div class="form_container">
-            <form action="signup" method="POST">
+              <%
+                String file_name = (String)request.getParameter("filename");
+                if(file_name!=null){
+                    out.println(file_name);
+                   %>
+                  <img src="http://localhost:8080/Chatter/images/<%=file_name%>">
+                  <% 
+                     }
+                  %>
+            <form action="signup" method="POST" enctype="multipart/form-data">
+                <div>
+                  <input name="avatar" type="file" class="form-control" placeholder="Avatar" />
+                </div>
                 <div>
                   <input name="username" type="text" class="form-control" placeholder="Username" />
                 </div>
                 <div>
                   <input name="password" type="text" class="form-control" placeholder="Password" />
                 </div>
-                <div>
+                <div>   
                   <input name="repassword" type="text" class="form-control" placeholder="Re Enter Password" />
                 </div>
                 <div>
@@ -129,27 +138,22 @@
                   <input name="email" type="email" class="form-control" placeholder="Your Email" />
                 </div>
                 <div>
-                  <select class="form-control nice-select wide">
-                    <option value="" disabled selected>
-                      How many persons?
-                    </option>
-                    <option value="">
-                      2
-                    </option>
-                    <option value="">
-                      3
-                    </option>
-                    <option value="">
-                      4
-                    </option>
-                    <option value="">
-                      5
-                    </option>
-                  </select>
+                  <input name="home_address"type="text" class="form-control" placeholder="Home Address" />
                 </div>
                 <div>
-                  <input type="date" class="form-control">
+                  <input name="district"type="text" class="form-control" placeholder="district" />
                 </div>
+                <div>
+                  <input name="city"type="text" class="form-control" placeholder="city" />
+                </div>
+                <select name="calc_shipping_provinces" required="">
+                  <option value="">Tỉnh / Thành phố</option>
+                </select>
+                <select name="calc_shipping_district" required="">
+                  <option value="">Quận / Huyện</option>
+                </select>
+                <input class="billing_address_1" name="" type="hidden" value="">
+                <input class="billing_address_2" name="" type="hidden" value="">
                 <div class="btn_box">
                   <button>
                     Sign up!
@@ -166,7 +170,7 @@
       </div>
     </div>
   </section>
-  <!-- end book section -->
+  <!-- end sign up section -->
 
   <!-- footer section -->
   <footer class="footer_section">
@@ -270,7 +274,9 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
   </script>
   <!-- End Google Map -->
-
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'/>
+<script src='https://cdn.jsdelivr.net/gh/vietblogdao/js/districts.min.js'/>
+  <script src="js/district.js"></script>
 </body>
 
 </html>
