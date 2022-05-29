@@ -19,6 +19,7 @@ public class DBContext {
     }   
     /*Insert your other code right after this comment*/
     /*Change/update information of your database connection, DO NOT change name of instance variables in this class*/
+
     private final String serverName = "localhost";
     private final String dbName = "Chatter";
     private final String portNumber = "1433";
@@ -26,4 +27,4 @@ public class DBContext {
     private final String userID = "sa";
     private final String password = "sa";
 }
- 
+
