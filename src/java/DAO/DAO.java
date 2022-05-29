@@ -13,15 +13,16 @@ import java.util.ArrayList;
 import java.util.List;
 import model.*;
 
-
 /**
  *
  * @author khuat
  */
 public class DAO {
+
     Connection conn = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
+    public String xSql = null;
 
     public User_Account checkAccountExist(String user) {
         String query = "select * from User_Accounts\n"
@@ -40,6 +41,7 @@ public class DAO {
         }
         return null;
     }
+
     //reset mat khau table User_Account 
     //Created by An at 27/5
     public void resetPassword(String username) {
@@ -53,11 +55,10 @@ public class DAO {
             ps.setString(1, username);
             ps.executeUpdate(query);
         } catch (Exception e) {
-            
+
         }
     }
-    
-    
+
     public List<Product> getAllProduct() {
         List<Product> list = new ArrayList<>();
         String query = "select * from Products";
@@ -147,8 +148,8 @@ public class DAO {
 
     public List<Product> getProductBySellID(int id) {
         List<Product> list = new ArrayList<>();
-        String query = "select * from Products \n" +
-"where sell_ID = ? and [Product_Price] = 2600 ";
+        String query = "select * from Products \n"
+                + "where sell_ID = ? and [Product_Price] = 2600 ";
         try {
             conn = new DBContext().getConnection();//mo ket noi voi sql
             ps = conn.prepareStatement(query);
@@ -225,8 +226,6 @@ public class DAO {
         }
         return list;
     }
-    
-   
 
     public Product getLast() {
         String query = "select top 1 * from Products\n"
@@ -248,8 +247,7 @@ public class DAO {
         return null;
     }
 
-  
-    public Boolean checkAccountPassword(String user,String pass) {
+    public Boolean checkAccountPassword(String user, String pass) {
         String query = "select * from Accounts\n"
                 + "where Username = ?\n";
         try {
@@ -258,8 +256,9 @@ public class DAO {
             ps.setString(1, user);
             rs = ps.executeQuery();
             while (rs.next()) {
-                if(rs.getString(3).equals(pass)) 
+                if (rs.getString(3).equals(pass)) {
                     return true;
+                }
             }
         } catch (Exception e) {
         }
@@ -277,7 +276,7 @@ public class DAO {
         } catch (Exception e) {
         }
     }
-    
+
     public void deleteAccount(String id) {
         String query = "delete from Accounts\n"
                 + "where Account_ID = ?";
@@ -289,7 +288,8 @@ public class DAO {
         } catch (Exception e) {
         }
     }
-    public void editAccount(String Username, String Password,int id) {
+
+    public void editAccount(String Username, String Password, int id) {
         String query = "update Accounts\n"
                 + "set Username = ?,\n"
                 + "Password = ?\n"
@@ -304,6 +304,7 @@ public class DAO {
         } catch (Exception e) {
         }
     }
+
     public void insertProduct(String name, String image, String price,
             String title, String description, String category, int sid) {
         String query = "INSERT into Products \n"
@@ -323,8 +324,7 @@ public class DAO {
         } catch (Exception e) {
         }
     }
-    
-    
+
     public void editProduct(String name, String image, String price,
             String title, String description, String category, String pid) {
         String query = "update Products\n"
@@ -349,24 +349,25 @@ public class DAO {
         } catch (Exception e) {
         }
     }
+
     public int couponCheck(String code) { //kiem tra ma coupon hl, tra ve gia tri giam gia 
         String query = "Select * from Coupon where CouponCode = ? ";
-        int discount=0;
+        int discount = 0;
         try {
             conn = new DBContext().getConnection();//mo ket noi voi sql
             ps = conn.prepareStatement(query);
-            ps.setString(1,code);
-            rs=ps.executeQuery();
-            while(rs.next()){
-                return discount=rs.getInt(2);
+            ps.setString(1, code);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return discount = rs.getInt(2);
             }
-            
+
         } catch (Exception e) {
         }
         return discount;
     }
-    
-    public void insertOrders(int Aid,int Pid,int Amount) {
+
+    public void insertOrders(int Aid, int Pid, int Amount) {
         String query = "Insert into Orders\n"
                 + "(Orders_Account_ID,Orders_Product_ID,Order_Amount)\n"
                 + "VALUES(?,?,?)";
@@ -380,36 +381,30 @@ public class DAO {
         } catch (Exception e) {
         }
     }
+
     //lay tong order dua vao role nguoi dung
     public List<Order> getAllOrders(String role) {
-        List<Order> o = new ArrayList<>(); 
+        List<Order> o = new ArrayList<>();
         String query1 = "Select * from Orders";
         String query2 = "Select o.* from Orders o INNER JOIN Products p ON o.Orders_Product_ID = p.Product_ID ";
         try {
             conn = new DBContext().getConnection();//mo ket noi voi sql
-            if(role.equalsIgnoreCase("admin")){
+            if (role.equalsIgnoreCase("admin")) {
                 ps = conn.prepareStatement(query1);
-            }
-            else if(role.equalsIgnoreCase("seller")){
+            } else if (role.equalsIgnoreCase("seller")) {
                 ps = conn.prepareStatement(query2);
             }
-            rs= ps.executeQuery();
+            rs = ps.executeQuery();
             while (rs.next()) {
-                  o.add(new Order(rs.getInt(1),
+                o.add(new Order(rs.getInt(1),
                         rs.getInt(2),
                         rs.getInt(3),
                         rs.getInt(4),
                         rs.getDate(5)));
             }
+        } catch (Exception e) {
         }
-        catch (Exception e) {
-        }
-        return o;  
+        return o;
     }
-    
 
-   
-    
-    
-    
 }
