@@ -11,8 +11,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import model.User;
-import model.User_Account;
+import model.*;
+
 
 /**
  *
@@ -23,33 +23,6 @@ public class DAO {
     PreparedStatement ps = null;
     ResultSet rs = null;
 
-    public void singup(User new) {
-        String query = "insert into users(firstname, lastname, email, gender)\n"
-                + "values(?,?,)";
-        String query2 = "insert into users_role\n"
-                + "values(?,'user')";
-        String query3 = "insert into users_account\n"
-                + "values(?,?)";
-        try {
-            conn = new DBContext().getConnection();//mo ket noi voi sql
-            ps = conn.prepareStatement(query);
-            ps.setString(1, user);
-            ps.setString(2, pass);
-            ps.executeUpdate();
-            
-            ps = conn.prepareStatement(query);
-            ps.setString(1, user);
-            ps.setString(2, pass);
-            ps.executeUpdate();
-            
-            ps = conn.prepareStatement(query);
-            ps.setString(1, user);
-            ps.setString(2, pass);
-            ps.executeUpdate();
-            
-        } catch (Exception e) {
-        }
-    }
     public User_Account checkAccountExist(String user) {
         String query = "select * from User_Accounts\n"
                 + "where Username = ?\n";
@@ -253,23 +226,7 @@ public class DAO {
         return list;
     }
     
-    public List<Account> getAllAccount() {
-        List<Account> list = new ArrayList<>();
-        String query = "select * from Accounts";
-        try {
-            conn = new DBContext().getConnection();//mo ket noi voi sql
-            ps = conn.prepareStatement(query);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                list.add(new Account(rs.getInt(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getString(4)));
-            }
-        } catch (Exception e) {
-        }
-        return list;
-    }
+   
 
     public Product getLast() {
         String query = "select top 1 * from Products\n"
@@ -291,26 +248,7 @@ public class DAO {
         return null;
     }
 
-    public Account login(String user, String pass) {
-        String query = "select * from Accounts\n"
-                + "where Username = ?\n"
-                + "and Password = ?";
-        try {
-            conn = new DBContext().getConnection();//mo ket noi voi sql
-            ps = conn.prepareStatement(query);
-            ps.setString(1, user);
-            ps.setString(2, pass);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                return new Account(rs.getInt(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getString(4));
-            }
-        } catch (Exception e) {
-        }
-        return null;
-    }
+  
     public Boolean checkAccountPassword(String user,String pass) {
         String query = "select * from Accounts\n"
                 + "where Username = ?\n";
@@ -470,18 +408,7 @@ public class DAO {
     }
     
 
-    public static void main(String[] args) {
-        DAO dao = new DAO();
-        List<Product> list = dao.getAllProduct();
-        List<Category> listC = dao.getAllCategory();
-        List<Account> listA = dao.getAllAccount(); //test acc
-        List<Product> listD = dao.getProductBySellID(3); //not working
-        List<Order> listO = dao.getAllOrders("admin");
-        for (Product o : listD) {
-            System.out.println(o);
-        }
-    }
-
+   
     
     
     
