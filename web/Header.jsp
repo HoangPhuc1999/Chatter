@@ -99,7 +99,10 @@
                 </button>
               </form>
               <a href="" class="order_online">
-                Order Online
+                Sign in
+              </a>
+                <a href="" class="order_online">
+                Sign up
               </a>
             </div>
           </div>

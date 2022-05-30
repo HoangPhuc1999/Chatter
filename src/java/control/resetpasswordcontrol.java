@@ -13,7 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.User_Account;
+import model.UserAccount;
 
 /**
  *
@@ -42,7 +42,7 @@ public class resetpasswordcontrol extends HttpServlet {
         String email = request.getParameter("email");
 
         DAO dao = new DAO();
-        User_Account user = dao.checkAccountExist(username);
+        UserAccount user = dao.checkAccountExist(username);
         if(user == null){
                 //send error message\
                 String message="oops, this username does not exsit";
@@ -51,6 +51,8 @@ public class resetpasswordcontrol extends HttpServlet {
                 
             }else{
                 dao.resetPassword(username);
+                String message="password reset completed";
+                response.getWriter().print(message);
             }
             
     }

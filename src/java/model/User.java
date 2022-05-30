@@ -14,21 +14,43 @@ import java.util.ArrayList;
 public class User {
     private int users_id;
     private String role;
+    private String firstname;
+    private String lastname;
     private String phonenumber;
     private String email;
     private String gender;
     private String avatar;
     private ArrayList<Item> cart;
 
-    public User(int users_id, String role, String phonenumber, String email, String gender, String avatar, ArrayList<Item> cart) {
+    public User(int users_id, String role, String firstname, String lastname, String phonenumber, String email, String gender, String avatar, ArrayList<Item> cart) {
         this.users_id = users_id;
         this.role = role;
+        this.firstname = firstname;
+        this.lastname = lastname;
         this.phonenumber = phonenumber;
         this.email = email;
         this.gender = gender;
         this.avatar = avatar;
         this.cart = cart;
     }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    
 
     public int getUsers_id() {
         return users_id;
@@ -84,6 +106,11 @@ public class User {
 
     public void setCart(ArrayList<Item> cart) {
         this.cart = cart;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" + "users_id=" + users_id + ", role=" + role + ", firstname=" + firstname + ", lastname=" + lastname + ", phonenumber=" + phonenumber + ", email=" + email + ", gender=" + gender + ", avatar=" + avatar + ", cart=" + cart + '}';
     }
     
     
