@@ -5,9 +5,14 @@
  */
 package DAO;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.User;
 import model.UserAccount;
 
+/**
 /**
  *
  * @author Hoang Phuc
@@ -41,5 +46,39 @@ public class UserDAO extends DAO {
         }
         return (x);
     }
+    
+        public ArrayList<User> getUsersForAdminByName(String namePattern){
+        ArrayList<User> users = new ArrayList<>();
+        try {
+            xSql = "select *\n" +
+                    "from users u join users_role ur on u.users_id = ur.users_id\n" +
+//                    "left join users_cart uc on u.users_id = uc.users_id\n" +
+                    "where (firstname + ' ' + lastname) like ('%' + ? + '%')"
+                    + "order by u.users_id";
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, namePattern);
+            rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                
+                users.add(
+                        new User(
+                            rs.getInt("users_id"),
+                            rs.getString("user_role"), 
+                            rs.getString("firstname"), 
+                            rs.getString("lastname"), 
+                            "0123456789", 
+                            rs.getString("email"), 
+                            rs.getBoolean("gender") == true ? "Male" : "Female", 
+                            rs.getString("avatar"), 
+                            null));
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return users;
+    }
+
 
 }
