@@ -51,12 +51,16 @@ public class UserDAO extends DAO {
         ArrayList<User> users = new ArrayList<>();
         try {
             xSql = "select *\n" +
-                    "from users u join users_role ur on u.users_id = ur.users_id\n" +
+                    "from users u join users_role ur on u.users_id = ur.users_id\n"+
 //                    "left join users_cart uc on u.users_id = uc.users_id\n" +
-                    "where (firstname + ' ' + lastname) like ('%' + ? + '%')"
+                    (namePattern.length()>0?
+                    "where (firstname + ' ' + lastname) like ('%' + ? + '%')\n":"")
                     + "order by u.users_id";
             ps = con.prepareStatement(xSql);
+            
+            if( namePattern.length()>0)
             ps.setString(1, namePattern);
+            
             rs = ps.executeQuery();
             
             while (rs.next()) {
@@ -79,6 +83,7 @@ public class UserDAO extends DAO {
         }
         return users;
     }
+        
 
 
 }
