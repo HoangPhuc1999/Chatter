@@ -27,6 +27,22 @@
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>EditUserController</servlet-name>
+        <servlet-class>controller.admin.EditUserController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListCategoryController</servlet-name>
+        <servlet-class>controller.admin.ListCategoryController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EditUserController</servlet-name>
+        <url-pattern>/EditUserController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListCategoryController</servlet-name>
+        <url-pattern>/admin/list_category</url-pattern>
+    </servlet-mapping>
 =======
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <session-config>
