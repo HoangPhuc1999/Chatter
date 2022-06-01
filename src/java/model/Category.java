@@ -7,7 +7,7 @@ package model;
 
 /**
  *
- * @author trinh
+ * @author An
  */
 public class Category {
     private int cid;

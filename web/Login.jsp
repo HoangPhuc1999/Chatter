@@ -69,7 +69,7 @@
                                     <a class="nav-link" href="list">Menu</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="about.jsp">About</a>
+                                    <a class="nav-link" href="About.jsp">About</a>
                                 </li>
                                 <li class="nav-item active">
                                     <a class="nav-link" href="book.jsp">Book Table <span class="sr-only">(current)</span> </a>

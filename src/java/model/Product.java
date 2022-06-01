@@ -7,7 +7,7 @@ package model;
 
 /**
  *
- * @author trinh
+ * @author an
  */
 public class Product {
     private int id;

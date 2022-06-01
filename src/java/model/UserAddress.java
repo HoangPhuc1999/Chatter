@@ -22,6 +22,13 @@ public class UserAddress {
         this.city = city;
     }
 
+    public UserAddress(String home_address, String district, String city) {
+        this.home_address = home_address;
+        this.district = district;
+        this.city = city;
+    }
+    
+
     public int getUsers_id() {
         return users_id;
     }

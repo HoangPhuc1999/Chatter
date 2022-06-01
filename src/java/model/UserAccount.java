@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author trinh
+ * @author An
  */
 public class UserAccount {
     private int users_id;
@@ -23,6 +23,12 @@ public class UserAccount {
         this.username = username;
         this.password = password;
     }
+
+    public UserAccount(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+    
 
     public int getUsers_id() {
         return users_id;

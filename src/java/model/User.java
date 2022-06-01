@@ -34,6 +34,19 @@ public class User {
         this.cart = cart;
     }
 
+    public User(String role, String firstname, String lastname, String phonenumber, String email, String gender, String avatar, ArrayList<Item> cart) {
+        this.role = role;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.phonenumber = phonenumber;
+        this.email = email;
+        this.gender = gender;
+        this.avatar = avatar;
+        this.cart = cart;
+    }
+    
+    
+
     public String getFirstname() {
         return firstname;
     }

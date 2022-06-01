@@ -101,7 +101,7 @@
               <a href="" class="order_online">
                 Sign in
               </a>
-                <a href="" class="order_online">
+                <a href="SignUp.jsp" class="order_online">
                 Sign up
               </a>
             </div>
