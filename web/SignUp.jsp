@@ -37,6 +37,38 @@
   <!-- responsive style -->
   <link href="css/responsive.css" rel="stylesheet" />
 
+  <link
+      class="jsbin"
+      href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script
+      class="jsbin"
+      src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"
+    ></script>
+    <script
+      class="jsbin"
+      src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"
+    ></script>
+    <meta charset="utf-8" />
+    <title>JS Bin</title>
+    <!--[if IE]>
+      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <style>
+      article,
+      aside,
+      figure,
+      footer,
+      header,
+      hgroup,
+      menu,
+      nav,
+      section {
+        display: block;
+      }
+    </style>
 </head>
 
 <body class="sub_page">
@@ -49,7 +81,7 @@
     <header class="header_section">
       <div class="container">
         <nav class="navbar navbar-expand-lg custom_nav-container ">
-          <a class="navbar-brand" href="index.html">
+          <a class="navbar-brand" href="Index.jsp">
             <span>
               Chatter
             </span>
@@ -62,16 +94,16 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav  mx-auto ">
               <li class="nav-item">
-                <a class="nav-link" href="index.html">Home </a>
+                <a class="nav-link" href="Index.jsp">Home </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="menu.html">Menu</a>
+                <a class="nav-link" href="menu.jsp">Menu</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="about.html">About</a>
+                <a class="nav-link" href="About.jsp">About</a>
               </li>
               <li class="nav-item active">
-                <a class="nav-link" href="book.html">Book Table <span class="sr-only">(current)</span> </a>
+                <a class="nav-link" href="book.jsp">Book Table <span class="sr-only">(current)</span> </a>
               </li>
             </ul>
             <div class="user_option">
@@ -114,7 +146,10 @@
                   %>
             <form action="signup" method="POST" enctype="multipart/form-data">
                 <div>
-                  <input name="avatar" type="file" class="form-control" placeholder="Avatar" />
+                  <input name="avatar" type="file" class="form-control" placeholder="Avatar"
+                             onchange="document.getElementById('avatar').src = window.URL.createObjectURL(this.files[0])"/>
+                  
+                  
                 </div>
                 <div>
                   <input name="username" type="text" class="form-control" placeholder="Username" />
@@ -146,32 +181,22 @@
                 <div>
                   <input name="city"type="text" class="form-control" placeholder="city" />
                 </div>
-                <select name="calc_shipping_provinces" required="">
-                  <option value="">Tỉnh / Thành phố</option>
-                </select>
-                <select name="calc_shipping_district" required="">
-                  <option value="">Quận / Huyện</option>
-                </select>
-                <input class="billing_address_1" name="" type="hidden" value="">
-                <input class="billing_address_2" name="" type="hidden" value="">
-                <div class="btn_box">
+                
                   <button>
                     Sign up!
                   </button>
                 </div>
             </form>
           </div>
-        </div>
         <div class="col-md-6">
-          <div class="map_container ">
-            <div id="googleMap"></div>
+          <div class="map_container">
+            <img id="avatar" alt="your image" class="img-fluid" />
           </div>
         </div>
       </div>
     </div>
   </section>
   <!-- end sign up section -->
-
   <!-- footer section -->
   <footer class="footer_section">
     <div class="container">

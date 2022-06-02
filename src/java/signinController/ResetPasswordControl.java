@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package control;
+package signinController;
 
 import DAO.DAO;
 import java.io.IOException;
@@ -20,7 +20,7 @@ import model.UserAccount;
  * @author khuat
  */
 @WebServlet(name = "resetpasswordcontrol", urlPatterns = {"/resetpassword"})
-public class resetpasswordcontrol extends HttpServlet {
+public class ResetPasswordControl extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
