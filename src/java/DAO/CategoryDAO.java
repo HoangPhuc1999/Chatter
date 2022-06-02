@@ -1,4 +1,3 @@
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -27,12 +26,41 @@ public class CategoryDAO extends DAO {
             while (rs.next()) {
                 Category category = new Category();
                 category.setCid(rs.getInt("category_id"));
-                category.setCname(rs.getString("category_name")) ;
+                category.setCname(rs.getString("category_name"));
                 categorys.add(category);
             }
         } catch (SQLException ex) {
             Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return categorys;
+    }
+    public void insert(Category category){
+        try {
+            xSql = "INSERT INTO [category]\n" +
+                    "           ([category_name])\n" +
+                    "     VALUES\n" +
+                    "           (?)";
+            ps = connection.prepareStatement(xSql);
+            ps.setString(1, category.getCname());
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void update(Category category){
+        
+        try {
+            xSql = "UPDATE [category]\n" +
+                    "   SET [category_name] = ?\n" +
+                    " WHERE [cid]= ?";
+            ps = connection.prepareStatement(xSql);
+            ps.setString(1, category.getCname());
+            ps.setInt(2, category.getCid());
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
     }
 }
