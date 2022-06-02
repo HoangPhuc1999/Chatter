@@ -1,3 +1,4 @@
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -25,8 +26,8 @@ public class CategoryDAO extends DAO {
             rs = ps.executeQuery();
             while (rs.next()) {
                 Category category = new Category();
-                category.setCid(rs.getInt("cid"));
-                category.setCname(rs.getString("name"));
+                category.setCid(rs.getInt("category_id"));
+                category.setCname(rs.getString("category_name")) ;
                 categorys.add(category);
             }
         } catch (SQLException ex) {
