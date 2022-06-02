@@ -19,13 +19,22 @@
   <!-- nice select  -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" integrity="sha512-CruCP+TD3yXzlvvijET8wV5WxxEh5H8P4cmz0RFbKK6FlZ2sYl3AEsKlLPHbniXKSrDdFewhbmBK5skbdsASbQ==" crossorigin="anonymous" />
   <!-- font awesome style -->
-  <link href="css/font-awesome.min.css" rel="stylesheet" />
+  <link href="../css/font-awesome.min.css" rel="stylesheet" />
 
   <!-- Custom styles for this template -->
-  <link href="css/style.css" rel="stylesheet" />
+  <link href="../css/style.css" rel="stylesheet" />
   <!-- responsive style -->
-  <link href="css/responsive.css" rel="stylesheet" />
-
+  <link href="../css/responsive.css" rel="stylesheet" />
+<style>
+body {
+  background-color: #121819;
+  background-attachment: fixed;
+  background-size: auto;
+}
+.main_content {
+    background: #FFF !important;
+}
+</style>
   <script>
             var cids = [];
             <c:forEach items="${requestScope.categorys}" var="c">
@@ -104,13 +113,13 @@
     <body>
         <div class="hero_area">
         <div class="bg-box">
-          <img src="images/hero-bg.jpg" alt="">
         </div>
         <!-- header section strats -->
         <jsp:include page="../../Header.jsp" />
         <!-- end header section -->
       </div>
-        <<h2 style="text-align: center;">Modify Categories</h2>
+        <div class="main_content">
+        <h2 style="text-align: center;">Modify Categories</h2>
         <div class="d-flex justify-content-center">
         <table class="table table-striped w-50" id="tableX">
             <tr class>
@@ -125,10 +134,10 @@
                     <td>${category.cid}</td>
                     <td>
                         <span class="viewmode${category.cid}" id="view_name${category.cid}">${category.cname}</span>
-                        <input name="name" class="editmode${category.cid}" type="text" id="edit_name${category.cid}" value="${category.cname}" />
+                        <input name="cname" class="editmode${category.cid}" type="text" id="edit_name${category.cid}" value="${category.cname}" />
                     </td>
                     <td>
-                        <input type="hidden" name="id" value="${category.cid}"/>
+                        <input type="hidden" name="cid" value="${category.cid}"/>
                         <input class="btn btn-outline-info btn-sm viewmode${category.cid}" type="button" onclick="showEditmode(${category.cid});hideViewmode(${category.cid});" value="Edit"/>
                         <a class="btn btn-outline-danger btn-sm viewmode${category.cid}"  href="#" onclick="deleteCategory(${category.cid})">Delete</a>
                         <input class="btn btn-outline-success btn-sm editmode${category.cid}" type="submit"  value="Save"/>
@@ -137,7 +146,7 @@
                 </tr>
             </c:forEach>
             
-                <form action="admin/update_category" method="post">   
+                <form action="admin/add_category" method="post">   
                 <tr>
                     <td></td>
                     <td></td>
@@ -145,6 +154,7 @@
                 </tr>
                 </form>
         </table>
+        </div>
         </div>
                 
          <!-- footer section -->
