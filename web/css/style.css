@@ -180,7 +180,7 @@ a:focus {
 }
 
 #search-text {
-    width: 100px;
+    width: 10vh;
     border-radius: 20px;
 }
 
@@ -193,7 +193,7 @@ a:focus {
 }
 
 #search-box:hover #search-text, #search-box #search-text:valid{
-    width: 100px;
+    width: 10vh;
     background: #ffffff;
     padding: 7px;
 }
