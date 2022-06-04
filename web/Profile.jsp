@@ -1,7 +1,10 @@
 <%-- 
-    Document   : signup
-    Created on : May 25, 2022, 9:04:43 PM
+    Document   : Profile
+    Created on : Jun 2, 2022, 9:45:19 PM
     Author     : khuat
+--%>
+<%-- 
+    To DO : 
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -148,49 +151,55 @@
                 <div>
                   <input name="avatar" type="file" class="form-control" placeholder="Avatar"
                              onchange="document.getElementById('avatar').src = window.URL.createObjectURL(this.files[0])"/>
-                  
-                  
                 </div>
                 <div>
-                  <input name="username" type="text" class="form-control" placeholder="Username" />
+                  <input name="username" type="text" class="form-control" required placeholder="Username" />
                 </div>
                 <div>
-                  <input name="password" type="text" class="form-control" placeholder="Password" />
+                  <input name="password" type="text" class="form-control"  required placeholder="Password" />
                 </div>
                 <div>   
-                  <input name="repassword" type="text" class="form-control" placeholder="Re Enter Password" />
+                  <input name="repassword" type="text" class="form-control" required placeholder="Re Enter Password" />
                 </div>
                 <div>
-                  <input name="firstname" type="text" class="form-control" placeholder="First name" />
+                  <input name="firstname" type="text" class="form-control" required placeholder="First name" />
                 </div>
                 <div>
-                  <input name="lastname" type="text" class="form-control" placeholder="Last name" />
+                  <input name="lastname" type="text" class="form-control" required placeholder="Last name" />
+                </div>       
+                <div class="form-control form-check-inline">
+                        <p>Gender:
+                        <label class="form-check-label">
+                  <input type="radio" class="form-check-input" name="gender" value="1" checked="checked">Male    
+                        </label>
+                <label class="form-check-label">
+                  <input type="radio" class="form-check-input" name="gender" value="0">Female
+                </label>
+                </div>
+                
+                <div>
+                  <input name="phonenumber"type="text" class="form-control" required placeholder="Phone Number" />
                 </div>
                 <div>
-                  <input name="phonenumber"type="text" class="form-control" placeholder="Phone Number" />
+                  <input name="email" type="email" class="form-control" required placeholder="Your Email" />
                 </div>
                 <div>
-                  <input name="email" type="email" class="form-control" placeholder="Your Email" />
+                  <input name="home_address"type="text" class="form-control" required placeholder="Home Address" />
                 </div>
                 <div>
-                  <input name="home_address"type="text" class="form-control" placeholder="Home Address" />
+                  <input name="district"type="text" class="form-control" required placeholder="District" />
                 </div>
                 <div>
-                  <input name="district"type="text" class="form-control" placeholder="district" />
-                </div>
-                <div>
-                  <input name="city"type="text" class="form-control" placeholder="city" />
+                  <input name="city"type="text" class="form-control" required placeholder="City" />
                 </div>
                 
                   <button>
                     Sign up!
                   </button>
-                </div>
             </form>
           </div>
         <div class="col-md-6">
           <div class="map_container">
-            <img id="avatar" alt="your image" class="img-fluid" />
           </div>
         </div>
       </div>

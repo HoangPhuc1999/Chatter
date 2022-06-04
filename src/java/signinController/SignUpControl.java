@@ -5,7 +5,8 @@
  */
 package signinController;
 
-import DAO.DAO;
+import DAO.*;
+import model.*;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,7 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-import model.UserAccount;
+
 
 /**
  *
@@ -29,7 +30,7 @@ import model.UserAccount;
   maxRequestSize = 1024 * 1024 * 100   // 100 MB
 )
 
-public class signUpControl extends HttpServlet {
+public class SignUpControl extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -44,10 +45,14 @@ public class signUpControl extends HttpServlet {
         String pass = request.getParameter("pass");
         String re_pass = request.getParameter("repass");
         String home_address = request.getParameter("home_address");
+        String district = request.getParameter("district");
+        String city = request.getParameter("city");
         String firstname = request.getParameter("firstname");
         String lastname = request.getParameter("lastname");
         String phone = request.getParameter("phone_number");
         String email = request.getParameter("email");
+        String gender = request.getParameter("gender");
+        String avatar;
         
         //recieeve and store avatar image        
          for (Part part : request.getParts()) {
@@ -56,24 +61,24 @@ public class signUpControl extends HttpServlet {
             fileName = new File(fileName).getName();
             part.write(this.getFolderUpload().getAbsolutePath() + File.separator + fileName);
           }       
-               
+         avatar= this.getFolderUpload().getAbsolutePath() + File.separator + fileName;
          
         if(!pass.equals(re_pass)){
             response.sendRedirect("Login.jsp");
         }else{
-            DAO dao = new DAO();
+            UserDAO dao = new UserDAO();
             UserAccount a = dao.checkAccountExist(user); //kiem tra username trong database 
             if(a == null){
                 //dc signup
                UserAccount newAcc = new UserAccount(user,pass);  
-               UserAddress newAccAddress newAcc = new UserAddress();  
+               UserAddress newAccAddress = new UserAddress(home_address,district,city);  
+               User newUser = new User(firstname,lastname,phone,email,gender,avatar);
                dao.singup(); //them user
                 
                 request.setAttribute("message", "Sign up Success!");
                 PrintWriter out = response.getWriter(); 
                 out.println("<script type=\"text/javascript\">"); 
                 out.println("alert('Sign up Success!');"); 
-                out.println("location='Index.jsp';"); 
                 out.println("</script>"); 
                 getServletContext().getRequestDispatcher("/result.jsp").forward(request, response);
                 
