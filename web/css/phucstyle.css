@@ -1,0 +1,115 @@
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Open+Sans:wght@400;600;700&display=swap");
+
+
+/* Text 1 */
+.text {
+    top: 10px;
+    left: 210px;
+    position: relative;
+    /*font-family: Poppins;*/
+    margin-bottom: 0;
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+
+/* Text 1 */
+.textusername {
+    position: relative;
+    /*font-family: Poppins;*/
+    margin-bottom: 0;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+
+/* Textbox 1 */
+.textbox {
+    position: absolute;
+    top: 108px;
+    left: 24px;
+    opacity: 1;
+}
+.textbox input {
+    width: 419px;
+    height: 36px;
+    padding-left: 34px;
+    padding-right: 12px;
+    font-family: Public Sans;
+    font-size: 14px;
+    background: #FFFFFFFF;
+    border-radius: 6px;
+    border-width: 1px;
+    border-color: #9095A0FF;
+    outline: none;
+}
+.textbox svg {
+    position: relative;
+    top: 12px;
+    right: 12px;
+    width: 16px;
+    height: 16px;
+    fill: #282E37;
+}
+.textbox .label {
+    font-size: 14px;
+    line-height: 22px;
+}
+.textbox svg.left {
+    left: 12px;
+}
+/* hover */
+.textbox input:hover {
+    color: #BCC1CAFF;
+    background: #FFFFFFFF;
+    border-color: #737C8CFF;
+}
+/* focused */
+.textbox input:focused {
+    color: #BCC1CAFF;
+    background: #FFFFFFFF;
+    border-color: #9095A0FF;
+}
+/* disabled */
+.textbox input:disabled {
+    color: #BCC1CAFF;
+    background: #FFFFFFFF;
+    border-color: #9095A0FF;
+}
+.textbox :disabled + .icon, .textbox :disabled + .icon + .icon {
+    fill: #282E37FF;
+}
+
+.button {
+  position: absolute;
+  top: 304px;
+  left: 24px;
+  width: 419px;
+  height: 44px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Public Sans;
+  font-size: 16px;
+  line-height: 26px;
+  color: #FAFAFBFF;
+  background: #282E37FF;
+  opacity: 1;
+  border: none;
+  border-radius: 6px;
+}
+/* Hover */
+.button:hover {
+  color: #FAFAFBFF;
+  background: #353C48FF;
+}
+/* Pressed */
+.button:hover:active {
+  color: #FAFAFBFF;
+  background: #4D5564FF;
+}
+/* Disabled */
+.button:disabled {
+  opacity: 0.4;
+}
