@@ -93,15 +93,18 @@
                   </g>
                 </svg>
               </a>
-              <form class="form-inline">
-                <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
-                  <i class="fa fa-search" aria-hidden="true"></i>
-                </button>
-              </form>
+                <form action="search" method="post" id="search-box" class="form-row">
+                    <input type="search" name="txt" id="search-text"
+                           placeholder="Bạn muốn ăn gì?"
+                           required>
+                    <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit" id="search-btn">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                    </button>
+                </form>
               <a href="" class="order_online">
                 Sign in
               </a>
-                <a href="SignUp.jsp" class="order_online">
+                <a href="" class="order_online">
                 Sign up
               </a>
             </div>

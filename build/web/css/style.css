@@ -92,7 +92,7 @@ a:focus {
 /*header section*/
 .hero_area {
   position: relative;
-  min-height: 100vh;
+  min-height: 10vh;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -177,6 +177,25 @@ a:focus {
 
 .custom_nav-container .navbar-nav .nav-item:hover .nav-link, .custom_nav-container .navbar-nav .nav-item.active .nav-link {
   color: #ffbe33;
+}
+
+#search-text {
+    width: 10vh;
+    border-radius: 20px;
+}
+
+#search-box #search-text{
+    border: none;
+    outline: none;
+    background: none;
+    width: 0;
+    transition: all 0.25s ease-in-out;
+}
+
+#search-box:hover #search-text, #search-box #search-text:valid{
+    width: 10vh;
+    background: #ffffff;
+    padding: 7px;
 }
 
 .custom_nav-container .nav_search-btn {
