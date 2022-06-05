@@ -1,5 +1,5 @@
 <%-- 
-    Document   : signup
+    Document   : signupsuccess
     Created on : May 25, 2022, 9:04:43 PM
     Author     : khuat
 --%>
@@ -129,68 +129,60 @@
     <div class="container">
       <div class="heading_container">
         <h2>
-          Sign up
+          <%=request.getAttribute("message")%>
         </h2>
       </div>
       <div class="row">
         <div class="col-md-6">
           <div class="form_container">
-              <%
-                String file_name = (String)request.getParameter("filename");
-                if(file_name!=null){
-                    out.println(file_name);
-                   %>
-                  <img src="http://localhost:8080/Chatter/images/<%=file_name%>">
-                  <% 
-                     }
-                  %>
-            <form action="signup" method="POST" enctype="multipart/form-data">
+            <form action="" method="POST" enctype="multipart/form-data">
                 <div>
-                  <input name="avatar" type="file" class="form-control" placeholder="Avatar"
+                  <input name="file" type="file" class="form-control" placeholder="Avatar"
                              onchange="document.getElementById('avatar').src = window.URL.createObjectURL(this.files[0])"/>
+                  <img id="avatar" alt="your image" class="img-fluid" />
                   
-                  
                 </div>
                 <div>
-                  <input name="username" type="text" class="form-control" placeholder="Username" />
+                  <input name="username" type="text" class="form-control" placeholder="Username" value="<%=request.getAttribute("user")%>" />
                 </div>
                 <div>
-                  <input name="password" type="text" class="form-control" placeholder="Password" />
-                </div>
-                <div>   
-                  <input name="repassword" type="text" class="form-control" placeholder="Re Enter Password" />
+                  <input name="password" type="text" class="form-control" placeholder="Password" value="<%=request.getAttribute("pass")%>" />
                 </div>
                 <div>
-                  <input name="firstname" type="text" class="form-control" placeholder="First name" />
+                  <input name="firstname" type="text" class="form-control" placeholder="First name" value="<%=request.getAttribute("firstname")%>"/>
                 </div>
                 <div>
-                  <input name="lastname" type="text" class="form-control" placeholder="Last name" />
+                  <input name="lastname" type="text" class="form-control" placeholder="Last name" value="<%=request.getAttribute("lastname")%>"/>
                 </div>
                 <div>
-                  <input name="phonenumber"type="text" class="form-control" placeholder="Phone Number" />
+                  <input name="phonenumber"type="text" class="form-control" placeholder="Phone Number" value="<%=request.getAttribute("phone")%>"/>
                 </div>
                 <div>
-                  <input name="email" type="email" class="form-control" placeholder="Your Email" />
+                  <input name="email" type="email" class="form-control" placeholder="Your Email" value="<%=request.getAttribute("email")%>"/>
+                </div>
+                <div class="form-control">
+                    <label for="gender">Gender</label>
+                    <p><%=request.getAttribute("gender")%></p>
+                </div>
+                    <div>
+                  <input name="home_address"type="text" class="form-control" placeholder="Home Address" value="<%=request.getAttribute("home")%>"/>
                 </div>
                 <div>
-                  <input name="home_address"type="text" class="form-control" placeholder="Home Address" />
+                  <input name="district"type="text" class="form-control" placeholder="District" value="<%=request.getAttribute("district")%>"/>
                 </div>
                 <div>
-                  <input name="district"type="text" class="form-control" placeholder="district" />
+                  <input name="city"type="text" class="form-control" placeholder="City" value="<%=request.getAttribute("city")%>"/>
                 </div>
-                <div>
-                  <input name="city"type="text" class="form-control" placeholder="city" />
-                </div>
-                
-                  <button>
+            
+                  <button type="submit">
                     Sign up!
                   </button>
+                </form>
                 </div>
-            </form>
           </div>
         <div class="col-md-6">
           <div class="map_container">
-            <img id="avatar" alt="your image" class="img-fluid" />
+            
           </div>
         </div>
       </div>

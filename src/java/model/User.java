@@ -34,16 +34,28 @@ public class User {
         this.cart = cart;
     }
 
-    public User(String role, String firstname, String lastname, String phonenumber, String email, String gender, String avatar, ArrayList<Item> cart) {
-        this.role = role;
+    public User(String firstname, String lastname, String phonenumber, String email, String gender, String avatar) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.phonenumber = phonenumber;
         this.email = email;
         this.gender = gender;
         this.avatar = avatar;
-        this.cart = cart;
     }
+
+    
+
+    public User(int users_id, String firstname, String lastname, String phonenumber, String email, String gender, String avatar) {
+        this.users_id = users_id;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.phonenumber = phonenumber;
+        this.email = email;
+        this.gender = gender;
+        this.avatar = avatar;
+    }
+
+    
     
     
 

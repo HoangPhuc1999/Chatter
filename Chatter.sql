@@ -217,6 +217,11 @@ values('a1','a2'),
 
 
 select * from users;
+select * from users_role
+select * from users_address 
+
+delete * from users_address Join users_role join users on  where users_id>10
+
 
 select * from friends;
 

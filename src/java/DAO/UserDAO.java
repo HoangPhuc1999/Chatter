@@ -257,17 +257,17 @@ public class UserDAO extends DAO {
         //check sign up
 //        UserAccount newAcc = new UserAccount("x","x");  
 //        UserAddress newAccAddress= new UserAddress("x","x","x");
-//        User newAccUser = new User("ggqeq","gqw","user3@fpt.edu.vn","0675978234","1","images/boy.jpg");
+//        User newAccUser = new User("newww","gqw","user3@fpt.edu.vn","0675978234","1","images/boy.jpg");
 //        
 //        dao.singup(newAccUser,newAcc,newAccAddress); //them user
-//        
+        
         
         ArrayList<User> b = dao.getAllUsers();
         
         int x = dao.getUserID();
         
         
-        System.out.println(x);
+        System.out.println(b);
     }
 
 }

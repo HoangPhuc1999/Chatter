@@ -135,20 +135,11 @@
       <div class="row">
         <div class="col-md-6">
           <div class="form_container">
-              <%
-                String file_name = (String)request.getParameter("filename");
-                if(file_name!=null){
-                    out.println(file_name);
-                   %>
-                  <img src="http://localhost:8080/Chatter/images/<%=file_name%>">
-                  <% 
-                     }
-                  %>
             <form action="signup" method="POST" enctype="multipart/form-data">
                 <div>
-                  <input name="avatar" type="file" class="form-control" placeholder="Avatar"
+                  <input name="file" type="file" class="form-control" placeholder="Avatar"
                              onchange="document.getElementById('avatar').src = window.URL.createObjectURL(this.files[0])"/>
-                  
+                  <img id="avatar" alt="your image" class="img-fluid" />
                   
                 </div>
                 <div>
@@ -172,25 +163,30 @@
                 <div>
                   <input name="email" type="email" class="form-control" placeholder="Your Email" />
                 </div>
-                <div>
+                <div class="form-control">
+                    <label for="gender">Gender</label>
+                    <input id="gender" name="gender" type="radio" class="form-control-inline" value="0">Female 
+                    <input id="gender" name="gender" type="radio" class="form-control-inline" value="1">Male 
+                </div>
+                    <div>
                   <input name="home_address"type="text" class="form-control" placeholder="Home Address" />
                 </div>
                 <div>
-                  <input name="district"type="text" class="form-control" placeholder="district" />
+                  <input name="district"type="text" class="form-control" placeholder="District" />
                 </div>
                 <div>
-                  <input name="city"type="text" class="form-control" placeholder="city" />
+                  <input name="city"type="text" class="form-control" placeholder="City" />
                 </div>
-                
-                  <button>
+            
+                  <button type="submit">
                     Sign up!
                   </button>
+                </form>
                 </div>
-            </form>
           </div>
         <div class="col-md-6">
           <div class="map_container">
-            <img id="avatar" alt="your image" class="img-fluid" />
+            
           </div>
         </div>
       </div>
@@ -269,10 +265,7 @@
       </div>
       <div class="footer-info">
         <p>
-          &copy; <span id="displayYear"></span> All Rights Reserved By
-          <a href="https://html.design/">Free Html Templates</a><br><br>
-          &copy; <span id="displayYear"></span> Distributed By
-          <a href="https://themewagon.com/" target="_blank">ThemeWagon</a>
+
         </p>
       </div>
     </div>
