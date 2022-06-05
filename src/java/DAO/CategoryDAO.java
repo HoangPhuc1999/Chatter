@@ -52,7 +52,7 @@ public class CategoryDAO extends DAO {
         try {
             xSql = "UPDATE [category]\n" +
                     "   SET [category_name] = ?\n" +
-                    " WHERE [cid]= ?";
+                    " WHERE [category_id]= ?";
             ps = connection.prepareStatement(xSql);
             ps.setString(1, category.getCname());
             ps.setInt(2, category.getCid());
