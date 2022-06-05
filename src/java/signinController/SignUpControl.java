@@ -61,7 +61,7 @@ public class SignUpControl extends HttpServlet {
             fileName = new File(fileName).getName();
             part.write(this.getFolderUpload().getAbsolutePath() + File.separator + fileName);
           }       
-         avatar= this.getFolderUpload().getAbsolutePath() + File.separator + fileName;
+    //     avatar= this.getFolderUpload().getAbsolutePath() + File.separator + fileName;
          
         if(!pass.equals(re_pass)){
             response.sendRedirect("Login.jsp");
@@ -72,8 +72,8 @@ public class SignUpControl extends HttpServlet {
                 //dc signup
                UserAccount newAcc = new UserAccount(user,pass);  
                UserAddress newAccAddress = new UserAddress(home_address,district,city);  
-               User newUser = new User(firstname,lastname,phone,email,gender,avatar);
-               dao.singup(); //them user
+//               User newUser = new User(firstname,lastname,phone,email,gender,avatar);
+//               dao.singup(); //them user
                 
                 request.setAttribute("message", "Sign up Success!");
                 PrintWriter out = response.getWriter(); 

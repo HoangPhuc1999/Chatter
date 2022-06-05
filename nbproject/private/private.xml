@@ -2,6 +2,11 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/D:/Chatter/Chatter/web/SignUp.jsp</file>
+            <file>file:/D:/Chatter/Chatter/src/java/controller/admin/category/UpdateController.java</file>
+            <file>file:/D:/Chatter/Chatter/web/Login.jsp</file>
+            <file>file:/D:/Chatter/Chatter/build/generated/src/org/apache/jsp/signup_jsp.java</file>
+        </group>
     </open-files>
 </project-private>
