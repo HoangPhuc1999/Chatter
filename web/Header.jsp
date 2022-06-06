@@ -101,12 +101,20 @@
                         <i class="fa fa-search" aria-hidden="true"></i>
                     </button>
                 </form>
-              <a href="" class="order_online">
-                Sign in
+                
+                <c:if test="${sessionScope.user != null}">
+                        <a class="nav-link" href="Profile.jsp">Hello ${sessionScope.user.userid}</a>
+                        <a class="nav-link" href="logout">Logout</a> 
+                </c:if>
+                <c:if test="${sessionScope.acc == null}">
+                    <a href="Login.jsp" class="order_online">
+                    Sign in
+                  </a>
+                    <a href="SignUp.jsp" class="order_online">
+                    Sign up
               </a>
-                <a href="" class="order_online">
-                Sign up
-              </a>
+                </c:if>
+              
             </div>
           </div>
         </nav>
