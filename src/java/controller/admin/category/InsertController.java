@@ -8,6 +8,7 @@ package controller.admin.category;
 import DAO.CategoryDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -47,7 +48,7 @@ public class InsertController extends HttpServlet {
         Category category = new Category(-1,request.getParameter("cname"));
         CategoryDAO categoryDAO = new CategoryDAO();
         categoryDAO.insert(category);
-        response.sendRedirect("../../../view/admin/ListCategory.jsp");
+        response.sendRedirect("../admin/list_category");
     }
 
     /** 
