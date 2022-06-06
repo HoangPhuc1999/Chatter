@@ -48,7 +48,7 @@ public class InsertController extends HttpServlet {
         Category category = new Category(-1,request.getParameter("cname"));
         CategoryDAO categoryDAO = new CategoryDAO();
         categoryDAO.insert(category);
-        response.sendRedirect("../../../view/admin/ListCategory.jsp");
+        response.sendRedirect("../admin/ListCategory.jsp");
     }
 
     /** 
