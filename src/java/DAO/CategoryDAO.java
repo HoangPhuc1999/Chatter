@@ -34,6 +34,7 @@ public class CategoryDAO extends DAO {
         }
         return categorys;
     }
+    //ínertIntoCategory
     public void insert(Category category){
         try {
             xSql = "INSERT INTO [category]\n" +
@@ -52,7 +53,7 @@ public class CategoryDAO extends DAO {
         try {
             xSql = "UPDATE [category]\n" +
                     "   SET [category_name] = ?\n" +
-                    " WHERE [cid]= ?";
+                    " WHERE [category_id]= ?";
             ps = connection.prepareStatement(xSql);
             ps.setString(1, category.getCname());
             ps.setInt(2, category.getCid());
@@ -62,5 +63,10 @@ public class CategoryDAO extends DAO {
         }
         
         
+    }
+    
+    public static void main(String[] args) {
+        CategoryDAO a = new CategoryDAO();
+        System.out.print(a.);
     }
 }

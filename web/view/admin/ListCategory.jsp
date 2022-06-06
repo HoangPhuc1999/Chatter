@@ -129,7 +129,7 @@ body {
                 
             </tr>
             <c:forEach items="${requestScope.categorys}" var="category">
-                <form action="admin/update_category" method="post">   
+                <form action="update_category" method="post">   
                 <tr>
                     <td>${category.cid}</td>
                     <td>
@@ -144,9 +144,10 @@ body {
                         <input class="btn btn-outline-warning btn-sm editmode${category.cid}" type="button" onclick="cancelEdit(${category.cid},'${category.cname}');" value="Cancel"/>
                     </td>
                 </tr>
+                </form>
             </c:forEach>
-            
-                <form action="admin/add_category" method="post">   
+                
+                <form action="insert_category" method="post">   
                 <tr>
                     <td></td>
                     <td></td>

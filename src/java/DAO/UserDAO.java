@@ -18,7 +18,7 @@ import model.*;
  */
 public class UserDAO extends DAO {
 
-   
+    //author : phuc 
     public UserAccount getUser(String xUserName, String xPass) {
         xSql = "select * from users_account where username = ? and password = ?";
         UserAccount x = null;
@@ -32,6 +32,33 @@ public class UserDAO extends DAO {
             if (rs.next()) {
                 user_id = rs.getInt("users_id");
                 x = new UserAccount(user_id, xUserName, xPass);
+            } else {
+                x = null;
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+        }
+        return (x);
+    }
+    
+     public User getUserFromId(int id) {
+        xSql = "select * from users where users_id = ?";
+        User x = null;
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                x = new User(rs.getInt(1),
+                                 rs.getString(2),
+                                 rs.getString(3),
+                                 rs.getString(4),
+                                 rs.getString(5),
+                                 rs.getString(6),
+                                 rs.getString(7));
+                
             } else {
                 x = null;
             }

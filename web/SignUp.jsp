@@ -135,22 +135,14 @@
       <div class="row">
         <div class="col-md-6">
           <div class="form_container">
-              <%
-                String file_name = (String)request.getParameter("filename");
-                if(file_name!=null){
-                    out.println(file_name);
-                   %>
-                  <img src="http://localhost:8080/Chatter/images/<%=file_name%>">
-                  <% 
-                     }
-                  %>
             <form action="signup" method="POST" enctype="multipart/form-data">
                 <div>
                   <input name="avatar" type="file" class="form-control" placeholder="Avatar"
                              onchange="document.getElementById('avatar').src = window.URL.createObjectURL(this.files[0])"/>
-                  
-                  
+                  <img id="avatar" class="img-fluid" />
+
                 </div>
+                
                 <div>
                   <input name="username" type="text" class="form-control" placeholder="Username" />
                 </div>
@@ -166,6 +158,11 @@
                 <div>
                   <input name="lastname" type="text" class="form-control" placeholder="Last name" />
                 </div>
+                <div class="form-control">
+                    <label>Gender:       </label>  
+                  Female<input name="gender" type="radio" class="form-control-inline" check="checked"/>
+                  Male<input name="gender" type="radio" class="form-control-inline"/>
+                </div>
                 <div>
                   <input name="phonenumber"type="text" class="form-control" placeholder="Phone Number" />
                 </div>
@@ -176,10 +173,10 @@
                   <input name="home_address"type="text" class="form-control" placeholder="Home Address" />
                 </div>
                 <div>
-                  <input name="district"type="text" class="form-control" placeholder="district" />
+                  <input name="district"type="text" class="form-control" placeholder="District" />
                 </div>
                 <div>
-                  <input name="city"type="text" class="form-control" placeholder="city" />
+                  <input name="city"type="text" class="form-control" placeholder="City" />
                 </div>
                 
                   <button>
@@ -190,7 +187,6 @@
           </div>
         <div class="col-md-6">
           <div class="map_container">
-            <img id="avatar" alt="your image" class="img-fluid" />
           </div>
         </div>
       </div>
