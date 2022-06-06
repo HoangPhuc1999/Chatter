@@ -51,7 +51,7 @@
             <header class="header_section">
                 <div class="container">
                     <nav class="navbar navbar-expand-lg custom_nav-container ">
-                        <a class="navbar-brand" href="homepage.jsp">
+                        <a class="navbar-brand" href="Index.jsp">
                             <span>
                                 Feane
                             </span>
@@ -64,7 +64,7 @@
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav  mx-auto ">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="homepage.jsp">Home </a>
+                                    <a class="nav-link" href="Index.jsp">Home </a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="list">Menu</a>
@@ -155,7 +155,11 @@
                                 <div>
                                     <input type="password" name="pass" class="form-control" placeholder="Enter your password" />
                                 </div>
-
+                                
+                                <div>
+                                <span>Forgot your password?</span>
+                                <a href="ResetPassword.jsp" class="text-decoration-none">Reset my password!</a>
+                                </div>
                                 <div class="btn_box"  type="submit">
                                     <button>
                                         Login
