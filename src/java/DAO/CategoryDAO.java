@@ -67,6 +67,6 @@ public class CategoryDAO extends DAO {
     
     public static void main(String[] args) {
         CategoryDAO a = new CategoryDAO();
-        System.out.print(a.);
+        System.out.print(a);
     }
 }

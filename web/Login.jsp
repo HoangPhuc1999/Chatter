@@ -48,75 +48,7 @@
                 <img src="images/hero-bg.jpg" alt="">
             </div>
             <!-- header section strats -->
-            <header class="header_section">
-                <div class="container">
-                    <nav class="navbar navbar-expand-lg custom_nav-container ">
-                        <a class="navbar-brand" href="Index.jsp">
-                            <span>
-                                Feane
-                            </span>
-                        </a>
-
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class=""> </span>
-                        </button>
-
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul class="navbar-nav  mx-auto ">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="Index.jsp">Home </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="list">Menu</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="About.jsp">About</a>
-                                </li>
-                                <li class="nav-item active">
-                                    <a class="nav-link" href="book.jsp">Book Table <span class="sr-only">(current)</span> </a>
-                                </li>
-                            </ul>
-                            <div class="user_option">
-                                <a href="" class="user_link">
-                                    <i class="fa fa-user" aria-hidden="true"></i>
-                                </a>
-                                <a class="cart_link" href="">
-                                    <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
-                                    <g>
-                                    <g>
-                                    <path d="M345.6,338.862c-29.184,0-53.248,23.552-53.248,53.248c0,29.184,23.552,53.248,53.248,53.248
-                                          c29.184,0,53.248-23.552,53.248-53.248C398.336,362.926,374.784,338.862,345.6,338.862z" />
-                                    </g>
-                                    </g>
-                                    <g>
-                                    <g>
-                                    <path d="M439.296,84.91c-1.024,0-2.56-0.512-4.096-0.512H112.64l-5.12-34.304C104.448,27.566,84.992,10.67,61.952,10.67H20.48
-                                          C9.216,10.67,0,19.886,0,31.15c0,11.264,9.216,20.48,20.48,20.48h41.472c2.56,0,4.608,2.048,5.12,4.608l31.744,216.064
-                                          c4.096,27.136,27.648,47.616,55.296,47.616h212.992c26.624,0,49.664-18.944,55.296-45.056l33.28-166.4
-                                          C457.728,97.71,450.56,86.958,439.296,84.91z" />
-                                    </g>
-                                    </g>
-                                    <g>
-                                    <g>
-                                    <path d="M215.04,389.55c-1.024-28.16-24.576-50.688-52.736-50.688c-29.696,1.536-52.224,26.112-51.2,55.296
-                                          c1.024,28.16,24.064,50.688,52.224,50.688h1.024C193.536,443.31,216.576,418.734,215.04,389.55z" />
-                                    </g>
-
-                                    </svg>
-                                </a>
-                                <form class="form-inline">
-                                    <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
-                                        <i class="fa fa-search" aria-hidden="true"></i>
-                                    </button>
-                                </form>
-                                <a href="" class="order_online">
-                                    Order Online
-                                </a>
-                            </div>
-                        </div>
-                    </nav>
-                </div>
-            </header>
+            <jsp:include page="Header.jsp" />
             <!-- end header section -->
         </div>
 
@@ -139,11 +71,11 @@
                                     Username                 
                                 </div>
 
-<!--                                <div class ="textbox">
-                                    <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 1024 1024">
-                                    <path d="M1023.46 232a31.629 31.629 0 0 0-2.48-18.271C1012.917 178.288 987.3 160 944.005 160h-832c-38.08 0-79.105 14-99.28 41.472-1.745 1.328-3.409 2.832-4.912 4.576-6.449 7.44-8.705 17.009-7.264 26.033-.288 2.592-.544 5.2-.544 7.92v512c0 53.024 58.992 112 112 112h832c53.024 0 80-58.976 80-112v-512c0-2.832-.368-5.313-.544-8.001zm-911.459-8l832.001-.001h.432L512.002 568.655 81.314 225.407C91.106 223.599 103.154 224 112 224zm832.001 575.999H112.003c-17.648 0-48-30.336-48-48V293.551l427.04 341.648c6.016 5.2 13.487 7.792 20.959 7.792a32.046 32.046 0 0 0 20.976-7.792l427.024-341.632v458.432c0 17.664 1.664 48-16 48z"/>
-                                    </svg>
-                                </div>-->
+                                <!--                                <div class ="textbox">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 1024 1024">
+                                                                    <path d="M1023.46 232a31.629 31.629 0 0 0-2.48-18.271C1012.917 178.288 987.3 160 944.005 160h-832c-38.08 0-79.105 14-99.28 41.472-1.745 1.328-3.409 2.832-4.912 4.576-6.449 7.44-8.705 17.009-7.264 26.033-.288 2.592-.544 5.2-.544 7.92v512c0 53.024 58.992 112 112 112h832c53.024 0 80-58.976 80-112v-512c0-2.832-.368-5.313-.544-8.001zm-911.459-8l832.001-.001h.432L512.002 568.655 81.314 225.407C91.106 223.599 103.154 224 112 224zm832.001 575.999H112.003c-17.648 0-48-30.336-48-48V293.551l427.04 341.648c6.016 5.2 13.487 7.792 20.959 7.792a32.046 32.046 0 0 0 20.976-7.792l427.024-341.632v458.432c0 17.664 1.664 48-16 48z"/>
+                                                                    </svg>
+                                                                </div>-->
 
                                 <div>
                                     <input type="text" name="name" class="form-control" placeholder="Enter your username" />
@@ -155,10 +87,10 @@
                                 <div>
                                     <input type="password" name="pass" class="form-control" placeholder="Enter your password" />
                                 </div>
-                                
+
                                 <div>
-                                <span>Forgot your password?</span>
-                                <a href="ResetPassword.jsp" class="text-decoration-none">Reset my password!</a>
+                                    <span>Forgot your password?</span>
+                                    <a href="ResetPassword.jsp" class="text-decoration-none">Reset my password!</a>
                                 </div>
                                 <div class="btn_box"  type="submit">
                                     <button>

@@ -22,6 +22,22 @@ import model.*;
  */
 public class LoginServlet extends HttpServlet {
 
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter pr = response.getWriter();
+        HttpSession session = request.getSession();
+        User x = (User) session.getAttribute("user");
+
+        if (x == null) {
+
+            request.getRequestDispatcher("Login.jsp").forward(request, response);
+        } else {
+            request.getRequestDispatcher("SignUp.jsp").forward(request, response);
+        }
+
+    }
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -29,29 +45,34 @@ public class LoginServlet extends HttpServlet {
         String xName = request.getParameter("name");
         String xPass = request.getParameter("pass");
         String xRem = request.getParameter("remember");
-        
+
         UserAccount x = null;
         UserDAO t;
 
         t = new UserDAO();
         x = t.getUser(xName, xPass);
-        User user = t.getUserFromId(x.getUsers_id());
+        System.out.println(x.getUsers_id());
         
+        User user = t.getUserFromId(x.getUsers_id());
+        System.out.println(user.getFirstname()+"hello");
+        
+
         if (x == null) {
             System.out.println("Error hahahaha");
         } else {
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
             session.setMaxInactiveInterval(10000);
-            if(xRem != null) {
-            String namePass = xName.trim() + "|" + xPass.trim();
-            Cookie y = new Cookie("currUser",namePass);
-            y.setMaxAge(60*60*24); // 1 day
-            response.addCookie(y);
+            if (xRem != null) {
+                String namePass = xName.trim() + "|" + xPass.trim();
+                Cookie y = new Cookie("currUser", namePass);
+                y.setMaxAge(60 * 60 * 24); // 1 day
+                response.addCookie(y);
+            }
             System.out.println("Success");
+            request.getRequestDispatcher("/Index.jsp").include(request, response);
+
         }
 
     }
-
-}
 }
