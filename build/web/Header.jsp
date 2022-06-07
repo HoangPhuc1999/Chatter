@@ -77,7 +77,7 @@
                     <% if (x != null) {
                     %>
 
-                    <a class="nav-link" href="">Hello <%=x.getFirstname()%> </a>
+                    <a class="nav-link" href="Menu.jsp">Hello <%=x.getFirstname()%> </a>
                     <a class="nav-link" href="logout">Logout</a> 
                     <%                } else if (x == null) {
                     %>
