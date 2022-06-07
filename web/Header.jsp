@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- header section starts -->
 <header class="header_section">
       <div class="container">
@@ -103,16 +103,16 @@
                 </form>
                 
                 <c:if test="${sessionScope.user != null}">
-                        <a class="nav-link" href="Profile.jsp">Hello ${sessionScope.user.userid}</a>
+                        <a class="nav-link" href="Profile.jsp">Hello ${sessionScope.user}</a>
                         <a class="nav-link" href="logout">Logout</a> 
                 </c:if>
-                <c:if test="${sessionScope.acc == null}">
+                <c:if test="${sessionScope.user == null}">
                     <a href="Login.jsp" class="order_online">
                     Sign in
                   </a>
                     <a href="SignUp.jsp" class="order_online">
                     Sign up
-              </a>
+                    </a>
                 </c:if>
               
             </div>

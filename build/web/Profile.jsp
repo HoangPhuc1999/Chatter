@@ -8,6 +8,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 
@@ -100,7 +101,7 @@
                 <a class="nav-link" href="Index.jsp">Home </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="menu.jsp">Menu</a>
+                <a class="nav-link" href="Menu.jsp">Menu</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="About.jsp">About</a>

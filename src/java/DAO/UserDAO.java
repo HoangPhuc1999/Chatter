@@ -237,6 +237,27 @@ public class UserDAO extends DAO {
         return null;
     }
     
+    
+    //check account username va email xem co trung k 
+    //author : an 
+    public Boolean checkAccountAndEmailMatch(String user,String email) {
+        String query = "select * from users_account a Join users u "
+                + "On u.users_id = a.users_id\n"
+                + "where(username = ? and email = ?)\n" ;
+        try {
+            ps = con.prepareStatement(query);
+            ps.setString(1, user);
+            ps.setString(2, email);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return true;
+            }
+        } catch (Exception e) {
+        }
+        return false;
+    }
+    
+    
     //reset mat khau table UserAccount 
     //Created by An at 27/5
     public void resetPassword(String username) {
@@ -284,10 +305,10 @@ public class UserDAO extends DAO {
         //check sign up
 //        UserAccount newAcc = new UserAccount("x","x");  
 //        UserAddress newAccAddress= new UserAddress("x","x","x");
-//        User newAccUser = new User("ggqeq","gqw","user3@fpt.edu.vn","0675978234","1","images/boy.jpg");
+//        User newAccUser = new User("heeeeeeeeee","gqw","0675978234","user3@fpt.edu.vn","1","images/boy.jpg");
 //        
 //        dao.singup(newAccUser,newAcc,newAccAddress); //them user
-//        
+        
         
        // ArrayList<User> b = dao.getAllUsers();
         

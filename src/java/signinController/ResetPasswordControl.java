@@ -6,6 +6,7 @@
 package signinController;
 
 import DAO.DAO;
+import DAO.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -41,7 +42,7 @@ public class ResetPasswordControl extends HttpServlet {
         String username = request.getParameter("username");
         String email = request.getParameter("email");
 
-        DAO dao = new DAO();
+        UserDAO dao = new UserDAO();
         UserAccount user = dao.checkAccountExist(username);
         if(user == null){
                 //send error message\
@@ -50,9 +51,12 @@ public class ResetPasswordControl extends HttpServlet {
                 response.setStatus(500);
                 
             }else{
-                dao.resetPassword(username);
-                String message="password reset completed";
-                response.getWriter().print(message);
+                if(dao.checkAccountAndEmailMatch(username,email)){
+                    dao.resetPassword(username);
+                    String message="password reset completed";
+                    response.getWriter().print(message);
+                }
+                
             }
             
     }

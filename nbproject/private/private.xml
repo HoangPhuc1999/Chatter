@@ -6,12 +6,10 @@
             <file>file:/C:/Users/khuat/OneDrive/Desktop/FPTUniversity/2022/SEMESTER%205/SWP391/Chatter/Chatter/Chatter/src/java/DAO/UserDAO.java</file>
             <file>file:/C:/Users/khuat/OneDrive/Desktop/FPTUniversity/2022/SEMESTER%205/SWP391/Chatter/Chatter/Chatter/src/java/signinController/ResetPasswordControl.java</file>
             <file>file:/C:/Users/khuat/OneDrive/Desktop/FPTUniversity/2022/SEMESTER%205/SWP391/Chatter/Chatter/Chatter/src/java/signinController/LoginServlet.java</file>
-            <file>file:/C:/Users/khuat/OneDrive/Desktop/FPTUniversity/2022/SEMESTER%205/SWP391/Chatter/Chatter/Chatter/src/java/context/DBContext.java</file>
+            <file>file:/C:/Users/khuat/OneDrive/Desktop/FPTUniversity/2022/SEMESTER%205/SWP391/Chatter/Chatter/Chatter/src/java/controller/admin/category/ListController.java</file>
+            <file>file:/C:/Users/khuat/OneDrive/Desktop/FPTUniversity/2022/SEMESTER%205/SWP391/Chatter/Chatter/Chatter/web/SignUpResult.jsp</file>
+            <file>file:/C:/Users/khuat/OneDrive/Desktop/FPTUniversity/2022/SEMESTER%205/SWP391/Chatter/Chatter/Chatter/src/java/Chatting/Endpoint/ChatRoomServerEndpoint.java</file>
             <file>file:/C:/Users/khuat/OneDrive/Desktop/FPTUniversity/2022/SEMESTER%205/SWP391/Chatter/Chatter/Chatter/src/java/signinController/SignUpServlet.java</file>
-            <file>file:/C:/Users/khuat/OneDrive/Desktop/FPTUniversity/2022/SEMESTER%205/SWP391/Chatter/Chatter/Chatter/web/Login.jsp</file>
-            <file>file:/C:/Users/khuat/OneDrive/Desktop/FPTUniversity/2022/SEMESTER%205/SWP391/Chatter/Chatter/Chatter/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/khuat/OneDrive/Desktop/FPTUniversity/2022/SEMESTER%205/SWP391/Chatter/Chatter/Chatter/web/SignUp.jsp</file>
-            <file>file:/C:/Users/khuat/OneDrive/Desktop/FPTUniversity/2022/SEMESTER%205/SWP391/Chatter/Chatter/Chatter/web/Header.jsp</file>
         </group>
     </open-files>
 </project-private>
