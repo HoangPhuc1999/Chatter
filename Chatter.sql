@@ -214,11 +214,14 @@ values('a1','a2'),
 
 
 
-
+select * from users_account a Join users u
+On u.users_id = a.users_id
+where Username = 'user1' and email = 'user1@fpt.edu.vn'
 
 select * from users;
-
-select * from friends;
+select * from users_account
+select * from users_address
+select * from users_friends;
 
 select * from messages;
 

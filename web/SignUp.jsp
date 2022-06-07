@@ -3,7 +3,7 @@
     Created on : May 25, 2022, 9:04:43 PM
     Author     : khuat
 --%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -97,7 +97,7 @@
                 <a class="nav-link" href="Index.jsp">Home </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="menu.jsp">Menu</a>
+                <a class="nav-link" href="Menu.jsp">Menu</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="About.jsp">About</a>
@@ -130,6 +130,9 @@
       <div class="heading_container">
         <h2>
           Sign up
+          <h2>
+            ${message}
+        </h2>
         </h2>
       </div>
       <div class="row">
@@ -160,8 +163,8 @@
                 </div>
                 <div class="form-control">
                     <label>Gender:       </label>  
-                  Female<input name="gender" type="radio" class="form-control-inline" check="checked"/>
-                  Male<input name="gender" type="radio" class="form-control-inline"/>
+                  Female<input name="gender" type="radio" class="form-control-inline" check="checked" value="0"/>
+                  Male<input name="gender" type="radio" class="form-control-inline" value="1" />
                 </div>
                 <div>
                   <input name="phonenumber"type="text" class="form-control" placeholder="Phone Number" />
