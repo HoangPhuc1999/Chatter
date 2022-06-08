@@ -12,18 +12,19 @@ import java.io.StringWriter;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import model.User;
+
 
 /**
  *
  * @author khuat
  */
-public class CartFilter implements Filter {
+public class UserFilter implements Filter {
     
     private static final boolean debug = true;
 
@@ -32,13 +33,13 @@ public class CartFilter implements Filter {
     // configured. 
     private FilterConfig filterConfig = null;
     
-    public CartFilter() {
+    public UserFilter() {
     }    
     
     private void doBeforeProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
         if (debug) {
-            log("CartFilter:DoBeforeProcessing");
+            log("UserFilter:DoBeforeProcessing");
         }
 
         // Write code here to process the request and/or response before
@@ -66,7 +67,7 @@ public class CartFilter implements Filter {
     private void doAfterProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
         if (debug) {
-            log("CartFilter:DoAfterProcessing");
+            log("UserFilter:DoAfterProcessing");
         }
 
         // Write code here to process the request and/or response after
@@ -101,41 +102,56 @@ public class CartFilter implements Filter {
             FilterChain chain)
             throws IOException, ServletException {
         
-        if(errorPage == null) {
-         returnError(request,response,"AuthorizationFilter not
-                     properly configured! Contact Administrator.");
-      }
-        
-        HttpSession session =((HttpServletRequest)request).getSession(false);
-        User currentUser = (User)session.getAttribute("user");
+        HttpServletRequest httpRequest = (HttpServletRequest) request;
+        String path = httpRequest.getRequestURI().substring(httpRequest.getContextPath().length());
+ 
+        if (path.startsWith("/")) {
+            chain.doFilter(request, response);
+            return;
+        }
+ 
+        HttpSession session = httpRequest.getSession(false);
+ 
+        boolean isLoggedIn = (session != null && session.getAttribute("user") != null);
+ 
+        String loginURI = httpRequest.getContextPath() + "/login";
+        boolean isLoginRequest = httpRequest.getRequestURI().equals(loginURI);
+        boolean isLoginPage = httpRequest.getRequestURI().endsWith("login.jsp");
+ 
+        if (isLoggedIn && (isLoginRequest || isLoginPage)) {
+            // the user is already logged in and he's trying to login again
+            // then forward to the homepage
+            httpRequest.getRequestDispatcher("/Index.jsp").forward(request, response);
+ 
+        } else if (!isLoggedIn && isLoginRequired()) {
+            // the user is not logged in, and the requested page requires
+            // authentication, then forward to the login page
+            String loginPage = "/login.jsp";
+            RequestDispatcher dispatcher = httpRequest.getRequestDispatcher(loginPage);
+            dispatcher.forward(request, response);
+        } else {
+            // for other requested pages that do not require authentication
+            // or the user is already logged in, continue to the destination
+            chain.doFilter(request, response);
+        }
 
-      if (currentUser == null) {
-          returnError(request,response,"User does not exist in session!");
-
-      }
-      else {
-          //Get relevant URI.
-          String URI = ((HttpServletRequest)request).getRequestURI();
-
-          //Obtain AuthorizationManager singleton from Spring
-          //ApplicationContext.
-          ApplicationContext ctx =
-              WebApplicationContextUtils.getWebApplicationContext(
-              session.getServletContext());
-          AuthorizationManager authMgr =
-              (AuthorizationManager)ctx.getBean("AuthorizationManager");
-
-          //Invoke AuthorizationManager method to see if user can
-          //access resource.
-          boolean authorized = authMgr.isUserAuthorized(currentUser,URI);
-          if (authorized) {
-              chain.doFilter(request,response);
-          }
-          else {
-              returnError(request,response,"User is not authorized
-                          to access this area!");
-          }
-      }
+    }
+    
+    private HttpServletRequest httpRequest;
+    private static final String[] loginRequiredURLs = {
+            "/Profile", "/Chatting", "/Cart"
+    };  
+    
+    private boolean isLoginRequired() {
+        String requestURL = httpRequest.getRequestURL().toString();
+ 
+        for (String loginRequiredURL : loginRequiredURLs) {
+            if (requestURL.contains(loginRequiredURL)) {
+                return true;
+            }
+        }
+ 
+        return false;
     }
 
     /**
@@ -163,14 +179,13 @@ public class CartFilter implements Filter {
     /**
      * Init method for this filter
      */
-    private String errorPage;
-
-    public void init(FilterConfig filterConfig) throws ServletException{        
+    public void init(FilterConfig filterConfig) {        
         this.filterConfig = filterConfig;
-        if (filterConfig != null) { 
-           errorPage = filterConfig.getInitParameter("error_page");
-       }
-        
+        if (filterConfig != null) {
+            if (debug) {                
+                log("UserFilter:Initializing filter");
+            }
+        }
     }
 
     /**
@@ -179,9 +194,9 @@ public class CartFilter implements Filter {
     @Override
     public String toString() {
         if (filterConfig == null) {
-            return ("CartFilter()");
+            return ("UserFilter()");
         }
-        StringBuffer sb = new StringBuffer("CartFilter(");
+        StringBuffer sb = new StringBuffer("UserFilter(");
         sb.append(filterConfig);
         sb.append(")");
         return (sb.toString());
