@@ -126,7 +126,7 @@ public class UserFilter implements Filter {
         } else if (!isLoggedIn && isLoginRequired()) {
             // the user is not logged in, and the requested page requires
             // authentication, then forward to the login page
-            String loginPage = "/login.jsp";
+            String loginPage = "/Login.jsp";
             RequestDispatcher dispatcher = httpRequest.getRequestDispatcher(loginPage);
             dispatcher.forward(request, response);
         } else {
@@ -137,7 +137,7 @@ public class UserFilter implements Filter {
 
     }
     
-    private HttpServletRequest httpRequest;
+    private HttpServletRequest  httpRequest;
     private static final String[] loginRequiredURLs = {
             "/Profile", "/Chatting", "/Cart"
     };  
