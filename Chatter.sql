@@ -79,10 +79,15 @@ create table groups(
 	users_id int references users(users_id) NOT NULL,
 	avatar char(50)
 );
-
 create table category(
 	category_id int PRIMARY KEY IDENTITY(1,1),
 	category_name varchar(255) NOT NULL
+);
+
+create table subcategory(
+	subcategory_id int PRIMARY KEY IDENTITY(1,1),
+	subcategory_name varchar(255) NOT NULL,
+	category_id int references category(category_id)
 );
 
 create table products(
@@ -106,9 +111,9 @@ create table products_inventory(
 	created_at datetime default current_timestamp
 );
 
-create table products_category(
+create table products_subcategory(
 	product_id int NOT NULL references products(product_id),
-	category_id int references category(category_id)
+	subcategory_id int references subcategory(subcategory_id)
 );
 
 create table products_review (
@@ -171,6 +176,7 @@ Values(1,'12 hang bai','Hoan Kiem' ,'Hanoi'),
 (3,'2 Nguyen Trai','Quan 1' ,'Ho Chi Minh city')
 
 
+
 insert into banks_info(bank_name,bank_code)
 Values('Ngân hàng Nông nghiệp và Phát triển Nông thôn VN','Agribank'),
 ('Ngân hàng Xây dựng','CB'),
@@ -187,14 +193,29 @@ Values('Ngân hàng Nông nghiệp và Phát triển Nông thôn VN','Agribank')
 
 
 
-Insert into Category(Category_Name)
+Insert into category(category_name)
 Values('foods'),
 ('drinks'),
 ('hats')
 
-Insert into Products(Product_Name,Product_Image,Product_Price,Product_Title,Product_Description)
-Values ('','images/food.jps',1400.00,'nike air','new',100,1,3),	
-('','images/',2600.00,'nike air','new',100,1,3)
+Insert into subcategory(subcategory_name,category_id)
+Values('milk',2),
+('beer,2'),
+('meat',1),
+('chicken',1),
+('vegetable',1),
+('noodle',1),
+('rice',1)
+
+Insert into products(product_name,product_image,product_price,product_title,product_description)
+Values ('Bun cha','images/food.jpg',1400.00,'nike air','new',100,1,3),	
+('Com rang dua bo','images/food.jpg',2600.00,'nike air','new',100,1,3)
+
+Insert into products_subcategory(product_id,subcategory_id)
+Values (1,6),
+(1,3),
+(2,7),
+(2,3)
 
 
 Insert into coupons(coupon_code,product_discount_id,Discount_Amount,Expire_Date)

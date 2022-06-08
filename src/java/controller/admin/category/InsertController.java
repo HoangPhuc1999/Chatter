@@ -45,7 +45,7 @@ public class InsertController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        Category category = new Category(-1,request.getParameter("cname"));
+        Category category = new Category(-1,request.getParameter("category_name"));
         CategoryDAO categoryDAO = new CategoryDAO();
         categoryDAO.insert(category);
         response.sendRedirect("../admin/list_category");
