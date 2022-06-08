@@ -133,74 +133,68 @@
     <div class="container">
       <div class="heading_container">
         <h2>
-          Sign up
+            ${message}
         </h2>
       </div>
       <div class="row">
         <div class="col-md-6">
           <div class="form_container">
-              <%
-                String file_name = (String)request.getParameter("filename");
-                if(file_name!=null){
-                    out.println(file_name);
-                   %>
-                  <img src="http://localhost:8080/Chatter/images/<%=file_name%>">
-                  <% 
-                     }
-                  %>
-            <form action="signup" method="POST" enctype="multipart/form-data">
                 <div>
-                  <input name="avatar" type="file" class="form-control" placeholder="Avatar"
-                             onchange="document.getElementById('avatar').src = window.URL.createObjectURL(this.files[0])"/>
+                    <label>Avatar:       </label> 
+
+                    <input name="avatar" type="text" class="form-control" placeholder="Avatar" value=${avapath}>                           
                 </div>
                 <div>
-                  <input name="username" type="text" class="form-control" required placeholder="Username" />
+                    <label>Username:       </label> 
+                  <input name="username" type="text" class="form-control" placeholder="Username" value=${user}>
                 </div>
                 <div>
-                  <input name="password" type="text" class="form-control"  required placeholder="Password" />
-                </div>
-                <div>   
-                  <input name="repassword" type="text" class="form-control" required placeholder="Re Enter Password" />
+                    <label>Password:       </label> 
+                  <input name="password" type="text" class="form-control" placeholder="Password" value=${pass}>
                 </div>
                 <div>
-                  <input name="firstname" type="text" class="form-control" required placeholder="First name" />
+                    <label>Firstname:       </label> 
+                  <input name="firstname" type="text" class="form-control" placeholder="First name" value=${first}>
                 </div>
                 <div>
-                  <input name="lastname" type="text" class="form-control" required placeholder="Last name" />
-                </div>       
-                <div class="form-control form-check-inline">
-                        <p>Gender:
-                        <label class="form-check-label">
-                  <input type="radio" class="form-check-input" name="gender" value="1" checked="checked">Male    
-                        </label>
-                <label class="form-check-label">
-                  <input type="radio" class="form-check-input" name="gender" value="0">Female
-                </label>
+                    <label>Lastname:       </label>
+                  <input name="lastname" type="text" class="form-control" placeholder="Last name" value=${last}>
+                </div>
+                <div>
+                    <label>Gender:</label>  
+                <input name="gender" type="text" class="form-control"  value=${gender}>
+                </div>
+                <div>
+                    <label>Phone number:       </label>
+                  <input name="phonenumber"type="text" class="form-control" placeholder="Phone Number" value=${phone}>
+                </div>
+                <div>
+                    <label>Email:       </label>
+                  <input name="email" type="email" class="form-control" placeholder="Your Email" value=${email}>
+                </div>
+                <div>
+                    <label>Home address:       </label>
+                  <input name="home_address"type="text" class="form-control" placeholder="Home Address" value=${home}>
+                </div>
+                <div>
+                    <label>District:       </label>
+                  <input name="district"type="text" class="form-control" placeholder="district" value=${district}>
+                </div>
+                <div>
+                    <label>City:       </label>
+                  <input name="city"type="text" class="form-control" placeholder="city" value=${city}>
                 </div>
                 
-                <div>
-                  <input name="phonenumber"type="text" class="form-control" required placeholder="Phone Number" />
-                </div>
-                <div>
-                  <input name="email" type="email" class="form-control" required placeholder="Your Email" />
-                </div>
-                <div>
-                  <input name="home_address"type="text" class="form-control" required placeholder="Home Address" />
-                </div>
-                <div>
-                  <input name="district"type="text" class="form-control" required placeholder="District" />
-                </div>
-                <div>
-                  <input name="city"type="text" class="form-control" required placeholder="City" />
-                </div>
-                
-                  <button>
-                    Sign up!
+                  <button href="Profile.jsp">
+                    Change Profile
                   </button>
-            </form>
+                </div>
+          
           </div>
         <div class="col-md-6">
           <div class="map_container">
+              <image 
+              
           </div>
         </div>
       </div>

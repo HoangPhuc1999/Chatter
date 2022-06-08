@@ -48,7 +48,7 @@ public class CartControl {
 	protected void doGet_Remove(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-                UserAccount a = (Account) request.getSession().getAttribute("users_id");
+                User a = (User) request.getSession().getAttribute("user");
                 if(a==null){
                     request.setAttribute("thongbao","Ban chua dang nhap!");
                     response.sendRedirect("home");
@@ -57,7 +57,7 @@ public class CartControl {
 		int index = isExisting(request.getParameter("id"), cart);
 		cart.remove(index);
                 a.setCart(cart);
-		session.setAttribute("acc", a);
+		//session.setAttribute("acc", a);
 		response.sendRedirect("Cart.jsp");
 	}
         
@@ -93,7 +93,7 @@ public class CartControl {
 			cart.get(index).setQuantity(quantity);
                     }
                     a.setCart(cart);
-                    session.setAttribute("acc", a);
+                    //session.setAttribute("acc", a);
                     request.setAttribute("thongbao","Items added to cart! ");
                     //added to cart alert to home      
 		}

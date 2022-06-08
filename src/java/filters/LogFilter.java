@@ -9,23 +9,19 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.Date;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import model.*;
-
 
 /**
  *
  * @author khuat
  */
-public class UserFilter implements Filter {
+public class LogFilter implements Filter {
     
     private static final boolean debug = true;
 
@@ -34,13 +30,13 @@ public class UserFilter implements Filter {
     // configured. 
     private FilterConfig filterConfig = null;
     
-    public UserFilter() {
+    public LogFilter() {
     }    
     
     private void doBeforeProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
         if (debug) {
-            log("UserFilter:DoBeforeProcessing");
+            log("LogFilter:DoBeforeProcessing");
         }
 
         // Write code here to process the request and/or response before
@@ -68,7 +64,7 @@ public class UserFilter implements Filter {
     private void doAfterProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
         if (debug) {
-            log("UserFilter:DoAfterProcessing");
+            log("LogFilter:DoAfterProcessing");
         }
 
         // Write code here to process the request and/or response after
@@ -103,59 +99,16 @@ public class UserFilter implements Filter {
             FilterChain chain)
             throws IOException, ServletException {
         
-        HttpServletRequest httpRequest = (HttpServletRequest) request;
-        String path = httpRequest.getRequestURI().substring(httpRequest.getContextPath().length());
- 
-        if (path.startsWith("/")) {
-            chain.doFilter(request, response);
-            return;
-        }
- 
-        HttpSession session = httpRequest.getSession(false);
- 
-        boolean isLoggedIn = (session != null && session.getAttribute("user") != null);
- 
-        String loginURI = httpRequest.getContextPath() + "/login";
-        boolean isLoginRequest = httpRequest.getRequestURI().equals(loginURI);
-        boolean isLoginPage = httpRequest.getRequestURI().endsWith("login.jsp");
- 
-        if (isLoggedIn && (isLoginRequest || isLoginPage)) {
-            // the user is already logged in and he's trying to login again
-            // then forward to the homepage
-            httpRequest.getRequestDispatcher("/Index.jsp").forward(request, response);
- 
-        } else if (!isLoggedIn && isLoginRequired()) {
-            // the user is not logged in, and the requested page requires
-            // authentication, then forward to the login page
-            String loginPage = "/Login.jsp";
-            RequestDispatcher dispatcher = httpRequest.getRequestDispatcher(loginPage);
-            dispatcher.forward(request, response);
-        } else {
-            // for other requested pages that do not require authentication
-            // or the user is already logged in, continue to the destination
-            User a = (User)session.getAttribute("user");
-            String role = a.getRole();
-            
-            chain.doFilter(request, response);
-        }
+        // Get the IP address of client machine.   
+      String ipAddress = request.getRemoteAddr();
 
-    }
-    
-    private HttpServletRequest  httpRequest;
-    private static final String[] loginRequiredURLs = {
-            "/Profile", "/Chatting", "/Cart"
-    };  
-    
-    private boolean isLoginRequired() {
-        String requestURL = httpRequest.getRequestURL().toString();
- 
-        for (String loginRequiredURL : loginRequiredURLs) {
-            if (requestURL.contains(loginRequiredURL)) {
-                return true;
-            }
-        }
- 
-        return false;
+      // Log the IP address and current timestamp.
+      System.out.println("IP "+ ipAddress + ", Time "
+                                       + new Date().toString());
+
+      // Pass request back down the filter chain
+      chain.doFilter(request,response);
+
     }
 
     /**
@@ -183,13 +136,12 @@ public class UserFilter implements Filter {
     /**
      * Init method for this filter
      */
-    public void init(FilterConfig filterConfig) {        
-        this.filterConfig = filterConfig;
-        if (filterConfig != null) {
-            if (debug) {                
-                log("UserFilter:Initializing filter");
-            }
-        }
+    public void init(FilterConfig config) {        
+        // Get init parameter 
+      String testParam = config.getInitParameter("test-param"); 
+
+      //Print the init parameter 
+      System.out.println("Test Param: " + testParam); 
     }
 
     /**
@@ -198,9 +150,9 @@ public class UserFilter implements Filter {
     @Override
     public String toString() {
         if (filterConfig == null) {
-            return ("UserFilter()");
+            return ("LogFilter()");
         }
-        StringBuffer sb = new StringBuffer("UserFilter(");
+        StringBuffer sb = new StringBuffer("LogFilter(");
         sb.append(filterConfig);
         sb.append(")");
         return (sb.toString());
