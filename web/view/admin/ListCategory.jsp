@@ -136,8 +136,8 @@
                                 <div class="mb-3">
                                     <label for="name" class="col-form-label">Category name:</label>
                                     <input type="text" class="form-control" id="category-name" name="category_name">
-                                </div>
-                            
+                                </div>  
+
                         </div>
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-success">Add</button>
