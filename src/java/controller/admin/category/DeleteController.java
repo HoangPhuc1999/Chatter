@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Tuan Phong
  */
-@WebServlet(name="DeleteCategoryController", urlPatterns={"/admin/delete_category","/admin/del_cate"})
+@WebServlet(name="DeleteCategoryController", urlPatterns={"/admin/delete_category","/admin/del_cat"})
 public class DeleteController extends HttpServlet {
    
     /** 
