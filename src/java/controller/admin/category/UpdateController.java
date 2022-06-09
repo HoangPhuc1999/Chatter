@@ -20,7 +20,7 @@ import model.Category;
  *
  * @author Tuan Phong
  */
-@WebServlet(name="UpdateCategoryController", urlPatterns={"/admin/update_category"})
+@WebServlet(name="UpdateCategoryController", urlPatterns={"/admin/update_category","/admin/modify_cate"})
 
 public class UpdateController extends HttpServlet {
    
