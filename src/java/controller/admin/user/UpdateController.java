@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Tuan Phong
  */
-@WebServlet(name="UpdateUserController", urlPatterns={"/admin/update_user"})
+@WebServlet(name="UpdateUserController", urlPatterns={"/admin/update_user","/admin/modify_cate"})
 
 public class UpdateController extends HttpServlet {
    
