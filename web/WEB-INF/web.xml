@@ -46,7 +46,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ChatControl</servlet-name>
-        <url-pattern>/ChatControl</url-pattern>
+        <url-pattern>/chatControl</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>LogoutServlet</servlet-name>
@@ -61,7 +61,7 @@
     </welcome-file-list>
     <session-config>
         <session-timeout>
-            30
+            31
         </session-timeout>
     </session-config>
 </web-app>
