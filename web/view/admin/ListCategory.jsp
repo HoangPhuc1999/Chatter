@@ -90,7 +90,7 @@
                 var result = confirm("Are you sure?");
                 if (result)
                 {
-                    window.location.href = "delete?cid=" + cid;
+                    window.location.href = "delete_category?category_id=" + cid;
                 }
             }
             /* 404

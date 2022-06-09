@@ -73,58 +73,16 @@
 
 <body class="sub_page">
 
-  <div class="hero_area">
-    <div class="bg-box">
-      <img src="images/hero-bg.jpg" alt="">
-    </div>
-    <!-- header section strats -->
-    <header class="header_section">
-      <div class="container">
-        <nav class="navbar navbar-expand-lg custom_nav-container ">
-          <a class="navbar-brand" href="Index.jsp">
-            <span>
-              Chatter
-            </span>
-          </a>
-
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class=""> </span>
-          </button>
-
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav  mx-auto ">
-              <li class="nav-item">
-                <a class="nav-link" href="Index.jsp">Home </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="Menu.jsp">Menu</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="About.jsp">About</a>
-              </li>
-              <li class="nav-item active">
-                <a class="nav-link" href="book.jsp">Book Table <span class="sr-only">(current)</span> </a>
-              </li>
-            </ul>
-            <div class="user_option">
-              <a href="" class="user_link">
-                <i class="fa fa-user" aria-hidden="true"></i>
-              </a>
-              <a class="cart_link" href="#"> 
-              <form class="form-inline">
-                <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
-                  <i class="fa fa-search" aria-hidden="true"></i>
-                </button>
-              </form>
+  <div class="hero_area"> 
+            <div class="bg-box">
+                <img src="images/hero-bg.jpg" alt="">
             </div>
-          </div>
-        </nav>
-      </div>
-    </header>
-    <!-- end header section -->
-  </div>
-
-  <!-- book section -->
+            <!-- header section strats -->
+            <jsp:include page="Header.jsp" />
+            <!-- end header section -->
+        </div>
+            
+  <!-- sign up section -->
   <section class="book_section layout_padding">
     <div class="container">
       <div class="heading_container">
@@ -140,6 +98,7 @@
           <div class="form_container">
             <form action="signup" method="POST" enctype="multipart/form-data">
                 <div>
+                  <label>Avatar:       </label> 
                   <input name="avatar" type="file" class="form-control" placeholder="Avatar"
                              onchange="document.getElementById('avatar').src = window.URL.createObjectURL(this.files[0])"/>
                   <img id="avatar" class="img-fluid" />
@@ -147,39 +106,44 @@
                 </div>
                 
                 <div>
-                  <input name="username" type="text" class="form-control" placeholder="Username" />
+                    <label>Username:       </label> 
+                  <input name="username" type="text" class="form-control" placeholder="Username" value=${user}>
                 </div>
                 <div>
-                  <input name="password" type="text" class="form-control" placeholder="Password" />
-                </div>
-                <div>   
-                  <input name="repassword" type="text" class="form-control" placeholder="Re Enter Password" />
+                    <label>Password:       </label> 
+                  <input name="password" type="text" class="form-control" placeholder="Password" value=${pass}>
                 </div>
                 <div>
-                  <input name="firstname" type="text" class="form-control" placeholder="First name" />
+                    <label>Firstname:       </label> 
+                  <input name="firstname" type="text" class="form-control" placeholder="First name" value=${first}>
                 </div>
                 <div>
-                  <input name="lastname" type="text" class="form-control" placeholder="Last name" />
-                </div>
-                <div class="form-control">
-                    <label>Gender:       </label>  
-                  Female<input name="gender" type="radio" class="form-control-inline" check="checked" value="0"/>
-                  Male<input name="gender" type="radio" class="form-control-inline" value="1" />
+                    <label>Lastname:       </label>
+                  <input name="lastname" type="text" class="form-control" placeholder="Last name" value=${last}>
                 </div>
                 <div>
-                  <input name="phonenumber"type="text" class="form-control" placeholder="Phone Number" />
+                    <label>Gender:</label>  
+                <input name="gender" type="text" class="form-control"  value=${gender}>
                 </div>
                 <div>
-                  <input name="email" type="email" class="form-control" placeholder="Your Email" />
+                    <label>Phone number:       </label>
+                  <input name="phonenumber"type="text" class="form-control" placeholder="Phone Number" value=${phone}>
                 </div>
                 <div>
-                  <input name="home_address"type="text" class="form-control" placeholder="Home Address" />
+                    <label>Email:       </label>
+                  <input name="email" type="email" class="form-control" placeholder="Your Email" value=${email}>
                 </div>
                 <div>
-                  <input name="district"type="text" class="form-control" placeholder="District" />
+                    <label>Home address:       </label>
+                  <input name="home_address"type="text" class="form-control" placeholder="Home Address" value=${home}>
                 </div>
                 <div>
-                  <input name="city"type="text" class="form-control" placeholder="City" />
+                    <label>District:       </label>
+                  <input name="district"type="text" class="form-control" placeholder="district" value=${district}>
+                </div>
+                <div>
+                    <label>City:       </label>
+                  <input name="city"type="text" class="form-control" placeholder="city" value=${city}>
                 </div>
                 
                   <button>

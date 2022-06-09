@@ -35,9 +35,12 @@
                     <li class="nav-item">
                         <a class="nav-link" href="Book.jsp">Book Table</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Chatting.jsp">Chatting</a>
+                    </li>
                 </ul>
                 <div class="user_option">
-                    <a href="" class="user_link">
+                    <a href="Profile.jsp" class="user_link">
                         <i class="fa fa-user" aria-hidden="true"></i>
                     </a>
                     <a class="cart_link" href="#">

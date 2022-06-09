@@ -16,7 +16,7 @@ import model.Category;
  *
  * @author Tuan Phong
  */
-public class CategoryDAO extends DAO {
+public class CategoryDAO extends MyDAO {
     public ArrayList<Category> list() {
     ArrayList<Category> categorys = new ArrayList<>();
         try {
@@ -61,8 +61,18 @@ public class CategoryDAO extends DAO {
         } catch (SQLException ex) {
             Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
+    }
+    
+    public void delete(int categoryId){ 
+        try {
+            xSql = "DELETE FROM [category]\n" +
+                    "      WHERE category_id = ?";
+            ps = connection.prepareStatement(xSql);
+            ps.setInt(1, categoryId);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public static void main(String[] args) {
