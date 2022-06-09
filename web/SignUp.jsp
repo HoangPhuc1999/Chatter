@@ -98,6 +98,7 @@
           <div class="form_container">
             <form action="signup" method="POST" enctype="multipart/form-data">
                 <div>
+                  <label>Avatar:       </label> 
                   <input name="avatar" type="file" class="form-control" placeholder="Avatar"
                              onchange="document.getElementById('avatar').src = window.URL.createObjectURL(this.files[0])"/>
                   <img id="avatar" class="img-fluid" />
@@ -105,39 +106,44 @@
                 </div>
                 
                 <div>
-                  <input name="username" type="text" class="form-control" placeholder="Username" />
+                    <label>Username:       </label> 
+                  <input name="username" type="text" class="form-control" placeholder="Username" value=${user}>
                 </div>
                 <div>
-                  <input name="password" type="text" class="form-control" placeholder="Password" />
-                </div>
-                <div>   
-                  <input name="repassword" type="text" class="form-control" placeholder="Re Enter Password" />
+                    <label>Password:       </label> 
+                  <input name="password" type="text" class="form-control" placeholder="Password" value=${pass}>
                 </div>
                 <div>
-                  <input name="firstname" type="text" class="form-control" placeholder="First name" />
+                    <label>Firstname:       </label> 
+                  <input name="firstname" type="text" class="form-control" placeholder="First name" value=${first}>
                 </div>
                 <div>
-                  <input name="lastname" type="text" class="form-control" placeholder="Last name" />
-                </div>
-                <div class="form-control">
-                    <label>Gender:       </label>  
-                  Female<input name="gender" type="radio" class="form-control-inline" check="checked" value="0"/>
-                  Male<input name="gender" type="radio" class="form-control-inline" value="1" />
+                    <label>Lastname:       </label>
+                  <input name="lastname" type="text" class="form-control" placeholder="Last name" value=${last}>
                 </div>
                 <div>
-                  <input name="phonenumber"type="text" class="form-control" placeholder="Phone Number" />
+                    <label>Gender:</label>  
+                <input name="gender" type="text" class="form-control"  value=${gender}>
                 </div>
                 <div>
-                  <input name="email" type="email" class="form-control" placeholder="Your Email" />
+                    <label>Phone number:       </label>
+                  <input name="phonenumber"type="text" class="form-control" placeholder="Phone Number" value=${phone}>
                 </div>
                 <div>
-                  <input name="home_address"type="text" class="form-control" placeholder="Home Address" />
+                    <label>Email:       </label>
+                  <input name="email" type="email" class="form-control" placeholder="Your Email" value=${email}>
                 </div>
                 <div>
-                  <input name="district"type="text" class="form-control" placeholder="District" />
+                    <label>Home address:       </label>
+                  <input name="home_address"type="text" class="form-control" placeholder="Home Address" value=${home}>
                 </div>
                 <div>
-                  <input name="city"type="text" class="form-control" placeholder="City" />
+                    <label>District:       </label>
+                  <input name="district"type="text" class="form-control" placeholder="district" value=${district}>
+                </div>
+                <div>
+                    <label>City:       </label>
+                  <input name="city"type="text" class="form-control" placeholder="city" value=${city}>
                 </div>
                 
                   <button>
