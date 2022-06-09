@@ -66,7 +66,7 @@ public class CategoryDAO extends MyDAO {
     public void delete(int categoryId){ 
         try {
             xSql = "DELETE FROM [category]\n" +
-                    "      WHERE category_id = ?";
+                    "WHERE category_id = ?";
             ps = connection.prepareStatement(xSql);
             ps.setInt(1, categoryId);
             ps.executeUpdate();
