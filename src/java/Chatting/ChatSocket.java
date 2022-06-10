@@ -10,63 +10,77 @@ package Chatting;
  * @author khuat
  */
 import java.io.IOException;
+import java.nio.ByteBuffer;
 import java.util.*;
 
 import javax.websocket.OnClose;
+import javax.websocket.OnError;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
+import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 
-@ServerEndpoint("/chat")
+@ServerEndpoint(value = "/chat/{username}", encoders = MessageEncoder.class, decoders = MessageDecoder.class)
 public class ChatSocket {
-    private static Map<Session,String> connectedUsers = Collections.synchronizedMap(new HashMap<>());
 
-    @OnOpen
-    public void onOpen (Session session){
-        System.out.println(session.getId() + " opened a connection");
-    }
+	private Session session;
+	private String username;
+	private Queue<FileDTO> fileDTOs = new LinkedList<>();
 
-    @OnMessage
-    public void onMessage(String message, Session session){
-        if((message.length()>7)&&message.substring(0,7).equals("newUser")) {
-            connectedUsers.put(session, message.substring(7));
-            String currentUsers = userList();
-            for (Session sessions : connectedUsers.keySet()){
-                try{
-                    sessions.getBasicRemote().sendText("---Users---" + currentUsers);
-                    sessions.getBasicRemote().sendText(" ( " + message.substring(7) + " has entered the chat )");
-                }
-                catch (IOException e){ connectedUsers.remove(sessions); }
-            }
-            System.out.println(message + " has been added");
-        }else{
-            for (Session sessions : connectedUsers.keySet()) {
-                try {  sessions.getBasicRemote().sendText(message);}
-                catch (IOException e) {  connectedUsers.remove(sessions); }
-            }
-        }
-    }
+	private ChatServiceAbstract chatService = ChatService.getInstance();
+	private MessageServiceInterface messageService = MessageService.getInstance();
 
-    @OnClose
-    public void onClose (Session session){
-        String userLeaving = connectedUsers.get(session);
-        connectedUsers.remove(session);
-        String currentUsers = userList();
-        for (Session sessions : connectedUsers.keySet()){
-            try{
-                sessions.getBasicRemote().sendText("---Users---" + currentUsers);
-                sessions.getBasicRemote().sendText(" ( " + userLeaving + " has left the chat )");
-            }
-            catch (IOException e){ connectedUsers.remove(sessions); }
-        }
-    }
+	@OnOpen
+	public void onOpen(@PathParam("username") String username, Session session) {
+		if (chatService.register(this)) {
+			this.session = session;
+			this.username = username;
+			String receiver = "all";
+			MessageDTO msgResponse = new MessageDTO(this.username, "[P]open", "text", receiver, null);
+			chatService.sendMessageToAllUsers(msgResponse);
+		}
+	}
 
+	@OnError
+	public void onError(Session session, Throwable throwable) {
 
-    private String userList(){
-        StringBuilder stringBuilder = new StringBuilder();
-        for (String username : connectedUsers.values()){  stringBuilder.append("<br>" + username ); }
-        return stringBuilder.toString();
-    }
+	}
 
+	@OnMessage
+	public void onMessage(MessageDTO message, Session session) {
+		chatService.sendMessageToOneUser(message, fileDTOs);
+		messageService.saveMessage(message);
+	}
+
+	@OnMessage
+	public void processUploading(ByteBuffer byteBuffer, boolean last, Session session) {
+		System.err.println(byteBuffer.array().length);
+		chatService.handleFileUpload(byteBuffer, last, fileDTOs);
+	}
+
+	@OnClose
+	public void onClose(Session session) {
+		if (chatService.close(this)) {
+			String receiver = "all";
+			MessageDTO msgResponse = new MessageDTO(this.username, "[P]close", "text", receiver, null);
+			chatService.sendMessageToAllUsers(msgResponse);
+		}
+	}
+
+	public Session getSession() {
+		return session;
+	}
+
+	public void setSession(Session session) {
+		this.session = session;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
 }
