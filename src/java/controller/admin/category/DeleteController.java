@@ -8,23 +8,36 @@ package controller.admin.category;
 import DAO.CategoryDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Category;
 
 /**
  *
  * @author Tuan Phong
  */
-@WebServlet(name="UpdateCategoryController", urlPatterns={"/admin/update_category","/admin/modify_cat"})
-
-public class UpdateController extends HttpServlet {
+@WebServlet(name="DeleteCategoryController", urlPatterns={"/admin/delete_category","/admin/del_cat"})
+public class DeleteController extends HttpServlet {
    
-    
+    /** 
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    throws ServletException, IOException {
+        CategoryDAO categoryDAO = new CategoryDAO();
+        int categoryId = Integer.parseInt(request.getParameter("category_id"));
+//        response.getWriter().print(categoryId);
+        categoryDAO.delete(categoryId);
+        response.sendRedirect("../admin/list_category");
+        
+    } 
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
      * Handles the HTTP <code>GET</code> method.
@@ -36,6 +49,7 @@ public class UpdateController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        processRequest(request, response);
     } 
 
     /** 
@@ -48,11 +62,7 @@ public class UpdateController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        Category category = new Category(Integer.parseInt(request.getParameter("cid")),request.getParameter("cname"));
-        CategoryDAO categoryDAO = new CategoryDAO();
-        categoryDAO.update(category);
-//        response.getWriter().print(category);
-        response.sendRedirect("../admin/list_category");
+        processRequest(request, response);
     }
 
     /** 
