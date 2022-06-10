@@ -16,6 +16,7 @@ public class Product {
     private double price;
     private String title;
     private String description;
+    private String cid;
 
     public Product() {
     }
@@ -27,6 +28,14 @@ public class Product {
         this.price = price;
         this.title = title;
         this.description = description;
+    }
+
+    public String getCid() {
+        return cid;
+    }
+
+    public void setCid(String cid) {
+        this.cid = cid;
     }
 
     public int getId() {

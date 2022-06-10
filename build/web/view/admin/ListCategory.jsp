@@ -1,3 +1,4 @@
+
 <%-- 
     Document   : ListCategory
     Created on : May 31, 2022, 5:13:21 PM
@@ -90,24 +91,9 @@
                 var result = confirm("Are you sure?");
                 if (result)
                 {
-                    window.location.href = "delete?cid=" + cid;
+                    window.location.href = "delete_category?category_id=" + cid;
                 }
             }
-            /* 404
-             function addCategory(cid){
-             var tableX = document.getElementById("tableX");
-             var row = tableX.insertRow(${requestScope.categorys.size()+1});
-             var cell1 = row.insertCell(0);
-             var cell2 = row.insertCell(1);
-             var cell3 = row.insertCell(2);
-             
-             cell1.innerHTML="<input type=\"hidden\" value=\"${cid+1}\"/>"
-             ;
-             cell2.innerHTML="<input name=\"name\" type=\"text\"  />";
-             cell3.innerHTML="";
-             }   
-             */
-
         </script>
     </head>
     <body>
@@ -191,3 +177,7 @@
 
     </body>
 </html>
+
+
+     
+                  

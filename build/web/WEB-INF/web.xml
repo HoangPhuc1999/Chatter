@@ -40,45 +40,13 @@
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
-    <servlet>
-        <servlet-name>UpdateCategoryController</servlet-name>
-        <servlet-class>controller.admin.category.UpdateController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>InsertCategoryController</servlet-name>
-        <servlet-class>controller.admin.category.InsertController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>UpdateUserController</servlet-name>
-        <servlet-class>controller.admin.user.UpdateController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ListCategoryController</servlet-name>
-        <servlet-class>controller.admin.category.ListController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>UpdateUserController</servlet-name>
-        <url-pattern>/admin/update_user</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ListCategoryController</servlet-name>
-        <url-pattern>/admin/list_category</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>UpdateCategoryController</servlet-name>
-        <url-pattern>/admin/update_category</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>InsertCategoryController</servlet-name>
-        <url-pattern>/admin/insert_category</url-pattern>
-    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SignUpServlet</servlet-name>
         <url-pattern>/signup</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ChatControl</servlet-name>
-        <url-pattern>/ChatControl</url-pattern>
+        <url-pattern>/chatControl</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>LogoutServlet</servlet-name>
@@ -91,4 +59,9 @@
     <welcome-file-list>
         <welcome-file>Index.jsp</welcome-file>
     </welcome-file-list>
+    <session-config>
+        <session-timeout>
+            31
+        </session-timeout>
+    </session-config>
 </web-app>
