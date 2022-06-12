@@ -72,8 +72,8 @@ public class SignUpServlet extends HttpServlet {
 //            avapath=("avatar\\"+extractFileName(part)).toString();
 //        
 
-        if (ServletFileUpload.isMultipartContent(request)) {
-            try {
+//        if (ServletFileUpload.isMultipartContent(request)) {
+//            try {
 
 //		List<FileItem> multiparts = new ServletFileUpload(
 //                        new DiskFileItemFactory()).parseRequest(request);
@@ -86,19 +86,19 @@ public class SignUpServlet extends HttpServlet {
 //
 //		}
                 
-                
-                Part filePart = request.getPart("avatar");
-                String fileName = filePart.getSubmittedFileName();
-                for (Part part : request.getParts()) {
-                    
-                    part.write(getFolderUpload()+File.separator + fileName);
-                    avapath ="avatar\\"+ fileName;
-                  
-                }
-                
-            }
-            catch (Exception e) {
-                System.out.println(e.getClass());
+//                
+//                Part filePart = request.getPart("avatar");
+//                String fileName = filePart.getSubmittedFileName();
+//                for (Part part : request.getParts()) {
+//                    
+//                    part.write(getFolderUpload()+File.separator + fileName);
+//                    avapath ="avatar\\"+ fileName;
+//                  
+//                }
+//                
+//            }
+//            catch (Exception e) {
+//                System.out.println(e.getClass());
                 //if there is no avatar image , assign basic
                 if(avapath==null){  
                     switch(gender){
@@ -110,8 +110,8 @@ public class SignUpServlet extends HttpServlet {
                             break;
                     }    
                 }
-              }
-        }   
+              
+           
 
         try{
             if(!user.matches("[a-zA-Z0-9 ]*")) throw new IOException("username is invalid");

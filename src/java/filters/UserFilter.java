@@ -115,9 +115,9 @@ public class UserFilter implements Filter {
  
         boolean isLoggedIn = (session != null && session.getAttribute("user") != null);
  
-        String loginURI = httpRequest.getContextPath() + "/login";
+        String loginURI = httpRequest.getContextPath() + "/Login";
         boolean isLoginRequest = httpRequest.getRequestURI().equals(loginURI);
-        boolean isLoginPage = httpRequest.getRequestURI().endsWith("login.jsp");
+        boolean isLoginPage = httpRequest.getRequestURI().endsWith("Login.jsp");
  
         if (isLoggedIn && (isLoginRequest || isLoginPage)) {
             // the user is already logged in and he's trying to login again

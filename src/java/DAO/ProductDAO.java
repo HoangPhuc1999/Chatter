@@ -15,35 +15,35 @@ import model.*;
  *
  * @author KQuangAn
  */
-public class PackageDAO extends DAO{
+public class ProductDAO extends DAO{
 
     //lay product trong table product bang product id  
     //dung cho gio hang cart 
     //author: an 
     public Product getProductById(int id) {
 
-        xSql = "select * from product where product_id = ?";
+        xSql = "select * from products p\n" +
+                "join products_image i\n" +
+                "on p.product_id = i.product_id\n" +
+                " where p.product_id = ?";
         try {
             ps = con.prepareStatement(xSql);
             ps.setInt(1, id);
             rs = ps.executeQuery();
-
-            if (rs.next()) {
-                return new Product(rs.getInt(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getString(4),
-                        rs.getString(5)
+            while(rs.next()) {
+                return new Product(rs.getInt(1),//id
+                        rs.getString(2),//name
+                        rs.getString(7),//image
+                        rs.getDouble(3),//price
+                        rs.getString(4),//title
+                        rs.getString(5)//description
                 );
-
-            } else {
-                x = null;
-            }
+            } 
             rs.close();
             ps.close();
         } catch (Exception e) {
         }
-        return (x);
+        return null;
     }
    
     //lay tat ca product cho vao arraylist (co lay image) 

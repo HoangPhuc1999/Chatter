@@ -121,9 +121,11 @@
                     <label>Lastname:       </label>
                   <input name="lastname" type="text" class="form-control" placeholder="Last name" value=${last}>
                 </div>
-                <div>
+                <div class="form-control">
                     <label>Gender:</label>  
-                <input name="gender" type="text" class="form-control"  value=${gender}>
+                <input name="gender" type="radio" class="form-control-inline"  value="1">Male
+                <input name="gender" type="radio" class="form-control-inline"  value="0">Female
+
                 </div>
                 <div>
                     <label>Phone number:       </label>
