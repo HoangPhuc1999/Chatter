@@ -156,10 +156,19 @@ public class SignUpServlet extends HttpServlet {
                 }
         }
         catch(Exception e){
-            request.setAttribute("message", "Sign up failed error code: " +e.toString() );
-            getServletContext().getRequestDispatcher("/SignUp.jsp").forward(request, response);
-
-            
+                request.setAttribute("message", "Sign up failed error code: " +e.toString() );
+                request.setAttribute("avapath", avapath);
+                request.setAttribute("user", user);
+                request.setAttribute("pass", pass);
+                request.setAttribute("home", home_address);
+                request.setAttribute("district", district);
+                request.setAttribute("city", city);
+                request.setAttribute("first", firstname);
+                request.setAttribute("last", lastname);
+                request.setAttribute("gender", gender);
+                request.setAttribute("phone", phone);
+                request.setAttribute("email", email);
+            getServletContext().getRequestDispatcher("/SignUp.jsp").forward(request, response);     
         }
         }
    

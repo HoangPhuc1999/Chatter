@@ -303,7 +303,7 @@ public class UserDAO extends DAO {
         //check sign up
 //        UserAccount newAcc = new UserAccount("x","x");  
 //        UserAddress newAccAddress= new UserAddress("x","x","x");
-//        User newAccUser = new User("heeeeeeeeee","gqw","0675978234","user3@fpt.edu.vn","1","images/boy.jpg");
+//        User newAccUser = new User("femmmmm","gqw","0675565454","user3@fpt.edu.vn","0",null);
 //        
 //        dao.singup(newAccUser,newAcc,newAccAddress); //them user
         
