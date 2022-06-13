@@ -98,6 +98,22 @@
                     window.location.href = "delete_category?category_id=" + cid;
                 }
             }
+
+            /* 404
+             function addCategory(cid){
+             var tableX = document.getElementById("tableX");
+             var row = tableX.insertRow(${requestScope.categorys.size()+1});
+             var cell1 = row.insertCell(0);
+             var cell2 = row.insertCell(1);
+             var cell3 = row.insertCell(2);
+             
+             cell1.innerHTML="<input type=\"hidden\" value=\"${cid+1}\"/>"
+             ;
+             cell2.innerHTML="<input name=\"name\" type=\"text\"  />";
+             cell3.innerHTML="";
+             }   
+             */
+
         </script>
     </head>
     <body>
@@ -125,13 +141,14 @@
                             <form action="insert_category" method="post">
                                 <div class="mb-3">
                                     <label for="name" class="col-form-label">Category name:</label>
-                                    <input type="text" class="form-control" id="category_name" name="category_name"  required="true" onkeyup="validate_category()">
-                                </div> 
-                                <span id="dumlicate_category"></span>
+
+                                    <input type="text" class="form-control" id="category-name" name="category_name">
+                                </div>  
 
                         </div>
                         <div class="modal-footer">
-                            <button id="add_category" type="submit" class="btn btn-success">Add</button>
+                            <button type="submit" class="btn btn-success">Add</button>
+
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
                             </form>
                         </div>
@@ -140,7 +157,8 @@
             </div>
             <h2>Categories</h2>
             <div class="d-flex">
-                <table class="table table-striped w-50">
+
+                <table class="table table-striped w-50" id="tableX">
                     <tr class>
                         <th class="w-auto">Category ID</th>
                         <th class="w-auto">Category Name</th>
@@ -157,8 +175,7 @@
                                 </td>
                                 <td>
                                     <input type="hidden" name="cid" value="${category.cid}"/>
-                                    <a class="btn-outline-info btn-box btn-lg fa fa-pencil-square-o fa-lg viewmode${category.cid}" onclick="showEditmode(${category.cid});
-                                            hideViewmode(${category.cid});"/>
+                                    <a class="btn-outline-info btn-box btn-lg fa fa-pencil-square-o fa-lg viewmode${category.cid}" onclick="showEditmode(${category.cid});hideViewmode(${category.cid});"/>
                                     <a class="btn-outline-danger btn-box btn-lg fa fa-trash fa-lg viewmode${category.cid}"  href="#" onclick="deleteCategory(${category.cid})"></a>
                                     <input class="btn btn-outline-success btn-sm editmode${category.cid}" type="submit"  value="Save">
                                     <input class="btn btn-outline-secondary btn-sm editmode${category.cid}" type="button" onclick="cancelEdit(${category.cid}, '${category.cname}');" value="Cancel"/>
@@ -174,7 +191,6 @@
         <jsp:include page="../../Footer.jsp" />
         <!-- footer section -->
         <script>
-
             for (var i = 0; i < cids.length; i++)
             {
                 hideEditmode(cids[i]);
