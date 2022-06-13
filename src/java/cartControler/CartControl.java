@@ -64,7 +64,7 @@ public class CartControl {
         
 	protected void doGet_Buy(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		DAO dao = new DAO();
+		ProductDAO dao = new ProductDAO();
 		HttpSession session = request.getSession();
                 User a = (User) request.getSession().getAttribute("user");
                 //neu chua dang nhap ma an mua hang

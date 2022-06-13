@@ -72,8 +72,8 @@ public class SignUpServlet extends HttpServlet {
 //            avapath=("avatar\\"+extractFileName(part)).toString();
 //        
 
-        if (ServletFileUpload.isMultipartContent(request)) {
-            try {
+//        if (ServletFileUpload.isMultipartContent(request)) {
+//            try {
 
 //		List<FileItem> multiparts = new ServletFileUpload(
 //                        new DiskFileItemFactory()).parseRequest(request);
@@ -86,19 +86,19 @@ public class SignUpServlet extends HttpServlet {
 //
 //		}
                 
-                
-                Part filePart = request.getPart("avatar");
-                String fileName = filePart.getSubmittedFileName();
-                for (Part part : request.getParts()) {
-                    
-                    part.write(getFolderUpload()+File.separator + fileName);
-                    avapath ="avatar\\"+ fileName;
-                  
-                }
-                
-            }
-            catch (Exception e) {
-                System.out.println(e.getClass());
+//                
+//                Part filePart = request.getPart("avatar");
+//                String fileName = filePart.getSubmittedFileName();
+//                for (Part part : request.getParts()) {
+//                    
+//                    part.write(getFolderUpload()+File.separator + fileName);
+//                    avapath ="avatar\\"+ fileName;
+//                  
+//                }
+//                
+//            }
+//            catch (Exception e) {
+//                System.out.println(e.getClass());
                 //if there is no avatar image , assign basic
                 if(avapath==null){  
                     switch(gender){
@@ -110,8 +110,8 @@ public class SignUpServlet extends HttpServlet {
                             break;
                     }    
                 }
-              }
-        }   
+              
+           
 
         try{
             if(!user.matches("[a-zA-Z0-9 ]*")) throw new IOException("username is invalid");
@@ -156,10 +156,19 @@ public class SignUpServlet extends HttpServlet {
                 }
         }
         catch(Exception e){
-            request.setAttribute("message", "Sign up failed error code: " +e.toString() );
-            getServletContext().getRequestDispatcher("/SignUp.jsp").forward(request, response);
-
-            
+                request.setAttribute("message", "Sign up failed error code: " +e.toString() );
+                request.setAttribute("avapath", avapath);
+                request.setAttribute("user", user);
+                request.setAttribute("pass", pass);
+                request.setAttribute("home", home_address);
+                request.setAttribute("district", district);
+                request.setAttribute("city", city);
+                request.setAttribute("first", firstname);
+                request.setAttribute("last", lastname);
+                request.setAttribute("gender", gender);
+                request.setAttribute("phone", phone);
+                request.setAttribute("email", email);
+            getServletContext().getRequestDispatcher("/SignUp.jsp").forward(request, response);     
         }
         }
    

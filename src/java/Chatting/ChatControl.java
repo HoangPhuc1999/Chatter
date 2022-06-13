@@ -11,6 +11,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import model.User;
 
 /**
  *
@@ -25,8 +27,12 @@ public class ChatControl extends HttpServlet {
         javascriptAddons(out,new String[]{"/chatVisibility.js","/chatSocket.js"});
         chatCore(out,"www.thekarlbrown.com");
         out.println("</html>");
+        
+        User a = (User) request.getSession().getAttribute("user");
+        request.setAttribute("firstname", a.getFirstname());
+        request.setAttribute("Avater", a.getAvatar());
+        
     }
-
     /**
      * Loads up listed Javascript's from pre-written array
      * @param printWriter PrintWriter to use when calling the method

@@ -71,6 +71,7 @@ public class UserDAO extends DAO {
         return (x);
     }
 
+    //author: phong 
     public ArrayList<User> getUsersForAdminByName(String namePattern) {
         ArrayList<User> users = new ArrayList<>();
         try {
@@ -269,29 +270,31 @@ public class UserDAO extends DAO {
 
         }
     }
+    
 
     //lay tat ca user trong bang users 
-//    public ArrayList<User> getAllUsers() {
-//        ArrayList<User> allUserList = new ArrayList<>();
-//        String query = "select * from users";
-//        try {
-//            ps = con.prepareStatement(query);
-//            rs = ps.executeQuery();
-//            while (rs.next()) {
-//                allUserList.add(new User(rs.getInt(1),
-//                        rs.getString(2),
-//                        rs.getString(3),
-//                        rs.getString(4),
-//                        rs.getString(5),
-//                        rs.getString(6),
-//                        rs.getString(7)));
-//            }
-//        } catch (Exception e) {
-//            
-//        }
-//        return allUserList;
-//    }
-//    
+    //author: an 
+    public ArrayList<User> getAllUsers() {
+        ArrayList<User> allUserList = new ArrayList<>();
+        String query = "select * from users";
+        try {
+            ps = con.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                allUserList.add(new User(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7)));
+            }
+        } catch (Exception e) {
+            
+        }
+        return allUserList;
+    }
+  
     public static void main(String[] args) throws SQLException {
         UserDAO dao = new UserDAO();
         UserAccount a = new UserAccount();
@@ -300,16 +303,16 @@ public class UserDAO extends DAO {
         //check sign up
 //        UserAccount newAcc = new UserAccount("x","x");  
 //        UserAddress newAccAddress= new UserAddress("x","x","x");
-//        User newAccUser = new User("heeeeeeeeee","gqw","0675978234","user3@fpt.edu.vn","1","images/boy.jpg");
+//        User newAccUser = new User("femmmmm","gqw","0675565454","user3@fpt.edu.vn","0",null);
 //        
 //        dao.singup(newAccUser,newAcc,newAccAddress); //them user
         
         
-       // ArrayList<User> b = dao.getAllUsers();
+       ArrayList<User> b = dao.getAllUsers();
         
         int x = dao.getUserID();
 
-        System.out.println(x);
+        System.out.println(b);
     }
 
 }

@@ -27,7 +27,7 @@
                         <a class="nav-link" href="Index.jsp">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="Menu.jsp">Menu</a>
+                        <a class="nav-link" href="menu">Menu</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="About.jsp">About</a>

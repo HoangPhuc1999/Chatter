@@ -41,6 +41,11 @@
             cids.push(${c.cid});
             </c:forEach>
 
+            var cates = [];
+            <c:forEach items="${requestScope.categorys}" var="cate">
+            cates.push('${cate.cname}');
+            </c:forEach>
+
             function hideEditmode(cid)
             {
                 var editcomponents = document.getElementsByClassName("editmode" + cid);
@@ -90,9 +95,10 @@
                 var result = confirm("Are you sure?");
                 if (result)
                 {
-                    window.location.href = "delete?cid=" + cid;
+                    window.location.href = "delete_category?category_id=" + cid;
                 }
             }
+
             /* 404
              function addCategory(cid){
              var tableX = document.getElementById("tableX");
@@ -135,12 +141,14 @@
                             <form action="insert_category" method="post">
                                 <div class="mb-3">
                                     <label for="name" class="col-form-label">Category name:</label>
+
                                     <input type="text" class="form-control" id="category-name" name="category_name">
                                 </div>  
 
                         </div>
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-success">Add</button>
+
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
                             </form>
                         </div>
@@ -149,6 +157,7 @@
             </div>
             <h2>Categories</h2>
             <div class="d-flex">
+
                 <table class="table table-striped w-50" id="tableX">
                     <tr class>
                         <th class="w-auto">Category ID</th>
@@ -186,6 +195,30 @@
             {
                 hideEditmode(cids[i]);
             }
+
+
+
+            function validate_category() {
+                let category = document.getElementById('category_name').value;
+                const includesValue = cates.some(element => {
+                    return element.toLowerCase() === category.toLowerCase();
+                  });
+                if (includesValue) {
+                    document.getElementById('dumlicate_category').style.color = 'red';
+                    document.getElementById('dumlicate_category').innerHTML
+                            = 'Category already exist!';
+                    document.getElementById('add_category').disabled = true;
+                    document.getElementById('add_category').style.opacity = (0.4);
+                } else {
+                    document.getElementById('dumlicate_category').style.color = 'green';
+                    document.getElementById('dumlicate_category').innerHTML =
+                            'Valid category';
+                    document.getElementById('add_category').disabled = false;
+                    document.getElementById('add_category').style.opacity = (1);
+                }
+            }
+
+
         </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
