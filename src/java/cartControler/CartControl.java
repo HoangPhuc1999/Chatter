@@ -70,12 +70,12 @@ public class CartControl {
                 //neu chua dang nhap ma an mua hang
                 if(a==null){
                     request.setAttribute("thongbao","Ban chua dang nhap!");
-                    request.getRequestDispatcher("Login.jsp").forward(request,response);
+                    request.getRequestDispatcher("SignUp.jsp").forward(request,response);
                 }
                 //neu day la mon hang dau tien -> tao cart va gan vao acc session
 		if (a.getCart() == null) {
 			ArrayList<Item> cart = new ArrayList<Item>();
-			cart.add(new Item(dao.getProductByID(request.getParameter("id")), 1));
+			cart.add(new Item(dao.getProductById(request.getParameter("id")), 1));
 			a.setCart(cart);
                         request.setAttribute("thongbao","Items added to cart! ");
 		}
@@ -85,7 +85,7 @@ public class CartControl {
                     int ammount = Integer.parseInt(request.getParameter("quantity"));
                     //neu product chua co trong cart -> tao item ms +1 
                     if (index == -1) {                                                   
-                        cart.add(new Item(dao.getProductByID(request.getParameter("id")), 1));
+                        cart.add(new Item(dao.getProductById(request.getParameter("id")), 1));
                     }
                         //neu product da co tromg cart --> + amount 
                     else {

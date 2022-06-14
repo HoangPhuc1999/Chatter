@@ -38,6 +38,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="Chatting.jsp">Chatting</a>
                     </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="productdetail">Review</a>
+                    </li>
                 </ul>
                 <div class="user_option">
                     <a href="Profile.jsp" class="user_link">

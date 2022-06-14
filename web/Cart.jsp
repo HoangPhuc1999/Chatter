@@ -75,7 +75,7 @@
                                             <tbody>
                                                 <c:set var="total" value="0"></c:set>
                                                 <c:set var="Discounted_Price" value="0"></c:set>
-                                            <c:forEach items="${sessionScope.user.cart}" var="o">
+                                            <c:forEach items="${sessionScope.acc.cart}" var="o">
                                                 <c:set var="total" value="${total+(o.product.price * o.quantity)}"></c:set>
                                                 <c:set var="Discounted_Price" value="${Discounted_Price+((o.product.price * o.quantity *(100 - Discount)) /100)}"></c:set>
                                                 <tr>
@@ -117,7 +117,7 @@
                                         <div class="input-group-append border-0">
                                             <button id="button-addon3" type="submit" form="couponCheck" class="btn btn-dark px-4 rounded-pill"><i class="fa fa-gift mr-2"></i>Sử dụng</button>
                                         </div>
-                                        <p class="text-danger">${thongbao}</p>
+                                        <p class="text-danger">${message}</p>
                                     </div>
                                 </div>
                             </div>

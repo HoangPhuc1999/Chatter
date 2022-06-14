@@ -40,10 +40,6 @@
         <servlet-name>ProductDetailServlet</servlet-name>
         <servlet-class>productController.ProductDetailServlet</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>CouponControl</servlet-name>
-        <servlet-class>cartControler.CouponControl</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -71,10 +67,6 @@
     <welcome-file-list>
         <welcome-file>Index.jsp</welcome-file>
     </welcome-file-list>
-    <servlet-mapping>
-        <servlet-name>CouponControl</servlet-name>
-        <url-pattern>/coupon</url-pattern>
-    </servlet-mapping>
     <session-config>
         <session-timeout>
             31
