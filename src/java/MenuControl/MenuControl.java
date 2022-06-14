@@ -38,10 +38,10 @@ public class MenuControl extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         ProductDAO dao = new ProductDAO();
         List<Product> list = dao.getAllProduct();
-        List<Category> listC = dao.getAllCategory();
+        //List<Category> listC = dao.getAllCategory();
         
         request.setAttribute("listP", list);
-        request.setAttribute("listC", listC);
+        //request.setAttribute("listC", listC);
         request.getRequestDispatcher("Menu.jsp").forward(request, response);
     }
 
