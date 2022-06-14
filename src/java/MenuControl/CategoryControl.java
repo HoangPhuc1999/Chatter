@@ -38,11 +38,11 @@ public class CategoryControl extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String cateID = request.getParameter("cid");
         ProductDAO dao = new ProductDAO();
-        List<Product> list = dao.getProductByCategoryID(cateID);
-        List<Category> listC = dao.getAllCategory();
+        //List<Product> list = dao.getProductByCategoryID(cateID);
+        //List<Category> listC = dao.getAllCategory();
         
-        request.setAttribute("listC", listC);
-        request.setAttribute("litsP", list);
+        //request.setAttribute("listC", listC);
+        //request.setAttribute("litsP", list);
         request.getRequestDispatcher("Menu.jsp").forward(request, response);
     }
 

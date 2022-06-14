@@ -7,6 +7,7 @@
 package DAO;
 
 import context.DBContext;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import model.*;
@@ -19,8 +20,9 @@ public class ProductDAO extends DAO{
 
     //lay product trong table product bang product id  
     //dung cho gio hang cart 
-    //author: an 
-    public Product getProductById(int id) {
+    //author: an
+    //last changed by : AN
+    public Product getProductById(String id) {
 
         xSql = "select * from products p\n" +
                 "join products_image i\n" +
@@ -28,7 +30,7 @@ public class ProductDAO extends DAO{
                 " where p.product_id = ?";
         try {
             ps = con.prepareStatement(xSql);
-            ps.setInt(1, id);
+            ps.setString(1, id);
             rs = ps.executeQuery();
             while(rs.next()) {
                 return new Product(rs.getInt(1),//id
