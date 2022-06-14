@@ -22,17 +22,6 @@ public class User {
     private String avatar;
     private ArrayList<Item> cart;
 
-    public User(int users_id, String role, String firstname, String lastname, String phonenumber, String email, String gender, String avatar, ArrayList<Item> cart) {
-        this.users_id = users_id;
-        this.role = role;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.phonenumber = phonenumber;
-        this.email = email;
-        this.gender = gender;
-        this.avatar = avatar;
-        this.cart = cart;
-    }
 
     public User(String firstname, String lastname, String phonenumber, String email, String gender, String avatar) {
         this.firstname = firstname;
@@ -136,6 +125,8 @@ public class User {
         return "User{" + "users_id=" + users_id + ", role=" + role + ", firstname=" + firstname + ", lastname=" + lastname + ", phonenumber=" + phonenumber + ", email=" + email + ", gender=" + gender + ", avatar=" + avatar + ", cart=" + cart + '}';
     }
     
+  
+  
     
     
     

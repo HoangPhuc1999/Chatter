@@ -70,7 +70,7 @@ public class CartControl {
                 //neu chua dang nhap ma an mua hang
                 if(a==null){
                     request.setAttribute("thongbao","Ban chua dang nhap!");
-                    request.getRequestDispatcher("SignUp.jsp").forward(request,response);
+                    request.getRequestDispatcher("Login.jsp").forward(request,response);
                 }
                 //neu day la mon hang dau tien -> tao cart va gan vao acc session
 		if (a.getCart() == null) {
