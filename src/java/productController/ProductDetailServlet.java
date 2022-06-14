@@ -5,7 +5,7 @@
  */
 package productController;
 
-import DAO.ProductDao;
+import DAO.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -28,7 +28,7 @@ public class ProductDetailServlet extends HttpServlet {
         PrintWriter pr = response.getWriter();
 //        String id = request.getParameter("id");
         String id = "1";
-        ProductDao d = new ProductDao();
+        ProductDAO d = new ProductDAO();
         ProductImage pd = d.getProductImageById(id);
         Product x = d.getProductById(id);
         String imageUrl = pd.getImageUrl();
