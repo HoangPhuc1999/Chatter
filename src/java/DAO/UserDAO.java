@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.http.HttpSession;
 import model.*;
 
 /**
@@ -100,8 +101,7 @@ public class UserDAO extends DAO {
                                 "0123456789",
                                 rs.getString("email"),
                                 rs.getBoolean("gender") == true ? "Male" : "Female",
-                                rs.getString("avatar"),
-                                null));
+                                rs.getString("avatar")));
 
             }
         } catch (SQLException ex) {
@@ -116,8 +116,6 @@ public class UserDAO extends DAO {
     public void singup(User newUser, UserAccount newUserAccount, UserAddress newUserAddress) {
         String query = "insert into users(firstname, lastname, phonenumber, email, gender, avatar)\n"
                 + "values(?,?,?,?,?,?)";
-        String idquery1 = "select SCOPE_IDENTITY() AS [SCOPE_IDENTITY]"; //ko dc 
-
         String idquery = "SELECT users_id \n"
                 + "FROM users \n"
                 + "WHERE users_id = (SELECT MAX(users_id) FROM Users)";
@@ -141,11 +139,6 @@ public class UserDAO extends DAO {
             ps.executeUpdate();
             ps.clearParameters();
 
-            //LAY USERS_ID
-//            rs = ps.getGeneratedKeys();
-//            if(rs.next()){
-//                users_id = rs.getInt("ID");
-//            }
             ps = con.prepareStatement(idquery);
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -183,7 +176,98 @@ public class UserDAO extends DAO {
         } catch (Exception e) {
         }
     }
+    //author: an 
+    //lay tat ca info cua user tu 4 bang
+    //state: insert xong bang users thi dung lai
+    public void getAllUserInfoById(String users_id) {
+        String query = "Select * from users where"
+                + "users_id=?";
+        String query2 = "Select * from users_role where"
+                + "users_id=?";
+        String query3 = "Select * from users_account where"
+                + "users_id=?";
+        String query4 = "Select * from users_address where"
+                + "users_id=?";
+        try {
+            
 
+            ps.close();
+            rs.close();
+
+        } catch (Exception e) {
+        }
+    }
+    
+    //author: an 
+    //lay user role = usersid 
+    public UserRole getUserRoleById(int users_id) {
+        String query = "Select * from users_role where"
+                + "users_id=?";
+        try {
+            ps = con.prepareStatement(query);
+            ps.setInt(1, users_id);
+            ps.executeQuery();
+            ps.clearParameters();
+            while (rs.next()) {
+                return new UserRole(rs.getInt(1),rs.getString(2));
+            }
+            ps.close();
+            rs.close();
+
+        } catch (Exception e) {
+            
+        }
+        return null;
+    }
+    
+    //author: an 
+    //lay user account = usersid 
+    public UserAccount getUserAccountById(int users_id) {
+        String query = "Select * from users_account where"
+                + "users_id=?";
+        try {
+            ps = con.prepareStatement(query);
+            ps.setInt(1, users_id);
+            ps.executeQuery();
+            ps.clearParameters();
+            while (rs.next()) {
+                return new UserAccount(rs.getInt(1),rs.getString(2),rs.getString(3));
+            }
+            ps.close();
+            rs.close();
+
+        } catch (Exception e) {
+            
+        }
+        return null;
+    }
+    
+    //author: an 
+    //lay user address = usersid 
+    public UserAddress getUserAddressById(int users_id) {
+        String query = "Select * from users_address where"
+                + "users_id=?";
+        try {
+            ps = con.prepareStatement(query);
+            ps.setInt(1, users_id);
+            ps.executeQuery();
+            ps.clearParameters();
+            while (rs.next()) {
+                return new UserAddress(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4));
+            }
+            ps.close();
+            rs.close();
+
+        } catch (Exception e) {
+            
+        }
+        return null;
+    }
+    
+    
+
+
+    
     //author: an 
     //Lay users_id moi nhat sau khi insert user
     //old

@@ -6,6 +6,7 @@
 package HomeController;
 
 import DAO.DAO;
+import DAO.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -48,15 +49,26 @@ public class ProfileControl extends HttpServlet {
         }
         request.setCharacterEncoding("UTF-8");
         //get user from session and display info to profile.jsp
+<<<<<<< HEAD
+        HttpSession session = request.getSession();
+        User a = (User) request.getSession().getAttribute("user");
+        UserDAO dao = new UserDAO();
+//                request.setAttribute("avapath", a.getAvatar());
+//                request.setAttribute("user", a.);
+//                request.setAttribute("pass", pass);
+//                request.setAttribute("home", );
+//                request.setAttribute("district", district);
+//                request.setAttribute("city", city);
+//                request.setAttribute("first", firstname);
+//                request.setAttribute("last", lastname);
+//                request.setAttribute("gender", gender);
+//                request.setAttribute("phone", phone);
+//                request.setAttribute("email", email);
+            getServletContext().getRequestDispatcher("/SignUp.jsp").forward(request, response);     
+=======
         //User a = session.getAttribute("user");
+>>>>>>> ec4a164aa5dfedf16760e1c58d413d14d9b48564
         
-        String uid = request.getParameter("id");
-        String uname = request.getParameter("name");
-        String uimage = request.getParameter("image");
-        String pprice = request.getParameter("price");
-        String ptitle = request.getParameter("title");
-        String pdescription = request.getParameter("description");
-        String pcategory = request.getParameter("category");
         
         
     }
