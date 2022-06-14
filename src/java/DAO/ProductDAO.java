@@ -71,7 +71,35 @@ public class ProductDAO extends DAO{
         }
         return list;
     }
+    
+    public ProductImage getProductImageById(String id) {
 
+        ProductImage x = new ProductImage();
+        int product_id = Integer.parseInt(id);
+        String imageUrl;
+        Date date;
+
+        xSql = "select * from products_image where product_id=?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, product_id);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+
+                imageUrl = rs.getString("product_image_path");
+                date = rs.getDate("modified_at");
+                x.setId(product_id);
+                x.setImageUrl(imageUrl);
+                x.setDate(date);
+
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return (x);
+    }
     
     
     
