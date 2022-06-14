@@ -64,40 +64,40 @@ public class CartControl {
         
 	protected void doGet_Buy(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		DAO dao = new DAO();
-		HttpSession session = request.getSession();
-                User a = (User) request.getSession().getAttribute("user");
-                //neu chua dang nhap ma an mua hang
-                if(a==null){
-                    request.setAttribute("thongbao","Ban chua dang nhap!");
-                    request.getRequestDispatcher("SignUp.jsp").forward(request,response);
-                }
-                //neu day la mon hang dau tien -> tao cart va gan vao acc session
-		if (a.getCart() == null) {
-			ArrayList<Item> cart = new ArrayList<Item>();
-			cart.add(new Item(dao.getProductByID(request.getParameter("id")), 1));
-			a.setCart(cart);
-                        request.setAttribute("thongbao","Items added to cart! ");
-		}
-                else {
-                    ArrayList<Item> cart = (ArrayList<Item>) a.getCart();
-                    int index = isExisting(request.getParameter("id"), cart);
-                    int ammount = Integer.parseInt(request.getParameter("quantity"));
-                    //neu product chua co trong cart -> tao item ms +1 
-                    if (index == -1) {                                                   
-                        cart.add(new Item(dao.getProductByID(request.getParameter("id")), 1));
-                    }
-                        //neu product da co tromg cart --> + amount 
-                    else {
-			int quantity = cart.get(index).getQuantity() + ammount;
-			cart.get(index).setQuantity(quantity);
-                    }
-                    a.setCart(cart);
-                    //session.setAttribute("acc", a);
-                    request.setAttribute("thongbao","Items added to cart! ");
-                    //added to cart alert to home      
-		}
-		request.getRequestDispatcher("home").forward(request,response);
+//		DAO dao = new DAO();
+//		HttpSession session = request.getSession();
+//                User a = (User) request.getSession().getAttribute("user");
+//                //neu chua dang nhap ma an mua hang
+//                if(a==null){
+//                    request.setAttribute("thongbao","Ban chua dang nhap!");
+//                    request.getRequestDispatcher("SignUp.jsp").forward(request,response);
+//                }
+//                //neu day la mon hang dau tien -> tao cart va gan vao acc session
+//		if (a.getCart() == null) {
+//			ArrayList<Item> cart = new ArrayList<Item>();
+//			cart.add(new Item(dao.getProductByID(request.getParameter("id")), 1));
+//			a.setCart(cart);
+//                        request.setAttribute("thongbao","Items added to cart! ");
+//		}
+//                else {
+//                    ArrayList<Item> cart = (ArrayList<Item>) a.getCart();
+//                    int index = isExisting(request.getParameter("id"), cart);
+//                    int ammount = Integer.parseInt(request.getParameter("quantity"));
+//                    //neu product chua co trong cart -> tao item ms +1 
+//                    if (index == -1) {                                                   
+//                        cart.add(new Item(dao.getProductByID(request.getParameter("id")), 1));
+//                    }
+//                        //neu product da co tromg cart --> + amount 
+//                    else {
+//			int quantity = cart.get(index).getQuantity() + ammount;
+//			cart.get(index).setQuantity(quantity);
+//                    }
+//                    a.setCart(cart);
+//                    //session.setAttribute("acc", a);
+//                    request.setAttribute("thongbao","Items added to cart! ");
+//                    //added to cart alert to home      
+//		}
+//		request.getRequestDispatcher("home").forward(request,response);
 	}
 
         //kiem tra item id da co trong gio hang chua 

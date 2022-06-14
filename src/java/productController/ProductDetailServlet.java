@@ -36,6 +36,7 @@ public class ProductDetailServlet extends HttpServlet {
         System.out.println(x.getImage());
         request.setAttribute("product_detail", x);
         request.getRequestDispatcher("ProductDetail.jsp").forward(request, response);
+     
     }
 
 }

@@ -44,7 +44,7 @@ public class TestWebsocketClient {
 
    @OnMessage
    public void onMessage(String message, Session session){
-      clientWindow.writeServerMessage(message);
+     // clientWindow.writeServerMessage(message);
    }
 
    public void sendMessage(String message){
