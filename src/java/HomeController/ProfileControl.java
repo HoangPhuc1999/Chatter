@@ -48,8 +48,9 @@ public class ProfileControl extends HttpServlet {
         }
         request.setCharacterEncoding("UTF-8");
         //get user from session and display info to profile.jsp
-        User a = session.getAttribute("user");
-        
+        HttpSession session = request.getSession();
+        User a = (User) request.getSession().getAttribute("user");
+        UserDAO dao = new UserDAO();
         String uid = request.getParameter("id");
         String uname = request.getParameter("name");
         String uimage = request.getParameter("image");
