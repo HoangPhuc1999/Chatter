@@ -17,6 +17,7 @@ import model.Category;
  * @author Tuan Phong
  */
 public class CategoryDAO extends MyDAO {
+    
     public ArrayList<Category> list() {
     ArrayList<Category> categorys = new ArrayList<>();
         try {

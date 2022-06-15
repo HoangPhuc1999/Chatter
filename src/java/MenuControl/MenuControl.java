@@ -5,6 +5,7 @@
  */
 package MenuControl;
 
+import DAO.CategoryDAO;
 import DAO.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -36,12 +37,13 @@ public class MenuControl extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        ProductDAO dao = new ProductDAO();
-        List<Product> list = dao.getAllProduct();
-        //List<Category> listC = dao.getAllCategory();
+        CategoryDAO cdao = new CategoryDAO();
+        ProductDAO pdao = new ProductDAO();
+        List<Product> list = pdao.getAllProductWithCategory();
+        List<Category> listC = cdao.list();
         
         request.setAttribute("listP", list);
-        //request.setAttribute("listC", listC);
+        request.setAttribute("listC", listC);
         request.getRequestDispatcher("Menu.jsp").forward(request, response);
     }
 
