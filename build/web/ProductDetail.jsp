@@ -32,7 +32,7 @@
 
         <!-- bootstrap core css -->
         <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
-
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
         <!--owl slider stylesheet -->
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
         <!-- nice select  -->
@@ -67,16 +67,11 @@
                 <div class="col-lg-5 mb-30">
                     <div id="product-carousel" class="carousel slide" data-ride="carousel">
                         <div class="carousel-inner bg-light">
-                            <div class="carousel-item active">
-                                <img src=<%=x.getImage()%> alt="">
-                            </div>                   
+
+                            <img src=<%=x.getImage()%> alt="">
+
                         </div>
-                        <a class="carousel-control-prev" href="#product-carousel" data-slide="prev">
-                            <i class="fa fa-2x fa-angle-left text-dark"></i>
-                        </a>
-                        <a class="carousel-control-next" href="#product-carousel" data-slide="next">
-                            <i class="fa fa-2x fa-angle-right text-dark"></i>
-                        </a>
+
                     </div>
                 </div>
 
@@ -93,10 +88,8 @@
                             </div>
                             <small class="pt-1">(99 Reviews)</small>
                         </div>
-                        <h3 class="font-weight-semi-bold mb-4">$150.00</h3>
-                        <p class="mb-4">Volup erat ipsum diam elitr rebum et dolor. Est nonumy elitr erat diam stet sit
-                            clita ea. Sanc ipsum et, labore clita lorem magna duo dolor no sea
-                            Nonumy</p>
+                        <h3 class="font-weight-semi-bold mb-4">$ <%=x.getPrice()%></h3>
+                        <p class="mb-4"> <%=x.getDescription()%></p>
 
 
                         <div class="d-flex align-items-center mb-4 pt-2">
@@ -131,8 +124,7 @@
                         <div class="tab-content">
                             <div class="tab-pane fade show active" id="tab-pane-1">
                                 <h4 class="mb-3">Product Description</h4>
-                                <p>Eos no lorem eirmod diam diam, eos elitr et gubergren diam sea. Consetetur vero aliquyam invidunt duo dolores et duo sit. Vero diam ea vero et dolore rebum, dolor rebum eirmod consetetur invidunt sed sed et, lorem duo et eos elitr, sadipscing kasd ipsum rebum diam. Dolore diam stet rebum sed tempor kasd eirmod. Takimata kasd ipsum accusam sadipscing, eos dolores sit no ut diam consetetur duo justo est, sit sanctus diam tempor aliquyam eirmod nonumy rebum dolor accusam, ipsum kasd eos consetetur at sit rebum, diam kasd invidunt tempor lorem, ipsum lorem elitr sanctus eirmod takimata dolor ea invidunt.</p>
-                                <p>Dolore magna est eirmod sanctus dolor, amet diam et eirmod et ipsum. Amet dolore tempor consetetur sed lorem dolor sit lorem tempor. Gubergren amet amet labore sadipscing clita clita diam clita. Sea amet et sed ipsum lorem elitr et, amet et labore voluptua sit rebum. Ea erat sed et diam takimata sed justo. Magna takimata justo et amet magna et.</p>
+                                <p> <%=x.getDescription()%></p>
                             </div>
                             <div class="tab-pane fade" id="tab-pane-2">
                                 <h4 class="mb-3">Additional Information</h4>
@@ -330,6 +322,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
         <!-- custom js -->
         <script src="js/custom.js"></script>
+        <script src="js/productdetail.js"></script>
         <!-- Google Map -->
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
         </script>
