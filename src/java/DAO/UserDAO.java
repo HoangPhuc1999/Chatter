@@ -91,17 +91,19 @@ public class UserDAO extends DAO {
             rs = ps.executeQuery();
 
             while (rs.next()) {
-
+                
                 users.add(
                         new User(
                                 rs.getInt("users_id"),
                                 rs.getString("user_role"),
                                 rs.getString("firstname"),
                                 rs.getString("lastname"),
-                                "0123456789",
+                                rs.getString("phonenumber"),
                                 rs.getString("email"),
-                                rs.getBoolean("gender") == true ? "Male" : "Female",
-                                rs.getString("avatar")));
+                                rs.getBoolean("gender")? "Male" : "Female",
+                                rs.getString("avatar"),
+                                null)
+                            );
 
             }
         } catch (SQLException ex) {
