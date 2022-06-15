@@ -56,8 +56,10 @@ public class LoginServlet extends HttpServlet {
         } else {
             request.setAttribute("message", "Sign up");
             User user = t.getUserFromId(x.getUsers_id());
+            UserAddress userAddress = t.getUserAddressById(x.getUsers_id());
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
+            session.setAttribute("user_address", userAddress);
             session.setMaxInactiveInterval(10000);
             if (xRem != null) {
                 String namePass = xName.trim() + "|" + xPass.trim();
