@@ -324,7 +324,7 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga
 
                         <c:forEach items="${listP}"  var="p">
                             
-                            <div class="col-sm-6 col-lg-4 ${p.cname} ">
+                            <div class="col-sm-6 col-lg-4 all ${p.cname} ">
 
                                 <div class="box">
                                     <div>
