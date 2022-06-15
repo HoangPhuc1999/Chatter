@@ -28,10 +28,10 @@ public class LoginServlet extends HttpServlet {
         PrintWriter pr = response.getWriter();
         HttpSession session = request.getSession();
         User x = (User) session.getAttribute("user");
-
+        request.setAttribute("message", "Sign up ");
         if (x == null) {
             request.getRequestDispatcher("Login.jsp").forward(request, response);
-        } 
+        }
 
     }
 
@@ -48,15 +48,14 @@ public class LoginServlet extends HttpServlet {
 
         t = new UserDAO();
         x = t.getUser(xName, xPass);
-        System.out.println(x.getUsers_id());
-        
-        User user = t.getUserFromId(x.getUsers_id());
-        System.out.println(user.getFirstname()+"hello");
-        
 
         if (x == null) {
-            System.out.println("Error hahahaha");
+            request.setAttribute("message", "Sign up Fail");
+            request.setAttribute("warning", "Check your username and password");
+            request.getRequestDispatcher("Login.jsp").forward(request, response);
         } else {
+            request.setAttribute("message", "Sign up");
+            User user = t.getUserFromId(x.getUsers_id());
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
             session.setMaxInactiveInterval(10000);
