@@ -42,6 +42,17 @@ public class User {
         this.avatar = avatar;
     }
 
+    public User(int users_id, String role, String firstname, String lastname, String phonenumber, String email, String gender, String avatar) {
+        this.users_id = users_id;
+        this.role = role;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.phonenumber = phonenumber;
+        this.email = email;
+        this.gender = gender;
+        this.avatar = avatar;
+    }
+
     
     
     
