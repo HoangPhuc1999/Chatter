@@ -47,13 +47,13 @@
                 </li>
                 <li>
                     <a href="#" class="nav-link link-dark">
-                        <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
+                        <svg class="bi me-2" width="16" height="16"><use xlink:href="dashboard"></use></svg>
                         Dashboard
                     </a>
                 </li>
                 <li>
                     <a href="#" class="nav-link link-dark">
-                        <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
+                        <svg class="bi me-2" width="16" height="16"><use xlink:href="orders"></use></svg>
                         Orders
                     </a>
                 </li>
