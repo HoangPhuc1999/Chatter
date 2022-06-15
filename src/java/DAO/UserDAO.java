@@ -91,7 +91,7 @@ public class UserDAO extends DAO {
             rs = ps.executeQuery();
 
             while (rs.next()) {
-
+                
                 users.add(
                         new User(
                                 rs.getInt("users_id"),
@@ -101,7 +101,8 @@ public class UserDAO extends DAO {
                                 "0123456789",
                                 rs.getString("email"),
                                 rs.getBoolean("gender") == true ? "Male" : "Female",
-                                rs.getString("avatar")));
+                                rs.getString("avatar"), 
+                                null));
 
             }
         } catch (SQLException ex) {
@@ -379,10 +380,10 @@ public class UserDAO extends DAO {
         return allUserList;
     }
   
-    public static void main(String[] args) throws SQLException {
-        UserDAO dao = new UserDAO();
-        UserAccount a = new UserAccount();
-        a = dao.checkAccountExist("user1");
+//    public static void main(String[] args) throws SQLException {
+//        UserDAO dao = new UserDAO();
+//        UserAccount a = new UserAccount();
+//        a = dao.checkAccountExist("user1");
 
         //check sign up
 //        UserAccount newAcc = new UserAccount("x","x");  
@@ -392,11 +393,11 @@ public class UserDAO extends DAO {
 //        dao.singup(newAccUser,newAcc,newAccAddress); //them user
         
         
-       ArrayList<User> b = dao.getAllUsers();
-        
-        int x = dao.getUserID();
-
-        System.out.println(b);
-    }
+//       ArrayList<User> b = dao.getAllUsers();
+//        
+//        int x = dao.getUserID();
+//
+//        System.out.println(b);
+//    }
 
 }

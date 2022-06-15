@@ -62,8 +62,8 @@
                 </div>
 
                 <ul class="filters_menu">
-                    <c:forEach items="${listC}" var="o">
-                        <li data-filter=".${o.cname}">${o.cname}</li>
+                    <c:forEach items="${listC}" var="c">
+                        <li class="${tag == c.cid ? "active":""}"><a href="category?cid=${c.cid}">${c.cname}</a></li>
                     </c:forEach>
 
                 </ul>
