@@ -14,6 +14,8 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+        <script src="https://kit.fontawesome.com/a141f28961.js" crossorigin="anonymous"></script>
 
         <!--owl slider stylesheet -->
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
@@ -26,7 +28,6 @@
         <link href="../css/style.css" rel="stylesheet" />
         <!-- responsive style -->
         <link href="../css/responsive.css" rel="stylesheet" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     </head>
     <body>
@@ -39,25 +40,26 @@
             <ul class="nav nav-pills flex-column mb-auto">
                 <li class="nav-item">
                     <a href="#" class="nav-link link-dark" aria-current="page">
+                        <span class="bi bi-house-fill fa-2x"></span>
                         <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
                         Home
                     </a>
                 </li>
                 <li>
                     <a href="#" class="nav-link link-dark">
-                        <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
+                        <svg class="bi me-2" width="16" height="16"><use xlink:href="dashboard"></use></svg>
                         Dashboard
                     </a>
                 </li>
                 <li>
                     <a href="#" class="nav-link link-dark">
-                        <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
+                        <svg class="bi me-2" width="16" height="16"><use xlink:href="orders"></use></svg>
                         Orders
                     </a>
                 </li>
                 <li>
                     <a href="#" class="nav-link link-dark">
-                        <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
+                        <svg class="bi me-2" width="16" height="16"><use xlink:href="products"></use></svg>
                         Products
                     </a>
                 </li>
