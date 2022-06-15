@@ -167,7 +167,7 @@
                                             <img id="avatar" class="img-fluid" />
                                         </div>
                                         <div class="form-group">
-                                            <label for="message">Your Review *</label>
+                                            <label for="message">Your Review </label>
                                             <textarea id="message" cols="30" rows="5" class="form-control"></textarea>
                                         </div>
 
