@@ -161,6 +161,12 @@
                                     </div>
                                     <form>
                                         <div class="form-group">
+                                            <label>Add image</label> 
+                                            <input name="avatar" type="file" class="form-control" placeholder="reviewImage"
+                                                   onchange="document.getElementById('avatar').src = window.URL.createObjectURL(this.files[0])"/>
+                                            <img id="avatar" class="img-fluid" />
+                                        </div>
+                                        <div class="form-group">
                                             <label for="message">Your Review *</label>
                                             <textarea id="message" cols="30" rows="5" class="form-control"></textarea>
                                         </div>
