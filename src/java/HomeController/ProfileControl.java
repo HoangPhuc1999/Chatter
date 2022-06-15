@@ -49,10 +49,7 @@ public class ProfileControl extends HttpServlet {
         }
         request.setCharacterEncoding("UTF-8");
         //get user from session and display info to profile.jsp
-<<<<<<< HEAD
-=======
 
->>>>>>> dcdf5d53e37a633f715e72fc1a990056db544d44
         HttpSession session = request.getSession();
         User a = (User) request.getSession().getAttribute("user");
         UserDAO dao = new UserDAO();
@@ -68,11 +65,7 @@ public class ProfileControl extends HttpServlet {
 //                request.setAttribute("phone", phone);
 //                request.setAttribute("email", email);
             getServletContext().getRequestDispatcher("/SignUp.jsp").forward(request, response);     
-<<<<<<< HEAD
-        //User a = session.getAttribute("user");
-=======
->>>>>>> dcdf5d53e37a633f715e72fc1a990056db544d44
-        
+
         
         
     }
