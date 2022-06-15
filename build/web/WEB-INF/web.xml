@@ -65,7 +65,7 @@
         <url-pattern>/productdetail</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
-        <welcome-file>Index.jsp</welcome-file>
+        <welcome-file>home</welcome-file>
     </welcome-file-list>
     <session-config>
         <session-timeout>

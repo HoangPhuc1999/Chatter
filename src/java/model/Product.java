@@ -16,7 +16,7 @@ public class Product {
     private double price;
     private String title;
     private String description;
-    private String cid;
+    private String cname;
 
     public Product() {
     }
@@ -30,13 +30,17 @@ public class Product {
         this.description = description;
     }
 
-    public String getCid() {
-        return cid;
+    public Product(int id, String name, String image, double price, String title, String description, String cname) {
+        this.id = id;
+        this.name = name;
+        this.image = image;
+        this.price = price;
+        this.title = title;
+        this.description = description;
+        this.cname = cname;
     }
 
-    public void setCid(String cid) {
-        this.cid = cid;
-    }
+    
 
     public int getId() {
         return id;
@@ -86,9 +90,18 @@ public class Product {
         this.description = description;
     }
 
+    public String getCname() {
+        return cname;
+    }
+
+    public void setCname(String cname) {
+        this.cname = cname;
+    }
+
     @Override
     public String toString() {
-        return "Product{" + "id=" + id + ", name=" + name + ", image=" + image + ", price=" + price + ", title=" + title + ", description=" + description + '}';
+        return "Product{" + "id=" + id + ", name=" + name + ", image=" + image + ", price=" + price + ", title=" + title + ", description=" + description + ", cname=" + cname + '}';
     }
+
     
 }

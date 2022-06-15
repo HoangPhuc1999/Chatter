@@ -74,6 +74,35 @@ public class ProductDAO extends DAO{
         return list;
     }
     
+    //lay tat ca product co category cho vao arraylist (co lay image) 
+    //dung cho index.jsp
+    //author an 
+    public List<Product> getAllProductWithCategory() {
+        List<Product> list = new ArrayList<>();
+        String query = "select p.*,c.category_name,i.product_image_path from products p\n" +
+                        "join products_category pc\n" +
+                        "on p.product_id = pc.product_id \n" +
+                        "join category c \n" +
+                        "on c.category_id = pc.category_id\n" +
+                        "join products_image i \n" +
+                        "on p.product_id = i.product_id";
+        try {
+            ps = con.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Product(rs.getInt(1),//id
+                        rs.getString(2),//name
+                        rs.getString(7),//image
+                        rs.getDouble(3),//price
+                        rs.getString(4),//title
+                        rs.getString(5),//des
+                        rs.getString(6)));//cname
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+    
     public ProductImage getProductImageById(String id) {
 
         ProductImage x = new ProductImage();
@@ -103,6 +132,9 @@ public class ProductDAO extends DAO{
         return (x);
     }
     
-    
+    public static void main(String[] args) {
+        ProductDAO dao = new ProductDAO();
+        System.out.println(dao.getAllProductWithCategory());
+    }
     
 }

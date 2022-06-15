@@ -65,7 +65,7 @@ public class ProfileControl extends HttpServlet {
 //                request.setAttribute("phone", phone);
 //                request.setAttribute("email", email);
             getServletContext().getRequestDispatcher("/SignUp.jsp").forward(request, response);     
-        
+
         
         
     }
