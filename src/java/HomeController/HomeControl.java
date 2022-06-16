@@ -5,6 +5,7 @@
  */
 package HomeController;
 
+import DAO.CategoryDAO;
 import DAO.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -28,11 +29,12 @@ public class HomeControl extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         ProductDAO dao = new ProductDAO();
+        CategoryDAO cdao = new CategoryDAO();
         List<Product> list = dao.getAllProductWithCategory();
-        //List<Category> listC = dao.getAllCategory();
+        List<Category> listC = cdao.list();
         
         request.setAttribute("listP", list);
-        //request.setAttribute("listC", listC);
+        request.setAttribute("listC", listC);
         request.getRequestDispatcher("Index.jsp").forward(request, response);
     }
 
