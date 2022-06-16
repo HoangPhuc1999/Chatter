@@ -30,19 +30,15 @@ import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
-
 /**
  *
  * @author khuat
  */
 @MultipartConfig(
-                 fileSizeThreshold=1024*1024*10,    // 10 MB 
-                 maxFileSize=1024*1024*50,          // 50 MB
-                 maxRequestSize=1024*1024*100,      // 100 MB
-                 location="")
-
-
-
+        fileSizeThreshold = 1024 * 1024 * 10, // 10 MB 
+        maxFileSize = 1024 * 1024 * 50, // 50 MB
+        maxRequestSize = 1024 * 1024 * 100, // 100 MB
+        location = "")
 
 public class SignUpServlet extends HttpServlet {
     
@@ -170,14 +166,13 @@ public class SignUpServlet extends HttpServlet {
             
             UserDAO dao = new UserDAO();
             UserAccount a = dao.checkAccountExist(user); //kiem tra username trong database 
-            if(a == null){
+            if (a == null) {
                 //dc signup
-               UserAccount newAcc = new UserAccount(user,pass);  
-               UserAddress newAccAddress = new UserAddress(home_address,district,city);  
-               User newUser = new User(firstname,lastname,phone,email,gender,avapath);
-               dao.singup(newUser,newAcc,newAccAddress); //them user
-                
-                
+                UserAccount newAcc = new UserAccount(user, pass);
+                UserAddress newAccAddress = new UserAddress(home_address, district, city);
+                User newUser = new User(firstname, lastname, phone, email, gender, avapath);
+                dao.singup(newUser, newAcc, newAccAddress); //them user
+
                 request.setAttribute("message", "Sign up Success!");
 
                 
@@ -192,41 +187,43 @@ public class SignUpServlet extends HttpServlet {
                 request.setAttribute("gender", gender);
                 request.setAttribute("phone", phone);
                 request.setAttribute("email", email);
-                
-               
+
                 getServletContext().getRequestDispatcher("/SignUpResult.jsp").forward(request, response);
-                
-                }
-            else{
-                 throw new IOException("Username already exist");
-                }
+
+            } else {
+                System.out.println(a.getUsername() + "checking");
+                System.out.println(a.getPassword() + "checking");
+                System.out.println(a.getUsers_id() + "checking");
+                throw new IOException("Username already exist");
+            }
+        } catch (Exception ex) {
+            request.setAttribute("message", "Sign up failed error code: " + ex.toString());
+            request.setAttribute("message", "Sign up failed error code: ");
+            request.setAttribute("avapath", avapath);
+            request.setAttribute("user", user);
+            request.setAttribute("pass", pass);
+            request.setAttribute("home", home_address);
+            request.setAttribute("district", district);
+            request.setAttribute("city", city);
+            request.setAttribute("first", firstname);
+            request.setAttribute("last", lastname);
+            request.setAttribute("gender", gender);
+            request.setAttribute("phone", phone);
+            request.setAttribute("email", email);
+            getServletContext().getRequestDispatcher("/SignUp.jsp").forward(request, response);
         }
-        catch(Exception ex){
-                request.setAttribute("message", "Sign up failed error code: " +ex.toString() );
-                request.setAttribute("avapath", avapath);
-                request.setAttribute("user", user);
-                request.setAttribute("pass", pass);
-                request.setAttribute("home", home_address);
-                request.setAttribute("district", district);
-                request.setAttribute("city", city);
-                request.setAttribute("first", firstname);
-                request.setAttribute("last", lastname);
-                request.setAttribute("gender", gender);
-                request.setAttribute("phone", phone);
-                request.setAttribute("email", email);
-            getServletContext().getRequestDispatcher("/SignUp.jsp").forward(request, response);     
-        }
-        }
-   
-        //end sign up
-    
+    }
+
+    //end sign up
     private String extractFileName(Part part) {
-    String contentDisp = part.getHeader("content-disposition");
-    String[] items = contentDisp.split(";");
-    for (String s : items) {
-      if (s.trim().startsWith("filename")) {
-        return s.substring(s.indexOf("=") + 2, s.length() - 1);
-      }
+        String contentDisp = part.getHeader("content-disposition");
+        String[] items = contentDisp.split(";");
+        for (String s : items) {
+            if (s.trim().startsWith("filename")) {
+                return s.substring(s.indexOf("=") + 2, s.length() - 1);
+            }
+        }
+        return "";
     }
     return "";
   }
@@ -247,9 +244,4 @@ public class SignUpServlet extends HttpServlet {
     if (!folderUpload.exists()) {
       folderUpload.mkdirs();
     }
-    return folderUpload;
-  }
 }
-
-
-   

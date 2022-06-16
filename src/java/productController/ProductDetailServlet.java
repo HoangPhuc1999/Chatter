@@ -12,8 +12,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.Product;
 import model.ProductImage;
+import model.User;
 
 /**
  *
@@ -23,11 +25,11 @@ public class ProductDetailServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        HttpSession session = request.getSession();
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter pr = response.getWriter();
 //        String id = request.getParameter("id");
-        String id = "1";
+        String id = "2";
         ProductDAO d = new ProductDAO();
         ProductImage pd = d.getProductImageById(id);
         Product x = d.getProductById(id);
@@ -36,6 +38,15 @@ public class ProductDetailServlet extends HttpServlet {
         System.out.println(x.getImage());
         request.setAttribute("product_detail", x);
         request.getRequestDispatcher("ProductDetail.jsp").forward(request, response);
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter pr = response.getWriter();
+        HttpSession session = request.getSession();
+        User x = (User) session.getAttribute("user");
+
     }
 
 }

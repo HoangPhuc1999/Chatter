@@ -96,7 +96,7 @@ public class ProductDAO extends DAO{
                         rs.getDouble(3),//price
                         rs.getString(4),//title
                         rs.getString(5),//des
-                        rs.getString(6));//cname
+                        rs.getString(6)));//cname
             }
         } catch (Exception e) {
         }
