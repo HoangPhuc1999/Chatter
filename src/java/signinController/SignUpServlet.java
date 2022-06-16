@@ -46,7 +46,7 @@ public class SignUpServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String user = request.getParameter("username");
         String pass = request.getParameter("password");
-       // String re_pass = request.getParameter("repassword");
+        // String re_pass = request.getParameter("repassword");
         String home_address = request.getParameter("home_address");
         String district = request.getParameter("district");
         String city = request.getParameter("city");
@@ -64,7 +64,7 @@ public class SignUpServlet extends HttpServlet {
             avapath = ("avatar\\" + extractFileName(part)).toString();
 
         } catch (Exception e) {
-            System.out.println(e.getClass());
+            System.out.println(e.getClass() + "hello");
 
         }
 
@@ -81,7 +81,7 @@ public class SignUpServlet extends HttpServlet {
             if (!phone.matches("[0-9]+")) {
                 throw new IOException("phone number is invalid");
             }
-
+            System.out.println(user + "==================");
             UserDAO dao = new UserDAO();
             UserAccount a = dao.checkAccountExist(user); //kiem tra username trong database 
             if (a == null) {
@@ -112,10 +112,14 @@ public class SignUpServlet extends HttpServlet {
                 getServletContext().getRequestDispatcher("/SignUpResult.jsp").forward(request, response);
 
             } else {
+                System.out.println(a.getUsername() + "checking");
+                System.out.println(a.getPassword() + "checking");
+                System.out.println(a.getUsers_id() + "checking");
                 throw new IOException("Username already exist");
             }
         } catch (Exception ex) {
-            //  request.setAttribute("message", "Sign up failed error code: " +ex.toString() );
+            request.setAttribute("message", "Sign up failed error code: " + ex.toString());
+            request.setAttribute("message", "Sign up failed error code: ");
             request.setAttribute("avapath", avapath);
             request.setAttribute("user", user);
             request.setAttribute("pass", pass);
