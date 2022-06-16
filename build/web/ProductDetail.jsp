@@ -11,7 +11,7 @@
 
 <%
     Product x = (Product) request.getAttribute("product_detail");
-   
+
 
 %>  
 <html>
@@ -142,24 +142,25 @@
                                 <div class="col-md-6">
                                     <h4 class="mb-4">Leave a review ${reviewmessage}    </h4>
                                     <small>Your email address will not be published. Required fields are marked *</small>
-                                    <div class="d-flex my-3">
-                                        <p class="mb-0 mr-2">Your Rating * :</p>
+                                    <form action="review" method="post">
+                                        <div class="d-flex my-3">
+                                            <p class="mb-0 mr-2">Your Rating * :</p>
 
-                                        <div id="rating">
-                                            <input type="radio" id="star5" name="rating" value="5" />
-                                            <label class = "full" for="star5" title="Awesome - 5 stars"></label>
-                                            <input type="radio" id="star4" name="rating" value="4" />
-                                            <label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-                                            <input type="radio" id="star3" name="rating" value="3" />
-                                            <label class = "full" for="star3" title="Meh - 3 stars"></label>
-                                            <input type="radio" id="star2" name="rating" value="2" />
-                                            <label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-                                            <input type="radio" id="star1" name="rating" value="1" />
-                                            <label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+                                            <div id="rating">
+                                                <input type="radio" id="star5" name="rate" value="5" />
+                                                <label class = "full" for="star5" title="Awesome - 5 stars"></label>
+                                                <input type="radio" id="star4" name="rate" value="4" />
+                                                <label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+                                                <input type="radio" id="star3" name="rate" value="3" />
+                                                <label class = "full" for="star3" title="Meh - 3 stars"></label>
+                                                <input type="radio" id="star2" name="rate" value="2" />
+                                                <label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+                                                <input type="radio" id="star1" name="rate" value="1" />
+                                                <label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+                                            </div>
+
                                         </div>
 
-                                    </div>
-                                    <form action="review" method="post">
                                         <div class="form-group">
                                             <label>Add image</label> 
                                             <input name="avatar" type="file" class="form-control" placeholder="reviewImage"
