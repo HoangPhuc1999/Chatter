@@ -26,10 +26,10 @@ public class ReviewServlet extends HttpServlet {
         PrintWriter pr = response.getWriter();
         HttpSession session = request.getSession();
         User x = (User) session.getAttribute("user");
-        
-        
-        
+        String review = request.getParameter("reviewtext");
+
         if (x == null) {
+            System.out.println(review);
             session.setAttribute("reviewmessage", "You have to sign in to leave a review");
             response.sendRedirect("productdetail");
         } else {

@@ -168,7 +168,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="message">Your Review </label>
-                                            <textarea id="message" cols="30" rows="5" class="form-control"></textarea>
+                                            <textarea id="message" cols="30" rows="5" class="form-control" name="reviewtext"></textarea>
                                         </div>
 
                                         <div class="form-group mb-0">

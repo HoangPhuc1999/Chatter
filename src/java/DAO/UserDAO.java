@@ -382,7 +382,7 @@ public class UserDAO extends DAO {
         UserAccount a = new UserAccount();
         a = dao.checkAccountExist("user1");
 
-        //check sign up
+//        //check sign up
 //        UserAccount newAcc = new UserAccount("x","x");  
 //        UserAddress newAccAddress= new UserAddress("x","x","x");
 //        User newAccUser = new User("femmmmm","gqw","0675565454","user3@fpt.edu.vn","0",null);

@@ -69,7 +69,7 @@
                 </ul>
 
                 <div class="filters-content">
-                    <div class="row grid">
+                    <div class="row grid" >
 
                         <c:forEach items="${listP}"  var="p">
                             

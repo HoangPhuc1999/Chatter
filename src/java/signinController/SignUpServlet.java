@@ -37,12 +37,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 
 
-public class SignUpServlet extends HttpServlet {     
-     
-    public SignUpServlet() {
-        super();
-    }
-    
+public class SignUpServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -63,53 +58,19 @@ public class SignUpServlet extends HttpServlet {
         String phone = request.getParameter("phonenumber");
         String email = request.getParameter("email");
         String gender = request.getParameter("gender");
-        String avapath=null;
+        String avapath="avatar\\male.jpg";
         
-//        //upload image to project 's avatar under web folder and save path to avapath
-//        try{
-//            Part part = request.getPart("file");
-//            part.write(extractFileName(part));
-//            avapath=("avatar\\"+extractFileName(part)).toString();
-//        
+        //upload image to project 's avatar under web folder and save path to avapath
+        try{
+            Part part = request.getPart("file");
+            part.write(extractFileName(part));
+            avapath=("avatar\\"+extractFileName(part)).toString();
 
-//        if (ServletFileUpload.isMultipartContent(request)) {
-//            try {
-
-//		List<FileItem> multiparts = new ServletFileUpload(
-//                        new DiskFileItemFactory()).parseRequest(request);
-//
-//		for (FileItem item : multiparts) {
-//		if (!item.isFormField()) {
-//		String name = new File(item.getName()).getName();
-//		item.write(new File(UPLOAD_DIRECTORY + File.separator + name));
-//		}
-//
-//		}
+            }
+            catch (Exception e) {
+                System.out.println(e.getClass());
                 
-//                
-//                Part filePart = request.getPart("avatar");
-//                String fileName = filePart.getSubmittedFileName();
-//                for (Part part : request.getParts()) {
-//                    
-//                    part.write(getFolderUpload()+File.separator + fileName);
-//                    avapath ="avatar\\"+ fileName;
-//                  
-//                }
-//                
-//            }
-//            catch (Exception e) {
-//                System.out.println(e.getClass());
-                //if there is no avatar image , assign basic
-                if(avapath==null){  
-                    switch(gender){
-                        case "1":
-                            avapath="avatar\\male.jpg";
-                            break;
-                        case "0":
-                            avapath="avatar\\female.jpg";
-                            break;
-                    }    
-                }
+            }
               
            
 
@@ -155,8 +116,8 @@ public class SignUpServlet extends HttpServlet {
                  throw new IOException("Username already exist");
                 }
         }
-        catch(Exception e){
-                request.setAttribute("message", "Sign up failed error code: " +e.toString() );
+        catch(Exception ex){
+                request.setAttribute("message", "Sign up failed error code: " +ex.toString() );
                 request.setAttribute("avapath", avapath);
                 request.setAttribute("user", user);
                 request.setAttribute("pass", pass);
@@ -172,9 +133,7 @@ public class SignUpServlet extends HttpServlet {
         }
         }
    
-        //sign up
-     
- 
+        //end sign up
     
     private String extractFileName(Part part) {
     String contentDisp = part.getHeader("content-disposition");
