@@ -133,5 +133,63 @@ public class ProductDAO extends DAO{
     }
     
     
+    public List<Category> getAllCategory() {
+        List<Category> list = new ArrayList<>();
+        String query = "select * from category";
+        try {
+            ps = con.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Category(
+                        rs.getInt(1),
+                        rs.getString(2))
+                );
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    
+    //author: thang 
+    //Last Changed: 16/6
+    public List<Product> getProductByCID(String cid) {
+        List<Product> list = new ArrayList<>();
+        String sql = "select p.product_id, p.product_name, i.product_image_path, "
+                + "p.product_price, p.product_title, p.product_description from products p join products_image i \n"
+                +  "on p.product_id = i.product_id where cid = ?";
+
+
+        try {
+            ps = con.prepareStatement(sql);
+            if(cid!= null){
+            ps.setString(1, cid);
+            }
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Product(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getDouble(4),
+                        rs.getString(5),
+                        rs.getString(6)));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+
+//    public static void main(String[] args) {
+//        ProductDAO dao = new ProductDAO();
+//        String cid = "1";
+//        List<Product> list = dao.getProductByCID(cid);
+//        for (Product o : list) {
+//            System.out.println(o);
+//        }
+//
+//    }
+    
     
 }
