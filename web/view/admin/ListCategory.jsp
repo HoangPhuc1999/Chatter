@@ -151,8 +151,7 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="bdr">
-                        <table class="table table-striped table-bordered table-hover table-warning">
+                        <table class="bdr table table-striped table-bordered table-hover table-warning">
                             <tr class>
                                 <th class="w-auto">Category ID</th>
                                 <th class="w-auto">Category Name</th>
@@ -179,7 +178,6 @@
                                 </form>
                             </c:forEach>
                         </table>
-                    </div>
                 </div>
             </div>
 
