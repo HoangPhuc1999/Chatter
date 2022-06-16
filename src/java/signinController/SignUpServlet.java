@@ -23,21 +23,18 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
-
 /**
  *
  * @author khuat
  */
 @MultipartConfig(
-                 fileSizeThreshold=1024*1024*10,    // 10 MB 
-                 maxFileSize=1024*1024*50,          // 50 MB
-                 maxRequestSize=1024*1024*100,      // 100 MB
-                 location="")
-
-
-
+        fileSizeThreshold = 1024 * 1024 * 10, // 10 MB 
+        maxFileSize = 1024 * 1024 * 50, // 50 MB
+        maxRequestSize = 1024 * 1024 * 100, // 100 MB
+        location = "")
 
 public class SignUpServlet extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -49,7 +46,7 @@ public class SignUpServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String user = request.getParameter("username");
         String pass = request.getParameter("password");
-        String re_pass = request.getParameter("repassword");
+       // String re_pass = request.getParameter("repassword");
         String home_address = request.getParameter("home_address");
         String district = request.getParameter("district");
         String city = request.getParameter("city");
@@ -58,44 +55,48 @@ public class SignUpServlet extends HttpServlet {
         String phone = request.getParameter("phonenumber");
         String email = request.getParameter("email");
         String gender = request.getParameter("gender");
-        String avapath="avatar\\male.jpg";
-        
+        String avapath = "avatar\\male.jpg";
+
         //upload image to project 's avatar under web folder and save path to avapath
-        try{
+        try {
             Part part = request.getPart("file");
             part.write(extractFileName(part));
-            avapath=("avatar\\"+extractFileName(part)).toString();
+            avapath = ("avatar\\" + extractFileName(part)).toString();
 
-            }
-            catch (Exception e) {
-                System.out.println(e.getClass());
-                
-            }
-              
-           
+        } catch (Exception e) {
+            System.out.println(e.getClass());
 
-        try{
-            if(!user.matches("[a-zA-Z0-9 ]*")) throw new IOException("username is invalid");
-            if(!pass.matches("[a-zA-Z0-9]*")) throw new IOException("password is invalid");
-            if(!pass.matches(re_pass)) throw new IOException("password does not match");
-            if(!phone.matches("[0-9]+")) throw new IOException("phone number is invalid");
-            
+        }
+
+        try {
+            if (!user.matches("[a-zA-Z0-9 ]*")) {
+                throw new IOException("username is invalid");
+            }
+            if (!pass.matches("[a-zA-Z0-9]*")) {
+                throw new IOException("password is invalid");
+            }
+//            if (!pass.matches(re_pass)) {
+//                throw new IOException("password does not match");
+//            }
+            if (!phone.matches("[0-9]+")) {
+                throw new IOException("phone number is invalid");
+            }
+
             UserDAO dao = new UserDAO();
             UserAccount a = dao.checkAccountExist(user); //kiem tra username trong database 
-            if(a == null){
+            if (a == null) {
                 //dc signup
-               UserAccount newAcc = new UserAccount(user,pass);  
-               UserAddress newAccAddress = new UserAddress(home_address,district,city);  
-               User newUser = new User(firstname,lastname,phone,email,gender,avapath);
-               dao.singup(newUser,newAcc,newAccAddress); //them user
-                
-                
+                UserAccount newAcc = new UserAccount(user, pass);
+                UserAddress newAccAddress = new UserAddress(home_address, district, city);
+                User newUser = new User(firstname, lastname, phone, email, gender, avapath);
+                dao.singup(newUser, newAcc, newAccAddress); //them user
+
                 request.setAttribute("message", "Sign up Success!");
-                PrintWriter out = response.getWriter(); 
-                out.println("<script type=\"text/javascript\">"); 
-                out.println("alert('Sign up Success!');"); 
+                PrintWriter out = response.getWriter();
+                out.println("<script type=\"text/javascript\">");
+                out.println("alert('Sign up Success!');");
                 out.println("</script>");
-                
+
                 request.setAttribute("avapath", avapath);
                 request.setAttribute("user", user);
                 request.setAttribute("pass", pass);
@@ -107,54 +108,47 @@ public class SignUpServlet extends HttpServlet {
                 request.setAttribute("gender", gender);
                 request.setAttribute("phone", phone);
                 request.setAttribute("email", email);
-                
-               
+
                 getServletContext().getRequestDispatcher("/SignUpResult.jsp").forward(request, response);
-                
-                }
-            else{
-                 throw new IOException("Username already exist");
-                }
+
+            } else {
+                throw new IOException("Username already exist");
+            }
+        } catch (Exception ex) {
+            //  request.setAttribute("message", "Sign up failed error code: " +ex.toString() );
+            request.setAttribute("avapath", avapath);
+            request.setAttribute("user", user);
+            request.setAttribute("pass", pass);
+            request.setAttribute("home", home_address);
+            request.setAttribute("district", district);
+            request.setAttribute("city", city);
+            request.setAttribute("first", firstname);
+            request.setAttribute("last", lastname);
+            request.setAttribute("gender", gender);
+            request.setAttribute("phone", phone);
+            request.setAttribute("email", email);
+            getServletContext().getRequestDispatcher("/SignUp.jsp").forward(request, response);
         }
-        catch(Exception ex){
-                request.setAttribute("message", "Sign up failed error code: " +ex.toString() );
-                request.setAttribute("avapath", avapath);
-                request.setAttribute("user", user);
-                request.setAttribute("pass", pass);
-                request.setAttribute("home", home_address);
-                request.setAttribute("district", district);
-                request.setAttribute("city", city);
-                request.setAttribute("first", firstname);
-                request.setAttribute("last", lastname);
-                request.setAttribute("gender", gender);
-                request.setAttribute("phone", phone);
-                request.setAttribute("email", email);
-            getServletContext().getRequestDispatcher("/SignUp.jsp").forward(request, response);     
-        }
-        }
-   
-        //end sign up
-    
+    }
+
+    //end sign up
     private String extractFileName(Part part) {
-    String contentDisp = part.getHeader("content-disposition");
-    String[] items = contentDisp.split(";");
-    for (String s : items) {
-      if (s.trim().startsWith("filename")) {
-        return s.substring(s.indexOf("=") + 2, s.length() - 1);
-      }
+        String contentDisp = part.getHeader("content-disposition");
+        String[] items = contentDisp.split(";");
+        for (String s : items) {
+            if (s.trim().startsWith("filename")) {
+                return s.substring(s.indexOf("=") + 2, s.length() - 1);
+            }
+        }
+        return "";
     }
-    return "";
-  }
-    
-   //upload image to folder 
-  public File getFolderUpload() {
-    File folderUpload = new File(System.getProperty("user.dir")+File.separator +"web\\avatar");
-    if (!folderUpload.exists()) {
-      folderUpload.mkdirs();
+
+    //upload image to folder 
+    public File getFolderUpload() {
+        File folderUpload = new File(System.getProperty("user.dir") + File.separator + "web\\avatar");
+        if (!folderUpload.exists()) {
+            folderUpload.mkdirs();
+        }
+        return folderUpload;
     }
-    return folderUpload;
-  }
 }
-
-
-   
