@@ -60,6 +60,7 @@ public class LoginServlet extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
             session.setAttribute("user_address", userAddress);
+            session.setAttribute("reviewmessage", "");
             session.setMaxInactiveInterval(10000);
             if (xRem != null) {
                 String namePass = xName.trim() + "|" + xPass.trim();
