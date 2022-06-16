@@ -215,18 +215,7 @@ public class SignUpServlet extends HttpServlet {
     }
 
     //end sign up
-    private String extractFileName(Part part) {
-        String contentDisp = part.getHeader("content-disposition");
-        String[] items = contentDisp.split(";");
-        for (String s : items) {
-            if (s.trim().startsWith("filename")) {
-                return s.substring(s.indexOf("=") + 2, s.length() - 1);
-            }
-        }
-        return "";
-    }
-    return "";
-  }
+
     private String getFileName(final Part part) {
     final String partHeader = part.getHeader("content-disposition");
     for (String content : part.getHeader("content-disposition").split(";")) {
@@ -238,10 +227,5 @@ public class SignUpServlet extends HttpServlet {
     return null;
 }
     
-   //upload image to folder 
-  public File getFolderUpload() {
-    File folderUpload = new File(System.getProperty("user.dir")+File.separator +"web\\avatar");
-    if (!folderUpload.exists()) {
-      folderUpload.mkdirs();
-    }
 }
+
