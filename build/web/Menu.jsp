@@ -70,12 +70,11 @@
                 </ul>
 
                 <div class="filters-content">
-                    <div class="row grid">
+                    <div class="row grid" >
 
                         <c:forEach items="${listP}"  var="p">
                             
                             <div class="col-sm-6 col-lg-4 ${p.cname}">
-
                                 <div class="box">
                                     <div>
                                         <div class="img-box">
