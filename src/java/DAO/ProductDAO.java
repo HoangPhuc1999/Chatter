@@ -96,7 +96,7 @@ public class ProductDAO extends DAO{
                         rs.getDouble(3),//price
                         rs.getString(4),//title
                         rs.getString(5),//des
-                        rs.getString(6)));//cname
+                        rs.getString(6));//cname
             }
         } catch (Exception e) {
         }
@@ -181,15 +181,14 @@ public class ProductDAO extends DAO{
     }
 
 
-//    public static void main(String[] args) {
-//        ProductDAO dao = new ProductDAO();
-//        String cid = "1";
+    public static void main(String[] args) {
+        ProductDAO dao = new ProductDAO();
 //        List<Product> list = dao.getProductByCID(cid);
 //        for (Product o : list) {
 //            System.out.println(o);
 //        }
-//
-//    }
+    System.out.println(dao.getAllProductWithCategory());
+    }
     
     
 }
