@@ -11,8 +11,8 @@
 
 <%
     Product x = (Product) request.getAttribute("product_detail");
+   
 
-    // If you use EL or JSTL, the above statement is not necessary. 
 %>  
 <html>
 
@@ -140,7 +140,7 @@
 
                                 </div>
                                 <div class="col-md-6">
-                                    <h4 class="mb-4">Leave a review</h4>
+                                    <h4 class="mb-4">Leave a review ${reviewmessage}    </h4>
                                     <small>Your email address will not be published. Required fields are marked *</small>
                                     <div class="d-flex my-3">
                                         <p class="mb-0 mr-2">Your Rating * :</p>
@@ -159,7 +159,7 @@
                                         </div>
 
                                     </div>
-                                    <form>
+                                    <form action="review" method="post">
                                         <div class="form-group">
                                             <label>Add image</label> 
                                             <input name="avatar" type="file" class="form-control" placeholder="reviewImage"
