@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package DAO;
 
 import context.DBContext;
@@ -15,7 +16,7 @@ import model.*;
  *
  * @author KQuangAn
  */
-public class ProductDAO extends DAO {
+public class ProductDAO extends DAO{
 
     //lay product trong table product bang product id  
     //dung cho gio hang cart 
@@ -23,15 +24,15 @@ public class ProductDAO extends DAO {
     //last changed by : AN
     public Product getProductById(String id) {
 
-        xSql = "select * from products p\n"
-                + "join products_image i\n"
-                + "on p.product_id = i.product_id\n"
-                + " where p.product_id = ?";
+        xSql = "select * from products p\n" +
+                "join products_image i\n" +
+                "on p.product_id = i.product_id\n" +
+                " where p.product_id = ?";
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, id);
             rs = ps.executeQuery();
-            while (rs.next()) {
+            while(rs.next()) {
                 return new Product(rs.getInt(1),//id
                         rs.getString(2),//name
                         rs.getString(7),//image
@@ -39,20 +40,20 @@ public class ProductDAO extends DAO {
                         rs.getString(4),//title
                         rs.getString(5)//description
                 );
-            }
+            } 
             rs.close();
             ps.close();
         } catch (Exception e) {
         }
         return null;
     }
-
+   
     //lay tat ca product cho vao arraylist (co lay image) 
     //dung cho index.jsp
     //author an 
     public List<Product> getAllProduct() {
         List<Product> list = new ArrayList<>();
-        String query = "select p.product_id , p.product_name  , i.product_image_path, p.product_price,"
+        String query = "select p.product_id , p.product_name , p.product_price , i.product_image_path,"
                 + "p.product_title,p.product_description"
                 + " from products p"
                 + " Join products_image i"
@@ -72,7 +73,36 @@ public class ProductDAO extends DAO {
         }
         return list;
     }
-
+    
+    //lay tat ca product co category cho vao arraylist (co lay image) 
+    //dung cho index.jsp
+    //author an 
+    public List<Product> getAllProductWithCategory() {
+        List<Product> list = new ArrayList<>();
+        String query = "select p.*,c.category_name,i.product_image_path from products p\n" +
+                        "join products_category pc\n" +
+                        "on p.product_id = pc.product_id \n" +
+                        "join category c \n" +
+                        "on c.category_id = pc.category_id\n" +
+                        "join products_image i \n" +
+                        "on p.product_id = i.product_id";
+        try {
+            ps = con.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Product(rs.getInt(1),//id
+                        rs.getString(2),//name
+                        rs.getString(7),//image
+                        rs.getDouble(3),//price
+                        rs.getString(4),//title
+                        rs.getString(5),//des
+                        rs.getString(6)));//cname
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+    
     public ProductImage getProductImageById(String id) {
 
         ProductImage x = new ProductImage();
@@ -101,7 +131,8 @@ public class ProductDAO extends DAO {
         }
         return (x);
     }
-
+    
+    
     public List<Category> getAllCategory() {
         List<Category> list = new ArrayList<>();
         String query = "select * from category";
@@ -119,12 +150,15 @@ public class ProductDAO extends DAO {
         return list;
     }
 
+    
+    //author: thang 
+    //Last Changed: 16/6
     public List<Product> getProductByCID(String cid) {
         List<Product> list = new ArrayList<>();
         String sql = "select p.product_id, p.product_name, i.product_image_path, "
                 + "p.product_price, p.product_title, p.product_description from products p join products_image i \n"
                 +  "on p.product_id = i.product_id where cid = ?";
-                
+
 
         try {
             ps = con.prepareStatement(sql);
@@ -145,8 +179,8 @@ public class ProductDAO extends DAO {
         }
         return list;
     }
-    
-    
+
+
 //    public static void main(String[] args) {
 //        ProductDAO dao = new ProductDAO();
 //        String cid = "1";
@@ -156,5 +190,6 @@ public class ProductDAO extends DAO {
 //        }
 //
 //    }
+    
     
 }
