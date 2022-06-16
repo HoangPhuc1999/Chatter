@@ -187,7 +187,8 @@ public class ProductDAO extends DAO{
 //        for (Product o : list) {
 //            System.out.println(o);
 //        }
-    System.out.println(dao.getAllProductWithCategory());
+    //System.out.println(dao.getAllProductWithCategory());
+    
     }
     
     
