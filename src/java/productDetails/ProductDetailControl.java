@@ -3,26 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package MenuControl;
+package productDetails;
 
 import DAO.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Category;
 import model.Product;
 
 /**
  *
  * @author 84384
  */
-@WebServlet(name = "CategoryControl", urlPatterns = {"/category"})
-public class CategoryControl extends HttpServlet {
+@WebServlet(name = "ProductDetailControl", urlPatterns = {"/detail"})
+public class ProductDetailControl extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,15 +34,14 @@ public class CategoryControl extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String cateID = request.getParameter("cid");
-        ProductDAO dao = new ProductDAO();
-        List<Product> list = dao.getProductByCID(cateID);
-        List<Category> listC = dao.getAllCategory();
-        
-        request.setAttribute("listC", listC);
-        request.setAttribute("listP", list);
-        request.setAttribute("tag", cateID);
-        request.getRequestDispatcher("Menu.jsp").forward(request, response);
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            String id = request.getParameter("pid");
+            ProductDAO dao = new ProductDAO();
+            Product p = dao.getProductById(id);
+            request.setAttribute("detail", p);
+            request.getRequestDispatcher("ProductDetail.jsp").forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

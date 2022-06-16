@@ -62,9 +62,8 @@
                 </div>
 
                 <ul class="filters_menu">
-                    <li class="active" data-filter="*">All</li>
-                    <c:forEach items="${listC}" var="o">
-                        <li data-filter=".${o.cname}">${o.cname}</li>
+                    <c:forEach items="${listC}" var="c">
+                        <li class="${tag == c.cid ? "active":""}"><a href="category?cid=${c.cid}">${c.cname}</a></li>
                     </c:forEach>
 
                 </ul>
@@ -74,7 +73,7 @@
 
                         <c:forEach items="${listP}"  var="p">
                             
-                            <div class="col-sm-6 col-lg-4 ${p.cname}">
+                            <div class="col-sm-6 col-lg-4 ">
 
                                 <div class="box">
                                     <div>
@@ -83,7 +82,7 @@
                                         </div>
                                         <div class="detail-box">
                                             <h5>
-                                                ${p.name}
+                                                <a href="detail?id=${p.id}">${p.name}</a>
                                             </h5>
                                             <p>
                                                 ${p.description}
