@@ -82,9 +82,25 @@
                     <%User x = (User) request.getSession().getAttribute("user");%>
                     <% if (x != null) {
                     %>
+                    <nav class="navbar navbar-dark bg-dark navbar-expand-sm">
 
-                    <a class="nav-link" href="profile">Hello <%=x.getFirstname()%> </a>
-                    <a class="nav-link" href="logout">Logout</a> 
+                      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-list-4" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                      </button>
+                      <div class="collapse navbar-collapse" id="navbar-list-4">
+                        <ul class="navbar-nav">
+                            <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              <img src="<%=x.getAvatar()%>" width="40" height="40" class="rounded-circle">
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                              <a class="dropdown-item" href="profile">Profile</a>
+                              <a class="dropdown-item" href="logout">Log Out</a>
+                            </div>
+                          </li>   
+                        </ul>
+                      </div>
+                    </nav>
                     <%                } else if (x == null) {
                     %>
                     <a href="login" class="order_online">
