@@ -121,7 +121,7 @@ public class SignUpServlet extends HttpServlet {
 //              
 
         // Create path components to save the file
-        final String path = "avatar";
+        final String path = "C:\\Users\\khuat\\OneDrive\\Desktop\\FPTUniversity\\2022\\SEMESTER 5\\SWP391\\Chatter\\Chatter\\Chatter\\web\\avatar";
         final Part filePart = request.getPart("avatar");
         final String fileName = getFileName(filePart);
         avapath = "avatar/" + fileName;//path saveto database 

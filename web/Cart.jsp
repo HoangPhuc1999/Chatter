@@ -75,7 +75,7 @@
                                             <tbody>
                                                 <c:set var="total" value="0"></c:set>
                                                 <c:set var="Discounted_Price" value="0"></c:set>
-                                            <c:forEach items="${sessionScope.acc.cart}" var="o">
+                                            <c:forEach items="${sessionScope.user.cart}" var="o">
                                                 <c:set var="total" value="${total+(o.product.price * o.quantity)}"></c:set>
                                                 <c:set var="Discounted_Price" value="${Discounted_Price+((o.product.price * o.quantity *(100 - Discount)) /100)}"></c:set>
                                                 <tr>
