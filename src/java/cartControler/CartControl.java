@@ -5,6 +5,7 @@
  */
 package cartControler;
 
+import DAO.CartDAO;
 import DAO.DAO;
 import DAO.ProductDAO;
 import java.io.IOException;
@@ -44,9 +45,17 @@ public class CartControl extends HttpServlet {
                         }
 		}
 	}
-
+        
+        //trigger when user click on cart icon after signing in 
+        //get user 's id and load previous cart items 
+        //author: an 
+        //20/6
 	protected void doGet_DisplayCart(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+                CartDAO cdao = new CartDAO();
+                User a = (User) request.getSession().getAttribute("user");
+                ArrayList<Item> cart = (ArrayList<Item>) cdao.getCart(a.getUsers_id()); //get cart of user in database
+                a.setCart(cart);
 		request.getRequestDispatcher("Cart.jsp").forward(request, response);
 	}
         
@@ -78,11 +87,19 @@ public class CartControl extends HttpServlet {
                     request.setAttribute("message","Ban chua dang nhap!");
                     request.getRequestDispatcher("Login.jsp").forward(request,response);
                 }
+                
                 //neu day la mon hang dau tien -> tao cart va gan vao acc session
 		if (a.getCart() == null) {
 			ArrayList<Item> cart = new ArrayList<Item>();
 			cart.add(new Item(dao.getProductById(request.getParameter("id")), 1));
 			a.setCart(cart);
+                        
+                        //update cart in database
+                        CartDAO cdao = new CartDAO();
+                        cdao.insertCart(a.getUsers_id(),
+                                Integer.parseInt(request.getParameter("id")),
+                                Integer.parseInt(request.getParameter("quantity")));
+                        
                         request.setAttribute("message","Items added to cart! ");
 		}
                 else {

@@ -30,6 +30,7 @@ import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+
 /**
  *
  * @author khuat
@@ -198,7 +199,6 @@ public class SignUpServlet extends HttpServlet {
             }
         } catch (Exception ex) {
             request.setAttribute("message", "Sign up failed error code: " + ex.toString());
-            request.setAttribute("message", "Sign up failed error code: ");
             request.setAttribute("avapath", avapath);
             request.setAttribute("user", user);
             request.setAttribute("pass", pass);

@@ -71,7 +71,7 @@ public class LoginServlet extends HttpServlet {
                 response.addCookie(y);
             }
             System.out.println("Success");
-            request.getRequestDispatcher("/Index.jsp").include(request, response);
+            request.getRequestDispatcher("home").include(request, response);
 
         }
 
