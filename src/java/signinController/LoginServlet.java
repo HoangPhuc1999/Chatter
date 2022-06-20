@@ -57,9 +57,11 @@ public class LoginServlet extends HttpServlet {
             request.setAttribute("message", "Sign up");
             User user = t.getUserFromId(x.getUsers_id());
             UserAddress userAddress = t.getUserAddressById(x.getUsers_id());
+            UserAccount userAccount = t.getUserAccountById(x.getUsers_id());
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
             session.setAttribute("user_address", userAddress);
+            session.setAttribute("user_account", userAccount);
             session.setAttribute("reviewmessage", "");
             session.setMaxInactiveInterval(10000);
             if (xRem != null) {

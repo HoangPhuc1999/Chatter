@@ -37,7 +37,7 @@
   <link href="css/style.css" rel="stylesheet" />
   <!-- responsive style -->
   <link href="css/responsive.css" rel="stylesheet" />
-
+  
   <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-M1KMW8WPRY"></script>
 <script>
@@ -169,7 +169,7 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga
                   Tasty Thursdays
                 </h5>
                 <h6>
-                  <span>20%</span> Off
+                  <span>20%</span> Off with voucher
                 </h6>
                 <a href="">
                   Order Now <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
@@ -238,7 +238,7 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga
                   Pizza Days
                 </h5>
                 <h6>
-                  <span>15%</span> Off
+                  <span>15%</span> Off with voucher
                 </h6>
                 <a href="">
                   Order Now <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
@@ -503,7 +503,7 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga
         </div>
         <div class="col-md-6">
           <div class="map_container ">
-            <div id="googleMap"></div>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1316.8068291965315!2d105.52465293230591!3d21.012984900871867!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31345bbf73fd814b%3A0xcfe6abd90d3f98f6!2zVG_DoCBuaMOgIEFscGhhIMSQ4bqhaSBo4buNYyBGUFQ!5e0!3m2!1svi!2s!4v1655443271782!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
           </div>
         </div>
       </div>
@@ -585,11 +585,7 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
   <!-- custom js -->
   <script src="js/custom.js"></script>
-  <!-- Google Map -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
-  </script>
-  <!-- End Google Map -->
-
+ 
 </body>
 
 </html>

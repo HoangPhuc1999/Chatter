@@ -75,7 +75,7 @@
                                             <tbody>
                                                 <c:set var="total" value="0"></c:set>
                                                 <c:set var="Discounted_Price" value="0"></c:set>
-                                            <c:forEach items="${sessionScope.acc.cart}" var="o">
+                                            <c:forEach items="${sessionScope.user.cart}" var="o">
                                                 <c:set var="total" value="${total+(o.product.price * o.quantity)}"></c:set>
                                                 <c:set var="Discounted_Price" value="${Discounted_Price+((o.product.price * o.quantity *(100 - Discount)) /100)}"></c:set>
                                                 <tr>
@@ -159,10 +159,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
   <!-- custom js -->
   <script src="js/custom.js"></script>
-  <!-- Google Map -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
-  </script>
-  <!-- End Google Map -->
+  
 
 </body>
 

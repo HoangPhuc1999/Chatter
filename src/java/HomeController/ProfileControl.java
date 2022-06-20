@@ -35,36 +35,29 @@ public class ProfileControl extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ProfileControl</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ProfileControl at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-        request.setCharacterEncoding("UTF-8");
         //get user from session and display info to profile.jsp
 
-        HttpSession session = request.getSession();
         User a = (User) request.getSession().getAttribute("user");
+        UserAccount acc = (UserAccount) request.getSession().getAttribute("user_account");
+        UserAddress adr = (UserAddress) request.getSession().getAttribute("user_address");
         UserDAO dao = new UserDAO();
-//                request.setAttribute("avapath", a.getAvatar());
-//                request.setAttribute("user", a.);
-//                request.setAttribute("pass", pass);
-//                request.setAttribute("home", );
-//                request.setAttribute("district", district);
-//                request.setAttribute("city", city);
-//                request.setAttribute("first", firstname);
-//                request.setAttribute("last", lastname);
-//                request.setAttribute("gender", gender);
-//                request.setAttribute("phone", phone);
-//                request.setAttribute("email", email);
-            getServletContext().getRequestDispatcher("/SignUp.jsp").forward(request, response);     
+        try{
+                request.setAttribute("avapath", a.getAvatar());
+                request.setAttribute("user", acc.getUsername());
+                request.setAttribute("pass", acc.getPassword());
+                request.setAttribute("home", adr.getHome_address());
+                request.setAttribute("district", adr.getDistrict());
+                request.setAttribute("city", adr.getCity());
+                request.setAttribute("first", a.getFirstname());
+                request.setAttribute("last", a.getLastname());
+                request.setAttribute("gender", a.getGender());
+                request.setAttribute("phone", a.getPhonenumber());
+                request.setAttribute("email", a.getEmail());
+        }
+        catch(Exception e){
+            System.out.println(e.toString());
+        }
+        getServletContext().getRequestDispatcher("/Profile.jsp").forward(request, response);     
 
         
         
@@ -105,13 +98,8 @@ public class ProfileControl extends HttpServlet {
         //dispaly profile to profile.jsp
         protected void doGet_DisplayProfile(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		DAO dao = new DAO();
-                HttpSession session = request.getSession();
-                User a = (User) request.getSession().getAttribute("user");
-                
-		session.setAttribute("acc", a);
-                request.setAttribute("message", "Profile updated!");
-		response.sendRedirect("Profile.jsp");
+		processRequest(request, response);
+
         }
         
     /**

@@ -143,7 +143,7 @@ public class UserFilter implements Filter {
     
     private HttpServletRequest  httpRequest;
     private static final String[] loginRequiredURLs = {
-            "/Profile", "/Chatting", "/Cart"
+            "/Profile.jsp", "/Chatting.jsp", "/Cart.jsp"
     };  
     
     private boolean isLoginRequired() {
