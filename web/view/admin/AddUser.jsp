@@ -50,7 +50,9 @@ Author     : khuat
 
 
         <div class="col-sm-9">
-            <h3 class="text-warning p-2 fa-thin fa-user">  Add new user</h3>
+            <h3 class="text-info p-2" >
+                <span class="text-info p-2 fa-duotone fa-user-group"></span>
+               Add new user </h3>
 <div class="form_container d-flex p-5">
                 <form action="" method="POST" class="row g-3 form-control" >
                     <div class="row">
