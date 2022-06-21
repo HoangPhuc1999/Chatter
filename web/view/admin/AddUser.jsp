@@ -26,8 +26,8 @@ Author     : khuat
         <!-- nice select  -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" integrity="sha512-CruCP+TD3yXzlvvijET8wV5WxxEh5H8P4cmz0RFbKK6FlZ2sYl3AEsKlLPHbniXKSrDdFewhbmBK5skbdsASbQ==" crossorigin="anonymous" />
         <!-- font awesome style -->
-        <script src="https://kit.fontawesome.com/a141f28961.js" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<link href="https://cdn.staticaly.com/gh/hung1001/font-awesome-pro-v6/18657a9/css/all.min.css" rel="stylesheet" type="text/css" />
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
 
 
@@ -50,9 +50,8 @@ Author     : khuat
 
 
         <div class="col-sm-9">
-            <h3 class="text-warning p-2 fa-regular fa-user">  Add new user</h3>
-                            
-            <div class="form_container d-flex p-5">
+            <h3 class="text-warning p-2 fa-thin fa-user">  Add new user</h3>
+<div class="form_container d-flex p-5">
                 <form action="" method="POST" class="row g-3 form-control" >
                     <div class="row">
                         <div class="col-md-6">
@@ -74,14 +73,14 @@ Author     : khuat
 
                         <div class="col-md-6">
                             <label for="inputPhonenumber" class="col-form-label">Phone number</label>
-                            <input id="inputPhonenumber" name="phonenumber"type="text" class="form-control" placeholder="e.g:012435464" value=${phone}>
+                            <input id="inputPhonenumber" name="phonenumber"type="text" class="form-control" placeholder="012435464" value=${phone}>
                         </div>
                         
                         <div class="col-md-6">
                         </div>
                         <div class="col-md-6">
                             <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
-                             <input id="inputEmail" name="email" type="email" class="form-control" placeholder="Enter email" required value=${email}>
+                             <input id="inputEmail" name="email" type="email" class="form-control" placeholder="mee@example.com" required value=${email}>
 
                         </div>
                              <div class="col-md-6">
