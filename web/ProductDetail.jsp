@@ -142,7 +142,7 @@
                                 <div class="col-md-6">
                                     <h4 class="mb-4">Leave a review ${reviewmessage}    </h4>
                                     <small>Your email address will not be published. Required fields are marked *</small>
-                                    <form action="review" method="post">
+                                    <form action="review?id=<%=x.getId()%>" method="post">
                                         <div class="d-flex my-3">
                                             <p class="mb-0 mr-2">Your Rating * :</p>
 

@@ -75,9 +75,11 @@
 
                                 <div class="box">
                                     <div>
+                                        <a href="productdetail?id=${p.id}">
                                         <div class="img-box">
                                             <img src="${p.image}" alt="">
                                         </div>
+                                        </a>
                                         <div class="detail-box">
                                             <h5>
                                                 ${p.name}

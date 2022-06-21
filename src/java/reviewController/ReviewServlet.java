@@ -28,16 +28,17 @@ public class ReviewServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter pr = response.getWriter();
         HttpSession session = request.getSession();
+        String id = request.getParameter("id");
+        session.setAttribute("id", id);
         User x = (User) session.getAttribute("user");
         String review = request.getParameter("reviewtext");
-
         String rating = request.getParameter("rate");
         Date date = new Date();
         java.sql.Date sqlDate = new java.sql.Date(date.getTime());
         if (x == null) {
             // check 
             session.setAttribute("reviewmessage", "You have to sign in to leave a review");
-            response.sendRedirect("productdetail");
+            response.sendRedirect("Login.jsp");
         } else {
             Review reviewItem = new Review();
             reviewItem.setDate(sqlDate);
@@ -50,7 +51,7 @@ public class ReviewServlet extends HttpServlet {
             ReviewDAO reviewDao = new ReviewDAO();
             reviewDao.postReview(reviewItem);
             session.setAttribute("reviewmessage", "Review Submitted");
-            response.sendRedirect("productdetail");
+            response.sendRedirect("menu");
 
         }
 

@@ -31,7 +31,6 @@ public class ReviewDAO extends DAO {
 
         } catch (Exception e) {
             e.printStackTrace();
-
         }
     }
 
