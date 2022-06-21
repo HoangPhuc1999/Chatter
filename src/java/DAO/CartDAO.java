@@ -85,7 +85,7 @@ public class CartDAO extends MyDAO{
     
     public static void main(String[] args) {
         CartDAO dao = new CartDAO();
-        dao.updateCart(1, 7, 45);
+      //  dao.updateCart(1, 7, 45);
         //System.out.println(dao.getCart(1));
         //dao.updateCart(1, 3, 69);
     }

@@ -28,9 +28,11 @@ public class ProductDetailServlet extends HttpServlet {
         HttpSession session = request.getSession();
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter pr = response.getWriter();
-//        String id = request.getParameter("id");
-        String id = "2";
+        String id = request.getParameter("id");
+
+        System.out.println(id+"======================= hello");
         ProductDAO d = new ProductDAO();
+      
         ProductImage pd = d.getProductImageById(id);
         Product x = d.getProductById(id);
         String imageUrl = pd.getImageUrl();
