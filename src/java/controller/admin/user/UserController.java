@@ -53,7 +53,23 @@ public class UserController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        String action = request.getParameter("action");
+        switch (action) {
+            case "add_users":
+                addUser(request, response);
+                break;
+            default:
+                throw new AssertionError();
+        }
+        
     }
+    
+    protected void addUser(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
+        String action = request.getParameter("username");
+        
+    }
+    
 
     /** 
      * Returns a short description of the servlet.
