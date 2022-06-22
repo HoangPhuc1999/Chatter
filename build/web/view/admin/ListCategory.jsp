@@ -26,24 +26,18 @@
         <link href="../css/style.css" rel="stylesheet" />
         <!-- responsive style -->
         <link href="../css/responsive.css" rel="stylesheet" />
+        <link href="../css/adminstyle.css" rel="stylesheet" />
         <style>
-            body {
-                background-color: #121819;
-                background-attachment: fixed;
-                background-size: auto;
-            }
-            .main_content {
-                background: #e2feff !important;
-            }
+            
             .fa-lg {
                 font-size: 1.25em;
                 line-height: 1em !important;
                 vertical-align: -.075em;
             }
-            .bdr {
-                border-radius: 10px;
-                overflow: hidden;
-            }
+            /*            .bdr {
+                            border-radius: 10px;
+                            overflow: hidden;
+                        }*/
         </style>
         <script>
             var cids = [];
@@ -120,64 +114,69 @@
             </div>   
             <div class="col-sm-9">
                 <h3 class="text-warning p-2 fa-solid fa-qrcode">  Categories</h3>
-                <div class="d-flex p-3 col-sm-12">
-                    <button type="button" class="btn btn-box btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        <i class="fa fa-plus-circle fa-lg" aria-hidden="true"></i> Add category
-                    </button>
+                <!--add category modal-->
+                <div class=" p-3 col-sm-12">
+                    <div class="col-sm-3 card p-3">
+                        <button type="button" class="btn btn-box btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <i class="fa fa-plus-circle fa-lg" aria-hidden="true"></i> Add category
+                        </button>
 
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">New category</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <form action="insert_category" method="post">
-                                        <div class="mb-3">
-                                            <label for="name" class="col-form-label">Category name:</label>
-                                            <input type="text" class="form-control" id="category_name" name="category_name"  required="true" onkeyup="validate_category()">
-                                        </div> 
-                                        <span id="dumlicate_category"></span>
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">New category</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="insert_category" method="post">
+                                            <div class="mb-3">
+                                                <label for="name" class="col-form-label">Category name:</label>
+                                                <input type="text" class="form-control" id="category_name" name="category_name"  required="true" onkeyup="validate_category()">
+                                            </div> 
+                                            <span id="dumlicate_category"></span>
 
-                                </div>
-                                <div class="modal-footer">
-                                    <button id="add_category" type="submit" class="btn btn-success">Add</button>
-                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
-                                    </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button id="add_category" type="submit" class="btn btn-success">Add</button>
+                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                        <table class="bdr table table-striped table-bordered table-hover table-warning">
-                            <tr class>
-                                <th class="w-auto">Category ID</th>
-                                <th class="w-auto">Category Name</th>
-                                <th class="w-auto"></th>
+                <div class="col-md-6 card p-3">
+                    <div class="card-header">List Categories</div>
 
-                            </tr>
-                            <c:forEach items="${requestScope.categorys}" var="category">
-                                <form action="update_category" method="post">   
-                                    <tr>
-                                        <td>${category.cid}</td>
-                                        <td>
-                                            <span class="viewmode${category.cid}" id="view_name${category.cid}">${category.cname}</span>
-                                            <input name="cname" class="form-control editmode${category.cid}" type="text" id="edit_name${category.cid}" value="${category.cname}" />
-                                        </td>
-                                        <td>
-                                            <input type="hidden" name="cid" value="${category.cid}"/>
-                                            <a class="btn-outline-info btn-box btn-lg fa fa-pencil-square-o fa-lg viewmode${category.cid}" onclick="showEditmode(${category.cid});
+                    <table class="bdr table table-striped table-hover  card-body">
+                        <tr class>
+                            <th class="w-auto">Category ID</th>
+                            <th class="w-auto">Category Name</th>
+                            <th class="w-auto"></th>
+
+                        </tr>
+                        <c:forEach items="${requestScope.categorys}" var="category">
+                            <form action="update_category" method="post">   
+                                <tr>
+                                    <td>${category.cid}</td>
+                                    <td>
+                                        <span class="viewmode${category.cid}" id="view_name${category.cid}">${category.cname}</span>
+                                        <input name="cname" class="form-control editmode${category.cid}" type="text" id="edit_name${category.cid}" value="${category.cname}" />
+                                    </td>
+                                    <td>
+                                        <input type="hidden" name="cid" value="${category.cid}"/>
+                                        <a class="btn-outline-info btn-box btn-lg fa fa-pencil-square-o fa-lg viewmode${category.cid}" onclick="showEditmode(${category.cid});
                                                     hideViewmode(${category.cid});"/>
-                                            <a class="btn-outline-danger btn-box btn-lg fa fa-trash fa-lg viewmode${category.cid}"  href="#" onclick="deleteCategory(${category.cid})"></a>
-                                            <input class="btn btn-outline-success btn-sm editmode${category.cid}" type="submit"  value="Save">
-                                            <input class="btn btn-outline-secondary btn-sm editmode${category.cid}" type="button" onclick="cancelEdit(${category.cid}, '${category.cname}');" value="Cancel"/>
-                                        </td>
-                                    </tr>
-                                </form>
-                            </c:forEach>
-                        </table>
+                                        <a class="btn-outline-danger btn-box btn-lg fa fa-trash fa-lg viewmode${category.cid}"  href="#" onclick="deleteCategory(${category.cid})"></a>
+                                        <input class="btn btn-outline-success btn-sm editmode${category.cid}" type="submit"  value="Save">
+                                        <input class="btn btn-outline-secondary btn-sm editmode${category.cid}" type="button" onclick="cancelEdit(${category.cid}, '${category.cname}');" value="Cancel"/>
+                                    </td>
+                                </tr>
+                            </form>
+                        </c:forEach>
+                    </table>
                 </div>
             </div>
 

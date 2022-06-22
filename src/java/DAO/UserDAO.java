@@ -174,38 +174,15 @@ public class UserDAO extends DAO {
         } catch (Exception e) {
         }
     }
-    //author: an 
-    //lay tat ca info cua user tu 4 bang
-    //state: insert xong bang users thi dung lai
-    public void getAllUserInfoById(String users_id) {
-        String query = "Select * from users where"
-                + "users_id=?";
-        String query2 = "Select * from users_role where"
-                + "users_id=?";
-        String query3 = "Select * from users_account where"
-                + "users_id=?";
-        String query4 = "Select * from users_address where"
-                + "users_id=?";
-        try {
-            
-
-            ps.close();
-            rs.close();
-
-        } catch (Exception e) {
-        }
-    }
     
     //author: an 
     //lay user role = usersid 
     public UserRole getUserRoleById(int users_id) {
-        String query = "Select * from users_role where"
-                + "users_id=?";
+        String query = "Select * from users_role where users_id=?";
         try {
             ps = con.prepareStatement(query);
             ps.setInt(1, users_id);
-            ps.executeQuery();
-            ps.clearParameters();
+            rs = ps.executeQuery();
             while (rs.next()) {
                 return new UserRole(rs.getInt(1),rs.getString(2));
             }
@@ -221,13 +198,11 @@ public class UserDAO extends DAO {
     //author: an 
     //lay user account = usersid 
     public UserAccount getUserAccountById(int users_id) {
-        String query = "Select * from users_account where"
-                + "users_id=?";
+        String query = "Select * from users_account where users_id =?";
         try {
             ps = con.prepareStatement(query);
             ps.setInt(1, users_id);
-            ps.executeQuery();
-            ps.clearParameters();
+            rs = ps.executeQuery();
             while (rs.next()) {
                 return new UserAccount(rs.getInt(1),rs.getString(2),rs.getString(3));
             }
@@ -235,7 +210,7 @@ public class UserDAO extends DAO {
             rs.close();
 
         } catch (Exception e) {
-            
+            System.out.println(e.toString());
         }
         return null;
     }
@@ -243,13 +218,11 @@ public class UserDAO extends DAO {
     //author: an 
     //lay user address = usersid 
     public UserAddress getUserAddressById(int users_id) {
-        String query = "Select * from users_address where"
-                + "users_id=?";
+        String query = "Select * from users_address where users_id=?";
         try {
             ps = con.prepareStatement(query);
             ps.setInt(1, users_id);
-            ps.executeQuery();
-            ps.clearParameters();
+            rs = ps.executeQuery();
             while (rs.next()) {
                 return new UserAddress(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4));
             }
@@ -393,8 +366,11 @@ public class UserDAO extends DAO {
        ArrayList<User> b = dao.getAllUsers();
         
         int x = dao.getUserID();
-
-        System.out.println(b);
+        
+        System.out.println(dao.getUserAddressById(1));
+        System.out.println(dao.getUserAccountById(1));
+        System.out.println(dao.getUserRoleById(1));
+        System.out.println(dao.getUserFromId(1));
     }
 
 }

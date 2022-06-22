@@ -185,7 +185,7 @@
                   <input name="city"type="text" class="form-control" placeholder="city" value=${city}>
                 </div>
                 
-                  <button href="Profile.jsp">
+                  <button href="profile?action=edit">
                     Change Profile
                   </button>
                 </div>

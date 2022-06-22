@@ -53,14 +53,15 @@ public class ProfileControl extends HttpServlet {
                 request.setAttribute("gender", a.getGender());
                 request.setAttribute("phone", a.getPhonenumber());
                 request.setAttribute("email", a.getEmail());
+                
         }
         catch(Exception e){
             System.out.println(e.toString());
         }
+        
+        
         getServletContext().getRequestDispatcher("/Profile.jsp").forward(request, response);     
 
-        
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -86,11 +87,9 @@ public class ProfileControl extends HttpServlet {
         //edit profile from profile.jsp
         protected void doGet_EditProfile(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		DAO dao = new DAO();
                 HttpSession session = request.getSession();
                 User a = (User) request.getSession().getAttribute("user");
                 
-		session.setAttribute("acc", a);
                 request.setAttribute("message", "Profile updated!");
 		request.getRequestDispatcher("Profile.jsp").forward(request,response);
         }
