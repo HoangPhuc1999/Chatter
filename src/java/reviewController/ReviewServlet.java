@@ -29,9 +29,9 @@ public class ReviewServlet extends HttpServlet {
         PrintWriter pr = response.getWriter();
         HttpSession session = request.getSession();
         String id = request.getParameter("id");
-        session.setAttribute("id", id);
         User x = (User) session.getAttribute("user");
         String review = request.getParameter("reviewtext");
+        String reviewtitle = request.getParameter("reviewtitle");
         String rating = request.getParameter("rate");
         Date date = new Date();
         java.sql.Date sqlDate = new java.sql.Date(date.getTime());
@@ -43,11 +43,11 @@ public class ReviewServlet extends HttpServlet {
             Review reviewItem = new Review();
             reviewItem.setDate(sqlDate);
             reviewItem.setUserId(x.getUsers_id());
-            reviewItem.setTitle("my review");
+            reviewItem.setTitle(reviewtitle);
             reviewItem.setRating(rating);
             reviewItem.setReviewContent(review);
             reviewItem.setReviewImageUrl("urla");
-            reviewItem.setProductId(2);
+            reviewItem.setProductId(Integer.parseInt(id));
             ReviewDAO reviewDao = new ReviewDAO();
             reviewDao.postReview(reviewItem);
             session.setAttribute("reviewmessage", "Review Submitted");
