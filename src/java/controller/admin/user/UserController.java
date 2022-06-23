@@ -55,8 +55,14 @@ public class UserController extends HttpServlet {
     throws ServletException, IOException {
         String action = request.getParameter("action");
         switch (action) {
-            case "add_users":
+            case "add_user":
                 addUser(request, response);
+                break;
+            case "delete_user":
+                deleteUser(request, response);
+                break;
+            case "update_user":
+                updateUser(request, response);
                 break;
             default:
                 throw new AssertionError();
@@ -65,6 +71,19 @@ public class UserController extends HttpServlet {
     }
     
     protected void addUser(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
+        String action = request.getParameter("username");
+        
+        
+    }
+    
+    protected void deleteUser(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
+        String action = request.getParameter("username");
+        
+    }
+    
+    protected void updateUser(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
         String action = request.getParameter("username");
         
