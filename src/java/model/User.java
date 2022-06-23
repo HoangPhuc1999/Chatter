@@ -13,11 +13,11 @@ import java.util.ArrayList;
  */
 public class User {
     private int users_id;
-    private String role;
     private String firstname;
     private String lastname;
     private String phonenumber;
     private String email;
+    private String role;
     private String gender;
     private String avatar;
     private ArrayList<Item> cart;
@@ -34,16 +34,16 @@ public class User {
         this.cart = cart;
     }
 
-    
-
-    public User(String firstname, String lastname, String phonenumber, String email, String gender, String avatar) {
+    public User(String firstname, String lastname, String phonenumber, String email, String role, String gender) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.phonenumber = phonenumber;
         this.email = email;
+        this.role = role;
         this.gender = gender;
-        this.avatar = avatar;
     }
+
+   
 
     public User(int users_id, String firstname, String lastname, String phonenumber, String email, String gender, String avatar) {
         this.users_id = users_id;
@@ -65,6 +65,8 @@ public class User {
         this.gender = gender;
         this.avatar = avatar;
     }
+    
+    
 
     
     
