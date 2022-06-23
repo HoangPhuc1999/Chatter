@@ -114,7 +114,9 @@
             </div>   
             <div class="col-sm-9 overflow-hidden row gy-2">
                 <h3 class="text-warning fa-solid fa-qrcode">  Categories</h3>
+
                 <!--add category modal-->
+
                 <div class="row-cols-3 row-cols-lg-5 g-2 g-lg-4">
                     <div class="col-sm-3 card p-3">
                         <button type="button" class="btn btn-box btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -147,6 +149,8 @@
                         </div>
                     </div>
                 </div>
+                <!--end modal-->
+
                 <div class="col-md-6 card p-3">
                     <div class="card-header">List Categories</div>
 
@@ -189,7 +193,7 @@
                 {
                     hideEditmode(cids[i]);
                 }
-                
+
                 document.getElementById('categories_page').classList.add('active');
                 document.getElementById('categories_page').className.replace('link-dark', '');
 
