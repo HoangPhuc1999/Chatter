@@ -26,34 +26,37 @@ Author     : khuat
         <!-- nice select  -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" integrity="sha512-CruCP+TD3yXzlvvijET8wV5WxxEh5H8P4cmz0RFbKK6FlZ2sYl3AEsKlLPHbniXKSrDdFewhbmBK5skbdsASbQ==" crossorigin="anonymous" />
         <!-- font awesome style -->
-<link href="https://cdn.staticaly.com/gh/hung1001/font-awesome-pro-v6/18657a9/css/all.min.css" rel="stylesheet" type="text/css" />
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <link href="https://cdn.staticaly.com/gh/hung1001/font-awesome-pro-v6/18657a9/css/all.min.css" rel="stylesheet" type="text/css" />
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
 
 
         <!-- Custom styles for this template -->
-        <link href="../css/style.css" rel="stylesheet" />
+        <!--<link href="../css/style.css" rel="stylesheet" />-->
         <!-- responsive style -->
-        <link href="../css/responsive.css" rel="stylesheet" />
+        <!--<link href="../css/responsive.css" rel="stylesheet" />-->
         <link href="../css/adminstyle.css" rel="stylesheet" />
+
+
+
 
         <title> Chatter </title>
     </head>
     <body class="row main_content">
 
 
-        <div class="col-sm-3">
+        <div class="col-sm-3 g-3">
             <jsp:include page="Sidebar.jsp" />
 
         </div>   
 
 
 
-        <div class="col-sm-9">
-            <h3 class="text-info p-2" >
-                <span class="text-info p-2 fa-duotone fa-user-group"></span>
-               Add new user </h3>
-<div class="form_container d-flex p-5">
+        <div class="col-sm-9 gy-2">
+            <h3 class="text-info p-3" >
+                <span class="text-info fa-duotone fa-user-group"></span>
+                Add new user </h3>
+            <div class="form_container d-flex g-lg-6">
                 <form action="" method="POST" class="row g-3 form-control" >
                     <div class="row">
                         <div class="col-md-6">
@@ -77,35 +80,45 @@ Author     : khuat
                             <label for="inputPhonenumber" class="col-form-label">Phone number</label>
                             <input id="inputPhonenumber" name="phonenumber"type="text" class="form-control" placeholder="012435464" value=${phone}>
                         </div>
-                        
+
                         <div class="col-md-6">
                         </div>
                         <div class="col-md-6">
                             <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
-                             <input id="inputEmail" name="email" type="email" class="form-control" placeholder="mee@example.com" required value=${email}>
+                            <input id="inputEmail" name="email" type="email" class="form-control" placeholder="mee@example.com" required value=${email}>
 
                         </div>
-                             <div class="col-md-6">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="inputDistrict" class="col-sm-2 col-form-label">District</label>
-                            <input id="inputDistrict" name="district"type="text" class="form-control" placeholder="" value=${district}>
-                        </div>
                         <div class="col-md-6">
                         </div>
-                        
-                        <div class="col-md-6">
-                            <label for="inputCity" class="col-sm-2 col-form-label">City</label>
-                            <input id="inputCity" name="city" type="text" class="form-control" placeholder="" value=${city}>
+
+                        <div class="btn-group col-md-4 p-3 form-check" role="group" aria-label="" id="role">
+                            <label class="form-check-label col-form-label col-lg-2" for="form-check">
+                                Role
+                            </label>
+
+                            <input type="radio" class="btn-check" name="role" value="Customer" id="btnradio1" autocomplete="off" checked>
+                            <label class="btn btn-outline-primary" for="btnradio1">Customer</label>
+
+                            <input type="radio" class="btn-check" name="role" value="Seller" id="btnradio2" autocomplete="off">
+                            <label class="btn btn-outline-primary" for="btnradio2">Seller</label>
+
+                            <input type="radio" class="btn-check" name="role" value="Admin" id="btnradio3" autocomplete="off">
+                            <label class="btn btn-outline-primary" for="btnradio3">Admin</label>
                         </div>
                     </div>
-
-                    <button class="btn btn-box btn-success - col-sm-2">
-                        Add User
-                    </button>
+                    <div class="text-center">
+                        <button class="btn btn-box btn-success - col-sm-2">
+                            Add User
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>
+                            
+        <script>
+            document.getElementById('customers_page').classList.add('active');
+            document.getElementById('customers_page').className.replace('link-dark', '');
+        </script>   
         <script>
             (function () {
                 'use strict'
