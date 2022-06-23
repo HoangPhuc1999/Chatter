@@ -30,7 +30,6 @@ Author     : khuat
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
 
-
         <!-- Custom styles for this template -->
         <!--<link href="../css/style.css" rel="stylesheet" />-->
         <!-- responsive style -->
@@ -38,9 +37,14 @@ Author     : khuat
         <link href="../css/adminstyle.css" rel="stylesheet" />
 
 
-
-
         <title> Chatter </title>
+        <script>
+            var usernames = [];
+
+            <c:forEach items="${requestScope.accounts}" var="account">
+            usernames.push('${account.username}');
+            </c:forEach>
+        </script>
     </head>
     <body class="row main_content">
 
@@ -57,12 +61,13 @@ Author     : khuat
                 <span class="text-info fa-duotone fa-user-group"></span>
                 Add new user </h3>
             <div class="form_container d-flex g-lg-6">
-                <form action="" method="POST" class="row g-3 form-control" >
+                <form action="add_user" method="POST" class="row g-3 form-control" >
                     <div class="row">
                         <div class="col-md-6">
                             <label for="inputUsername" class="col-sm-2 col-form-label">Username</label>
-                            <input name="username"  type="text" class="form-control" placeholder="Enter username" required value=${user} >
-                        </div>
+                            <input id="username"  name="username"  type="text" class="form-control" placeholder="Enter username" onkeyup="checkUsername()" required autofocus value=${user} >
+                            <span id="dumlicate_username"></span>
+                        </div> 
                         <div class="col-md-6">
                             <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
                             <input id="inputPassword" name="password" type="password" class="form-control" placeholder="Enter password" required value=${pass}>
@@ -78,7 +83,7 @@ Author     : khuat
 
                         <div class="col-md-6">
                             <label for="inputPhonenumber" class="col-form-label">Phone number</label>
-                            <input id="inputPhonenumber" name="phonenumber"type="text" class="form-control" placeholder="012435464" value=${phone}>
+                            <input id="inputPhonenumber" name="phonenumber" type="tel" class="form-control" placeholder="0906111111" pattern="^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$" title="Invalid phone number in Vietnam (10 digits)" value=${phone} >
                         </div>
 
                         <div class="col-md-6">
@@ -96,46 +101,58 @@ Author     : khuat
                                 Role
                             </label>
 
-                            <input type="radio" class="btn-check" name="role" value="Customer" id="btnradio1" autocomplete="off" checked>
+                            <input type="radio" class="btn-check" name="role" value="customer" id="btnradio1" autocomplete="off" checked>
                             <label class="btn btn-outline-primary" for="btnradio1">Customer</label>
 
-                            <input type="radio" class="btn-check" name="role" value="Seller" id="btnradio2" autocomplete="off">
+                            <input type="radio" class="btn-check" name="role" value="seller" id="btnradio2" autocomplete="off">
                             <label class="btn btn-outline-primary" for="btnradio2">Seller</label>
 
-                            <input type="radio" class="btn-check" name="role" value="Admin" id="btnradio3" autocomplete="off">
+                            <input type="radio" class="btn-check" name="role" value="admin" id="btnradio3" autocomplete="off">
                             <label class="btn btn-outline-primary" for="btnradio3">Admin</label>
                         </div>
                     </div>
                     <div class="text-center">
-                        <button class="btn btn-box btn-success - col-sm-2">
+                        <button class="btn btn-box btn-success - col-sm-2" id="add-user">
                             Add User
                         </button>
                     </div>
                 </form>
             </div>
         </div>
-                            
+
         <script>
             document.getElementById('customers_page').classList.add('active');
             document.getElementById('customers_page').className.replace('link-dark', '');
-        </script>   
-        <script>
-            (function () {
-                'use strict'
-                const forms = document.querySelectorAll('.requires-validation')
-                Array.from(forms)
-                        .forEach(function (form) {
-                            form.addEventListener('submit', function (event) {
-                                if (!form.checkValidity()) {
-                                    event.preventDefault()
-                                    event.stopPropagation()
-                                }
-
-                                form.classList.add('was-validated')
-                            }, false)
-                        })
-            })()
-        </script>
 
 
+            function checkUsername() {
+                let username = document.getElementById('username').value;
+                const isDumlicate = usernames.some(element => {
+                    return element === username;
+                });
+                
+                if (isDumlicate) {
+                    document.getElementById('dumlicate_username').style.color = 'red';
+                    document.getElementById('dumlicate_username').innerHTML =
+                            'Username already exist!';
+                    document.getElementById('add-user').disabled = true;
+                    document.getElementById('add-user').style.opacity = (0.4);
+                } else if(username===''){
+                    document.getElementById('dumlicate_username').style.color = 'red';
+                    document.getElementById('dumlicate_username').innerHTML =
+                            'Please enter a username!';
+                    document.getElementById('add-user').disabled = true;
+                    document.getElementById('add-user').style.opacity = (0.4);
+                }else
+                {
+                    document.getElementById('dumlicate_username').style.color = 'green';
+                    document.getElementById('dumlicate_username').innerHTML =
+                            'Valid Username ';
+                    document.getElementById('add-user').disabled = false;
+                    document.getElementById('add-user').style.opacity = (1);
+                }
+            }
+        </script>  
+
+    </body>
 </html>
