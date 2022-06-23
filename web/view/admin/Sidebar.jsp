@@ -46,31 +46,31 @@
                     </a>
                 </li>
                 <li>
-                    <a href="dashboard" class="nav-link link-dark">
+                    <a href="dashboard" class="nav-link link-dark" id="dashboard_page">
                         <i class="fa-solid fa-gauge"></i>
                         Dashboard
                     </a>
                 </li>
                 <li>
-                    <a href="list_order" class="nav-link link-dark">
+                    <a href="list_order" class="nav-link link-dark" id="orders_page">
                         <i class="fa-solid fa-cart-shopping"></i>
                         Orders
                     </a>
                 </li>
                 <li>
-                    <a href="list_product" class="nav-link link-dark">
+                    <a href="list_product" class="nav-link link-dark" id="products_page">
                         <i class="fa-solid fa-bowl-food"></i>
                         Products
                     </a>
                 </li>
                 <li>
-                    <a href="list_category" class="nav-link active">
+                    <a href="list_category" class="nav-link link-dark" id="categories_page">
                         <i class="fa-solid fa-qrcode"></i>
                         Categories
                     </a>
                 </li>
                 <li>
-                    <a href="list_customer" class="nav-link link-dark">
+                    <a href="list_customer" class="nav-link link-dark" id="customers_page">
                         <i class="fa-solid fa-person-chalkboard"></i>
                         Customers
                     </a>
