@@ -20,7 +20,7 @@ import model.UserAccount;
  *
  * @author Tuan Phong
  */
-@WebServlet(name = "UserController", urlPatterns = {"/admin/user", "/admin/list_users"})
+@WebServlet(name = "UserController", urlPatterns = {"/admin/users", "/admin/list_users"})
 
 public class UserController extends HttpServlet {
 
@@ -78,14 +78,14 @@ public class UserController extends HttpServlet {
             throws ServletException, IOException {
         UserDAO userDAO = new UserDAO();
 
-        userDAO.addAccount(new UserAccount(
-                userDAO.addUser(
-                        new User(request.getParameter("firstname"),
-                                request.getParameter("lastname"),
-                                request.getParameter("phonenumber"),
-                                request.getParameter("email"),
-                                request.getParameter("role"),
-                                gender)),
+        userDAO.addAccount(
+                new UserAccount(userDAO.addUser(new User(
+                        request.getParameter("firstname"),
+                        request.getParameter("lastname"),
+                        request.getParameter("phonenumber"),
+                        request.getParameter("email"),
+                        request.getParameter("role"),
+                        gender)),
                 request.getParameter("username"),
                 request.getParameter("password")));
     }
