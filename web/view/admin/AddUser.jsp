@@ -61,7 +61,7 @@ Author     : khuat
                 <span class="text-info fa-duotone fa-user-group"></span>
                 Add new user </h3>
             <div class="form_container d-flex g-lg-6">
-                <form action="add_user" method="POST" class="row g-3 form-control" >
+                <form action="users" method="POST" class="row g-3 form-control" >
                     <div class="row">
                         <div class="col-md-6">
                             <label for="inputUsername" class="col-sm-2 col-form-label">Username</label>
@@ -83,7 +83,7 @@ Author     : khuat
 
                         <div class="col-md-6">
                             <label for="inputPhonenumber" class="col-form-label">Phone number</label>
-                            <input id="inputPhonenumber" name="phonenumber" type="tel" class="form-control" placeholder="0906111111" pattern="^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$" title="Invalid phone number in Vietnam (10 digits)" value=${phone} >
+                            <input id="inputPhonenumber" name="phonenumber" type="tel" required class="form-control" placeholder="0906111111" pattern="^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$" title="Invalid phone number in Vietnam (10 digits)" value=${phone} >
                         </div>
 
                         <div class="col-md-6">
@@ -112,7 +112,7 @@ Author     : khuat
                         </div>
                     </div>
                     <div class="text-center">
-                        <button class="btn btn-box btn-success - col-sm-2" id="add-user">
+                        <button class="btn btn-box btn-success - col-sm-2" type="submit" id="add-user" name="action" value="add_user">
                             Add User
                         </button>
                     </div>
