@@ -2,7 +2,9 @@ package DAO;
 
 import static com.sun.xml.ws.security.impl.policy.Constants.logger;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -374,33 +376,38 @@ public class UserDAO extends DAO {
                     + "           ,?\n"
                     + "           ,?\n"
                     + "           ,?\n"
-                    + "           ,?)\n";
-            ps = connection.prepareStatement(sql);
-
-            ps.setString(1, user.getFirstname());
-            ps.setString(2, user.getLastname() == null || user.getLastname().trim().length() == 0 ? "Your last name" : user.getLastname());
-            ps.setString(3, user.getPhonenumber());
-            ps.setString(4, user.getEmail());
-            ps.setString(5, user.getGender());
-            ps.setString(6, user.getAvatar());
-            ps.executeUpdate();
-
-            xSql = "SELECT SCOPE_IDENTITY()";
-            rs = ps.executeQuery();
-
-            if (rs.next()) {
-                userid = rs.getInt(1);
+                    + "           ,?)";
+            PreparedStatement statement = connection.prepareStatement(sql,  Statement.RETURN_GENERATED_KEYS);
+            
+            
+            statement.setString(1, user.getFirstname()== null || user.getFirstname().trim().length()==0 ? "Your first name" : user.getFirstname());
+            statement.setString(2, user.getLastname() == null || user.getLastname().trim().length()==0 ? "Your last name" : user.getLastname());
+            statement.setString(3, user.getPhonenumber());
+            statement.setString(4, user.getEmail());
+            statement.setBoolean(5, user.getGender().equals("male"));
+            statement.setString(6, user.getAvatar());
+            
+            statement.executeUpdate();
+            
+            ResultSet resultSet = statement.getGeneratedKeys();
+            
+            while (resultSet.next()) {                
+                userid = resultSet.getInt(1);
                 xSql = "INSERT INTO [users_role]\n"
-                        + "           ([users_id]\n"
-                        + "           ,[user_role])\n"
-                        + "     VALUES\n"
-                        + "           (?\n"
-                        + "           ,?)";
-                PreparedStatement prepareStatement = connection.prepareStatement(sql);
-                prepareStatement.setInt(1, userid);
-                prepareStatement.setString(2, user.getRole());
-                ps.executeUpdate();
+                    + "           ([users_id]\n"
+                    + "           ,[user_role])\n"
+                    + "     VALUES\n"
+                    + "           (?\n"
+                    + "           ,?)";
+            PreparedStatement prepareStatement = connection.prepareStatement(xSql);
+            prepareStatement.setInt(1, userid);
+            prepareStatement.setString(2, user.getRole());
+            prepareStatement.executeUpdate();
+           
             }
+
+            
+            
 
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
