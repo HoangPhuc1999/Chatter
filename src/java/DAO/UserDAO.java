@@ -359,7 +359,9 @@ public class UserDAO extends DAO {
         }
         return accounts;
     }
-
+    
+//DoTuanPhong: addUser dung de them user moi vao bang user va them role cua user vao bang row
+  //method tra ve user_id
     public int addUser(User user) {
         int userid = 0;
         try {
@@ -414,7 +416,7 @@ public class UserDAO extends DAO {
         }
         return userid;
     }
-
+//DoTuanPhong them account moi vao bang account
     public void addAccount(UserAccount account) {
         try {
             String sql = "INSERT INTO [users_account]\n"
