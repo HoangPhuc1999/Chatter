@@ -14,28 +14,24 @@ import java.util.ArrayList;
  * 
  */
 public class UserDetails extends UserAddress {
-    private Order order;
+    private ArrayList<Order> orders = new ArrayList<>();
+
+    public UserDetails(int users_id, String home_address, String district, String city, String role, String firstname, String lastname, String phonenumber, String email, String gender, String avatar, ArrayList<Item> cart) {
+        super(users_id, home_address, district, city, role, firstname, lastname, phonenumber, email, gender, avatar, cart);
+    }
 
     public UserDetails() {
     }
 
-    public UserDetails(Order order, int users_id, String home_address, String district, String city) {
-        super(users_id, home_address, district, city);
-        this.order = order;
+    public ArrayList<Order> getOrders() {
+        return orders;
     }
 
-    public UserDetails(Order order, int users_id, String home_address, String district, String city, String role, String firstname, String lastname, String phonenumber, String email, String gender, String avatar, ArrayList<Item> cart) {
-        super(users_id, home_address, district, city, role, firstname, lastname, phonenumber, email, gender, avatar, cart);
-        this.order = order;
+    public void setOrders(ArrayList<Order> orders) {
+        this.orders = orders;
     }
 
-    public Order getOrder() {
-        return order;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
-    }
+  
     
 
     
