@@ -5,19 +5,23 @@
 
 package controller.admin.user;
 
+import DAO.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.User;
+import model.UserAccount;
 
 /**
  *
  * @author Tuan Phong
  */
-@WebServlet(name="UpdateUserController", urlPatterns={"/admin/update_user","/admin/modify_cate"})
+@WebServlet(name="UpdateUserController", urlPatterns={"/admin/update_user","/admin/eidt_user"})
 
 public class UpdateController extends HttpServlet {
    
@@ -34,8 +38,13 @@ public class UpdateController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        
-    } 
+        UserDAO userDAO = new UserDAO();
+        ArrayList<User> users = userDAO.getUsersForAdminByName(request.getParameter("userpattern"));
+        ArrayList<UserAccount> accounts = userDAO.getAllAccounts();
+        request.setAttribute("users", users);
+        request.setAttribute("accounts", accounts);
+        request.getRequestDispatcher("../view/admin/EditUser.jsp").forward(request, response);
+    }
 
     /** 
      * Handles the HTTP <code>POST</code> method.
@@ -47,6 +56,7 @@ public class UpdateController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        
     }
 
     /** 
