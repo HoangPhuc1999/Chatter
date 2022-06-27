@@ -44,7 +44,7 @@ public class MenuControl extends HttpServlet {
         
         request.setAttribute("listP", list);
         request.setAttribute("listC", listC);
-        request.getRequestDispatcher("Menu.jsp").forward(request, response);
+        request.getRequestDispatcher("newMenu.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

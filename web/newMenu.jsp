@@ -1,6 +1,6 @@
 <%-- 
-    Document   : Menu
-    Created on : May 26, 2022, 1:11:00 AM
+    Document   : Index
+    Created on : May 26, 2022, 1:07:28 AM
     Author     : 84384
 --%>
 
@@ -41,7 +41,6 @@
     </head>
 
     <body class="sub_page">
-
         <div class="hero_area">
             <div class="bg-box">
                 <img src="images/hero-bg.jpg" alt="">
@@ -51,17 +50,19 @@
             <!-- end header section -->
         </div>
 
-        <!-- food section -->
+  <!-- end offer section -->
 
-        <section class="food_section layout_padding">
-            <div class="container">
-                <div class="heading_container heading_center">
-                    <h2>
-                        Our Menu
-                    </h2>
-                </div>
+  <!-- food section -->
 
-                <ul class="filters_menu">
+  <section class="food_section layout_padding-bottom">
+    <div class="container">
+      <div class="heading_container heading_center">
+        <h2>
+          Our Menu
+        </h2>
+      </div>
+
+      <ul class="filters_menu">
                     <c:forEach items="${listC}" var="o">
                         <li data-filter=".${o.cname}">${o.cname}</li>
                     </c:forEach>
@@ -154,21 +155,23 @@
                         </c:forEach>
                     </div>
                 </div>
-                <div class="btn-box">
-                    <a href="">
-                        View More
-                    </a>
-                </div>
-            </div>
-        </section>
+      <div class="btn-box">
+        <a href="menu">
+          View More
+        </a>
+      </div>
+    </div>
+  </section>
 
-<!--         end food section -->
 
-        <!-- footer section -->
-        
-        <!-- footer section -->
 
-            <!-- jQery -->
+  <!-- end client section -->
+  <jsp:include page="Footer.jsp" />
+  <!-- start footer section -->
+  
+  <!-- end footer section -->
+
+  <!-- jQery -->
   <script src="js/jquery-3.4.1.min.js"></script>
   <!-- popper js -->
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
@@ -184,7 +187,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
   <!-- custom js -->
   <script src="js/custom.js"></script>
-  
-    </body>
+ 
+</body>
 
 </html>
