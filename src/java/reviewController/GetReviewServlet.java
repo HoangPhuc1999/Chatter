@@ -32,7 +32,8 @@ public class GetReviewServlet extends HttpServlet {
         List<Review> list = new ArrayList<>();
         list = dao.getAllReviews();
         for (int i = 0; i < list.size(); i++) {
-            System.out.println(list.get(i).getRating());
+            String name = dao.getReviewAuthor(list.get(i).getUserId());
+            list.get(i).setName(name);
         }
         request.setAttribute("reviewlist", list);
         request.getRequestDispatcher("Review.jsp").forward(request, response);
