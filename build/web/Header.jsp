@@ -39,7 +39,7 @@
                         <a class="nav-link" href="Chatting.jsp">Chatting</a>
                     </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="Review.jsp">Review</a>
+                        <a class="nav-link" href="getreview">Review</a>
                     </li>
                 </ul>
                 <div class="user_option">
