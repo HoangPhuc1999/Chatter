@@ -11,16 +11,29 @@ import java.sql.Date;
  *
  * @author Hoang Phuc
  */
-public class ProductImage {
+public class ProductImage extends Product {
 
     private int id;
     private String imageUrl;
     private Date dateTime;
 
-    public int getId() {
-        return id;
+    public ProductImage(String imageUrl, Date dateTime, int id, String name, String image, double price, String title, String description, String cname) {
+        super(id, name, image, price, title, description, cname);
+        this.imageUrl = imageUrl;
+        this.dateTime = dateTime;
     }
 
+    public ProductImage() {
+    }
+    
+    
+
+    @Override
+    public int getId() {
+        return this.id;
+    }
+
+    @Override
     public void setId(int id) {
         this.id = id;
     }

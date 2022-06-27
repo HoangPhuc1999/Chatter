@@ -1,7 +1,9 @@
-
 package DAO;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -68,7 +70,11 @@ public class UserDAO extends DAO {
         return (x);
     }
 
-    //author: phong 
+    /**
+     * lay nguoi dung boi ten
+     * @param namePattern
+     * @return ArrayList<User>
+     */
     public ArrayList<User> getUsersForAdminByName(String namePattern) {
         ArrayList<User> users = new ArrayList<>();
         try {
@@ -87,7 +93,7 @@ public class UserDAO extends DAO {
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                
+
                 users.add(
                         new User(
                                 rs.getInt("users_id"),
@@ -96,10 +102,10 @@ public class UserDAO extends DAO {
                                 rs.getString("lastname"),
                                 rs.getString("phonenumber"),
                                 rs.getString("email"),
-                                rs.getBoolean("gender")? "Male" : "Female",
+                                rs.getBoolean("gender") ? "male" : "female",
                                 rs.getString("avatar"),
                                 null)
-                            );
+                );
 
             }
         } catch (SQLException ex) {
@@ -174,98 +180,67 @@ public class UserDAO extends DAO {
         } catch (Exception e) {
         }
     }
-    //author: an 
-    //lay tat ca info cua user tu 4 bang
-    //state: insert xong bang users thi dung lai
-    public void getAllUserInfoById(String users_id) {
-        String query = "Select * from users where"
-                + "users_id=?";
-        String query2 = "Select * from users_role where"
-                + "users_id=?";
-        String query3 = "Select * from users_account where"
-                + "users_id=?";
-        String query4 = "Select * from users_address where"
-                + "users_id=?";
-        try {
-            
 
-            ps.close();
-            rs.close();
-
-        } catch (Exception e) {
-        }
-    }
-    
     //author: an 
     //lay user role = usersid 
     public UserRole getUserRoleById(int users_id) {
-        String query = "Select * from users_role where"
-                + "users_id=?";
+        String query = "Select * from users_role where users_id=?";
         try {
             ps = con.prepareStatement(query);
             ps.setInt(1, users_id);
-            ps.executeQuery();
-            ps.clearParameters();
+            rs = ps.executeQuery();
             while (rs.next()) {
-                return new UserRole(rs.getInt(1),rs.getString(2));
+                return new UserRole(rs.getInt(1), rs.getString(2));
             }
             ps.close();
             rs.close();
 
         } catch (Exception e) {
-            
+
         }
         return null;
     }
-    
+
     //author: an 
     //lay user account = usersid 
     public UserAccount getUserAccountById(int users_id) {
-        String query = "Select * from users_account where"
-                + "users_id=?";
+        String query = "Select * from users_account where users_id =?";
         try {
             ps = con.prepareStatement(query);
             ps.setInt(1, users_id);
-            ps.executeQuery();
-            ps.clearParameters();
+            rs = ps.executeQuery();
             while (rs.next()) {
-                return new UserAccount(rs.getInt(1),rs.getString(2),rs.getString(3));
+                return new UserAccount(rs.getInt(1), rs.getString(2), rs.getString(3));
             }
             ps.close();
             rs.close();
 
         } catch (Exception e) {
-            
+            System.out.println(e.toString());
         }
         return null;
     }
-    
+
     //author: an 
     //lay user address = usersid 
     public UserAddress getUserAddressById(int users_id) {
-        String query = "Select * from users_address where"
-                + "users_id=?";
+        String query = "Select * from users_address where users_id=?";
         try {
             ps = con.prepareStatement(query);
             ps.setInt(1, users_id);
-            ps.executeQuery();
-            ps.clearParameters();
+            rs = ps.executeQuery();
             while (rs.next()) {
-                return new UserAddress(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4));
+                return new UserAddress(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4));
             }
             ps.close();
             rs.close();
 
         } catch (Exception e) {
-            
+
         }
         return null;
     }
-    
-    
 
-
-    
     //author: an 
     //Lay users_id moi nhat sau khi insert user
     //old
@@ -314,14 +289,13 @@ public class UserDAO extends DAO {
         }
         return null;
     }
-    
-    
+
     //check account username va email xem co trung k 
     //author : an 
-    public Boolean checkAccountAndEmailMatch(String user,String email) {
+    public Boolean checkAccountAndEmailMatch(String user, String email) {
         String query = "select * from users_account a Join users u "
                 + "On u.users_id = a.users_id\n"
-                + "where(username = ? and email = ?)\n" ;
+                + "where(username = ? and email = ?)\n";
         try {
             ps = con.prepareStatement(query);
             ps.setString(1, user);
@@ -334,8 +308,6 @@ public class UserDAO extends DAO {
         }
         return false;
     }
-    
-    
 
     //reset mat khau table UserAccount 
     //Created by An at 27/5
@@ -352,7 +324,6 @@ public class UserDAO extends DAO {
 
         }
     }
-    
 
     //lay tat ca user trong bang users 
     //author: an 
@@ -372,15 +343,147 @@ public class UserDAO extends DAO {
                         rs.getString(7)));
             }
         } catch (Exception e) {
-            
+
         }
         return allUserList;
     }
-  
+
+    /**
+     * 
+     * Do Tuan Phong lay du lieu cua user voi nhieu order
+     * chua xong
+     *
+     * @param userid
+     * @return 
+     */
+    public UserDetails getUserById(int userid) {
+        String query = "SELECT *\n"
+                + "FROM users u LEFT JOIN users_role ur on u.users_id = ur.users_id\n"
+                + "RIGHT JOIN users_account uac on u.users_id = uac.users_id\n"
+                + "LEFT JOIN users_address uar on u.users_id = uar.users_id\n"
+                + "LEFT JOIN orders o on u.users_id = o.order_by\n"
+                + "LEFT JOIN orders_details od on o.order_id = od.order_id\n"
+                + "LEFT JOIN products p on p.product_id  = od.order_product_id\n"
+                + "WHERE u.users_id = ?";
+       Order order = new Order();
+       UserAddress address = new UserAddress();
+        try {
+            ps = con.prepareStatement(query);
+
+            ps.setInt(1, userid);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return new UserDetails();
+            }
+            
+        } catch (Exception ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+        return null;
+    }
+
+    public ArrayList<UserAccount> getAllAccounts() {
+        ArrayList<UserAccount> accounts = new ArrayList<>();
+        String query = "select * from users_account";
+        try {
+            ps = con.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                accounts.add(new UserAccount(rs.getString(2), rs.getString(3)));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return accounts;
+    }
+
+    /**
+     * DoTuanPhong: addUser dung de them user moi vao bang user va them role cua
+     * user vao bang row method tra ve user_id
+     *
+     * @param user
+     * @return userid vua moi duoc them vao
+     */
+    public int addUser(User user) {
+        int userid = 0;
+        try {
+            String sql = "INSERT INTO [users]\n"
+                    + "           ([firstname]\n"
+                    + "           ,[lastname]\n"
+                    + "           ,[phonenumber]\n"
+                    + "           ,[email]\n"
+                    + "           ,[gender]\n"
+                    + "           ,[avatar])\n"
+                    + "     VALUES\n"
+                    + "           (?\n"
+                    + "           ,?\n"
+                    + "           ,?\n"
+                    + "           ,?\n"
+                    + "           ,?\n"
+                    + "           ,?)";
+            PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+            statement.setString(1, user.getFirstname() == null || user.getFirstname().trim().length() == 0 ? "Your first name" : user.getFirstname());
+            statement.setString(2, user.getLastname() == null || user.getLastname().trim().length() == 0 ? "Your last name" : user.getLastname());
+            statement.setString(3, user.getPhonenumber());
+            statement.setString(4, user.getEmail());
+            statement.setBoolean(5, user.getGender().equals("male"));
+            statement.setString(6, user.getAvatar());
+
+            statement.executeUpdate();
+
+            ResultSet resultSet = statement.getGeneratedKeys();
+
+            while (resultSet.next()) {
+                userid = resultSet.getInt(1);
+                xSql = "INSERT INTO [users_role]\n"
+                        + "           ([users_id]\n"
+                        + "           ,[user_role])\n"
+                        + "     VALUES\n"
+                        + "           (?\n"
+                        + "           ,?)";
+                PreparedStatement prepareStatement = connection.prepareStatement(xSql);
+                prepareStatement.setInt(1, userid);
+                prepareStatement.setString(2, user.getRole());
+                prepareStatement.executeUpdate();
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return userid;
+    }
+
+    /**
+     * DoTuanPhong them account moi vao bang account
+     *
+     * @param account
+     */
+    public void addAccount(UserAccount account) {
+        try {
+            String sql = "INSERT INTO [users_account]\n"
+                    + "           ([users_id]\n"
+                    + "           ,[username]\n"
+                    + "           ,[password])\n"
+                    + "     VALUES\n"
+                    + "           (?\n"
+                    + "           ,?\n"
+                    + "           ,?)";
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, account.getUsers_id());
+            ps.setString(2, account.getUsername());
+            ps.setString(3, account.getPassword());
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     public static void main(String[] args) throws SQLException {
         UserDAO dao = new UserDAO();
-        UserAccount a = new UserAccount();
-        a = dao.checkAccountExist("user1");
+//        UserAccount a = new UserAccount();
+//        a = dao.checkAccountExist("user1");
 
 //        //check sign up
 //        UserAccount newAcc = new UserAccount("x","x");  
@@ -388,13 +491,19 @@ public class UserDAO extends DAO {
 //        User newAccUser = new User("femmmmm","gqw","0675565454","user3@fpt.edu.vn","0",null);
 //        
 //        dao.singup(newAccUser,newAcc,newAccAddress); //them user
-        
-        
-       ArrayList<User> b = dao.getAllUsers();
-        
-        int x = dao.getUserID();
-
-        System.out.println(b);
+//        
+//        
+//       ArrayList<UserAccount> b = dao.getAllAccounts();
+//        for (UserAccount userAccount : b) {
+//            logger.log(Level.SEVERE, userAccount.getUsername());
+//        }
+//        
+//        int x = dao.getUserID();
+//        
+//        System.out.println(dao.getUserAddressById(1));
+//        System.out.println(dao.getUserAccountById(1));
+//        System.out.println(dao.getUserRoleById(1));
+//        System.out.println(dao.getUserFromId(1));
     }
 
 }

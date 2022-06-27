@@ -28,7 +28,7 @@
         <link href="../css/responsive.css" rel="stylesheet" />
         <link href="../css/adminstyle.css" rel="stylesheet" />
         <style>
-            
+
             .fa-lg {
                 font-size: 1.25em;
                 line-height: 1em !important;
@@ -108,14 +108,16 @@
 
         <div class="main_content row">
             <!-- Button trigger modal -->
-            <div class="col-sm-3">
+            <div class="col-sm-3 g-2">
                 <jsp:include page="Sidebar.jsp" />
 
             </div>   
-            <div class="col-sm-9">
-                <h3 class="text-warning p-2 fa-solid fa-qrcode">  Categories</h3>
+            <div class="col-sm-9 overflow-hidden row gy-2">
+                <h3 class="text-warning fa-solid fa-qrcode">  Categories</h3>
+
                 <!--add category modal-->
-                <div class=" p-3 col-sm-12">
+
+                <div class="row-cols-3 row-cols-lg-5 g-2 g-lg-4">
                     <div class="col-sm-3 card p-3">
                         <button type="button" class="btn btn-box btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
                             <i class="fa fa-plus-circle fa-lg" aria-hidden="true"></i> Add category
@@ -147,6 +149,8 @@
                         </div>
                     </div>
                 </div>
+                <!--end modal-->
+
                 <div class="col-md-6 card p-3">
                     <div class="card-header">List Categories</div>
 
@@ -168,7 +172,7 @@
                                     <td>
                                         <input type="hidden" name="cid" value="${category.cid}"/>
                                         <a class="btn-outline-info btn-box btn-lg fa fa-pencil-square-o fa-lg viewmode${category.cid}" onclick="showEditmode(${category.cid});
-                                                    hideViewmode(${category.cid});"/>
+                                                hideViewmode(${category.cid});"/>
                                         <a class="btn-outline-danger btn-box btn-lg fa fa-trash fa-lg viewmode${category.cid}"  href="#" onclick="deleteCategory(${category.cid})"></a>
                                         <input class="btn btn-outline-success btn-sm editmode${category.cid}" type="submit"  value="Save">
                                         <input class="btn btn-outline-secondary btn-sm editmode${category.cid}" type="button" onclick="cancelEdit(${category.cid}, '${category.cname}');" value="Cancel"/>
@@ -190,6 +194,8 @@
                     hideEditmode(cids[i]);
                 }
 
+                document.getElementById('categories_page').classList.add('active');
+                document.getElementById('categories_page').className.replace('link-dark', '');
 
 
                 function validate_category() {

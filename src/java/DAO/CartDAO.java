@@ -10,13 +10,28 @@ import java.util.ArrayList;
 import java.util.List;
 import model.Item;
 import model.Product;
+import model.User;
 
 /**
  *
  * @author KQuangAn
  */
 public class CartDAO extends MyDAO{
-  
+    
+    //xoa gio hang sau khi mua va da them vao order details
+    //author an 
+    public void deleteCartAfterBuy(User a){
+       String query ="delete from users_cart WHERE users_id=?";
+       try{
+       ps = con.prepareStatement(query);
+       ps.setInt(1, a.getUsers_id());
+       ps.executeUpdate();
+       }
+       catch (Exception e) {
+            System.out.println(e.toString());
+        }
+        
+    }
     //them gio hang cua nguoi dung vao bang user cart moi khi nguoi dung them mon hang
     //neu da co thi update 
     //author an 

@@ -33,6 +33,9 @@ public class ReviewServlet extends HttpServlet {
         String review = request.getParameter("reviewtext");
         String reviewtitle = request.getParameter("reviewtitle");
         String rating = request.getParameter("rate");
+        if (rating == null) {
+            rating = "1";
+        }
         Date date = new Date();
         java.sql.Date sqlDate = new java.sql.Date(date.getTime());
         if (x == null) {

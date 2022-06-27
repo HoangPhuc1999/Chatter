@@ -54,6 +54,10 @@ public class CartControl extends HttpServlet {
 			throws ServletException, IOException {
                 CartDAO cdao = new CartDAO();
                 User a = (User) request.getSession().getAttribute("user");
+                if(a==null){
+                    request.setAttribute("message","Ban chua dang nhap!");
+                    request.getRequestDispatcher("Login.jsp").forward(request,response);
+                }
                 ArrayList<Item> cart = (ArrayList<Item>) cdao.getCart(a.getUsers_id()); //get cart of user in database
                 a.setCart(cart);
 		request.getRequestDispatcher("Cart.jsp").forward(request, response);
@@ -64,9 +68,9 @@ public class CartControl extends HttpServlet {
 			throws ServletException, IOException {
                 User a = (User) request.getSession().getAttribute("user");
                 if(a==null){
-                    request.setAttribute("thongbao","Ban chua dang nhap!");
-                    response.sendRedirect("home");
-                }   
+                    request.setAttribute("message","Ban chua dang nhap!");
+                    request.getRequestDispatcher("Login.jsp").forward(request,response);
+                } 
 		ArrayList<Item> cart = (ArrayList<Item>) a.getCart();
 		int index = isExisting(request.getParameter("id"), cart);
 		//cart.remove(index);

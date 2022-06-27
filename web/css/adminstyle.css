@@ -8,10 +8,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 */
 
 body {
-    background-color: #121819;
-    background-attachment: fixed;
-    background-size: auto;
+    background-image: url("https://img.freepik.com/free-vector/white-technology-background_23-2148390334.jpg?w=1000") !important;
+    background-size: cover;
 }
 .main_content {
-    background: #e2feff !important;
+    background-image: url("https://img.freepik.com/free-vector/white-technology-background_23-2148390334.jpg?w=1000") !important;
 }

@@ -5,15 +5,18 @@
  */
 package model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author khuat
  */
-public class UserAddress {
+public class UserAddress extends User{
     private int users_id;
     private String home_address;
     private String district;
     private String city;
+    
 
     public UserAddress(int users_id, String home_address, String district, String city) {
         this.users_id = users_id;
@@ -27,6 +30,17 @@ public class UserAddress {
         this.district = district;
         this.city = city;
     }
+
+    public UserAddress(int users_id, String home_address, String district, String city, String role, String firstname, String lastname, String phonenumber, String email, String gender, String avatar, ArrayList<Item> cart) {
+        super(users_id, role, firstname, lastname, phonenumber, email, gender, avatar, cart);
+        this.home_address = home_address;
+        this.district = district;
+        this.city = city;
+    }
+
+    public UserAddress() {
+    }
+    
     
 
     public int getUsers_id() {

@@ -5,6 +5,7 @@
         <group>
             <file>file:/D:/Chatter/ChatterFinal/src/java/signinController/LoginServlet.java</file>
             <file>file:/D:/Chatter/ChatterFinal/src/java/signinController/SignUpServlet.java</file>
+            <file>file:/D:/Chatter/ChatterFinal/build/web/view/admin/ListCategory.jsp</file>
             <file>file:/D:/Chatter/ChatterFinal/web/ProductDetail.jsp</file>
             <file>file:/D:/Chatter/ChatterFinal/src/java/DAO/UserDAO.java</file>
             <file>file:/D:/Chatter/ChatterFinal/src/java/reviewController/ReviewServlet.java</file>

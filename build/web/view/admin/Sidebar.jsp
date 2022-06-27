@@ -9,26 +9,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <script src="https://kit.fontawesome.com/a141f28961.js" crossorigin="anonymous"></script>
-
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Admin menu</title>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
-
-        <!--owl slider stylesheet -->
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
-        <!-- nice select  -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" integrity="sha512-CruCP+TD3yXzlvvijET8wV5WxxEh5H8P4cmz0RFbKK6FlZ2sYl3AEsKlLPHbniXKSrDdFewhbmBK5skbdsASbQ==" crossorigin="anonymous" />
-  
-
-        <!-- Custom styles for this template -->
-        <link href="../css/style.css" rel="stylesheet" />
-        <!-- responsive style -->
-        <link href="../css/responsive.css" rel="stylesheet" />
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        
     </head>
     <body>
         <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
@@ -46,31 +30,31 @@
                     </a>
                 </li>
                 <li>
-                    <a href="dashboard" class="nav-link link-dark">
+                    <a href="dashboard" class="nav-link link-dark" id="dashboard_page">
                         <i class="fa-solid fa-gauge"></i>
                         Dashboard
                     </a>
                 </li>
                 <li>
-                    <a href="list_order" class="nav-link link-dark">
+                    <a href="list_order" class="nav-link link-dark" id="orders_page">
                         <i class="fa-solid fa-cart-shopping"></i>
                         Orders
                     </a>
                 </li>
                 <li>
-                    <a href="list_product" class="nav-link link-dark">
+                    <a href="list_product" class="nav-link link-dark" id="products_page">
                         <i class="fa-solid fa-bowl-food"></i>
                         Products
                     </a>
                 </li>
                 <li>
-                    <a href="list_category" class="nav-link active">
+                    <a href="list_category" class="nav-link link-dark" id="categories_page">
                         <i class="fa-solid fa-qrcode"></i>
                         Categories
                     </a>
                 </li>
                 <li>
-                    <a href="list_customer" class="nav-link link-dark">
+                    <a href="list_customer" class="nav-link link-dark" id="customers_page">
                         <i class="fa-solid fa-person-chalkboard"></i>
                         Customers
                     </a>
