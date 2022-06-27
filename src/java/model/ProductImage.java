@@ -21,6 +21,7 @@ public class ProductImage extends Product {
         super(id, name, image, price, title, description, cname);
         this.imageUrl = imageUrl;
         this.dateTime = dateTime;
+        this.id = id;
     }
 
     public ProductImage() {
@@ -36,6 +37,7 @@ public class ProductImage extends Product {
     @Override
     public void setId(int id) {
         this.id = id;
+        super.setId(id);
     }
 
     public String getImageUrl() {
