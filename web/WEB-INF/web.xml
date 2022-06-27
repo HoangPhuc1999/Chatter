@@ -44,6 +44,10 @@
         <servlet-name>ReviewServlet</servlet-name>
         <servlet-class>reviewController.ReviewServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GetReviewServlet</servlet-name>
+        <servlet-class>reviewController.GetReviewServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -74,6 +78,10 @@
     <servlet-mapping>
         <servlet-name>ReviewServlet</servlet-name>
         <url-pattern>/review</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetReviewServlet</servlet-name>
+        <url-pattern>/getreview</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -5,6 +5,7 @@
  */
 package reviewController;
 
+import DAO.ProductDAO;
 import DAO.ReviewDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.Product;
 import model.Review;
 import model.User;
 
@@ -29,10 +31,15 @@ public class ReviewServlet extends HttpServlet {
         PrintWriter pr = response.getWriter();
         HttpSession session = request.getSession();
         String id = request.getParameter("id");
-        session.setAttribute("id", id);
+        ProductDAO dao = new ProductDAO();
+        Product p = dao.getProductById(id);
         User x = (User) session.getAttribute("user");
         String review = request.getParameter("reviewtext");
+        String reviewtitle = request.getParameter("reviewtitle");
         String rating = request.getParameter("rate");
+        if (rating == null) {
+            rating = "1";
+        }
         Date date = new Date();
         java.sql.Date sqlDate = new java.sql.Date(date.getTime());
         if (x == null) {
@@ -43,11 +50,11 @@ public class ReviewServlet extends HttpServlet {
             Review reviewItem = new Review();
             reviewItem.setDate(sqlDate);
             reviewItem.setUserId(x.getUsers_id());
-            reviewItem.setTitle("my review");
+            reviewItem.setTitle(reviewtitle);
             reviewItem.setRating(rating);
             reviewItem.setReviewContent(review);
-            reviewItem.setReviewImageUrl("urla");
-            reviewItem.setProductId(2);
+            reviewItem.setReviewImageUrl(p.getImage());
+            reviewItem.setProductId(Integer.parseInt(id));
             ReviewDAO reviewDao = new ReviewDAO();
             reviewDao.postReview(reviewItem);
             session.setAttribute("reviewmessage", "Review Submitted");
