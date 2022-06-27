@@ -19,11 +19,14 @@ public class Order extends ProductImage{
     private Date orderdate;
 
     public Order(int orderid, int orderaid, int orderpid, int orderamount, Date orderdate) {
+        super();
         this.orderid = orderid;
         this.orderaid = orderaid;
         this.orderpid = orderpid;
         this.orderamount = orderamount;
         this.orderdate = orderdate;
+        super.setId(orderpid);
+        
     }
 
     public Order(int orderid, int orderaid, int orderpid, int orderamount, Date orderdate, String imageUrl, Date dateTime, int id, String name, String image, double price, String title, String description, String cname) {
@@ -33,6 +36,8 @@ public class Order extends ProductImage{
         this.orderpid = orderpid;
         this.orderamount = orderamount;
         this.orderdate = orderdate;
+        
+        super.setId(orderpid);
     }
 
     public Order() {
@@ -63,6 +68,8 @@ public class Order extends ProductImage{
 
     public void setOrderpid(int orderpid) {
         this.orderpid = orderpid;
+        
+        super.setId(orderpid);
     }
 
     public int getOrderamount() {

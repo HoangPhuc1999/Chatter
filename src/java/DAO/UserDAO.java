@@ -72,6 +72,7 @@ public class UserDAO extends DAO {
 
     /**
      * lay nguoi dung boi ten
+     *
      * @param namePattern
      * @return ArrayList<User>
      */
@@ -348,41 +349,6 @@ public class UserDAO extends DAO {
         return allUserList;
     }
 
-    /**
-     * 
-     * Do Tuan Phong lay du lieu cua user voi nhieu order
-     * chua xong
-     *
-     * @param userid
-     * @return 
-     */
-    public UserDetails getUserById(int userid) {
-        String query = "SELECT *\n"
-                + "FROM users u LEFT JOIN users_role ur on u.users_id = ur.users_id\n"
-                + "RIGHT JOIN users_account uac on u.users_id = uac.users_id\n"
-                + "LEFT JOIN users_address uar on u.users_id = uar.users_id\n"
-                + "LEFT JOIN orders o on u.users_id = o.order_by\n"
-                + "LEFT JOIN orders_details od on o.order_id = od.order_id\n"
-                + "LEFT JOIN products p on p.product_id  = od.order_product_id\n"
-                + "WHERE u.users_id = ?";
-       Order order = new Order();
-       UserAddress address = new UserAddress();
-        try {
-            ps = con.prepareStatement(query);
-
-            ps.setInt(1, userid);
-            rs = ps.executeQuery();
-            if (rs.next()) {
-                return new UserDetails();
-            }
-            
-        } catch (Exception ex) {
-            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
-
-        }
-        return null;
-    }
-
     public ArrayList<UserAccount> getAllAccounts() {
         ArrayList<UserAccount> accounts = new ArrayList<>();
         String query = "select * from users_account";
@@ -400,10 +366,10 @@ public class UserDAO extends DAO {
 
     /**
      * DoTuanPhong: addUser dung de them user moi vao bang user va them role cua
-     * user vao bang row method tra ve user_id
+     * user vao bang row
      *
      * @param user
-     * @return userid vua moi duoc them vao
+     * @return userid vua moi duoc tao ra
      */
     public int addUser(User user) {
         int userid = 0;
@@ -478,6 +444,92 @@ public class UserDAO extends DAO {
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    /**
+     *
+     * Do Tuan Phong: lay du lieu day du cua user bang userid
+     * chac la xong, chua check
+     *
+     * @param userid
+     * @return UserDetails
+     */
+    public UserDetails getUserDetailsById(int userid) {
+        String query = "SELECT *\n"
+                + "FROM users u LEFT JOIN users_role ur on u.users_id = ur.users_id\n"
+                + "RIGHT JOIN users_account uac on u.users_id = uac.users_id\n"
+                + "LEFT JOIN users_address uar on u.users_id = uar.users_id\n"
+                + "LEFT JOIN orders o on u.users_id = o.order_by\n"
+                + "LEFT JOIN orders_details od on o.order_id = od.order_id\n"
+                + "LEFT JOIN products p on p.product_id  = od.order_product_id\n"
+                + "LEFT JOIN products_image pi on pi.product_id = p.product_id\n"
+                + "WHERE u.users_id = ?";
+
+        ArrayList<Order> orders = new ArrayList<>();
+        Order order = new Order();
+        UserDetails details = new UserDetails();
+        
+        try {
+            ps = con.prepareStatement(query);
+
+            ps.setInt(1, userid);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                if (rs.getInt(1) == 0) {
+                    return null;
+                } else {
+                    details.setUsers_id(userid);
+                    details.setFirstname(rs.getString("firstname"));
+                    details.setLastname(rs.getString("lastname"));
+                    details.setPhonenumber(rs.getString("phonenumber"));
+                    details.setEmail(rs.getString("email"));
+                    details.setGender(rs.getBoolean("gender") ? "male" : "female");
+                    details.setAvatar(rs.getString("avatar"));
+                    details.setRole(rs.getString("user_role"));
+                    details.setAccount(new UserAccount(userid, rs.getString("username"), null));
+                    details.setHome_address(rs.getString("home_address"));
+                    details.setDistrict(rs.getString("district"));
+                    details.setCity("city");
+                    
+                    order.setOrderid(rs.getInt(17));
+                    order.setOrderpid(rs.getInt("order_product_id"));
+                    order.setOrderamount(rs.getInt("order_amount"));
+                    order.setOrderdate(rs.getDate("order_date"));
+                    order.setName(rs.getString("product_name"));
+                    order.setPrice(rs.getDouble("product_price"));
+                    order.setTitle(rs.getString("product_title"));
+                    order.setDescription(rs.getString("product_description"));
+                    order.setImageUrl(rs.getString("product_image_path"));
+                    order.setDate(rs.getDate("modified_at"));
+                    
+                    orders.add(order);
+                    details.setOrders(orders);
+
+                }
+                while (rs.next()) {
+                    Order order1 = new Order();
+                    order1.setOrderid(rs.getInt(17));
+                    order1.setOrderpid(rs.getInt("order_product_id"));
+                    order1.setOrderamount(rs.getInt("order_amount"));
+                    order1.setOrderdate(rs.getDate("order_date"));
+                    order1.setName(rs.getString("product_name"));
+                    order1.setPrice(rs.getDouble("product_price"));
+                    order1.setTitle(rs.getString("product_title"));
+                    order1.setDescription(rs.getString("product_description"));
+                    order1.setImageUrl(rs.getString("product_image_path"));
+                    order1.setDate(rs.getDate("modified_at"));
+                    
+                    orders.add(order1);
+                    details.setOrders(orders);
+                }
+                return details;
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+        return null;
     }
 
     public static void main(String[] args) throws SQLException {
