@@ -24,7 +24,7 @@ import model.UserAccount;
 
 public class UserController extends HttpServlet {
 
-    private static final String gender = "male";
+    public static final String GENDER = "male";
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -43,7 +43,8 @@ public class UserController extends HttpServlet {
         ArrayList<UserAccount> accounts = userDAO.getAllAccounts();
         request.setAttribute("users", users);
         request.setAttribute("accounts", accounts);
-        request.getRequestDispatcher("../view/admin/AddUser.jsp").forward(request, response);
+        
+        request.getRequestDispatcher("../view/admin/Users.jsp").forward(request, response);
     }
 
     /**
@@ -85,7 +86,7 @@ public class UserController extends HttpServlet {
                         request.getParameter("phonenumber"),
                         request.getParameter("email"),
                         request.getParameter("role"),
-                        gender)),
+                        GENDER)),
                 request.getParameter("username"),
                 request.getParameter("password")));
     }

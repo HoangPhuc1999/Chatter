@@ -1,6 +1,5 @@
 package DAO;
 
-import static com.sun.xml.ws.security.impl.policy.Constants.logger;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -71,7 +70,11 @@ public class UserDAO extends DAO {
         return (x);
     }
 
-    //author: phong 
+    /**
+     * lay nguoi dung boi ten
+     * @param namePattern
+     * @return ArrayList<User>
+     */
     public ArrayList<User> getUsersForAdminByName(String namePattern) {
         ArrayList<User> users = new ArrayList<>();
         try {
@@ -99,7 +102,7 @@ public class UserDAO extends DAO {
                                 rs.getString("lastname"),
                                 rs.getString("phonenumber"),
                                 rs.getString("email"),
-                                rs.getBoolean("gender") ? "Male" : "Female",
+                                rs.getBoolean("gender") ? "male" : "female",
                                 rs.getString("avatar"),
                                 null)
                 );
@@ -345,6 +348,41 @@ public class UserDAO extends DAO {
         return allUserList;
     }
 
+    /**
+     * 
+     * Do Tuan Phong lay du lieu cua user voi nhieu order
+     * chua xong
+     *
+     * @param userid
+     * @return 
+     */
+    public UserDetails getUserById(int userid) {
+        String query = "SELECT *\n"
+                + "FROM users u LEFT JOIN users_role ur on u.users_id = ur.users_id\n"
+                + "RIGHT JOIN users_account uac on u.users_id = uac.users_id\n"
+                + "LEFT JOIN users_address uar on u.users_id = uar.users_id\n"
+                + "LEFT JOIN orders o on u.users_id = o.order_by\n"
+                + "LEFT JOIN orders_details od on o.order_id = od.order_id\n"
+                + "LEFT JOIN products p on p.product_id  = od.order_product_id\n"
+                + "WHERE u.users_id = ?";
+       Order order = new Order();
+       UserAddress address = new UserAddress();
+        try {
+            ps = con.prepareStatement(query);
+
+            ps.setInt(1, userid);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return new UserDetails();
+            }
+            
+        } catch (Exception ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+        return null;
+    }
+
     public ArrayList<UserAccount> getAllAccounts() {
         ArrayList<UserAccount> accounts = new ArrayList<>();
         String query = "select * from users_account";
@@ -359,9 +397,14 @@ public class UserDAO extends DAO {
         }
         return accounts;
     }
-    
-//DoTuanPhong: addUser dung de them user moi vao bang user va them role cua user vao bang row
-  //method tra ve user_id
+
+    /**
+     * DoTuanPhong: addUser dung de them user moi vao bang user va them role cua
+     * user vao bang row method tra ve user_id
+     *
+     * @param user
+     * @return userid vua moi duoc them vao
+     */
     public int addUser(User user) {
         int userid = 0;
         try {
@@ -379,44 +422,44 @@ public class UserDAO extends DAO {
                     + "           ,?\n"
                     + "           ,?\n"
                     + "           ,?)";
-            PreparedStatement statement = connection.prepareStatement(sql,  Statement.RETURN_GENERATED_KEYS);
-            
-            
-            statement.setString(1, user.getFirstname()== null || user.getFirstname().trim().length()==0 ? "Your first name" : user.getFirstname());
-            statement.setString(2, user.getLastname() == null || user.getLastname().trim().length()==0 ? "Your last name" : user.getLastname());
+            PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+            statement.setString(1, user.getFirstname() == null || user.getFirstname().trim().length() == 0 ? "Your first name" : user.getFirstname());
+            statement.setString(2, user.getLastname() == null || user.getLastname().trim().length() == 0 ? "Your last name" : user.getLastname());
             statement.setString(3, user.getPhonenumber());
             statement.setString(4, user.getEmail());
             statement.setBoolean(5, user.getGender().equals("male"));
             statement.setString(6, user.getAvatar());
-            
+
             statement.executeUpdate();
-            
+
             ResultSet resultSet = statement.getGeneratedKeys();
-            
-            while (resultSet.next()) {                
+
+            while (resultSet.next()) {
                 userid = resultSet.getInt(1);
                 xSql = "INSERT INTO [users_role]\n"
-                    + "           ([users_id]\n"
-                    + "           ,[user_role])\n"
-                    + "     VALUES\n"
-                    + "           (?\n"
-                    + "           ,?)";
-            PreparedStatement prepareStatement = connection.prepareStatement(xSql);
-            prepareStatement.setInt(1, userid);
-            prepareStatement.setString(2, user.getRole());
-            prepareStatement.executeUpdate();
-           
+                        + "           ([users_id]\n"
+                        + "           ,[user_role])\n"
+                        + "     VALUES\n"
+                        + "           (?\n"
+                        + "           ,?)";
+                PreparedStatement prepareStatement = connection.prepareStatement(xSql);
+                prepareStatement.setInt(1, userid);
+                prepareStatement.setString(2, user.getRole());
+                prepareStatement.executeUpdate();
+
             }
-
-            
-            
-
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return userid;
     }
-//DoTuanPhong them account moi vao bang account
+
+    /**
+     * DoTuanPhong them account moi vao bang account
+     *
+     * @param account
+     */
     public void addAccount(UserAccount account) {
         try {
             String sql = "INSERT INTO [users_account]\n"

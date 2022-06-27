@@ -11,7 +11,7 @@ import java.sql.Date;
  *
  * @author khuat
  */
-public class Order {
+public class Order extends ProductImage{
     private int orderid; 
     private int orderaid;
     private int orderpid;
@@ -25,6 +25,21 @@ public class Order {
         this.orderamount = orderamount;
         this.orderdate = orderdate;
     }
+
+    public Order(int orderid, int orderaid, int orderpid, int orderamount, Date orderdate, String imageUrl, Date dateTime, int id, String name, String image, double price, String title, String description, String cname) {
+        super(imageUrl, dateTime, id, name, image, price, title, description, cname);
+        this.orderid = orderid;
+        this.orderaid = orderaid;
+        this.orderpid = orderpid;
+        this.orderamount = orderamount;
+        this.orderdate = orderdate;
+    }
+
+    public Order() {
+    }
+    
+
+    
 
     public int getOrderid() {
         return orderid;
@@ -65,7 +80,7 @@ public class Order {
     public void setOrderdate(Date orderdate) {
         this.orderdate = orderdate;
     }
-
+    
     @Override
     public String toString() {
         return "Order{" + "orderid=" + orderid + ", orderaid=" + orderaid + ", orderpid=" + orderpid + ", orderamount=" + orderamount + ", orderdate=" + orderdate + '}';

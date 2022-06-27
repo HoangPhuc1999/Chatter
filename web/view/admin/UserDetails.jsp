@@ -50,8 +50,6 @@
 
         </div>   
 
-
-
         <div class="col-sm-9 gy-2">
             <h3 class="text-info p-3" >
                 <span class="text-info fa-duotone fa-user-group"></span>

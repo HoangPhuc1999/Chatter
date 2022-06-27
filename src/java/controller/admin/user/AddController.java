@@ -21,11 +21,25 @@ import model.UserAccount;
  *
  * @author Tuan Phong
  */
-@WebServlet(name="UpdateUserController", urlPatterns={"/admin/update_user","/admin/eidt_user"})
-
-public class UpdateController extends HttpServlet {
+@WebServlet(name="AddUserController", urlPatterns={"/admin/add_user"})
+public class AddController extends HttpServlet {
    
-   
+    /** 
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    throws ServletException, IOException {
+        UserDAO userDAO = new UserDAO();
+        ArrayList<User> users = userDAO.getAllUsers();
+        ArrayList<UserAccount> accounts = userDAO.getAllAccounts();
+        request.setAttribute("users", users);
+        request.setAttribute("accounts", accounts);
+        request.getRequestDispatcher("../view/admin/AddUser.jsp").forward(request, response);
+    } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
@@ -38,13 +52,8 @@ public class UpdateController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        UserDAO userDAO = new UserDAO();
-        ArrayList<User> users = userDAO.getUsersForAdminByName(request.getParameter("userpattern"));
-        ArrayList<UserAccount> accounts = userDAO.getAllAccounts();
-        request.setAttribute("users", users);
-        request.setAttribute("accounts", accounts);
-        request.getRequestDispatcher("../view/admin/EditUser.jsp").forward(request, response);
-    }
+        processRequest(request, response);
+    } 
 
     /** 
      * Handles the HTTP <code>POST</code> method.
@@ -56,7 +65,7 @@ public class UpdateController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        
+        processRequest(request, response);
     }
 
     /** 
