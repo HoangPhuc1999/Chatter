@@ -11,24 +11,28 @@ import java.util.ArrayList;
  *
  * @author khuat
  */
-public class UserAddress extends User{
+public class UserAddress extends User {
+
     private int users_id;
     private String home_address;
     private String district;
     private String city;
-    
 
     public UserAddress(int users_id, String home_address, String district, String city) {
         this.users_id = users_id;
         this.home_address = home_address;
         this.district = district;
         this.city = city;
+        super.setUsers_id(users_id);
+
     }
 
     public UserAddress(String home_address, String district, String city) {
         this.home_address = home_address;
         this.district = district;
         this.city = city;
+        super.setUsers_id(users_id);
+
     }
 
     public UserAddress(int users_id, String home_address, String district, String city, String role, String firstname, String lastname, String phonenumber, String email, String gender, String avatar, ArrayList<Item> cart) {
@@ -36,19 +40,22 @@ public class UserAddress extends User{
         this.home_address = home_address;
         this.district = district;
         this.city = city;
+        super.setUsers_id(users_id);
+
     }
 
     public UserAddress() {
     }
-    
-    
 
+    @Override
     public int getUsers_id() {
         return users_id;
     }
 
+    @Override
     public void setUsers_id(int users_id) {
         this.users_id = users_id;
+        super.setUsers_id(users_id);
     }
 
     public String getHome_address() {
@@ -79,7 +86,5 @@ public class UserAddress extends User{
     public String toString() {
         return "User_Address{" + "users_id=" + users_id + ", home_address=" + home_address + ", district=" + district + ", city=" + city + '}';
     }
-    
-    
-    
+
 }
