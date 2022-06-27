@@ -65,6 +65,9 @@ public class User {
         this.gender = gender;
         this.avatar = avatar;
     }
+
+    public User() {
+    }
     
     
 
