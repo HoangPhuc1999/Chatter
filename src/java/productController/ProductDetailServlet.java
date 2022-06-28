@@ -6,8 +6,11 @@
 package productController;
 
 import DAO.ProductDAO;
+import DAO.ReviewDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.Product;
 import model.ProductImage;
+import model.Review;
 import model.User;
 
 /**
@@ -29,16 +33,30 @@ public class ProductDetailServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter pr = response.getWriter();
         String id = request.getParameter("id");
-
-        System.out.println(id+"======================= hello");
         ProductDAO d = new ProductDAO();
-      
         ProductImage pd = d.getProductImageById(id);
         Product x = d.getProductById(id);
         String imageUrl = pd.getImageUrl();
+
+        ReviewDAO dao = new ReviewDAO();
+        List<Review> list = new ArrayList<>();
+        list = dao.getAllReviewsFromId(id);
+        int totalRating = 0;
+        int averageRating = 0;
+        if (list.size() != 0) {
+            for (int i = 0; i < list.size(); i++) {
+                totalRating = totalRating + Integer.parseInt(list.get(i).getRating());
+                String name = dao.getReviewAuthor(list.get(i).getUserId());
+                list.get(i).setName(name);
+            }
+            averageRating = (totalRating / list.size());
+        }
+
         x.setImage(imageUrl);
         System.out.println(x.getImage());
         request.setAttribute("product_detail", x);
+        request.setAttribute("reviewproductlist", list);
+        request.setAttribute("ratting", averageRating);
         request.getRequestDispatcher("ProductDetail.jsp").forward(request, response);
     }
 

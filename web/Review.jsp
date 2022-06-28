@@ -106,7 +106,7 @@
                                                 <h2><%=x.getTitle()%></h2>
                                             </a>
                                             <p><%=x.getReviewContent()%></p>
-                                            <a href="single-blog.html" class="blog_btn">View More</a>
+                                           
                                         </div>
                                     </div>
                                 </div>
