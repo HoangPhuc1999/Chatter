@@ -116,6 +116,57 @@ public class UserDAO extends DAO {
     }
 
     //author: an 
+    //edit user profile.jsp
+    //29/6 
+    public void editProfile(int users_id ,User editUser, UserAccount editUserAccount, UserAddress editUserAddress) {
+        String query ="UPDATE users "
+                    + "SET firstname = ? , lastname= ? , phonenumber= ?, email= ?, gender= ?, avatar= ?"
+                    + "WHERE users_id = ? ;";
+        String query2 = "UPDATE users_account"
+                + "SET username = ? ,password =?"
+                + "WHERE users_id = ?";
+        String query3 = "UPDATE users_address"
+                + "SET home_address = ? , district = ? , city = ? "
+                + "WHERE users_id = ?";
+        try {
+            //edit users
+            ps = con.prepareStatement(query);
+            ps.setString(1, editUser.getFirstname());
+            ps.setString(2, editUser.getLastname());
+            ps.setString(3, editUser.getPhonenumber());
+            ps.setString(4, editUser.getEmail());
+            ps.setString(5, editUser.getGender());
+            ps.setString(6, editUser.getAvatar());
+            ps.setInt(7, users_id);
+            ps.executeUpdate();
+            ps.clearParameters();
+
+            //edit  user_account
+            ps = con.prepareStatement(query2);
+            ps.setString(1, editUserAccount.getUsername());
+            ps.setString(2, editUserAccount.getPassword());
+            ps.setInt(3, users_id);
+            ps.executeUpdate();
+            ps.clearParameters();
+
+            //edit user_address
+            ps = con.prepareStatement(query3);
+            ps.setString(1, editUserAddress.getHome_address());
+            ps.setString(2, editUserAddress.getDistrict());
+            ps.setString(3, editUserAddress.getCity());
+            ps.setInt(4, users_id);
+            ps.executeUpdate();
+            ps.clearParameters();
+
+            ps.close();
+            rs.close();
+
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+    }
+    
+    //author: an 
     //Them user vao 4 bang User,user account, user address, user role
     //state: insert xong bang users thi dung lai
     public void singup(User newUser, UserAccount newUserAccount, UserAddress newUserAddress) {
@@ -556,6 +607,13 @@ public class UserDAO extends DAO {
 //        System.out.println(dao.getUserAccountById(1));
 //        System.out.println(dao.getUserRoleById(1));
 //        System.out.println(dao.getUserFromId(1));
+
+    //check edit
+    UserAccount editAcc = new UserAccount("user1","user1");  
+    UserAddress eAccAddress= new UserAddress("Hoan kiem","Hanoi","Vietnam");
+    User eAccUser = new User("make","gg","0675565454","user3@fpt.edu.vn","0",null);
+    dao.editProfile(1, eAccUser, editAcc, eAccAddress);
+    System.out.println(dao.getUserFromId(1));
     }
 
 }
