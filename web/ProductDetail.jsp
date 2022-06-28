@@ -4,6 +4,7 @@
     Author     : Hoang Phuc
 --%>
 
+<%@page import="java.util.List"%>
 <%@page import="model.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -11,7 +12,7 @@
 
 <%
     Product x = (Product) request.getAttribute("product_detail");
-
+    List<Review> list = (List<Review>) request.getAttribute("reviewproductlist");
 
 %>  
 <html>
@@ -88,7 +89,7 @@
                                 <i class="far fa-star"></i>
                             </div>
 
-                            <small class="pt-1">(99 Reviews)</small>
+                            <small class="pt-1">(<%=list.size()%> reviews)</small>
                         </div>
                         <h3 class="font-weight-semi-bold mb-4">$ <%=x.getPrice()%></h3>
                         <p class="mb-4"> <%=x.getDescription()%></p>
@@ -290,7 +291,7 @@
         <!-- custom js -->
         <script src="js/custom.js"></script>
         <script src="js/productdetail.js"></script>
-        
+
 
     </body>
 
