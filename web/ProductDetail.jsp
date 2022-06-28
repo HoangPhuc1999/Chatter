@@ -125,22 +125,25 @@
                         <div >
                             <div class="row">
                                 <div class="col-md-6">
-                                    <h4 class="mb-4">1 review for  <%=x.getName()%></h4>
+                                    <h4 class="mb-4"><%=list.size()%> review for  <%=x.getName()%></h4>
+                                    <%                           for (Review y : list) {
+
+                                    %>
                                     <div class="media mb-4">
-                                        <img src=<%=x.getImage()%> alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
+                                        <img src=<%=y.getReviewImageUrl()%> alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
                                         <div class="media-body">
-                                            <h6>John Doe<small> - <i>01 Jan 2045</i></small></h6>
+                                            <h6><%=y.getName()%><small> - <i><%=y.getDate()%></i></small></h6>
                                             <div class="text-primary mb-2">
+                                                <%                           for (int i = 0; i < Integer.parseInt(y.getRating()); i++) {
+                                                %>
                                                 <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star-half-alt"></i>
-                                                <i class="far fa-star"></i>
+
+                                                <% }%> 
                                             </div>
-                                            <p>Diam amet duo labore stet elitr ea clita ipsum, tempor labore accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed sed eirmod ipsum.</p>
+                                            <p><%=y.getReviewContent()%></p>
                                         </div>
                                     </div>
-
+                                    <% }%> 
                                 </div>
                                 <div class="col-md-6">
                                     <h4 class="mb-4">Leave a review ${reviewmessage}    </h4>

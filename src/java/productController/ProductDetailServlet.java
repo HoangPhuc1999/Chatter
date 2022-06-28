@@ -44,10 +44,10 @@ public class ProductDetailServlet extends HttpServlet {
         int totalRating = 0;
         for (int i = 0; i < list.size(); i++) {
             totalRating = totalRating + Integer.parseInt(list.get(i).getRating());
+            String name = dao.getReviewAuthor(list.get(i).getUserId());
+            list.get(i).setName(name);
         }
-        System.out.println(totalRating+"=======================");
         int averageRating = (totalRating / list.size());
-         System.out.println(averageRating+"=======================");
         x.setImage(imageUrl);
         System.out.println(x.getImage());
         request.setAttribute("product_detail", x);
