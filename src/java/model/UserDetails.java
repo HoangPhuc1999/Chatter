@@ -52,9 +52,12 @@ public class UserDetails extends UserAddress {
         this.orders = orders;
     }
 
-  
-    
+    @Override
+    public String toString() {
+        return "UserDetails{" + "orders=" + orders + ", account=" + account + '}' + "\nSuper: " + super.toString();
+    }
 
+   
     
     
 }
