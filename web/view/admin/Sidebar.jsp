@@ -12,11 +12,11 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Admin menu</title>
         <meta charset="utf-8">
-        
+
     </head>
     <body>
         <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
-            
+
             <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
                 <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
                 <span class="fs-4">Chatter</span>
@@ -54,9 +54,9 @@
                     </a>
                 </li>
                 <li>
-                    <a href="list_customer" class="nav-link link-dark" id="customers_page">
+                    <a href="list_user" class="nav-link link-dark" id="users_page">
                         <i class="fa-solid fa-person-chalkboard"></i>
-                        Customers
+                        Users
                     </a>
                 </li>
             </ul>
@@ -75,46 +75,6 @@
                 </ul>
             </div>
         </div>
-        <script>
-            document.addEventListener("DOMContentLoaded", function (event) {
 
-                const showNavbar = (toggleId, navId, bodyId, headerId) => {
-                    const toggle = document.getElementById(toggleId),
-                            nav = document.getElementById(navId),
-                            bodypd = document.getElementById(bodyId),
-                            headerpd = document.getElementById(headerId)
-
-// Validate that all variables exist
-                    if (toggle && nav && bodypd && headerpd) {
-                        toggle.addEventListener('click', () => {
-// show navbar
-                            nav.classList.toggle('show')
-// change icon
-                            toggle.classList.toggle('bx-x')
-// add padding to body
-                            bodypd.classList.toggle('body-pd')
-// add padding to header
-                            headerpd.classList.toggle('body-pd')
-                        })
-                    }
-                }
-
-                showNavbar('header-toggle', 'nav-bar', 'body-pd', 'header')
-
-                /*===== LINK ACTIVE =====*/
-                const linkColor = document.querySelectorAll('.nav_link')
-
-                function colorLink() {
-                    if (linkColor) {
-                        linkColor.forEach(l => l.classList.remove('active'))
-                        this.classList.add('active')
-                    }
-                }
-                linkColor.forEach(l => l.addEventListener('click', colorLink))
-
-                // Your code to run since DOM is loaded and ready
-            });
-            
-        </script>
     </body>
 </html>
