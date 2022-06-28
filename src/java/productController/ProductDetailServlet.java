@@ -41,10 +41,18 @@ public class ProductDetailServlet extends HttpServlet {
         ReviewDAO dao = new ReviewDAO();
         List<Review> list = new ArrayList<>();
         list = dao.getAllReviewsFromId(id);
+        int totalRating = 0;
+        for (int i = 0; i < list.size(); i++) {
+            totalRating = totalRating + Integer.parseInt(list.get(i).getRating());
+        }
+        System.out.println(totalRating+"=======================");
+        int averageRating = (totalRating / list.size());
+         System.out.println(averageRating+"=======================");
         x.setImage(imageUrl);
         System.out.println(x.getImage());
         request.setAttribute("product_detail", x);
         request.setAttribute("reviewproductlist", list);
+        request.setAttribute("ratting", averageRating);
         request.getRequestDispatcher("ProductDetail.jsp").forward(request, response);
     }
 

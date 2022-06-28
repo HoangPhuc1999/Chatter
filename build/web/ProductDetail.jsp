@@ -13,6 +13,7 @@
 <%
     Product x = (Product) request.getAttribute("product_detail");
     List<Review> list = (List<Review>) request.getAttribute("reviewproductlist");
+    Integer ratting = (Integer) request.getAttribute("ratting");
 
 %>  
 <html>
@@ -82,11 +83,12 @@
                         <h3>  <%=x.getName()%></h3>
                         <div class="d-flex mb-3">
                             <div class="text-primary mb-2">
+                                <%                           for (int i = 0; i < ratting; i++) {
+                                %>
                                 <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                                <i class="far fa-star"></i>
+
+                                <% }%> 
+
                             </div>
 
                             <small class="pt-1">(<%=list.size()%> reviews)</small>
