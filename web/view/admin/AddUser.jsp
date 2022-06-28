@@ -16,6 +16,7 @@
         <meta name="author" content="" />
         <link rel="shortcut icon" href="images/favicon.png" type="">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
         <!--owl slider stylesheet -->
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
@@ -23,7 +24,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" integrity="sha512-CruCP+TD3yXzlvvijET8wV5WxxEh5H8P4cmz0RFbKK6FlZ2sYl3AEsKlLPHbniXKSrDdFewhbmBK5skbdsASbQ==" crossorigin="anonymous" />
         <!-- font awesome style -->
         <link href="https://cdn.staticaly.com/gh/hung1001/font-awesome-pro-v6/18657a9/css/all.min.css" rel="stylesheet" type="text/css" />
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://kit.fontawesome.com/a141f28961.js" crossorigin="anonymous"></script>
 
 
         <!-- Custom styles for this template -->
@@ -45,7 +46,7 @@
     <body class="row main_content">
 
 
-        <div class="col-sm-3 g-3">
+        <div class="col-sm-3 g-2">
             <jsp:include page="Sidebar.jsp" />
 
         </div>   
@@ -117,8 +118,8 @@
         </div>
 
         <script>
-            document.getElementById('customers_page').classList.add('active');
-            document.getElementById('customers_page').className.replace('link-dark', '');
+            document.getElementById('users_page').classList.add('active');
+            document.getElementById('users_page').className.replace('link-dark', '');
 
 
             function checkUsername() {
