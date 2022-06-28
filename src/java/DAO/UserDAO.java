@@ -448,8 +448,8 @@ public class UserDAO extends DAO {
 
     /**
      *
-     * Do Tuan Phong: lay du lieu day du cua user bang userid
-     * chac la xong, chua check
+     * Do Tuan Phong: lay du lieu day du cua user bang userid chac la xong, chua
+     * check
      *
      * @param userid
      * @return UserDetails
@@ -468,7 +468,7 @@ public class UserDAO extends DAO {
         ArrayList<Order> orders = new ArrayList<>();
         Order order = new Order();
         UserDetails details = new UserDetails();
-        
+
         try {
             ps = con.prepareStatement(query);
 
@@ -491,7 +491,11 @@ public class UserDAO extends DAO {
                     details.setHome_address(rs.getString("home_address"));
                     details.setDistrict(rs.getString("district"));
                     details.setCity("city");
-                    
+
+                    if (rs.getInt(17) == 0) {
+                        return details;
+                    }
+
                     order.setOrderid(rs.getInt(17));
                     order.setOrderpid(rs.getInt("order_product_id"));
                     order.setOrderamount(rs.getInt("order_amount"));
@@ -502,7 +506,7 @@ public class UserDAO extends DAO {
                     order.setDescription(rs.getString("product_description"));
                     order.setImageUrl(rs.getString("product_image_path"));
                     order.setDate(rs.getDate("modified_at"));
-                    
+
                     orders.add(order);
                     details.setOrders(orders);
 
@@ -519,13 +523,13 @@ public class UserDAO extends DAO {
                     order1.setDescription(rs.getString("product_description"));
                     order1.setImageUrl(rs.getString("product_image_path"));
                     order1.setDate(rs.getDate("modified_at"));
-                    
+
                     orders.add(order1);
                     details.setOrders(orders);
                 }
                 return details;
             }
-        } catch (Exception ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
 
         }
