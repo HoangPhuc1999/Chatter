@@ -3,14 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Chatter/ChatterFinal/src/java/signinController/LoginServlet.java</file>
-            <file>file:/D:/Chatter/ChatterFinal/src/java/signinController/SignUpServlet.java</file>
-            <file>file:/D:/Chatter/ChatterFinal/build/web/view/admin/ListCategory.jsp</file>
-            <file>file:/D:/Chatter/ChatterFinal/web/ProductDetail.jsp</file>
-            <file>file:/D:/Chatter/ChatterFinal/src/java/DAO/UserDAO.java</file>
+            <file>file:/D:/Chatter/ChatterFinal/web/Review.jsp</file>
+            <file>file:/D:/Chatter/ChatterFinal/src/java/reviewController/GetReviewServlet.java</file>
+            <file>file:/D:/Chatter/ChatterFinal/src/java/DAO/ProductDAO.java</file>
+            <file>file:/D:/Chatter/ChatterFinal/src/java/model/Review.java</file>
+            <file>file:/D:/Chatter/ChatterFinal/src/java/DAO/ReviewDAO.java</file>
             <file>file:/D:/Chatter/ChatterFinal/src/java/reviewController/ReviewServlet.java</file>
-            <file>file:/D:/Chatter/ChatterFinal/web/SignUp.jsp</file>
-            <file>file:/D:/Chatter/ChatterFinal/nbproject/build-impl.xml</file>
         </group>
     </open-files>
 </project-private>
