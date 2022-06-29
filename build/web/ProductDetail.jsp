@@ -4,6 +4,7 @@
     Author     : Hoang Phuc
 --%>
 
+<%@page import="java.util.List"%>
 <%@page import="model.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -11,7 +12,8 @@
 
 <%
     Product x = (Product) request.getAttribute("product_detail");
-
+    List<Review> list = (List<Review>) request.getAttribute("reviewproductlist");
+    Integer ratting = (Integer) request.getAttribute("ratting");
 
 %>  
 <html>
@@ -81,14 +83,15 @@
                         <h3>  <%=x.getName()%></h3>
                         <div class="d-flex mb-3">
                             <div class="text-primary mb-2">
+                                <%                           for (int i = 0; i < ratting; i++) {
+                                %>
                                 <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                                <i class="far fa-star"></i>
+
+                                <% }%> 
+
                             </div>
 
-                            <small class="pt-1">(99 Reviews)</small>
+                            <small class="pt-1">(<%=list.size()%> reviews)</small>
                         </div>
                         <h3 class="font-weight-semi-bold mb-4">$ <%=x.getPrice()%></h3>
                         <p class="mb-4"> <%=x.getDescription()%></p>
@@ -122,22 +125,24 @@
                         <div >
                             <div class="row">
                                 <div class="col-md-6">
-                                    <h4 class="mb-4">1 review for  <%=x.getName()%></h4>
+                                    <h4 class="mb-4"><%=list.size()%> review for  <%=x.getName()%></h4>
+                                    <%                           for (Review y : list) {
+                                    %>
                                     <div class="media mb-4">
-                                        <img src=<%=x.getImage()%> alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
+                                        <img src=<%=y.getReviewImageUrl()%> alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
                                         <div class="media-body">
-                                            <h6>John Doe<small> - <i>01 Jan 2045</i></small></h6>
+                                            <h6><%=y.getName()%><small> - <i><%=y.getDate()%></i></small></h6>
                                             <div class="text-primary mb-2">
+                                                <%                           for (int i = 0; i < Integer.parseInt(y.getRating()); i++) {
+                                                %>
                                                 <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star-half-alt"></i>
-                                                <i class="far fa-star"></i>
+
+                                                <% }%> 
                                             </div>
-                                            <p>Diam amet duo labore stet elitr ea clita ipsum, tempor labore accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed sed eirmod ipsum.</p>
+                                            <p><%=y.getReviewContent()%></p>
                                         </div>
                                     </div>
-
+                                    <% }%> 
                                 </div>
                                 <div class="col-md-6">
                                     <h4 class="mb-4">Leave a review ${reviewmessage}    </h4>
@@ -290,7 +295,7 @@
         <!-- custom js -->
         <script src="js/custom.js"></script>
         <script src="js/productdetail.js"></script>
-        
+
 
     </body>
 

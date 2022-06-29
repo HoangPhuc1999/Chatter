@@ -84,7 +84,8 @@ public class UserAddress extends User {
 
     @Override
     public String toString() {
-        return "User_Address{" + "users_id=" + users_id + ", home_address=" + home_address + ", district=" + district + ", city=" + city + '}';
+        return "User_Address{" + "users_id=" + users_id + ", home_address=" + home_address + ", district=" + district + ", city=" + city + '}' + ""
+                + "/nUser: " + super.toString();
     }
 
 }

@@ -43,7 +43,6 @@ public class ReviewServlet extends HttpServlet {
         Date date = new Date();
         java.sql.Date sqlDate = new java.sql.Date(date.getTime());
         if (x == null) {
-            // check 
             session.setAttribute("reviewmessage", "You have to sign in to leave a review");
             response.sendRedirect("Login.jsp");
         } else {
@@ -59,7 +58,6 @@ public class ReviewServlet extends HttpServlet {
             reviewDao.postReview(reviewItem);
             session.setAttribute("reviewmessage", "Review Submitted");
             response.sendRedirect("menu");
-
         }
 
     }
