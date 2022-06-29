@@ -127,7 +127,6 @@
                                 <div class="col-md-6">
                                     <h4 class="mb-4"><%=list.size()%> review for  <%=x.getName()%></h4>
                                     <%                           for (Review y : list) {
-
                                     %>
                                     <div class="media mb-4">
                                         <img src=<%=y.getReviewImageUrl()%> alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
