@@ -13,7 +13,7 @@
 <%
     List<Review> list = (List<Review>) request.getAttribute("reviewlist");
 
-        System.out.println("Hello world" + list.size());
+    System.out.println("Hello world" + list.size());
 %>  
 <html>
 
@@ -78,9 +78,7 @@
                     <div class="col-lg-8">
                         <div class="blog_left_sidebar">
                             <%                           for (Review x : list) {
-
                             %>
-
                             <article class="row blog_item">
                                 <div class="col-md-3">
                                     <div class="blog_info text-right">
@@ -106,16 +104,12 @@
                                                 <h2><%=x.getTitle()%></h2>
                                             </a>
                                             <p><%=x.getReviewContent()%></p>
-                                           
+
                                         </div>
                                     </div>
                                 </div>
                             </article>
-
-
                             <% }%> 
-
-
                             <nav class="blog-pagination justify-content-center d-flex">
                                 <ul class="pagination">
                                     <li class="page-item">
