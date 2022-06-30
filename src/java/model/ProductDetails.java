@@ -41,7 +41,7 @@ public class ProductDetails extends ProductImage{
 
     @Override
     public String toString() {
-        return "ProductDetails{" + "quantity=" + quantity + ", modifyAt=" + modifyAt + ", createAt=" + createAt + '}';
+        return "ProductDetails{" + "quantity=" + quantity + ", modifyAt=" + modifyAt + ", createAt=" + createAt + super.toString()+ '}';
     }
     
     
