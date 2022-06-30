@@ -3,9 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller.admin.category;
+package controller.admin.product;
 
 import DAO.CategoryDAO;
+import DAO.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -15,17 +16,33 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Category;
+import model.Product;
+import model.ProductDetails;
 
 /**
  *
  * @author Tuan Phong
  */
-@WebServlet(name="ListCategoryController", urlPatterns={"/admin/list_category","/admin/view_cat","admin/cates"})
-
-
-public class ListController extends HttpServlet {
+@WebServlet(name="AddProductController", urlPatterns={"/admin/add_product"})
+public class AddController extends HttpServlet {
    
-   
+    /** 
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    throws ServletException, IOException {
+        ProductDAO productDAO = new ProductDAO();
+        CategoryDAO categoryDAO = new CategoryDAO();
+        ArrayList<Category> categorys = categoryDAO.listAllCategory();
+        ArrayList<ProductDetails> products = (ArrayList<ProductDetails>) productDAO.getAllProductDetailses();
+        request.setAttribute("products", products);
+        request.setAttribute("categorys", categorys);
+        request.getRequestDispatcher("../view/admin/AddProduct.jsp").forward(request, response);
+    } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
@@ -38,11 +55,8 @@ public class ListController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        CategoryDAO categoryDAO = new CategoryDAO();
-        ArrayList<Category> categorys = categoryDAO.listAllCategory();
-        request.setAttribute("categorys", categorys);
-        request.getRequestDispatcher("../view/admin/ListCategory.jsp").forward(request, response);
-    }
+        processRequest(request, response);
+    } 
 
     /** 
      * Handles the HTTP <code>POST</code> method.
@@ -54,6 +68,7 @@ public class ListController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        processRequest(request, response);
     }
 
     /** 

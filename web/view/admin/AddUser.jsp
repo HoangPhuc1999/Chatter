@@ -80,7 +80,7 @@
 
                         <div class="col-md-6">
                             <label for="inputPhonenumber" class="col-form-label">Phone number</label>
-                            <input id="inputPhonenumber" name="phonenumber" type="tel" required class="form-control" placeholder="0906111111" pattern="^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$" title="Invalid phone number in Vietnam (10 digits)" value=${phone} >
+                            <input id="inputPhonenumber" name="phonenumber" type="tel" required class="form-control" placeholder="0906111111" pattern="^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$" title="Please input a phone number in Vietnam (10 digits)" value=${phone} >
                         </div>
 
                         <div class="col-md-6">
@@ -98,13 +98,13 @@
                                 Role
                             </label>
 
-                            <input type="radio" class="btn-check" name="role" value="customer" id="btnradio1" autocomplete="off" checked>
+                            <input type="radio" class="btn-check" name="role" value="customer" id="btnradio1" checked>
                             <label class="btn btn-outline-primary" for="btnradio1">Customer</label>
 
-                            <input type="radio" class="btn-check" name="role" value="seller" id="btnradio2" autocomplete="off">
+                            <input type="radio" class="btn-check" name="role" value="seller" id="btnradio2">
                             <label class="btn btn-outline-primary" for="btnradio2">Seller</label>
 
-                            <input type="radio" class="btn-check" name="role" value="admin" id="btnradio3" autocomplete="off">
+                            <input type="radio" class="btn-check" name="role" value="admin" id="btnradio3">
                             <label class="btn btn-outline-primary" for="btnradio3">Admin</label>
                         </div>
                     </div>
