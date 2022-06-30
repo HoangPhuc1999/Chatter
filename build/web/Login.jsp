@@ -113,7 +113,6 @@
             </div>
         </section>
         <!-- end book section -->
-
         <!-- footer section -->
         <footer class="footer_section">
             <div class="container">
