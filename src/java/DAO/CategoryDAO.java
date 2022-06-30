@@ -17,9 +17,14 @@ import model.Category;
  * @author Tuan Phong
  */
 public class CategoryDAO extends MyDAO {
-    
-    public ArrayList<Category> list() {
-    ArrayList<Category> categorys = new ArrayList<>();
+
+    /**
+     * Do Tuan Phong: lay het cac category tu database
+     *
+     * @return ArrayList<Category>
+     */
+    public ArrayList<Category> listAllCategory() {
+        ArrayList<Category> categorys = new ArrayList<>();
         try {
             xSql = "SELECT * from Category";
             ps = connection.prepareStatement(xSql);
@@ -35,13 +40,18 @@ public class CategoryDAO extends MyDAO {
         }
         return categorys;
     }
-    //ínertIntoCategory
-    public void insert(Category category){
+
+    /**
+     * Do Tuan Phong insert a category to database
+     *
+     * @param category
+     */
+    public void insert(Category category) {
         try {
-            xSql = "INSERT INTO [category]\n" +
-                    "           ([category_name])\n" +
-                    "     VALUES\n" +
-                    "           (?)";
+            xSql = "INSERT INTO [category]\n"
+                    + "           ([category_name])\n"
+                    + "     VALUES\n"
+                    + "           (?)";
             ps = connection.prepareStatement(xSql);
             ps.setString(1, category.getCname());
             ps.executeUpdate();
@@ -49,12 +59,19 @@ public class CategoryDAO extends MyDAO {
             Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public void update(Category category){
-        
+    
+        /**
+     * Do Tuan Phong update a category to database
+     *
+     * @param category
+     */
+
+    public void update(Category category) {
+
         try {
-            xSql = "UPDATE [category]\n" +
-                    "   SET [category_name] = ?\n" +
-                    " WHERE [category_id]= ?";
+            xSql = "UPDATE [category]\n"
+                    + "   SET [category_name] = ?\n"
+                    + " WHERE [category_id]= ?";
             ps = connection.prepareStatement(xSql);
             ps.setString(1, category.getCname());
             ps.setInt(2, category.getCid());
@@ -63,11 +80,15 @@ public class CategoryDAO extends MyDAO {
             Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void delete(int categoryId){ 
+    /**
+     * Do Tuan Phong delete a category to database
+     *
+     * @param categoryId
+     */
+    public void delete(int categoryId) {
         try {
-            xSql = "DELETE FROM [category]\n" +
-                    "WHERE category_id = ?";
+            xSql = "DELETE FROM [category]\n"
+                    + "WHERE category_id = ?";
             ps = connection.prepareStatement(xSql);
             ps.setInt(1, categoryId);
             ps.executeUpdate();
@@ -75,5 +96,5 @@ public class CategoryDAO extends MyDAO {
             Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
 }

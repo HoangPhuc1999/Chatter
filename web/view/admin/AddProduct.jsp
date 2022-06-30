@@ -14,9 +14,9 @@
         <meta name="keywords" content="" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <link rel="shortcut icon" href="images/favicon.png" type="">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <link rel="shortcut icon" href="../images/favicon.png" type="">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
 
         <!--owl slider stylesheet -->
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
@@ -50,67 +50,67 @@
             <jsp:include page="Sidebar.jsp" />
 
         </div>   
-
-
-
         <div class="col-sm-9 gy-2">
             <h3 class="text-info p-3" >
                 <span class="text-info fa-duotone fa-user-group"></span>
                 Add new product </h3>
             <div class="form_container d-flex g-lg-6">
-                <form action="users" method="POST" class="row g-3 form-control" >
+                <form enctype="multipart/form-data"  action="products" method="POST" class="row g-3 form-control" >
                     <div class="row">
                         <div class="col-md-6">
-                            <label for="inputUsername" class="col-form-label">Product name</label>
-                            <input id="productname"  name="productname"  type="text" class="form-control" placeholder="Enter product name" onkeyup="checkUsername()" required autofocus value=${user} >
-                            <span id="dumlicate_username"></span>
+                            <label for="inputProductname" class="col-form-label">Product name</label>
+                            <input id="productname"  name="productname"  type="text" class="form-control" placeholder="Enter the product name" onkeyup="checkProductName()" required autofocus>
+                            <span id="dumlicate_productname"></span>
                         </div> 
-                        <div class="col-md-6">
-                            <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
-                            <input id="inputPassword" name="password" type="password" class="form-control" placeholder="Enter password" required value=${pass}>
+                        <div class="col-md-2">
+                            <label for="inputQuantity" class=" col-form-label">Quantity</label>
+                            <input id="inputQuantity" name="quantity" type="number" class="form-control" placeholder="" min="0" max="65536">
                         </div>
-                        <div class="col-md-6">
-                            <label for="inputFirstname" class=" col-form-label">First name</label>
-                            <input id="inputFirstname" name="firstname" type="text" class="form-control" placeholder="User's first name" value=${first}>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="inputLastname" class="col-form-label">Last name</label>
-                            <input id="inputLastname" name="lastname" type="text" class="form-control" placeholder="User's last name" value=${last}>
-                        </div>
-
-                        <div class="col-md-6">
-                            <label for="inputPhonenumber" class="col-form-label">Phone number</label>
-                            <input id="inputPhonenumber" name="phonenumber" type="tel" required class="form-control" placeholder="0906111111" pattern="^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$" title="Invalid phone number in Vietnam (10 digits)" value=${phone} >
+                        <div class="col-md-4">
+                            <label for="inputPrice" class="col-form-label">Product price</label>
+                            <div class="btn-group">
+                                <input id="inputLastname" name="lastname" type="text" class="form-control" pattern="[0-9]+(.?[0-9]+)?" title="Please input a double number!" placeholder="" value=${last}>
+                                <span class="input-group-text" id="basic-addon2">$</span>
+                            </div>
                         </div>
 
                         <div class="col-md-6">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
-                            <input id="inputEmail" name="email" type="email" class="form-control" placeholder="mee@example.com" required value=${email}>
+                            <label for="inputTitle" class="col-sm-2 col-form-label">Title</label>
+                            <input id="inputTitle" name="title" type="text" class="form-control" placeholder="Example title" required value="">
 
                         </div>
-                        <div class="col-md-6">
+                        <div class="col">
                         </div>
 
-                        <div class="btn-group col-md-4 p-3 form-check" role="group" aria-label="" id="role">
-                            <label class="form-check-label col-form-label col-lg-2" for="form-check">
-                                Role
+
+                        <div class="col-md-6 p-3">
+                            <label for="inputDescription" class="col-sm-2 col-form-label">Description</label>
+                            <textarea id="inputDescription" name="description" type="text" class="form-control" placeholder="Enter product description" required></textarea>
+                        </div>
+                        <div class="col-md-6">
+                        </div>
+                        <div class="g-0 p-3">
+
+                            <label class="form-check-label" for="form-check">
+                                Category 
                             </label>
+                            <c:forEach items="${requestScope.categorys}" var="category">
+                                <input type="checkbox" class="btn-check" name="role" value="${category.cid}" id="btnradio${category.cid}">
+                                <label class="btn btn-outline-primary rounded-pill" for="btnradio${category.cid}">${category.cname}</label>
 
-                            <input type="radio" class="btn-check" name="role" value="customer" id="btnradio1" autocomplete="off" checked>
-                            <label class="btn btn-outline-primary" for="btnradio1">Customer</label>
+                            </c:forEach>
 
-                            <input type="radio" class="btn-check" name="role" value="seller" id="btnradio2" autocomplete="off">
-                            <label class="btn btn-outline-primary" for="btnradio2">Seller</label>
-
-                            <input type="radio" class="btn-check" name="role" value="admin" id="btnradio3" autocomplete="off">
-                            <label class="btn btn-outline-primary" for="btnradio3">Admin</label>
                         </div>
+                        <div class="col-md-6">
+                            <label for="formFile" class="form-label">Default file input example</label>
+                            <input accept="image/*" class="form-control" type="file" id="formFile">
+                            <img id="img-preview" class="img-thumbnail" max-width=180px src="./img.jpg" />
+                        </div>
+
                     </div>
                     <div class="text-center">
-                        <button class="btn btn-box btn-success - col-sm-2" type="submit" id="add-user" name="action" value="add_user">
-                            Add User
+                        <button class="btn btn-box btn-success - col-sm-2" type="submit" id="add-product" name="action" value="add_user">
+                            Add Product
                         </button>
                     </div>
                 </form>
@@ -122,33 +122,44 @@
             document.getElementById('products_page').className.replace('link-dark', '');
 
 
-            function checkUsername() {
-                let username = document.getElementById('username').value;
-                const isDumlicate = usernames.some(element => {
-                    return element === username;
+            function checkProductName() {
+                let productname = document.getElementById('productname').value;
+                const isDumlicate = productnames.some(element => {
+                    return element === productname;
                 });
-                
+
                 if (isDumlicate) {
-                    document.getElementById('dumlicate_username').style.color = 'red';
-                    document.getElementById('dumlicate_username').innerHTML =
-                            'Username already exist!';
-                    document.getElementById('add-user').disabled = true;
-                    document.getElementById('add-user').style.opacity = (0.4);
-                } else if(username===''){
-                    document.getElementById('dumlicate_username').style.color = 'red';
-                    document.getElementById('dumlicate_username').innerHTML =
-                            'Please enter a username!';
-                    document.getElementById('add-user').disabled = true;
-                    document.getElementById('add-user').style.opacity = (0.4);
-                }else
+                    document.getElementById('dumlicate_productname').style.color = 'red';
+                    document.getElementById('dumlicate_productname').innerHTML =
+                            'Product already exist!';
+                    document.getElementById('add-product').disabled = true;
+                    document.getElementById('add-product').style.opacity = (0.4);
+                } else if (productname.trim() === '') {
+                    document.getElementById('dumlicate_productname').style.color = 'red';
+                    document.getElementById('dumlicate_productname').innerHTML =
+                            'Please enter the product\'s name!';
+                    document.getElementById('add-product').disabled = true;
+                    document.getElementById('add-product').style.opacity = (0.4);
+                } else
                 {
-                    document.getElementById('dumlicate_username').style.color = 'green';
-                    document.getElementById('dumlicate_username').innerHTML =
-                            'Valid Username ';
-                    document.getElementById('add-user').disabled = false;
-                    document.getElementById('add-user').style.opacity = (1);
+                    document.getElementById('dumlicate_productname').style.color = 'green';
+                    document.getElementById('dumlicate_productname').innerHTML =
+                            '';
+                    document.getElementById('add-product').disabled = false;
+                    document.getElementById('add-product').style.opacity = (1);
                 }
             }
+
+                const input = document.getElementById('formFile');
+                const image = document.getElementById('img-preview');
+
+                input.addEventListener('change', (e) => {
+                    if (e.target.files.length) {
+                        const src = URL.createObjectURL(e.target.files[0]);
+                        image.src = src;
+                    }
+                });
+           
         </script>  
 
     </body>

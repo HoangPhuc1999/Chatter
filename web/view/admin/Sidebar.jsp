@@ -42,7 +42,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="list_product" class="nav-link link-dark" id="products_page">
+                    <a href="products" class="nav-link link-dark" id="products_page">
                         <i class="fa-solid fa-bowl-food"></i>
                         Products
                     </a>
