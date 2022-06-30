@@ -27,7 +27,8 @@
         <script src="https://kit.fontawesome.com/a141f28961.js" crossorigin="anonymous"></script>
         <style>
             .container-content{
-                background: white;
+                background: rgba(255,255,255,0.4);
+                
             }
             .avatar {
                 border-radius: 50%;
@@ -80,169 +81,176 @@
             ${user}
             <div class="blockquote">
                 <div class="display-6">
-                    <img src="../avatar/female.jpg" class="avatar" alt="...">  ${user.account.username}
+                    <img src="../avatar/female.jpg" class="avatar" alt="avatar">  ${user.account.username}
                     <em class="display-6 blockquote-footer">(User ID: ${user.users_id})</em></div></div>
 
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
 
-            <ul class="nav nav-tabs">
-
-                <!--User Details-->
-
-                <li class="nav-item">
-                    <a class="nav-link active" id="UserDetailsNav"  aria-current="page" href="#" 
-                       onclick="showUserDetails(1);showOrderHistory(0);">
-                        User Details</a>
-
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">User Details</button>
                 </li>
 
-                <!--Orders history-->
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Orders history</button>
+                </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="#"
-                       onclick="showUserDetails(0);showOrderHistory(1);">
-                        Orders history</a>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Contact</button>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
+
             </ul>
-            <div class="container-content border border-light rounded row" id="UserDetails">
-                <div class="col-6 row g-2">
-                    <div class="col-8">
-                        <div class="card border-info ">
-                            <div class=" card-header">
-                                <i class="fa-duotone fa-ballot"></i>
-                                General Info</div>
+            <div class="tab-content" id="myTabContent">
 
-                            <div class="card-body row row-cols-6 row-cols-lg-2 g-2 g-lg-3">
-                                <div class="col">
-                                    <i class="fa-duotone fa-square-1"></i>
-                                    First name<br>
-                                </div>
-                                <div class="col">
-                                    ${user.firstname}<br>
-                                </div>
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    
+                    <div class="container-content border border-light rounded row" id="UserDetails">
+                        <div class="col-6 row g-2">
+                            <div class="col-8">
+                                <div class="card border-info ">
+                                    <div class=" card-header">
+                                        <i class="fa-duotone fa-ballot"></i>
+                                        General Info</div>
 
-                                <div class="col">
-                                    <i class="fa-duotone fa-circle-0"></i>
-                                    Last name<br>
-                                </div>
-                                <div class="col">
-                                    ${user.lastname}<br>
-                                </div>
+                                    <div class="card-body row row-cols-6 row-cols-lg-2 g-2 g-lg-3">
+                                        <div class="col">
+                                            <i class="fa-duotone fa-square-1"></i>
+                                            First name<br>
+                                        </div>
+                                        <div class="col">
+                                            ${user.firstname}<br>
+                                        </div>
 
-                                <div class="col">
-                                    <i class="fa-duotone fa-venus-mars"></i>
-                                    Gender<br>
-                                </div>
-                                <div class="col">
-                                    ${user.gender}<br>
-                                </div>
+                                        <div class="col">
+                                            <i class="fa-duotone fa-circle-0"></i>
+                                            Last name<br>
+                                        </div>
+                                        <div class="col">
+                                            ${user.lastname}<br>
+                                        </div>
 
-                                <div class="col">
-                                    <i class="fa-solid fa-person-military-pointing"></i>
-                                    Role<br>
-                                </div>
-                                <div class="col">
-                                    ${user.role}<br>
-                                </div>
+                                        <div class="col">
+                                            <i class="fa-duotone fa-venus-mars"></i>
+                                            Gender<br>
+                                        </div>
+                                        <div class="col">
+                                            ${user.gender}<br>
+                                        </div>
 
-                                <div class="col">
-                                    <i class="fa-solid fa-mobile-retro"></i>
-                                    Phone number<br>
-                                </div>
-                                <div class="col">
-                                    ${user.phonenumber}<br>
-                                </div>
+                                        <div class="col">
+                                            <i class="fa-solid fa-person-military-pointing"></i>
+                                            Role<br>
+                                        </div>
+                                        <div class="col">
+                                            ${user.role}<br>
+                                        </div>
 
-                                <div class="col">
-                                    <i class="fa-duotone fa-envelopes"></i>                                   
-                                    Email<br>
-                                </div>
-                                <div class="col">
-                                    ${user.email}<br>
+                                        <div class="col">
+                                            <i class="fa-solid fa-mobile-retro"></i>
+                                            Phone number<br>
+                                        </div>
+                                        <div class="col">
+                                            ${user.phonenumber}<br>
+                                        </div>
+
+                                        <div class="col">
+                                            <i class="fa-duotone fa-envelopes"></i>                                   
+                                            Email<br>
+                                        </div>
+                                        <div class="col">
+                                            ${user.email}<br>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
+                        <!--Address-->
+
+                        <div class="col-6 row g-2">
+                            <div class="col-9">
+                                <div class="card border-info ">
+                                    <div class=" card-header">
+                                        <i class="fa-duotone fa-address-book"></i>
+                                        Address</div>
+
+                                    <div class="card-body row row-cols-5 row-cols-lg-2 g-2 g-lg-3">
+                                        <div class="col">
+                                            <i class="fa-duotone fa-house-tree"></i>
+                                            Home address<br>
+                                        </div>
+                                        <div class="col">
+                                            ${user.home_address}<br>
+                                        </div>
+
+                                        <div class="col">
+                                            <i class="fa-duotone fa-house-building"></i>
+                                            District<br>
+                                        </div>
+                                        <div class="col">
+                                            ${user.district}<br>
+                                        </div>
+
+                                        <div class="col">
+                                            <i class="fa-duotone fa-city"></i>
+                                            City<br>
+                                        </div>
+                                        <div class="col">
+                                            ${user.city}<br>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                
+
                     </div>
                 </div>
 
-                <!--Address-->
+            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                 
-                <div class="col-6 row g-2">
-                    <div class="col-9">
-                        <div class="card border-info ">
-                            <div class=" card-header">
-                                <i class="fa-duotone fa-address-book"></i>
-                                Address</div>
-
-                            <div class="card-body row row-cols-5 row-cols-lg-2 g-2 g-lg-3">
-                                <div class="col">
-                                    <i class="fa-duotone fa-house-tree"></i>
-                                    Home address<br>
-                                </div>
-                                <div class="col">
-                                    ${user.home_address}<br>
-                                </div>
-
-                                <div class="col">
-                                    <i class="fa-duotone fa-house-building"></i>
-                                    District<br>
-                                </div>
-                                <div class="col">
-                                    ${user.district}<br>
-                                </div>
-
-                                <div class="col">
-                                    <i class="fa-duotone fa-city"></i>
-                                    City<br>
-                                </div>
-                                <div class="col">
-                                    ${user.city}<br>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>                
-
             </div>
+            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
         </div>
 
-        <script>
-            document.getElementById('users_page').classList.add('active');
-            document.getElementById('users_page').className.replace('link-dark', '');
 
 
-            function checkUsername() {
-                let username = document.getElementById('username').value;
-                const isDumlicate = usernames.some(element => {
-                    return element === username;
-                });
 
-                if (isDumlicate) {
-                    document.getElementById('dumlicate_username').style.color = 'red';
-                    document.getElementById('dumlicate_username').innerHTML =
-                            'Username already exist!';
-                    document.getElementById('add-user').disabled = true;
-                    document.getElementById('add-user').style.opacity = (0.4);
-                } else if (username === '') {
-                    document.getElementById('dumlicate_username').style.color = 'red';
-                    document.getElementById('dumlicate_username').innerHTML =
-                            'Please enter a username!';
-                    document.getElementById('add-user').disabled = true;
-                    document.getElementById('add-user').style.opacity = (0.4);
-                } else
-                {
-                    document.getElementById('dumlicate_username').style.color = 'green';
-                    document.getElementById('dumlicate_username').innerHTML =
-                            'Valid Username ';
-                    document.getElementById('add-user').disabled = false;
-                    document.getElementById('add-user').style.opacity = (1);
-                }
+    </div>
+
+    <script>
+        document.getElementById('users_page').classList.add('active');
+        document.getElementById('users_page').className.replace('link-dark', '');
+
+
+        function checkUsername() {
+            let username = document.getElementById('username').value;
+            const isDumlicate = usernames.some(element => {
+                return element === username;
+            });
+
+            if (isDumlicate) {
+                document.getElementById('dumlicate_username').style.color = 'red';
+                document.getElementById('dumlicate_username').innerHTML =
+                        'Username already exist!';
+                document.getElementById('add-user').disabled = true;
+                document.getElementById('add-user').style.opacity = (0.4);
+            } else if (username === '') {
+                document.getElementById('dumlicate_username').style.color = 'red';
+                document.getElementById('dumlicate_username').innerHTML =
+                        'Please enter a username!';
+                document.getElementById('add-user').disabled = true;
+                document.getElementById('add-user').style.opacity = (0.4);
+            } else
+            {
+                document.getElementById('dumlicate_username').style.color = 'green';
+                document.getElementById('dumlicate_username').innerHTML =
+                        'Valid Username ';
+                document.getElementById('add-user').disabled = false;
+                document.getElementById('add-user').style.opacity = (1);
             }
-        </script>  
+        }
+    </script>  
 
-    </body>
+</body>
 </html>
 
