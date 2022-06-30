@@ -20,6 +20,7 @@ import model.Book;
  * @author Hoang Phuc
  */
 public class BookServlet extends HttpServlet {
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -29,7 +30,7 @@ public class BookServlet extends HttpServlet {
         String phonenumber;
         String person;
         String dob;
-        
+
         name = request.getParameter("name").trim();
         email = request.getParameter("email").trim();
         phonenumber = request.getParameter("phonenumber").trim();
@@ -47,5 +48,5 @@ public class BookServlet extends HttpServlet {
         u.insertBook(x);
         request.getRequestDispatcher("booksuccess.jsp").forward(request, response);
     }
-  
+
 }
