@@ -20,7 +20,7 @@ import model.Category;
  *
  * @author Tuan Phong
  */
-@WebServlet(name="ListCategoryController", urlPatterns={"/admin/list_category","/admin/view_cat"})
+@WebServlet(name="ListCategoryController", urlPatterns={"/admin/list_category","/admin/view_cat","admin/cates"})
 
 
 public class ListController extends HttpServlet {
@@ -39,7 +39,7 @@ public class ListController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         CategoryDAO categoryDAO = new CategoryDAO();
-        ArrayList<Category> categorys = categoryDAO.list();
+        ArrayList<Category> categorys = categoryDAO.listAllCategory();
         request.setAttribute("categorys", categorys);
         request.getRequestDispatcher("../view/admin/ListCategory.jsp").forward(request, response);
     }
