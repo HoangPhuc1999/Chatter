@@ -194,12 +194,12 @@ public class ProductDAO extends DAO {
     }
 
     /**
-     * Do Tuan Phong Lay tu database tat ca ProductImage
+     * Do Tuan Phong Lay tu database tat ca ProductDetails
      *
      * @return List<ProductDetails>
      */
     public List<ProductDetails> getAllProductDetailses() {
-        List<ProductDetails> productDetailses = new ArrayList<>();
+        ArrayList<ProductDetails> productDetailses = new ArrayList<>();
         String query = "SELECT *\n"
                 + "FROM products p LEFT JOIN products_image pi on p.product_id  = pi.product_id\n"
                 + "LEFT JOIN products_inventory pin on p.product_id = pin.product_id\n"
@@ -209,32 +209,42 @@ public class ProductDAO extends DAO {
         try {
             ps = con.prepareStatement(query);
             rs = ps.executeQuery();
-            ProductDetails productDetails = new ProductDetails();
-            productDetails.setId(0);
+            ProductDetails productDetailsTemp = new ProductDetails();
+            productDetailsTemp.setId(0);
 
             while (rs.next()) {
-                if (productDetails.getId() != rs.getInt(1)) {
+                if (productDetailsTemp.getId() != rs.getInt(1)) {
+                    productDetailsTemp.setId(rs.getInt(1));
+
+                    ProductDetails productDetails = new ProductDetails();
+
+                    productDetails.setId(rs.getInt(1));
                     productDetails.setName(rs.getString("product_name"));
                     productDetails.setTitle(rs.getString("product_title"));
                     productDetails.setPrice(rs.getDouble("product_price"));
                     productDetails.setDescription(rs.getString("product_description"));
                     productDetails.setImageUrl(rs.getString("product_image_path"));
+                    productDetails.setImage(rs.getString("product_image_path"));
                     productDetails.setModifyAt(rs.getTimestamp(8).toLocalDateTime());
-                    productDetails.setCreateAt(rs.getTimestamp("created_at").toLocalDateTime());
+                    productDetails.setCreateAt(
+                            rs.getTimestamp("created_at") != null
+                            ? rs.getTimestamp("created_at").toLocalDateTime() : null);
 
                     if (rs.getInt(14) != 0) {
                         productDetails.setCategorys(new ArrayList<>());
                         productDetails.getCategorys().add(
                                 new Category(rs.getInt(14),
                                         rs.getString("category_name")));
+
+                        productDetails.setCname(rs.getString("category_name"));
+
                     }
 
                     productDetailses.add(productDetails);
 
                 } else {
-                    productDetails.getCategorys().add(
-                            new Category(rs.getInt(14),
-                                    rs.getString("category_name")));
+                    productDetailses.get(productDetailses.size() - 1).getCategorys().add(
+                            new Category(rs.getInt(14), rs.getString("category_name")));
                 }
             }
 
