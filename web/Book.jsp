@@ -77,6 +77,9 @@
                   <option value="" disabled selected>
                     How many persons?
                   </option>
+                   <option value="">
+                    1
+                  </option>
                   <option value="">
                     2
                   </option>
