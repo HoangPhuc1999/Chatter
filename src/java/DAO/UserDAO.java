@@ -426,7 +426,7 @@ public class UserDAO extends DAO {
      *
      * @param account
      */
-    public void addAccount(UserAccount account) {
+    public int addAccount(UserAccount account) {
         try {
             String sql = "INSERT INTO [users_account]\n"
                     + "           ([users_id]\n"
@@ -444,6 +444,7 @@ public class UserDAO extends DAO {
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return account.getUsers_id();
     }
 
     /**
