@@ -102,8 +102,8 @@
 
                         </div>
                         <div class="col-md-6">
-                            <label for="formFile" class="form-label">Default file input example</label>
-                            <input accept="image/*" class="form-control" type="file" id="formFile" name="image">
+                            <label for="formFile" class="form-label">Product Image</label>
+                            <input accept="image/*" class="form-control" type="file" id="formFile">
                             <img id="img-preview" class="img-thumbnail" max-width=180px src="./img.jpg" />
                         </div>
 
