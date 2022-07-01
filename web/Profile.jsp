@@ -139,11 +139,12 @@
       <div class="row">
         <div class="col-md-6">
           <div class="form_container">
-                <div>
+        <form action="profile" method="POST">
+                <input type="hidden" name="action" value="edit" />
+                
                     <label>Avatar:       </label> 
 
                     <input name="avatar" type="text" class="form-control" placeholder="Avatar" value=${avapath}>                           
-                </div>
                 <div>
                     <label>Username:       </label> 
                   <input name="username" type="text" class="form-control" placeholder="Username" value=${user}>
@@ -185,11 +186,11 @@
                   <input name="city"type="text" class="form-control" placeholder="city" value=${city}>
                 </div>
                 
-                  <button href="profile?action=edit">
+                  <button>
                     Change Profile
                   </button>
+        </form>
                 </div>
-          
           </div>
         <div class="col-md-6">
           <div class="map_container">

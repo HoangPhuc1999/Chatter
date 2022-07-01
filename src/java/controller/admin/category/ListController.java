@@ -20,7 +20,7 @@ import model.Category;
  *
  * @author Tuan Phong
  */
-@WebServlet(name="ListCategoryController", urlPatterns={"/admin/list_category","/admin/view_cat","admin/cates"})
+@WebServlet(name="ListCategoryController", urlPatterns={"/admin/list_category","/admin/view_cat","/admin/cates"})
 
 
 public class ListController extends HttpServlet {
