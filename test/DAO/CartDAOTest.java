@@ -46,7 +46,7 @@ public class CartDAOTest {
     @Test(expected = Exception.class)
     public void testDeleteCartAfterBuy() {
         System.out.println("deleteCartAfterBuy");
-        User a = null;
+        User a = new User();
         CartDAO instance = new CartDAO();
         instance.deleteCartAfterBuy(a);
         // TODO review the generated test code and remove the default call to fail.
