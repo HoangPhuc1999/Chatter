@@ -87,8 +87,25 @@ public class ProfileControl extends HttpServlet {
         //edit profile from profile.jsp
         protected void doGet_EditProfile(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-                HttpSession session = request.getSession();
                 User a = (User) request.getSession().getAttribute("user");
+                String user = request.getParameter("username");
+                String pass = request.getParameter("password");
+                String home_address = request.getParameter("home_address");
+                String district = request.getParameter("district");
+                String city = request.getParameter("city");
+                String firstname = request.getParameter("firstname");
+                String lastname = request.getParameter("lastname");
+                String phone = request.getParameter("phonenumber");
+                String email = request.getParameter("email");
+                String gender = request.getParameter("gender");
+                String avapath=request.getParameter("avatar");;
+                
+                UserDAO udao = new UserDAO();
+                UserAccount editAcc = new UserAccount(user, pass);
+                UserAddress editAccAddress = new UserAddress(home_address, district, city);
+                User editUser = new User(firstname, lastname, phone, email, gender, avapath);
+                
+                udao.editProfile(a.getUsers_id(), editUser, editAcc, editAccAddress);
                 
                 request.setAttribute("message", "Profile updated!");
 		request.getRequestDispatcher("Profile.jsp").forward(request,response);
@@ -112,8 +129,28 @@ public class ProfileControl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-    }
+        User a = (User) request.getSession().getAttribute("user");
+                String user = request.getParameter("username");
+                String pass = request.getParameter("password");
+                String home_address = request.getParameter("home_address");
+                String district = request.getParameter("district");
+                String city = request.getParameter("city");
+                String firstname = request.getParameter("firstname");
+                String lastname = request.getParameter("lastname");
+                String phone = request.getParameter("phonenumber");
+                String email = request.getParameter("email");
+                String gender = request.getParameter("gender");
+                String avapath=request.getParameter("avatar");;
+                
+                UserDAO udao = new UserDAO();
+                UserAccount editAcc = new UserAccount(user, pass);
+                UserAddress editAccAddress = new UserAddress(home_address, district, city);
+                User editUser = new User(firstname, lastname, phone, email, gender, avapath);
+                
+                udao.editProfile(a.getUsers_id(), editUser, editAcc, editAccAddress);
+                
+                request.setAttribute("message", "Profile updated!");
+		request.getRequestDispatcher("Profile.jsp").forward(request,response);    }
 
     /**
      * Returns a short description of the servlet.
