@@ -40,7 +40,7 @@ public class MenuControl extends HttpServlet {
         CategoryDAO cdao = new CategoryDAO();
         ProductDAO pdao = new ProductDAO();
         List<Product> list = pdao.getAllProductWithCategory();
-        List<Category> listC = cdao.list();
+        List<Category> listC = cdao.listAllCategory();
         
         request.setAttribute("listP", list);
         request.setAttribute("listC", listC);
