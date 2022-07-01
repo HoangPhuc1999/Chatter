@@ -79,7 +79,7 @@ public class UserController extends HttpServlet {
             throws ServletException, IOException {
         UserDAO userDAO = new UserDAO();
 
-        userDAO.addAccount(
+        int userid = userDAO.addAccount(
                 new UserAccount(userDAO.addUser(new User(
                         request.getParameter("firstname"),
                         request.getParameter("lastname"),
@@ -87,8 +87,10 @@ public class UserController extends HttpServlet {
                         request.getParameter("email"),
                         request.getParameter("role"),
                         GENDER)),
-                request.getParameter("username"),
-                request.getParameter("password")));
+                        request.getParameter("username"),
+                        request.getParameter("password")));
+        
+        response.sendRedirect("user?user_id=" + userid);
     }
 
     protected void deleteUser(HttpServletRequest request, HttpServletResponse response)

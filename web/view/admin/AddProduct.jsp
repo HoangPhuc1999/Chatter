@@ -69,7 +69,7 @@
                         <div class="col-md-4">
                             <label for="inputPrice" class="col-form-label">Product price</label>
                             <div class="btn-group">
-                                <input id="inputLastname" name="lastname" type="text" class="form-control" pattern="[0-9]+(.?[0-9]+)?" title="Please input a double number!" placeholder="" value=${last}>
+                                <input id="inputPrice" name="price" type="text" class="form-control" pattern="[0-9]+(.?[0-9]+)?" title="Please input a double number!" placeholder="" value=${last}>
                                 <span class="input-group-text" id="basic-addon2">$</span>
                             </div>
                         </div>
@@ -95,21 +95,21 @@
                                 Category 
                             </label>
                             <c:forEach items="${requestScope.categorys}" var="category">
-                                <input type="checkbox" class="btn-check" name="role" value="${category.cid}" id="btnradio${category.cid}">
+                                <input type="checkbox" class="btn-check" name="category" value="${category.cid}" id="btnradio${category.cid}">
                                 <label class="btn btn-outline-primary rounded-pill" for="btnradio${category.cid}">${category.cname}</label>
 
                             </c:forEach>
 
                         </div>
                         <div class="col-md-6">
-                            <label for="formFile" class="form-label">Default file input example</label>
+                            <label for="formFile" class="form-label">Product Image</label>
                             <input accept="image/*" class="form-control" type="file" id="formFile">
                             <img id="img-preview" class="img-thumbnail" max-width=180px src="./img.jpg" />
                         </div>
 
                     </div>
                     <div class="text-center">
-                        <button class="btn btn-box btn-success - col-sm-2" type="submit" id="add-product" name="action" value="add_user">
+                        <button class="btn btn-box btn-success - col-sm-2" type="submit" id="add-product" name="action" value="add_product">
                             Add Product
                         </button>
                     </div>
