@@ -31,7 +31,7 @@ public class HomeControl extends HttpServlet {
         ProductDAO dao = new ProductDAO();
         CategoryDAO cdao = new CategoryDAO();
         List<Product> list = dao.getAllProductWithCategory();
-        List<Category> listC = cdao.list();
+        List<Category> listC = cdao.listAllCategory();
         
         request.setAttribute("listP", list);
         request.setAttribute("listC", listC);
