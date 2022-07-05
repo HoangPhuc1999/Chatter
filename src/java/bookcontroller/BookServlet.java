@@ -8,6 +8,7 @@ package bookcontroller;
 import DAO.BookDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import java.text.SimpleDateFormat;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -37,14 +38,10 @@ public class BookServlet extends HttpServlet {
         person = request.getParameter("person").trim();
         dob = request.getParameter("dob").trim();
         int xPerson = Integer.parseInt(person);
-        java.util.Date xDob = null;
-        try {
-            xDob = new SimpleDateFormat("yyyy-mm-dd").parse(dob);
-        } catch (Exception e) {
-        }
+        Date date = Date.valueOf(dob);
         BookDAO u = new BookDAO();
         Book x = new Book();
-        x = new Book(1, name, email, phonenumber, xPerson, xDob);
+        x = new Book(1, name, email, phonenumber, xPerson, date);
         u.insertBook(x);
         request.getRequestDispatcher("booksuccess.jsp").forward(request, response);
     }

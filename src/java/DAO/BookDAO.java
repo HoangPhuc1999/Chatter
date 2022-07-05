@@ -18,14 +18,14 @@ public class BookDAO extends DAO {
      public void insertBook(Book x) {
         xSql = "insert into booking values (?,?,?,?,?)";
 
-        java.sql.Date sqlDate = new java.sql.Date(System.currentTimeMillis());
+        
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, x.getName());
             ps.setString(2, x.getEmail());
             ps.setString(3, x.getPhoneNumber());
-            ps.setInt(4, x.getPerson());
-            ps.setDate(5, sqlDate);
+            ps.setInt(4, x.getUsersId());
+            ps.setDate(5, x.getDob());
             ps.executeUpdate();
             ps.close();
         } catch (Exception e) {
@@ -52,8 +52,8 @@ public class BookDAO extends DAO {
                 name = rs.getString("name");
                 email = rs.getString("email");
                 phonenumber = rs.getString("phonenumber");
-                person = rs.getInt("person");
-                dob = rs.getDate("dob");
+                person = rs.getInt("users_id");
+                dob = rs.getDate("book_time");
 
                 x = new Book(book_id, name, email, phonenumber, person, dob);
                 t.add(x);

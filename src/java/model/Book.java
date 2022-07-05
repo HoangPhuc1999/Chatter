@@ -5,7 +5,7 @@
  */
 package model;
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  *
@@ -17,19 +17,19 @@ public class Book {
     private String name;
     private String email;
     private String phonenumber;
-    private int person;
-    private Date dob;
+    private int users_id;
+    private Date book_time;
 
     public Book() {
     }
 
-    public Book(int book_id, String name, String email, String phonenumber, int person, Date dob) {
+    public Book(int book_id, String name, String email, String phonenumber, int users_id, Date book_time) {
         this.book_id = book_id;
         this.name = name;
         this.email = email;
         this.phonenumber = phonenumber;
-        this.person = person;
-        this.dob = dob;
+        this.users_id = users_id;
+        this.book_time = book_time;
     }
 
     public int getBookId() {
@@ -48,12 +48,12 @@ public class Book {
         return phonenumber;
     }
 
-    public int getPerson() {
-        return person;
+    public int getUsersId() {
+        return users_id;
     }
 
     public Date getDob() {
-        return dob;
+        return book_time;
     }
 
     public void setBookId(int book_id) {
@@ -73,10 +73,10 @@ public class Book {
     }
 
     public void setPerson(int person) {
-        this.person = person;
+        this.users_id = person;
     }
 
     public void setDob(Date dob) {
-        this.dob = dob;
+        this.book_time = dob;
     }
 }
