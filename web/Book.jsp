@@ -64,16 +64,16 @@
                         <div class="form_container">
                             <form action="book" method="post">
                                 <div>
-                                    <input type="text" class="form-control" placeholder="Your Name" />
+                                    <input type="text" class="form-control" placeholder="Your Name" name ="name"/>
                                 </div>
                                 <div>
-                                    <input type="text" class="form-control" placeholder="Phone Number" />
+                                    <input type="text" class="form-control" placeholder="Phone Number" name="phonenumber" />
                                 </div>
                                 <div>
-                                    <input type="email" class="form-control" placeholder="Your Email" />
+                                    <input type="email" class="form-control" placeholder="Your Email" name="email" />
                                 </div>
                                 <div>
-                                    <select class="form-control nice-select wide">
+                                    <select name = "person" class="form-control nice-select wide">
                                         <option value="" disabled selected>
                                             How many persons?
                                         </option>
