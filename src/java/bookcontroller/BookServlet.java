@@ -42,21 +42,17 @@ public class BookServlet extends HttpServlet {
             xPerson = 1;
         } else {
             xPerson = Integer.parseInt(person);
-
         }
-
         if (dob == null || dob.isEmpty()) {
             long millis = System.currentTimeMillis();
             date = new java.sql.Date(millis);
         } else {
             date = Date.valueOf(dob);
-
         }
         BookDAO u = new BookDAO();
         if (name == null || email == null || phonenumber == null || person == null || dob == null) {
             request.setAttribute("bookingmessage", "Please enter all information");
             request.getRequestDispatcher("Book.jsp").forward(request, response);
-
         } else if (!name.matches("[a-zA-Z0-9 ]*") || !phonenumber.matches("[0-9]+")) {
             request.setAttribute("bookingmessage", "Booking Fail, Name or Phone number invalid");
             request.getRequestDispatcher("Book.jsp").forward(request, response);
@@ -66,7 +62,6 @@ public class BookServlet extends HttpServlet {
             u.insertBook(x);
             request.setAttribute("bookingmessage", "Booking Success");
             request.getRequestDispatcher("Book.jsp").forward(request, response);
-
         }
 
     }
