@@ -21,6 +21,15 @@ public class Review {
     private String review_image_path;
     private int users_id;
     private Date date;
+    private String user_name;
+
+    public String getName() {
+        return user_name;
+    }
+
+    public void setName(String name) {
+        user_name = name;
+    }
 
     public String getTitle() {
         return title;
@@ -81,8 +90,8 @@ public class Review {
     public void setRating(String rating) {
         this.rating = rating;
     }
-    
-     public void setUserId(int id) {
+
+    public void setUserId(int id) {
         this.users_id = id;
     }
 
