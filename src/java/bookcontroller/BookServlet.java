@@ -43,7 +43,7 @@ public class BookServlet extends HttpServlet {
         Book x = new Book();
         x = new Book(1, name, email, phonenumber, xPerson, date);
         u.insertBook(x);
-        request.getRequestDispatcher("booksuccess.jsp").forward(request, response);
+        request.getRequestDispatcher("Index.jsp").forward(request, response);
     }
 
 }
