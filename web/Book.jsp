@@ -7,6 +7,14 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
+
+<%
+    String bookingmessage = (String) request.getAttribute("bookingmessage");
+    if (bookingmessage == null) {
+        request.setAttribute("bookingmessage", "Book a table");
+    }
+    // If you use EL or JSTL, the above statement is not necessary. 
+%>  
 <html>
 
     <head>
@@ -56,7 +64,7 @@
             <div class="container">
                 <div class="heading_container">
                     <h2>
-                        Book A Table
+                        ${bookingmessage} 
                     </h2>
                 </div>
                 <div class="row">
@@ -73,7 +81,7 @@
                                     <input type="email" class="form-control" placeholder="Your Email" name="email" />
                                 </div>
                                 <div>
-                                    <select name = "person" class="form-control nice-select wide">
+                                    <select name = "person" class="form-control nice-select wide" value = "1">
                                         <option value="" disabled selected>
                                             How many persons?
                                         </option>

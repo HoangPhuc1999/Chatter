@@ -31,19 +31,44 @@ public class BookServlet extends HttpServlet {
         String phonenumber;
         String person;
         String dob;
-
+        Date date;
+        int xPerson = 0;
         name = request.getParameter("name").trim();
         email = request.getParameter("email").trim();
         phonenumber = request.getParameter("phonenumber").trim();
-        person = request.getParameter("person").trim();
-        dob = request.getParameter("dob").trim();
-        int xPerson = Integer.parseInt(person);
-        Date date = Date.valueOf(dob);
+        dob = request.getParameter("dob");
+        person = request.getParameter("person");
+        if (person == null || person.isEmpty()) {
+            xPerson = 1;
+        } else {
+            xPerson = Integer.parseInt(person);
+
+        }
+
+        if (dob == null || dob.isEmpty()) {
+            long millis = System.currentTimeMillis();
+            date = new java.sql.Date(millis);
+        } else {
+            date = Date.valueOf(dob);
+
+        }
         BookDAO u = new BookDAO();
-        Book x = new Book();
-        x = new Book(1, name, email, phonenumber, xPerson, date);
-        u.insertBook(x);
-        request.getRequestDispatcher("Index.jsp").forward(request, response);
+        if (name == null || email == null || phonenumber == null || person == null || dob == null) {
+            request.setAttribute("bookingmessage", "Please enter all information");
+            request.getRequestDispatcher("Book.jsp").forward(request, response);
+
+        } else if (!name.matches("[a-zA-Z0-9 ]*") || !phonenumber.matches("[0-9]+")) {
+            request.setAttribute("bookingmessage", "Booking Fail, Name or Phone number invalid");
+            request.getRequestDispatcher("Book.jsp").forward(request, response);
+        } else {
+            Book x = new Book();
+            x = new Book(1, name, email, phonenumber, xPerson, date);
+            u.insertBook(x);
+            request.setAttribute("bookingmessage", "Booking Success");
+            request.getRequestDispatcher("Book.jsp").forward(request, response);
+
+        }
+
     }
 
 }
