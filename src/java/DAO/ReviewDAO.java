@@ -5,6 +5,8 @@
  */
 package DAO;
 
+import java.util.ArrayList;
+import java.util.List;
 import model.Review;
 
 /**
@@ -32,6 +34,81 @@ public class ReviewDAO extends DAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public List<Review> getAllReviews() {
+        List<Review> list = new ArrayList<>();
+        xSql = "select * from products_review";
+
+        try {
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Review x = new Review();
+                x.setReviewId(rs.getInt("review_id"));
+                x.setProductId(rs.getInt("product_id"));
+                x.setTitle(rs.getString("title"));
+                x.setReviewContent(rs.getString("review_content"));
+                x.setRating(rs.getString("rating"));
+                x.setReviewImageUrl(rs.getString("review_image_path"));
+                x.setDate(rs.getDate("created_at"));
+                x.setUserId(rs.getInt("users_id"));
+                list.add(x);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+        }
+        return (list);
+
+    }
+
+    public List<Review> getAllReviewsFromId(String id) {
+        List<Review> list = new ArrayList<>();
+        xSql = "select * from products_review where product_id = ?";
+
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Review x = new Review();
+                x.setReviewId(rs.getInt("review_id"));
+                x.setProductId(rs.getInt("product_id"));
+                x.setTitle(rs.getString("title"));
+                x.setReviewContent(rs.getString("review_content"));
+                x.setRating(rs.getString("rating"));
+                x.setReviewImageUrl(rs.getString("review_image_path"));
+                x.setDate(rs.getDate("created_at"));
+                x.setUserId(rs.getInt("users_id"));
+                list.add(x);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+        }
+        return (list);
+
+    }
+
+    public String getReviewAuthor(int id) {
+        String name = "";
+        xSql = "select * from users_account where users_id = ?";
+
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                name = rs.getString("username");
+            }
+            rs.close();
+            ps.close();
+
+        } catch (Exception e) {
+        }
+
+        return name;
     }
 
 }
