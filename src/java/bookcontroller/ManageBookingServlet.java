@@ -28,6 +28,6 @@ public class ManageBookingServlet extends HttpServlet {
         BookDAO u = new BookDAO();
         List<Book> lst = u.getBookItem();
         request.setAttribute("bookinglist", lst);
-        //request.getRequestDispatcher("managebook.jsp").forward(request, response);
+        request.getRequestDispatcher("ManageBooking.jsp").forward(request, response);
     }
 }
