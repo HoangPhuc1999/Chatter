@@ -142,8 +142,8 @@
                                                     <img src="<%=x.getAvatar()%>" width="40" height="40" class="rounded-circle">
                                                 </a>
                                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                                    <a class="dropdown-item" href="profile">Profile</a>
-                                                    <a class="dropdown-item" href="logout">Log Out</a>
+                                                    <a class="dropdown-item" href="../profile">Profile</a>
+                                                    <a class="dropdown-item" href="../logout">Log Out</a>
                                                 </div>
                                             </li>   
                                         </ul>
@@ -151,10 +151,10 @@
                                 </nav>
                                 <%                } else if (x == null) {
                                 %>
-                                <a href="login" class="order_online">
+                                <a href="../login" class="order_online">
                                     Sign in
                                 </a>
-                                <a href="SignUp.jsp" class="order_online">
+                                <a href="../SignUp.jsp" class="order_online">
                                     Sign up
                                 </a>
                                 <%
@@ -179,8 +179,8 @@
 
                     <div class="pb-5">
                         <div class="container">
-                            <form action="search" method="post" id="search-box" class="form-row">
-                                <input type="search" name="txt" id="search-text"
+                            <form action="../admin/booking" method="post" id="search-box" class="form-row">
+                                <input type="search" name="phonenumber" id="search-text"
                                        placeholder="Tra thông tin đặt bàn theo số điện thoại hoặc tên người đặt"
                                        required>
                                 <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit" id="search-btn">
@@ -219,6 +219,21 @@
                                                     </th>
                                                 </tr>
                                             </thead>
+                                            <%                         if (list.isEmpty()) {
+
+                                            %>
+                                            <tbody>
+                                            <div class="heading_container">
+                                                <div class ="text">
+                                                    No customer found
+                                                </div>
+                                            </div>
+                                            </tbody>
+
+                                            <%                                              } else {
+
+                                            %>
+
                                             <tbody>
                                                 <%                           for (Book y : list) {
 
@@ -241,6 +256,7 @@
                                                 </tr> 
                                                 <% }%> 
                                             </tbody>
+                                            <% }%> 
                                         </table>
                                     </div>
                                     <!-- End -->

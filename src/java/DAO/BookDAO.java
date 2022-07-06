@@ -93,7 +93,6 @@ public class BookDAO extends DAO {
             }
 
             rs.close();
-
             ps.close();
         } catch (Exception e) {
             e.printStackTrace();

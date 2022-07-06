@@ -68,6 +68,13 @@ public class ManageBookServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        PrintWriter pr = response.getWriter();
+        String xPhoneNumber = request.getParameter("phonenumber");
+        BookDAO u = new BookDAO();
+        List<Book> lst = u.searchBookItem(xPhoneNumber);
+        request.setAttribute("bookinglist", lst);
+        request.getRequestDispatcher("../ManageBooking.jsp").forward(request, response);
         processRequest(request, response);
     }
 
