@@ -60,6 +60,9 @@
                     <h2>
                         Reset password                    
                     </h2>
+                    <h2>
+                            ${warning}
+                    </h2>
                 </div>
                 <div class="row">
                     <div class="col-md-6">

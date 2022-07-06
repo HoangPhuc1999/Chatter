@@ -365,7 +365,7 @@ public class UserDAO extends DAO {
     //Created by An at 27/5
     public void resetPassword(String username) {
         String query = "Update users_account\n"
-                + "Set Password = !@#$%"
+                + "Set Password = '12345'"
                 + "where Username = ?\n"
                 + "";
         try {
