@@ -81,7 +81,6 @@ public class BookDAO extends DAO {
             int person;
             Date dob;
             Book x;
-
             while (rs.next()) {
                 book_id = rs.getInt("book_id");
                 name = rs.getString("name");
@@ -91,7 +90,6 @@ public class BookDAO extends DAO {
                 x = new Book(book_id, name, email, phonenumber, person, dob);
                 t.add(x);
             }
-
             rs.close();
             ps.close();
         } catch (Exception e) {

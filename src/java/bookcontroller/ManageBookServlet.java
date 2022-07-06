@@ -77,7 +77,6 @@ public class ManageBookServlet extends HttpServlet {
         request.getRequestDispatcher("../ManageBooking.jsp").forward(request, response);
         processRequest(request, response);
     }
-
     /**
      * Returns a short description of the servlet.
      *
