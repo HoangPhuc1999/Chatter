@@ -3,14 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Chatter/ChatterFinal/web/Index.jsp</file>
-            <file>file:/D:/Chatter/ChatterFinal/src/java/model/Review.java</file>
+            <file>file:/D:/Chatter/ChatterFinal/src/java/signinController/LoginServlet.java</file>
+            <file>file:/D:/Chatter/ChatterFinal/web/Login.jsp</file>
             <file>file:/D:/Chatter/ChatterFinal/src/java/bookcontroller/BookServlet.java</file>
-            <file>file:/D:/Chatter/ChatterFinal/src/java/DAO/ReviewDAO.java</file>
-            <file>file:/D:/Chatter/ChatterFinal/src/java/DAO/BookDAO.java</file>
-            <file>file:/D:/Chatter/ChatterFinal/src/java/reviewController/ReviewServlet.java</file>
             <file>file:/D:/Chatter/ChatterFinal/web/Book.jsp</file>
-            <file>file:/D:/Chatter/ChatterFinal/src/java/model/Book.java</file>
         </group>
     </open-files>
 </project-private>

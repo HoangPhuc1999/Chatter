@@ -54,7 +54,6 @@ public class BookDAO extends DAO {
                 phonenumber = rs.getString("phonenumber");
                 person = rs.getInt("users_id");
                 dob = rs.getDate("book_time");
-
                 x = new Book(book_id, name, email, phonenumber, person, dob);
                 t.add(x);
             }
