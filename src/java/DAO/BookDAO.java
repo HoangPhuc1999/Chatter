@@ -15,10 +15,10 @@ import model.Book;
  * @author Hoang Phuc
  */
 public class BookDAO extends DAO {
-     public void insertBook(Book x) {
+
+    public void insertBook(Book x) {
         xSql = "insert into booking values (?,?,?,?,?)";
 
-        
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, x.getName());
@@ -54,7 +54,6 @@ public class BookDAO extends DAO {
                 phonenumber = rs.getString("phonenumber");
                 person = rs.getInt("users_id");
                 dob = rs.getDate("book_time");
-
                 x = new Book(book_id, name, email, phonenumber, person, dob);
                 t.add(x);
             }
@@ -67,4 +66,36 @@ public class BookDAO extends DAO {
         }
         return (t);
     }
+
+    public List<Book> searchBookItem(String phonenumber) {
+        List<Book> t = new ArrayList<>();
+        xSql = "select * from booking where phonenumber = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, phonenumber);
+            rs = ps.executeQuery();
+
+            int book_id;
+            String name;
+            String email;
+            int person;
+            Date dob;
+            Book x;
+            while (rs.next()) {
+                book_id = rs.getInt("book_id");
+                name = rs.getString("name");
+                email = rs.getString("email");
+                person = rs.getInt("users_id");
+                dob = rs.getDate("book_time");
+                x = new Book(book_id, name, email, phonenumber, person, dob);
+                t.add(x);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return (t);
+    }
+
 }
