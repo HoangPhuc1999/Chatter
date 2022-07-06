@@ -5,7 +5,14 @@
  */
 package DAO;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.sql.DataSource;
 import model.User;
 import model.UserAccount;
 import model.UserAddress;
@@ -17,12 +24,31 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import static org.mockito.Mockito.*;
+import org.mockito.junit.MockitoJUnitRunner;
+
 
 /**
  *
  * @author khuat
  */
+@RunWith(MockitoJUnitRunner.class)
 public class UserDAOTest {
+    
+    @Mock
+    DataSource mockDataSource;
+    @Mock
+    Connection mockConn;
+    @Mock
+    PreparedStatement mockPreparedStmnt;
+    @Mock
+    ResultSet mockResultSet;
+    
+    private UserDAO udao = new UserDAO();
     
     public UserDAOTest() {
     }
@@ -36,7 +62,8 @@ public class UserDAOTest {
     }
     
     @Before
-    public void setUp() {
+    public void setUp() throws SQLException {
+       
     }
     
     @After
@@ -45,33 +72,58 @@ public class UserDAOTest {
 
     /**
      * Test of getUser method, of class UserDAO.
+     * return user
      */
     @Test
-    public void testGetUser() {
-        System.out.println("getUser");
-        String xUserName = "";
-        String xPass = "";
+    public void testGetUserThatExist() {
+        System.out.println("getUserThatExist");
+        String xUserName = "user1";
+        String xPass = "user1";
         UserDAO instance = new UserDAO();
-        UserAccount expResult = null;
         UserAccount result = instance.getUser(xUserName, xPass);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals("user1", result.getUsername());
+        assertEquals("user1", result.getPassword());
+    }
+    
+    /**
+     * Test of getUser method, of class UserDAO.
+     * return null
+     */
+    @Test
+    public void testGetUserThatDoesNotExist() {
+        System.out.println("getUserThatDoesNotExist");
+        String xUserName = "user0";
+        String xPass = "user1";
+        UserDAO instance = new UserDAO();
+        UserAccount result = instance.getUser(xUserName, xPass);
+        assertNull(result);
     }
 
     /**
      * Test of getUserFromId method, of class UserDAO.
      */
     @Test
-    public void testGetUserFromId() {
-        System.out.println("getUserFromId");
+    public void testGetUserFromIdTrue() {
+        System.out.println("getUserFromIdTrue");
+        int id = 1;
+        UserDAO instance = new UserDAO();
+        User result = instance.getUserFromId(id);
+        assertEquals(id, result.getUsers_id());
+        
+    }
+    
+    /**
+     * Test of getUserFromId method, of class UserDAO.
+     */
+    @Test
+    public void testGetUserFromIdNull() {
+        System.out.println("getUserFromIdNull");
         int id = 0;
         UserDAO instance = new UserDAO();
         User expResult = null;
         User result = instance.getUserFromId(id);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -80,13 +132,25 @@ public class UserDAOTest {
     @Test
     public void testGetUsersForAdminByName() {
         System.out.println("getUsersForAdminByName");
-        String namePattern = "";
+        String namePattern = "user1 user1";
+        UserDAO instance = new UserDAO();
+        ArrayList<User> result = instance.getUsersForAdminByName(namePattern);
+        assertEquals(namePattern, result.get(0).getFirstname());
+        
+    }
+    
+    /**
+     * Test of getUsersForAdminByName method, of class UserDAO.
+     */
+    @Test
+    public void testGetUsersForAdminByNameNull() {
+        System.out.println("getUsersForAdminByName");
+        String namePattern = "lmao lmao";
         UserDAO instance = new UserDAO();
         ArrayList<User> expResult = null;
         ArrayList<User> result = instance.getUsersForAdminByName(namePattern);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -95,30 +159,60 @@ public class UserDAOTest {
     @Test
     public void testEditProfile() {
         System.out.println("editProfile");
+        int users_id = 1;
+        User editUser = null;
+        UserAccount editUserAccount = null;
+        UserAddress editUserAddress = null;
+        UserDAO instance = new UserDAO();
+        instance.editProfile(users_id, editUser, editUserAccount, editUserAddress);
+        
+    }
+    
+    /**
+     * Test of editProfile method, of class UserDAO.
+     */
+    @Test
+    public void testEditProfileNullId() {
+        System.out.println("editProfile");
         int users_id = 0;
         User editUser = null;
         UserAccount editUserAccount = null;
         UserAddress editUserAddress = null;
         UserDAO instance = new UserDAO();
         instance.editProfile(users_id, editUser, editUserAccount, editUserAddress);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
      * Test of singup method, of class UserDAO.
      */
     @Test
-    public void testSingup() {
+    public void testSignUp() {
         System.out.println("singup");
-        User newUser = null;
-        UserAccount newUserAccount = null;
-        UserAddress newUserAddress = null;
+        UserAccount newAcc = new UserAccount("test1","test1");  
+        UserAddress newAddress= new UserAddress("Hoan kiem","Hanoi","Vietnam");
+        User newAccUser = new User("test","1","0675565454","test@fpt.edu.vn","0",null);
         UserDAO instance = new UserDAO();
-        instance.singup(newUser, newUserAccount, newUserAddress);
+        instance.singup(newAccUser, newAcc, newAddress);
+        
+        try {
+            int newSignUpId = udao.getUserID();
+            System.out.println(udao.getUserAddressById(newSignUpId));
+            System.out.println(udao.getUserAccountById(newSignUpId));
+            System.out.println(udao.getUserFromId(newSignUpId));
+            
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(UserDAOTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+            assertEquals(x, result);
+
+        
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
+    
 
     /**
      * Test of getUserRoleById method, of class UserDAO.
@@ -161,8 +255,7 @@ public class UserDAOTest {
         UserAddress expResult = null;
         UserAddress result = instance.getUserAddressById(users_id);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+       
     }
 
     /**
@@ -175,8 +268,7 @@ public class UserDAOTest {
         int expResult = 0;
         int result = instance.getUserIDold();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**

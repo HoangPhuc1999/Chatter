@@ -47,17 +47,24 @@ public class ResetPasswordControl extends HttpServlet {
         if(user == null){
                 //send error message\
                 String message="oops, this username does not exsit";
-                response.getWriter().print(message);
-                response.setStatus(500);
+                request.setAttribute("message", message);
+                 request.setAttribute("warning", message);
+
                 
             }else{
                 if(dao.checkAccountAndEmailMatch(username,email)){
                     dao.resetPassword(username);
-                    String message="password reset completed";
-                    response.getWriter().print(message);
+                    String message="password reset completed, new password is 12345";
+                     request.setAttribute("warning", message);
                 }
-                
+                else{
+                    String message="username and email does not match";
+                     request.setAttribute("message", "Reset password fail");
+                     request.setAttribute("warning", message);
+                }
             }
+        
+        request.getRequestDispatcher("/ResetPassword.jsp").forward(request, response);
             
     }
 
