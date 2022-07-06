@@ -56,10 +56,6 @@
         <servlet-name>AboutServlet</servlet-name>
         <servlet-class>aboutcontroller.AboutServlet</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>ManageBookingServlet</servlet-name>
-        <servlet-class>bookcontroller.ManageBookingServlet</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -102,10 +98,6 @@
     <servlet-mapping>
         <servlet-name>AboutServlet</servlet-name>
         <url-pattern>/about</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ManageBookingServlet</servlet-name>
-        <url-pattern>/admin/booking</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
