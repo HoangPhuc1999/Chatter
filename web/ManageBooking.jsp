@@ -61,7 +61,7 @@
                     <nav class="navbar navbar-expand-lg custom_nav-container ">
                         <a class="navbar-brand" href="../home">
                             <span>
-                                Chat
+                                Chatter
                             </span>
                         </a>
 
@@ -179,6 +179,14 @@
 
                     <div class="pb-5">
                         <div class="container">
+                            <form action="search" method="post" id="search-box" class="form-row">
+                                <input type="search" name="txt" id="search-text"
+                                       placeholder="Tra thông tin đặt bàn theo số điện thoại hoặc tên người đặt"
+                                       required>
+                                <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit" id="search-btn">
+                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                </button>
+                            </form>
                             <div class="row">
                                 <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">
 
@@ -206,7 +214,9 @@
                                                     <th scope="col" class="border-0 bg-light">
                                                         <div class="py-2 text-uppercase">Date</div>
                                                     </th>
-
+                                                    <th scope="col" class="border-0 bg-light">
+                                                        <div class="py-2 text-uppercase">Hoàn Thành</div>
+                                                    </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -220,7 +230,10 @@
                                                     <td class="align-middle"><strong><%=y.getPhoneNumber()%></strong></td>
                                                     <td class="align-middle"><strong><%=y.getUsersId()%></strong></td>
                                                     <td class="align-middle"><strong><%=y.getDob()%></strong></td>
-
+                                                    <td class="align-middle">
+                                                        <button type="button" class="btn btn-danger">Hoàn thành</button>
+                                                        </a>
+                                                    </td>
 
 
 
