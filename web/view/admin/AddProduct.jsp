@@ -55,7 +55,7 @@
                 <span class="text-info fa-duotone fa-user-group"></span>
                 Add new product </h3>
             <div class="form_container d-flex g-lg-6">
-                <form enctype="multipart/form-data"  action="products" method="POST" class="row g-3 form-control" >
+                <form enctype="multipart/form-data"  action="add_product" method="POST" class="row g-3 form-control" >
                     <div class="row">
                         <div class="col-md-6">
                             <label for="inputProductname" class="col-form-label">Product name</label>
@@ -69,7 +69,7 @@
                         <div class="col-md-4">
                             <label for="inputPrice" class="col-form-label">Product price</label>
                             <div class="btn-group">
-                                <input id="inputPrice" name="price" type="text" class="form-control" pattern="[0-9]+(.?[0-9]+)?" title="Please input a double number!" placeholder="" value=${last}>
+                                <input id="inputPrice" name="price" type="text" class="form-control" pattern="[0-9]+(.?[0-9]+)?" title="Please input a number!" placeholder="" value=${last}>
                                 <span class="input-group-text" id="basic-addon2">$</span>
                             </div>
                         </div>
@@ -104,12 +104,12 @@
                         <div class="col-md-6">
                             <label for="formFile" class="form-label">Product Image</label>
                             <input accept="image/*" class="form-control" type="file" id="formFile">
-                            <img id="img-preview" class="img-thumbnail" max-width=180px src="./img.jpg" />
+                            <img id="img-preview" class="img-thumbnail" max-width=180px src="image/1.png" />
                         </div>
 
                     </div>
                     <div class="text-center">
-                        <button class="btn btn-box btn-success - col-sm-2" type="submit" id="add-product" name="action" value="add_product">
+                        <button class="btn btn-box btn-success - col-sm-2" type="submit" id="add-product">
                             Add Product
                         </button>
                     </div>
@@ -150,16 +150,16 @@
                 }
             }
 
-                const input = document.getElementById('formFile');
-                const image = document.getElementById('img-preview');
+            const input = document.getElementById('formFile');
+            const image = document.getElementById('img-preview');
 
-                input.addEventListener('change', (e) => {
-                    if (e.target.files.length) {
-                        const src = URL.createObjectURL(e.target.files[0]);
-                        image.src = src;
-                    }
-                });
-           
+            input.addEventListener('change', (e) => {
+                if (e.target.files.length) {
+                    const src = URL.createObjectURL(e.target.files[0]);
+                    image.src = src;
+                }
+            });
+
         </script>  
 
     </body>
