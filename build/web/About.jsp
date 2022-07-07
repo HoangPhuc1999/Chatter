@@ -75,7 +75,7 @@
                 <div class="row no-gutters slider-text align-items-end justify-content-center">
                     <div class="col-md-9 ftco-animate text-center mb-5">
                         <h1 class="mb-2 bread">About</h1>
-                        <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="fa fa-chevron-right"></i></a></span> <span>About <i class="fa fa-chevron-right"></i></span></p>
+                        <p class="breadcrumbs"><span class="mr-2"><a href="home">Home <i class="fa fa-chevron-right"></i></a></span> <span>About <i class="fa fa-chevron-right"></i></span></p>
                     </div>
                 </div>
             </div>
@@ -157,7 +157,6 @@
         <!-- footer section -->
         <jsp:include page="Footer.jsp" />
         <!-- footer section -->
-
         <!-- jQery -->
         <script src="js/jquery-3.4.1.min.js"></script>
         <!-- popper js -->
