@@ -7,7 +7,6 @@ package controller.admin.category;
 
 import DAO.CategoryDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,6 +33,7 @@ public class DeleteController extends HttpServlet {
         int categoryId = Integer.parseInt(request.getParameter("category_id"));
 //        response.getWriter().print(categoryId);
         categoryDAO.delete(categoryId);
+        categoryDAO.deleteInProductsCategory(categoryId);
         response.sendRedirect("../admin/list_category");
         
     } 
