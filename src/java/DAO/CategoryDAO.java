@@ -59,13 +59,12 @@ public class CategoryDAO extends MyDAO {
             Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-        /**
+
+    /**
      * Do Tuan Phong update a category to database
      *
      * @param category
      */
-
     public void update(Category category) {
 
         try {
@@ -80,14 +79,32 @@ public class CategoryDAO extends MyDAO {
             Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     /**
-     * Do Tuan Phong delete a category to database
+     * Do Tuan Phong delete a category from category table
      *
      * @param categoryId
      */
     public void delete(int categoryId) {
         try {
             xSql = "DELETE FROM [category]\n"
+                    + "WHERE category_id = ?";
+            ps = connection.prepareStatement(xSql);
+            ps.setInt(1, categoryId);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    /**
+     * Do Tuan Phong delete a category from products_Category table
+     *
+     * @param categoryId
+     */
+    public void deleteInProductsCategory(int categoryId) {
+        try {
+            xSql = "DELETE FROM [products_category]\n"
                     + "WHERE category_id = ?";
             ps = connection.prepareStatement(xSql);
             ps.setInt(1, categoryId);
