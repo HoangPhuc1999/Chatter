@@ -61,7 +61,7 @@ public class LoginServlet extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
             session.setAttribute("user_address", userAddress);
-            session.setAttribute("user_account", userAccount);
+            session.setAttribute("user_account", x);
             session.setAttribute("reviewmessage", "");
             session.setMaxInactiveInterval(10000);
             if (xRem != null) {
@@ -71,7 +71,11 @@ public class LoginServlet extends HttpServlet {
                 response.addCookie(y);
             }
             System.out.println("Success");
-            request.getRequestDispatcher("home").include(request, response);
+            if (!x.getRole().equals("admin")) {
+                request.getRequestDispatcher("home").include(request, response);
+            } else {
+                response.sendRedirect("admin/dashboard");
+            }
 
         }
 

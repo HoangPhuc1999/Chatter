@@ -76,22 +76,6 @@ public class AddController extends HttpServlet {
         productDetails.setPrice(Double.parseDouble(request.getParameter("price")));
         productDetails.setTitle(request.getParameter("title"));
         productDetails.setDescription(request.getParameter("description"));
-//        //set image
-
-        String fullPath = request.getServletContext().getRealPath("").replace("\\", File.separator) + File.separator + "images";
-        response.getWriter().println("Write attachment to file: " + fullPath);
-
-        for (Part part : request.getParts()) {
-            String fileName = extractFileName(part);
-
-            if (fileName != null && fileName.length() > 0) {
-                String filePath = File.separator + productDetails.getName() + "_" + fileName;
-
-                // Ghi vào file.
-                part.write(filePath);
-                productDetails.setImage("/image/" + fileName);
-            }
-        }
 
         //set cateid
         String[] categoryIds = request.getParameterValues("category");
@@ -103,7 +87,33 @@ public class AddController extends HttpServlet {
 
         response.getWriter().print(productDetails);
 
-//        response.sendRedirect("../productdetail?id=1");
+        ProductDAO productDAO = new ProductDAO();
+
+        productDetails.setId(productDAO.addProductDetailsToProducts(productDetails));
+
+        //set image
+//        String fullPath = request.getServletContext().getRealPath("").replace("\\", File.separator) + File.separator + "images";
+//        response.getWriter().println("Write attachment to file: " + fullPath);
+        String fileName;
+        for (Part part : request.getParts()) {
+            fileName = extractFileName(part);
+
+            if (fileName != null && fileName.length() > 0) {
+                String filePath = File.separator + productDetails.getId() + "_" + fileName;
+
+                // Ghi vào file.
+                part.write(filePath);
+                productDetails.setImageUrl("images/" + productDetails.getId() + '_' + fileName);
+            }
+        }
+
+        productDAO.addProductDetailsToProductsImage(productDetails);
+
+        productDAO.addProductDetailsToProductsInventory(productDetails);
+
+        productDAO.addProductDetailsToProductsCategory(productDetails);
+
+        response.sendRedirect("../productdetail?id=" + productDetails.getId());
     }
 
     /**
