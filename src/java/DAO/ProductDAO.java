@@ -7,9 +7,14 @@ package DAO;
 
 import context.DBContext;
 import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.*;
 
 /**
@@ -252,6 +257,56 @@ public class ProductDAO extends DAO {
         }
         return productDetailses;
     }
+    
+//    public boolean addProductDetails(ProductDetails pd){
+//        int pdid = 0;
+//        try {
+//            String sql = "INSERT INTO [users]\n"
+//                    + "           ([firstname]\n"
+//                    + "           ,[lastname]\n"
+//                    + "           ,[phonenumber]\n"
+//                    + "           ,[email]\n"
+//                    + "           ,[gender]\n"
+//                    + "           ,[avatar])\n"
+//                    + "     VALUES\n"
+//                    + "           (?\n"
+//                    + "           ,?\n"
+//                    + "           ,?\n"
+//                    + "           ,?\n"
+//                    + "           ,?\n"
+//                    + "           ,?)";
+//            PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+//
+//            statement.setString(1, user.getFirstname() == null || user.getFirstname().trim().length() == 0 ? "Your first name" : user.getFirstname());
+//            statement.setString(2, user.getLastname() == null || user.getLastname().trim().length() == 0 ? "Your last name" : user.getLastname());
+//            statement.setString(3, user.getPhonenumber());
+//            statement.setString(4, user.getEmail());
+//            statement.setBoolean(5, user.getGender().equals("male"));
+//            statement.setString(6, user.getAvatar());
+//
+//            statement.executeUpdate();
+//
+//            ResultSet resultSet = statement.getGeneratedKeys();
+//
+//            while (resultSet.next()) {
+//                userid = resultSet.getInt(1);
+//                xSql = "INSERT INTO [users_role]\n"
+//                        + "           ([users_id]\n"
+//                        + "           ,[user_role])\n"
+//                        + "     VALUES\n"
+//                        + "           (?\n"
+//                        + "           ,?)";
+//                PreparedStatement prepareStatement = connection.prepareStatement(xSql);
+//                prepareStatement.setInt(1, userid);
+//                prepareStatement.setString(2, user.getRole());
+//                prepareStatement.executeUpdate();
+//
+//            }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return userid;
+//    }
 
     public static void main(String[] args) {
         ProductDAO dao = new ProductDAO();
