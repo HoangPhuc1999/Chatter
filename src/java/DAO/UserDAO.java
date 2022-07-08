@@ -500,9 +500,8 @@ public class UserDAO extends DAO {
 
     /**
      *
-     * Do Tuan Phong: lay du lieu day du cua user bang userid chac la xong, chua
-     * check
-     *
+     * Do Tuan Phong: lay du lieu day du cua user bang userid
+     * 
      * @param userid
      * @return UserDetails
      */
