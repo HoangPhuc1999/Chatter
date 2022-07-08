@@ -24,166 +24,167 @@
     </head>
 
     <body>
-        <!-- Credit card form -->
-        <section>
-            <div class="row">
-                <div class="col-md-8 mb-4">
-                    <div class="card mb-4">
-                        <div class="card-header py-3">
-                            <h5 class="mb-0">Biling details</h5>
-                        </div>
-                        <div class="card-body">
-                            <form>
-                                <!-- 2 column grid layout with text inputs for the first and last names -->
-                                <div class="row mb-4">
-                                    <div class="col">
-                                        <div class="form-outline">
-                                            <input type="text" id="form6Example1" class="form-control" />
-                                            <label class="form-label" for="form6Example1">First name</label>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="form-outline">
-                                            <input type="text" id="form6Example2" class="form-control" />
-                                            <label class="form-label" for="form6Example2">Last name</label>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Text input -->
-                                <div class="form-outline mb-4">
-                                    <input type="text" id="form6Example3" class="form-control" />
-                                    <label class="form-label" for="form6Example3">Company name</label>
-                                </div>
-
-                                <!-- Text input -->
-                                <div class="form-outline mb-4">
-                                    <input type="text" id="form6Example4" class="form-control" />
-                                    <label class="form-label" for="form6Example4">Address</label>
-                                </div>
-
-                                <!-- Email input -->
-                                <div class="form-outline mb-4">
-                                    <input type="email" id="form6Example5" class="form-control" />
-                                    <label class="form-label" for="form6Example5">Email</label>
-                                </div>
-
-                                <!-- Number input -->
-                                <div class="form-outline mb-4">
-                                    <input type="number" id="form6Example6" class="form-control" />
-                                    <label class="form-label" for="form6Example6">Phone</label>
-                                </div>
-
-                                <hr class="my-4" />
-
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="checkoutForm1" />
-                                    <label class="form-check-label" for="checkoutForm1">
-                                        Shipping address is the same as my billing address
-                                    </label>
-                                </div>
-
-                                <div class="form-check mb-4">
-                                    <input class="form-check-input" type="checkbox" value="" id="checkoutForm2" checked />
-                                    <label class="form-check-label" for="checkoutForm2">
-                                        Save this information for next time
-                                    </label>
-                                </div>
-
-                                <hr class="my-4" />
-
-                                <h5 class="mb-4">Payment</h5>
-
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="checkoutForm3" checked />
-                                    <label class="form-check-label" for="checkoutForm3">
-                                        Credit card
-                                    </label>
-                                </div>
-
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="checkoutForm4" />
-                                    <label class="form-check-label" for="checkoutForm4">
-                                        Debit card
-                                    </label>
-                                </div>
-
-                                <div class="form-check mb-4">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="checkoutForm5" />
-                                    <label class="form-check-label" for="checkoutForm5">
-                                        Paypal
-                                    </label>
-                                </div>
-
-                                <div class="row mb-4">
-                                    <div class="col">
-                                        <div class="form-outline">
-                                            <input type="text" id="formNameOnCard" class="form-control" />
-                                            <label class="form-label" for="formNameOnCard">Name on card</label>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="form-outline">
-                                            <input type="text" id="formCardNumber" class="form-control" />
-                                            <label class="form-label" for="formCardNumber">Credit card number</label>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row mb-4">
-                                    <div class="col-3">
-                                        <div class="form-outline">
-                                            <input type="text" id="formExpiration" class="form-control" />
-                                            <label class="form-label" for="formExpiration">Expiration</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-3">
-                                        <div class="form-outline">
-                                            <input type="text" id="formCVV" class="form-control" />
-                                            <label class="form-label" for="formCVV">CVV</label>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <button class="btn btn-primary btn-lg btn-block" type="submit">
-                                    Continue to checkout
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4 mb-4">
-                    <div class="card mb-4">
-                        <div class="card-header py-3">
-                            <h5 class="mb-0">Summary</h5>
-                        </div>
-                        <div class="card-body">
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
-                                    Products
-                                    <span>$53.98</span>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                                    Shipping
-                                    <span>Gratis</span>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
-                                    <div>
-                                        <strong>Total amount</strong>
-                                        <strong>
-                                            <p class="mb-0">(including VAT)</p>
-                                        </strong>
-                                    </div>
-                                    <span><strong>$53.98</strong></span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+        <section style="background-color: #eee;">
+  <div class="container py-5">
+    <div class="card">
+      <div class="card-body">
+        <div class="row d-flex justify-content-center pb-5">
+          <div class="col-md-7 col-xl-5 mb-4 mb-md-0">
+            <div class="py-4 d-flex flex-row">
+              <h5><span class="far fa-check-square pe-2"></span><b>ELIGIBLE</b> |</h5>
+              <span class="ps-2">Pay</span>
             </div>
-        </section>
-        <!-- Credit card form -->
+            <h4 class="text-success">$85.00</h4>
+            <h4>Diabetes Pump & Supplies</h4>
+            <div class="row mb-4">
+                <div class="col">
+                  <div class="form-outline">
+                    <input type="text" id="form6Example1" class="form-control" />
+                    <label class="form-label" for="form6Example1">First name</label>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-outline">
+                    <input type="text" id="form6Example2" class="form-control" />
+                    <label class="form-label" for="form6Example2">Last name</label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Text input -->
+              <div class="form-outline mb-4">
+                <input type="text" id="form6Example3" class="form-control" />
+                <label class="form-label" for="form6Example3">Company name</label>
+              </div>
+
+              <!-- Text input -->
+              <div class="form-outline mb-4">
+                <input type="text" id="form6Example4" class="form-control" />
+                <label class="form-label" for="form6Example4">Address</label>
+              </div>
+
+              <!-- Email input -->
+              <div class="form-outline mb-4">
+                <input type="email" id="form6Example5" class="form-control" />
+                <label class="form-label" for="form6Example5">Email</label>
+              </div>
+
+              <!-- Number input -->
+              <div class="form-outline mb-4">
+                <input type="number" id="form6Example6" class="form-control" />
+                <label class="form-label" for="form6Example6">Phone</label>
+              </div>
+            
+            <hr />
+            <div class="pt-2">
+              <div class="d-flex pb-2">
+                <div>
+                  <p>
+                    <b>Patient Balance <span class="text-success">$13.24</span></b>
+                  </p>
+                </div>
+                <div class="ms-auto">
+                  <p class="text-primary">
+                    <i class="fas fa-plus-circle text-primary pe-1"></i>Add payment card
+                  </p>
+                </div>
+              </div>
+              <p>
+                This is an estimate for the portion of your order (not covered by
+                insurance) due today . once insurance finalizes their review refunds
+                and/or balances will reconcile automatically.
+              </p>
+              <form class="pb-3">
+                <div class="d-flex flex-row pb-3">
+                  <div class="d-flex align-items-center pe-2">
+                    <input class="form-check-input" type="radio" name="radioNoLabel" id="radioNoLabel1"
+                      value="" aria-label="..." checked />
+                  </div>
+                  <div class="rounded border d-flex w-100 p-3 align-items-center">
+                    <p class="mb-0">
+                      <i class="fab fa-cc-visa fa-lg text-primary pe-2"></i>Visa Debit
+                      Card
+                    </p>
+                    <div class="ms-auto">************3456</div>
+                  </div>
+                </div>
+
+                <div class="d-flex flex-row">
+                  <div class="d-flex align-items-center pe-2">
+                    <input class="form-check-input" type="radio" name="radioNoLabel" id="radioNoLabel2"
+                      value="" aria-label="..." />
+                  </div>
+                  <div class="rounded border d-flex w-100 p-3 align-items-center">
+                    <p class="mb-0">
+                      <i class="fab fa-cc-mastercard fa-lg text-dark pe-2"></i>Mastercard
+                      Office
+                    </p>
+                    <div class="ms-auto">************1038</div>
+                  </div>
+                </div>
+              </form>
+              <input type="button" value="Proceed to payment" class="btn btn-primary btn-block btn-lg" />
+            </div>
+          </div>
+
+          <div class="col-md-5 col-xl-4 offset-xl-1">
+            <div class="py-4 d-flex justify-content-end">
+              <h6><a href="home">Cancel and return to website</a></h6>
+            </div>
+            <div class="rounded d-flex flex-column p-2" style="background-color: #f8f9fa;">
+              <div class="p-2 me-3">
+                <h4>Order Recap</h4>
+              </div>
+              <div class="p-2 d-flex">
+                <div class="col-8">Contracted Price</div>
+                <div class="ms-auto">$186.76</div>
+              </div>
+              <div class="p-2 d-flex">
+                <div class="col-8">Amount toward deductible</div>
+                <div class="ms-auto">$0.00</div>
+              </div>
+              <div class="p-2 d-flex">
+                <div class="col-8">Coinsurance( 0% )</div>
+                <div class="ms-auto">+ $0.00</div>
+              </div>
+              <div class="p-2 d-flex">
+                <div class="col-8">Copayment</div>
+                <div class="ms-auto">+ $40.00</div>
+              </div>
+              <div class="border-top px-2 mx-2"></div>
+              <div class="p-2 d-flex pt-3">
+                <div class="col-8">Total Deductible, Coinsurance, and Copay</div>
+                <div class="ms-auto">$40.00</div>
+              </div>
+              <div class="p-2 d-flex">
+                <div class="col-8">
+                  Maximum out-of-pocket on Insurance Policy (not reached)
+                </div>
+                <div class="ms-auto">$6500.00</div>
+              </div>
+              <div class="border-top px-2 mx-2"></div>
+              <div class="p-2 d-flex pt-3">
+                <div class="col-8">Insurance Responsibility</div>
+                <div class="ms-auto"><b>$71.76</b></div>
+              </div>
+              <div class="p-2 d-flex">
+                <div class="col-8">
+                  Patient Balance <span class="fa fa-question-circle text-dark"></span>
+                </div>
+                <div class="ms-auto"><b>$71.76</b></div>
+              </div>
+              <div class="border-top px-2 mx-2"></div>
+              <div class="p-2 d-flex pt-3">
+                <div class="col-8"><b>Total</b></div>
+                <div class="ms-auto"><b class="text-success">$85.00</b></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
         <!-- MDB -->
         <script type="text/javascript" src="js/mdb.min.js"></script>
