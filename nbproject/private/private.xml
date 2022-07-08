@@ -3,11 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Chatter/ChatterFinal/web/WEB-INF/web.xml</file>
-            <file>file:/D:/Chatter/ChatterFinal/src/java/bookcontroller/ManageBookingServlet.java</file>
-            <file>file:/D:/Chatter/ChatterFinal/src/java/controller/admin/user/AddController.java</file>
-            <file>file:/D:/Chatter/ChatterFinal/web/Book.jsp</file>
-            <file>file:/D:/Chatter/ChatterFinal/web/ManageBooking.jsp</file>
+            <file>file:/C:/Users/khuat/OneDrive/Desktop/FPTUniversity/2022/SEMESTER%205/SWP391/Chatter/Chatter/Chatter/src/java/reviewController/GetReviewServlet.java</file>
+            <file>file:/C:/Users/khuat/OneDrive/Desktop/FPTUniversity/2022/SEMESTER%205/SWP391/Chatter/Chatter/Chatter/src/java/DAO/UserDAO.java</file>
+            <file>file:/C:/Users/khuat/OneDrive/Desktop/FPTUniversity/2022/SEMESTER%205/SWP391/Chatter/Chatter/Chatter/src/java/DAO/CategoryDAO.java</file>
+            <file>file:/C:/Users/khuat/OneDrive/Desktop/FPTUniversity/2022/SEMESTER%205/SWP391/Chatter/Chatter/Chatter/web/About.jsp</file>
+            <file>file:/C:/Users/khuat/OneDrive/Desktop/FPTUniversity/2022/SEMESTER%205/SWP391/Chatter/Chatter/Chatter/src/java/MenuControl/MenuControl.java</file>
+            <file>file:/C:/Users/khuat/OneDrive/Desktop/FPTUniversity/2022/SEMESTER%205/SWP391/Chatter/Chatter/Chatter/src/java/DAO/OrderDAO.java</file>
+            <file>file:/C:/Users/khuat/OneDrive/Desktop/FPTUniversity/2022/SEMESTER%205/SWP391/Chatter/Chatter/Chatter/src/java/DAO/ReviewDAO.java</file>
+            <file>file:/C:/Users/khuat/OneDrive/Desktop/FPTUniversity/2022/SEMESTER%205/SWP391/Chatter/Chatter/Chatter/web/Cart.jsp</file>
+            <file>file:/C:/Users/khuat/OneDrive/Desktop/FPTUniversity/2022/SEMESTER%205/SWP391/Chatter/Chatter/Chatter/src/java/cartControler/CartControl.java</file>
+            <file>file:/C:/Users/khuat/OneDrive/Desktop/FPTUniversity/2022/SEMESTER%205/SWP391/Chatter/Chatter/Chatter/src/java/HomeController/HomeControl.java</file>
+            <file>file:/C:/Users/khuat/OneDrive/Desktop/FPTUniversity/2022/SEMESTER%205/SWP391/Chatter/Chatter/Chatter/src/java/productController/ProductDetailServlet.java</file>
+            <file>file:/C:/Users/khuat/OneDrive/Desktop/FPTUniversity/2022/SEMESTER%205/SWP391/Chatter/Chatter/Chatter/src/java/cartControler/BuyControl.java</file>
         </group>
     </open-files>
 </project-private>
