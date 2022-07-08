@@ -81,7 +81,7 @@ public class CategoryDAO extends MyDAO {
     }
 
     /**
-     * Do Tuan Phong delete a category from database
+     * Do Tuan Phong delete a category from category table
      *
      * @param categoryId
      */
@@ -98,7 +98,7 @@ public class CategoryDAO extends MyDAO {
     }
 
     /**
-     * Do Tuan Phong delete a category from database
+     * Do Tuan Phong delete a category from products_Category table
      *
      * @param categoryId
      */
