@@ -59,9 +59,17 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="orders" class="nav-link link-dark" id="orders_page">
+                        <a href="/Chatter/admin/orders" class="nav-link link-dark" id="orders_page">
                             <i class="fa-solid fa-cart-shopping"></i>
                             Orders
+                        </a>
+                        <!-- Collapsed content -->
+
+                    </li>
+                    <li>
+                        <a href="/Chatter/admin/booking" class="nav-link link-dark" id="bookings_page">
+                           <i class="fa-duotone fa-table-picnic"></i>
+                            Bookings list
                         </a>
                         <!-- Collapsed content -->
 

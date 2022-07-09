@@ -19,6 +19,7 @@
         <!-- nice select  -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" integrity="sha512-CruCP+TD3yXzlvvijET8wV5WxxEh5H8P4cmz0RFbKK6FlZ2sYl3AEsKlLPHbniXKSrDdFewhbmBK5skbdsASbQ==" crossorigin="anonymous" />
         <!-- font awesome style -->
+        <link href="https://cdn.staticaly.com/gh/hung1001/font-awesome-pro-v6/18657a9/css/all.min.css" rel="stylesheet" type="text/css" />
         <script src="https://kit.fontawesome.com/a141f28961.js" crossorigin="anonymous"></script>
 
 
@@ -29,11 +30,7 @@
         <link href="../css/adminstyle.css" rel="stylesheet" />
         <style>
 
-            .fa-lg {
-                font-size: 1.25em;
-                line-height: 1em !important;
-                vertical-align: -.075em;
-            }
+
             /*            .bdr {
                             border-radius: 10px;
                             overflow: hidden;
@@ -154,11 +151,11 @@
                 <div class="col-md-6 card p-3">
                     <div class="card-header">List Categories</div>
 
-                    <table class="bdr table table-striped table-hover  card-body">
+                    <table class="bdr table table-striped table-hover  card-body text-center">
                         <tr class>
-                            <th class="w-auto">Category ID</th>
+                            <th class="w-auto">ID</th>
                             <th class="w-auto">Category Name</th>
-                            <th class="w-auto"></th>
+                            <th class=" text-center">Action</th>
 
                         </tr>
                         <c:forEach items="${requestScope.categorys}" var="category">
@@ -169,11 +166,11 @@
                                         <span class="viewmode${category.cid}" id="view_name${category.cid}">${category.cname}</span>
                                         <input name="cname" class="form-control editmode${category.cid}" type="text" id="edit_name${category.cid}" value="${category.cname}" />
                                     </td>
-                                    <td>
+                                    <td class="text-center">
                                         <input type="hidden" name="cid" value="${category.cid}"/>
-                                        <a class="btn-outline-info btn-box btn-lg fa fa-pencil-square-o fa-lg viewmode${category.cid}" onclick="showEditmode(${category.cid});
+                                        <a class="btn-outline-info btn-box btn-lg fa fa-pencil-square-o viewmode${category.cid}" onclick="showEditmode(${category.cid});
                                                 hideViewmode(${category.cid});"/>
-                                        <a class="btn-outline-danger btn-box btn-lg fa fa-trash fa-lg viewmode${category.cid}"  href="#" onclick="deleteCategory(${category.cid})"></a>
+                                        <a class="btn-outline-danger btn-box btn-lg fa fa-trash viewmode${category.cid}"  href="#" onclick="deleteCategory(${category.cid})"></a>
                                         <input class="btn btn-outline-success btn-sm editmode${category.cid}" type="submit"  value="Save">
                                         <input class="btn btn-outline-secondary btn-sm editmode${category.cid}" type="button" onclick="cancelEdit(${category.cid}, '${category.cname}');" value="Cancel"/>
                                     </td>
