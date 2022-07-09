@@ -109,7 +109,7 @@
 
                     </div>
                     <div class="text-center">
-                        <button class="btn btn-box btn-success - col-sm-2" type="submit" id="add-product">
+                        <button class="btn btn-box btn-success col-sm-2" type="submit" id="add-product">
                             Add Product
                         </button>
                     </div>
