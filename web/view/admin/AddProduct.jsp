@@ -119,7 +119,7 @@
 
         <script>
             document.getElementById('products_page').classList.add('active');
-            document.getElementById('products_page').className.replace('link-dark', '');
+            document.getElementById('products_page').classList.remove('link-dark');
 
 
             function checkProductName() {
