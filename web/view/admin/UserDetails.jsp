@@ -28,7 +28,7 @@
         <style>
             .container-content{
                 background: rgba(255,255,255,0.4);
-                
+
             }
             .avatar {
                 border-radius: 50%;
@@ -46,24 +46,25 @@
         <link href="../css/adminstyle.css" rel="stylesheet" />
         <title> Chatter </title>
         <script>
-            function showEditmode(cid)
+            function controlEditmode(type)
             {
-                var editcomponents = document.getElementById('');
-                for (var i = 0; i < editcomponents.length; i++)
-                {
-                    var component = editcomponents[i];
-                    component.style.display = "inline";
-                }
+                var editcomponent = document.getElementById('editmode');
+                editcomponent.style.display = (type === 0) ? "none" : "inline";
             }
-            function showViewmode(cid)
+
+            function controlViewmode(type)
             {
-                var editcomponents = document.getElementsByClassName("viewmode" + cid);
-                for (var i = 0; i < editcomponents.length; i++)
-                {
-                    var component = editcomponents[i];
-                    component.style.display = "inline";
-                }
+                var viewcomponent = document.getElementById('viewmode');
+                viewcomponent.style.display = (type == 0) ? "none" : "inline";
             }
+
+            function cancelEdit(cid, cname)
+            {
+                hideEditmode(cid);
+                showViewmode(cid);
+                document.getElementById("edit_name" + cid).value = cname;
+            }
+
         </script>
     </head>
     <body class="row main_content">
@@ -91,7 +92,8 @@
                 </li>
 
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Orders history</button>
+                    <button class="nav-link" id="order-tab" data-bs-toggle="tab" data-bs-target="#order"
+                            type="button" role="tab" aria-controls="order" aria-selected="false">Orders history</button>
                 </li>
 
                 <li class="nav-item" role="presentation">
@@ -102,155 +104,304 @@
             <div class="tab-content" id="myTabContent">
 
                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                    
-                    <div class="container-content border border-light rounded row" id="UserDetails">
-                        <div class="col-6 row g-2">
-                            <div class="col-8">
-                                <div class="card border-info ">
-                                    <div class=" card-header">
-                                        <i class="fa-duotone fa-ballot"></i>
-                                        General Info</div>
+                    <div id="viewmode">
+                        <div class="container-content border border-light rounded row" id="UserDetails">
+                            <div class="col-5 row g-2">
+                                <div class="col-10">
+                                    <div class="card border-info ">
+                                        <div class=" card-header">
+                                            <i class="fa-duotone fa-ballot"></i>
+                                            General Info</div>
 
-                                    <div class="card-body row row-cols-6 row-cols-lg-2 g-2 g-lg-3">
-                                        <div class="col">
-                                            <i class="fa-duotone fa-square-1"></i>
-                                            First name<br>
-                                        </div>
-                                        <div class="col">
-                                            ${user.firstname}<br>
-                                        </div>
+                                        <div class="card-body row row-cols-6 row-cols-lg-2 g-2 g-lg-3">
+                                            <div class="col">
+                                                <i class="fa-duotone fa-square-1"></i>
+                                                First name<br>
+                                            </div>
+                                            <div class="col">
+                                                ${user.firstname}<br>
+                                            </div>
 
-                                        <div class="col">
-                                            <i class="fa-duotone fa-circle-0"></i>
-                                            Last name<br>
-                                        </div>
-                                        <div class="col">
-                                            ${user.lastname}<br>
-                                        </div>
+                                            <div class="col">
+                                                <i class="fa-duotone fa-circle-0"></i>
+                                                Last name<br>
+                                            </div>
+                                            <div class="col">
+                                                ${user.lastname}<br>
+                                            </div>
 
-                                        <div class="col">
-                                            <i class="fa-duotone fa-venus-mars"></i>
-                                            Gender<br>
-                                        </div>
-                                        <div class="col">
-                                            ${user.gender}<br>
-                                        </div>
+                                            <div class="col">
+                                                <i class="fa-duotone fa-venus-mars"></i>
+                                                Gender<br>
+                                            </div>
+                                            <div class="col">
+                                                ${user.gender}<br>
+                                            </div>
 
-                                        <div class="col">
-                                            <i class="fa-solid fa-person-military-pointing"></i>
-                                            Role<br>
-                                        </div>
-                                        <div class="col">
-                                            ${user.role}<br>
-                                        </div>
+                                            <div class="col">
+                                                <i class="fa-solid fa-person-military-pointing"></i>
+                                                Role<br>
+                                            </div>
+                                            <div class="col">
+                                                ${user.role}<br>
+                                            </div>
 
-                                        <div class="col">
-                                            <i class="fa-solid fa-mobile-retro"></i>
-                                            Phone number<br>
-                                        </div>
-                                        <div class="col">
-                                            ${user.phonenumber}<br>
-                                        </div>
+                                            <div class="col">
+                                                <i class="fa-solid fa-mobile-retro"></i>
+                                                Phone number<br>
+                                            </div>
+                                            <div class="col">
+                                                ${user.phonenumber}<br>
+                                            </div>
 
-                                        <div class="col">
-                                            <i class="fa-duotone fa-envelopes"></i>                                   
-                                            Email<br>
-                                        </div>
-                                        <div class="col">
-                                            ${user.email}<br>
+                                            <div class="col">
+                                                <i class="fa-duotone fa-envelopes"></i>                                   
+                                                Email<br>
+                                            </div>
+                                            <div class="col">
+                                                ${user.email}<br>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+
+                            <!--Address-->
+
+                            <div class="col-5 row g-2">
+                                <div class="col-9">
+                                    <div class="card border-info ">
+                                        <div class=" card-header">
+                                            <i class="fa-duotone fa-address-book"></i>
+                                            Address</div>
+
+                                        <div class="card-body row row-cols-5 row-cols-lg-2 g-2 g-lg-3">
+                                            <div class="col">
+                                                <i class="fa-duotone fa-house-tree"></i>
+                                                Home address<br>
+                                            </div>
+                                            <div class="col">
+                                                ${user.home_address}<br>
+                                            </div>
+
+                                            <div class="col">
+                                                <i class="fa-duotone fa-house-building"></i>
+                                                District<br>
+                                            </div>
+                                            <div class="col">
+                                                ${user.district}<br>
+                                            </div>
+
+                                            <div class="col">
+                                                <i class="fa-duotone fa-city"></i>
+                                                City<br>
+                                            </div>
+                                            <div class="col">
+                                                ${user.city}<br>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col text-end p-3">
+                                <button class="btn btn-outline-info btn-box fa fa-pencil-square-o" 
+                                        onclick="controlEditmode(1);controlViewmode(0);"> Edit</button>
+
                             </div>
                         </div>
 
-                        <!--Address-->
+                    </div>
 
-                        <div class="col-6 row g-2">
-                            <div class="col-9">
-                                <div class="card border-info ">
-                                    <div class=" card-header">
-                                        <i class="fa-duotone fa-address-book"></i>
-                                        Address</div>
+                    <!--Edit mode-->
+                    <div id="editmode">
+                        <form class=" form-control">
+                            <div class="container-content border border-light rounded row" id="UserDetails">
+                                <div class="col-6 row g-2">
+                                    <div class="col-11">
+                                        <div class="card border-info ">
+                                            <div class=" card-header">
+                                                <i class="fa-duotone fa-ballot"></i>
+                                                General Info</div>
 
-                                    <div class="card-body row row-cols-5 row-cols-lg-2 g-2 g-lg-3">
-                                        <div class="col">
-                                            <i class="fa-duotone fa-house-tree"></i>
-                                            Home address<br>
-                                        </div>
-                                        <div class="col">
-                                            ${user.home_address}<br>
-                                        </div>
+                                            <div class="card-body row row-cols-6 row-cols-lg-2 g-2 g-lg-3">
+                                                <div class="col">
+                                                    <i class="fa-duotone fa-square-1"></i>
+                                                    First name
+                                                </div>
+                                                <div class="col">
+                                                    <input type="text" required class="form-control" autofocus  value="${user.firstname}" name="firstname"/>
+                                                </div>
 
-                                        <div class="col">
-                                            <i class="fa-duotone fa-house-building"></i>
-                                            District<br>
-                                        </div>
-                                        <div class="col">
-                                            ${user.district}<br>
-                                        </div>
+                                                <div class="col">
+                                                    <i class="fa-duotone fa-circle-0"></i>
+                                                    Last name
+                                                </div>
+                                                <div class="col">
+                                                    <input type="text" class="form-control" required  value="${user.lastname}" name="lastname"/>
+                                                </div>
 
-                                        <div class="col">
-                                            <i class="fa-duotone fa-city"></i>
-                                            City<br>
-                                        </div>
-                                        <div class="col">
-                                            ${user.city}<br>
-                                        </div>
+                                                <div class="col">
+                                                    <i class="fa-duotone fa-venus-mars"></i>
+                                                    Gender<br>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="gender" id="genderMale"
+                                                               ${user.gender eq 'male'?'checked':''} value="male">
+                                                        <label class="form-check-label" for="genderMale">Male</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" ${user.gender eq 'female'?'checked':''} type="radio" name="gender" id="genderFemale" value="female">
+                                                        <label class="form-check-label" for="genderFemale">Female</label>
+                                                    </div>
+                                                </div>
+                                                <div class="row g-0 justify-content-between">
+                                                    <div class="col-6 col-md-8 g-3">
+                                                        <i class="fa-solid fa-person-military-pointing"></i>
+                                                        Role
+                                                    </div>
+                                                    <div class="col-6 col-md-1 p-1 ">
+                                                        <div class="btn-group col-md-0 form-check" role="group" aria-label="" id="role">
 
+                                                            <input type="radio" class="btn-check" ${user.role eq 'user'?'checked':''} name="role" value="user" id="btnradio1">
+                                                            <label class="btn btn-outline-primary" for="btnradio1">User</label>
+
+                                                            <input type="radio" class="btn-check" ${user.role eq 'seller'?'checked':''} name="role" value="seller" id="btnradio2">
+                                                            <label class="btn btn-outline-primary" for="btnradio2">Seller</label>
+
+                                                            <input type="radio" class="btn-check" ${user.role eq 'admin'?'checked':''} name="role" value="admin" id="btnradio3">
+                                                            <label class="btn btn-outline-primary" for="btnradio3">Admin</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col"></div>
+
+                                                <div class="col">
+                                                    <i class="fa-solid fa-mobile-retro"></i>
+                                                    Phone number
+                                                </div>
+                                                <div class="col">
+                                                    <input id="inputPhonenumber" name="phonenumber" type="tel" value="${requestScope.user.phonenumber}"  required class="form-control" placeholder="0906111111" pattern="^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$" title="Please input a phone number in Vietnam (10 digits)" value=${phone} >
+                                                </div>
+
+                                                <div class="col">
+                                                    <i class="fa-duotone fa-envelopes"></i>                                   
+                                                    Email
+                                                </div>
+                                                <div class="col">
+                                                    <input id="inputEmail" name="email" type="email" value="${user.email}" class="form-control" placeholder="mee@example.com" required value=${email}>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <!--Address-->
+
+                                <div class="col-6 row g-2">
+                                    <div class="col-12">
+                                        <div class="card border-info ">
+                                            <div class=" card-header">
+                                                <i class="fa-duotone fa-address-book"></i>
+                                                Address</div>
+
+                                            <div class="card-body row row-cols-5 row-cols-lg-2 g-2 g-lg-3">
+                                                <div class="col">
+                                                    <i class="fa-duotone fa-house-tree"></i>
+                                                    Home address<br>
+                                                </div>
+                                                <div class="col">
+                                                    ${user.home_address}<br>
+                                                </div>
+
+                                                <div class="col">
+                                                    <i class="fa-duotone fa-house-building"></i>
+                                                    District<br>
+                                                </div>
+                                                <div class="col">
+                                                    ${user.district}<br>
+                                                </div>
+
+                                                <div class="col">
+                                                    <i class="fa-duotone fa-city"></i>
+                                                    City<br>
+                                                </div>
+                                                <div class="col">
+                                                    ${user.city}<br>
+                                                </div>
+
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>                
-
+                        </form>
+                        <div class="col text-center">
+                            <button class="btn btn-outline-success btn-box me-md-4" 
+                                    onclick="controlEditmode(0);controlViewmode(1);">
+                                <i class="fa-duotone fa-file-lines"></i>                                Save
+                            </button>
+                            <button class="btn btn-outline-danger btn-box" 
+                                    onclick="controlEditmode(0);controlViewmode(1);">
+                                <i class="fa-duotone fa-eraser"></i>
+                                Cancel
+                            </button>
+                        </div>
                     </div>
                 </div>
 
-            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                
+                <div class="tab-pane fade" id="order" role="tabpanel" aria-labelledby="order-tab">
+                    aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                </div>
+                <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
             </div>
-            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+
+
+
+
         </div>
 
+        <script>
+
+            controlViewmode(0);
+
+            document.getElementById('users_page').classList.add('active');
+            document.getElementById('users_page').className.replace('link-dark', '');
 
 
+            function checkUsername() {
+                let username = document.getElementById('username').value;
+                const isDumlicate = usernames.some(element => {
+                    return element === username;
+                });
 
-    </div>
-
-    <script>
-        document.getElementById('users_page').classList.add('active');
-        document.getElementById('users_page').className.replace('link-dark', '');
-
-
-        function checkUsername() {
-            let username = document.getElementById('username').value;
-            const isDumlicate = usernames.some(element => {
-                return element === username;
-            });
-
-            if (isDumlicate) {
-                document.getElementById('dumlicate_username').style.color = 'red';
-                document.getElementById('dumlicate_username').innerHTML =
-                        'Username already exist!';
-                document.getElementById('add-user').disabled = true;
-                document.getElementById('add-user').style.opacity = (0.4);
-            } else if (username === '') {
-                document.getElementById('dumlicate_username').style.color = 'red';
-                document.getElementById('dumlicate_username').innerHTML =
-                        'Please enter a username!';
-                document.getElementById('add-user').disabled = true;
-                document.getElementById('add-user').style.opacity = (0.4);
-            } else
-            {
-                document.getElementById('dumlicate_username').style.color = 'green';
-                document.getElementById('dumlicate_username').innerHTML =
-                        'Valid Username ';
-                document.getElementById('add-user').disabled = false;
-                document.getElementById('add-user').style.opacity = (1);
+                if (isDumlicate) {
+                    document.getElementById('dumlicate_username').style.color = 'red';
+                    document.getElementById('dumlicate_username').innerHTML =
+                            'Username already exist!';
+                    document.getElementById('add-user').disabled = true;
+                    document.getElementById('add-user').style.opacity = (0.4);
+                } else if (username === '') {
+                    document.getElementById('dumlicate_username').style.color = 'red';
+                    document.getElementById('dumlicate_username').innerHTML =
+                            'Please enter a username!';
+                    document.getElementById('add-user').disabled = true;
+                    document.getElementById('add-user').style.opacity = (0.4);
+                } else
+                {
+                    document.getElementById('dumlicate_username').style.color = 'green';
+                    document.getElementById('dumlicate_username').innerHTML =
+                            'Valid Username ';
+                    document.getElementById('add-user').disabled = false;
+                    document.getElementById('add-user').style.opacity = (1);
+                }
             }
-        }
-    </script>  
+        </script>  
 
-</body>
+    </body>
 </html>
 
