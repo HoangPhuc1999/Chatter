@@ -109,7 +109,7 @@
 
                     </div>
                     <div class="text-center">
-                        <button class="btn btn-box btn-success - col-sm-2" type="submit" id="add-product">
+                        <button class="btn btn-box btn-success col-sm-2" type="submit" id="add-product">
                             Add Product
                         </button>
                     </div>
@@ -119,7 +119,7 @@
 
         <script>
             document.getElementById('products_page').classList.add('active');
-            document.getElementById('products_page').className.replace('link-dark', '');
+            document.getElementById('products_page').classList.remove('link-dark');
 
 
             function checkProductName() {

@@ -249,8 +249,8 @@ public class ProductDAO extends DAO {
                     productDetailses.add(productDetails);
 
                 } else {
-                    productDetailses.get(productDetailses.size() - 1).getCategorys().add(
-                            new Category(rs.getInt(14), rs.getString("category_name")));
+                    productDetailses.get(productDetailses.size() - 1).getCategorys()
+                            .add(new Category(rs.getInt(14), rs.getString("category_name")));
                 }
             }
 
@@ -267,7 +267,7 @@ public class ProductDAO extends DAO {
      * @param ProductDetails
      * @return int new product id
      */
-    public int addProductDetailsToDBproducts(ProductDetails pd) {
+    public int addProductDetailsToProducts(ProductDetails pd) {
         try {
             String sql = "INSERT INTO [products]\n"
                     + "           ([product_name]\n"
@@ -299,14 +299,13 @@ public class ProductDAO extends DAO {
     }
 
     /**
-     * Do Tuan Phong: insert to products_image table 
-     * should get productid from
+     * Do Tuan Phong: insert to products_image table, should get productid from
      * addProductDetailsToDBproducts
      *
      * @param ProductDetails
-     * @return boolean
+     * @return boolean is executeUpdate successful insert to Database
      */
-    public boolean addProductDetailsToDBproductsImage(ProductDetails pd) {
+    public boolean addProductDetailsToProductsImage(ProductDetails pd) {
         try {
             String sql = "INSERT INTO [products_image]\n"
                     + "           ([product_id]\n"
@@ -321,44 +320,86 @@ public class ProductDAO extends DAO {
             statement.setInt(1, pd.getId());
             statement.setString(2, pd.getImage());
             statement.setTimestamp(3, Timestamp.valueOf(pd.getCreateAt()));
-            statement.executeUpdate();
+            return statement.executeUpdate() != 0;
 
         } catch (SQLException ex) {
             Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
-    
-//    /**
-//     * Do Tuan Phong: insert to products_image table 
-//     * should get productid from
-//     * addProductDetailsToDBproducts
-//     *
-//     * @param ProductDetails
-//     * @return boolean
-//     */
-//    public boolean addProductDetailsToDBproductsImage(ProductDetails pd) {
-//        try {
-//            String sql = "INSERT INTO [products_image]\n"
-//                    + "           ([product_id]\n"
-//                    + "           ,[product_image_path]\n"
-//                    + "           ,[modified_at])\n"
-//                    + "     VALUES\n"
-//                    + "           (?\n"
-//                    + "           ,?\n"
-//                    + "           ,?)";
-//            PreparedStatement statement = connection.prepareStatement(sql);
-//
-//            statement.setInt(1, pd.getId());
-//            statement.setString(2, pd.getImage());
-//            statement.setTimestamp(3, Timestamp.valueOf(pd.getCreateAt()));
-//            statement.executeUpdate();
-//
-//        } catch (SQLException ex) {
-//            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        return false;
-//    }
+
+    /**
+     * Do Tuan Phong: insert to products_image table, should get productid from
+     * addProductDetailsToDBproducts
+     *
+     * @param ProductDetails
+     * @return boolean is executeUpdate successful insert to Database
+     */
+    public boolean addProductDetailsToProductsInventory(ProductDetails pd) {
+        try {
+            String sql = "INSERT INTO [products_inventory]\n"
+                    + "           ([product_id]\n"
+                    + "           ,[product_quantity]\n"
+                    + "           ,[modified_at]\n"
+                    + "           ,[created_at])\n"
+                    + "     VALUES\n"
+                    + "           (?\n"
+                    + "           ,?\n"
+                    + "           ,?\n"
+                    + "           ,?)";
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            statement.setInt(1, pd.getId());
+            statement.setInt(2, pd.getQuantity());
+            statement.setTimestamp(3, Timestamp.valueOf(pd.getModifyAt()));
+            statement.setTimestamp(4, Timestamp.valueOf(pd.getCreateAt()));
+            return statement.executeUpdate() != 0;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
+    /**
+     * Do Tuan Phong: insert to products_category table, should get productid
+     * from addProductDetailsToDBproducts
+     *
+     * @param pd
+     * @return boolean: is executeUpdate successful insert to Database
+     */
+    public boolean addProductDetailsToProductsCategory(ProductDetails pd) {
+        try {
+            int size = pd.getCategorys().size();
+
+            if (size == 0) {
+                return false;
+            }
+
+            String sql = "INSERT INTO [products_category]\n"
+                    + "           ([product_id]\n"
+                    + "           ,[category_id])\n"
+                    + "     VALUES\n";
+
+            for (int i = 0; i < size; i++) {
+                sql += "           (?\n"
+                        + "           ,?)" + (i == size - 1 ? "" : ",\n");
+            }
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            for (int i = 0; i < size; i++) {
+                statement.setInt(2 * i + 1, pd.getId());
+                statement.setInt(2 * i + 2, pd.getCategorys().get(i).getCid());
+            }
+
+            return statement.executeUpdate() != 0;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
 
     public static void main(String[] args) {
         ProductDAO dao = new ProductDAO();
