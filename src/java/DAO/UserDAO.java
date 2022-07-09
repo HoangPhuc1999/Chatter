@@ -29,7 +29,7 @@ public class UserDAO extends DAO {
      */
     public UserAccount getUser(String xUserName, String xPass) {
         xSql = "select ua.users_id users_id, user_role\n"
-                + "from users_account ua right join users_role ur on ua.users_id = ur.users_id\n"
+                + "from users_account ua LEFT JOIN users_role ur ON ua.users_id = ur.users_id\n"
                 + "where username = ? and password = ?";
         UserAccount x = null;
         int user_id;
