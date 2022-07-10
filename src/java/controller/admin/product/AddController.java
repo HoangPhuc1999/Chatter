@@ -10,6 +10,9 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -85,8 +88,6 @@ public class AddController extends HttpServlet {
         }
         productDetails.setCategorys(categorys);
 
-        response.getWriter().print(productDetails);
-
         ProductDAO productDAO = new ProductDAO();
 
         productDetails.setId(productDAO.addProductDetailsToProducts(productDetails));
@@ -97,13 +98,14 @@ public class AddController extends HttpServlet {
         String fileName;
         for (Part part : request.getParts()) {
             fileName = extractFileName(part);
+            String extension = fileName.substring(fileName.lastIndexOf('.')-1);
 
             if (fileName != null && fileName.length() > 0) {
-                String filePath = File.separator + productDetails.getId() + "_" + fileName;
+                String filePath = File.separator + "product_" + productDetails.getId() + productDetails.getName() + extension;
 
                 // Ghi vào file.
                 part.write(filePath);
-                productDetails.setImageUrl("images/" + productDetails.getId() + '_' + fileName);
+                productDetails.setImageUrl("images/" + "product_" + productDetails.getId() + productDetails.getName() + extension);
             }
         }
 
@@ -112,6 +114,11 @@ public class AddController extends HttpServlet {
         productDAO.addProductDetailsToProductsInventory(productDetails);
 
         productDAO.addProductDetailsToProductsCategory(productDetails);
+        try {
+            TimeUnit.MILLISECONDS.sleep(500);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(AddController.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         response.sendRedirect("../productdetail?id=" + productDetails.getId());
     }
