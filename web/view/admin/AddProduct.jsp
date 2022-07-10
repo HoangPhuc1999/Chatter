@@ -48,8 +48,8 @@
 
         <div class="col-sm-3 g-2">
             <jsp:include page="Sidebar.jsp" />
+        </div>
 
-        </div>   
         <div class="col-sm-9 gy-2">
             <h3 class="text-info p-3" >
                 <span class="text-info fa-duotone fa-user-group"></span>
@@ -77,18 +77,19 @@
                         <div class="col-md-6">
                             <label for="inputTitle" class="col-sm-2 col-form-label">Title</label>
                             <input id="inputTitle" name="title" type="text" class="form-control" placeholder="Example title" required value="">
-
                         </div>
+
                         <div class="col">
                         </div>
-
 
                         <div class="col-md-6 p-3">
                             <label for="inputDescription" class="col-sm-2 col-form-label">Description</label>
                             <textarea id="inputDescription" name="description" type="text" class="form-control" placeholder="Enter product description" required></textarea>
+
                         </div>
                         <div class="col-md-6">
                         </div>
+
                         <div class="g-0 p-3">
 
                             <label class="form-check-label" for="form-check">
@@ -97,17 +98,16 @@
                             <c:forEach items="${requestScope.categorys}" var="category">
                                 <input type="checkbox" class="btn-check" name="category" value="${category.cid}" id="btnradio${category.cid}">
                                 <label class="btn btn-outline-primary rounded-pill" for="btnradio${category.cid}">${category.cname}</label>
-
                             </c:forEach>
-
                         </div>
+
                         <div class="col-md-6">
                             <label for="formFile" class="form-label">Product Image</label>
                             <input accept="image/*" class="form-control" type="file" id="formFile" name="image">
                             <img id="img-preview" class="img-thumbnail" max-width=180px src="image/1.png" />
                         </div>
-
                     </div>
+
                     <div class="text-center">
                         <button class="btn btn-box btn-success col-sm-2" type="submit" id="add-product">
                             Add Product
@@ -117,6 +117,14 @@
             </div>
         </div>
 
+        <div class=" btn-dark g-md-2 row" >
+            <div class="col-2">
+            </div>
+            <div class="col-10">
+                <br>
+                <jsp:include page="../../Footer.jsp" />
+            </div>
+        </div>
         <script>
             document.getElementById('products_page').classList.add('active');
             document.getElementById('products_page').classList.remove('link-dark');
