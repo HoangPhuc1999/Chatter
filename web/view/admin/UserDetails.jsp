@@ -26,12 +26,13 @@
         <link href="https://cdn.staticaly.com/gh/hung1001/font-awesome-pro-v6/18657a9/css/all.min.css" rel="stylesheet" type="text/css" />
         <script src="https://kit.fontawesome.com/a141f28961.js" crossorigin="anonymous"></script>
         <style>
-            .container-content{
-                background: rgba(255,255,255,0.4);
+            .tab-pane{
+                background: rgba(255,255,255,0.6);
+                margin-bottom: 2%;
 
             }
             .form-control{
-                background: rgba(255,255,255,0.4);
+                background: rgba(255,255,255,0);
 
             }
             .avatar {
@@ -227,7 +228,7 @@
 
                         <!--Edit mode-->
                         <div id="editmode">
-                            <form class="form-control" action="edit_product" method="POST" class="row g-3 form-control" enctype="multipart/form-data">
+                            <form class=" form-control" action="edit_user" method="POST"  enctype="multipart/form-data">
                                 <div class="container-content border border-light rounded row" id="UserDetails">
                                     <div class="col-6 row g-2">
                                         <div class="col-11">
@@ -250,7 +251,7 @@
                                                         Last name
                                                     </div>
                                                     <div class="col">
-                                                        <input type="text" class="form-control" required  value="${user.lastname}" name="lastname"/>
+                                                        <input type="text" class="form-control"  value="${user.lastname}" name="lastname"/>
                                                     </div>
 
                                                     <div class="col">
@@ -355,14 +356,13 @@
                                                         <input type="text" class="form-control"  value="${user.city}" name="city"/>
                                                     </div>
 
+                                                    <input type="hidden" name="userid" value="${user.users_id}"/>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <input hidden value="${users_id}" name="userid"/>
-
-                                <div class="col text-center">
+                                <div class="col text-center p-3">
                                     <button class="btn btn-outline-warning btn-box me-md-4" type="submit">
                                         <i class="fa-duotone fa-file-lines"></i>
                                         Save
@@ -373,7 +373,9 @@
                                         Cancel
                                     </button>
                                 </div>
+
                             </form>
+
                         </div>
                     </div>
 
@@ -385,7 +387,7 @@
             </c:if>
         </div>
 
-        <div class=" btn-dark g-md-2 row" >
+        <div class=" btn-dark g-md-4 row" >
             <div class="col-2">
             </div>
             <div class="col-10">
@@ -396,7 +398,7 @@
 
         <script>
 
-            controlEditmode(0);
+            controlViewmode(0);
 
             document.getElementById('users_page').classList.add('active');
             document.getElementById('users_page').className.replace('link-dark', '');
