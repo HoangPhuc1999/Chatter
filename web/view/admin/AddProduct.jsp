@@ -55,7 +55,7 @@
                 <span class="text-info fa-duotone fa-user-group"></span>
                 Add new product </h3>
             <div class="form_container d-flex g-lg-6">
-                <form enctype="multipart/form-data"  action="add_product" method="POST" class="row g-3 form-control" >
+                <form action="add_product" method="POST" class="row g-3 form-control" enctype="multipart/form-data" >
                     <div class="row">
                         <div class="col-md-6">
                             <label for="inputProductname" class="col-form-label">Product name</label>
@@ -103,13 +103,13 @@
                         </div>
                         <div class="col-md-6">
                             <label for="formFile" class="form-label">Product Image</label>
-                            <input accept="image/*" class="form-control" type="file" id="formFile">
+                            <input accept="image/*" class="form-control" type="file" id="formFile" name="image">
                             <img id="img-preview" class="img-thumbnail" max-width=180px src="image/1.png" />
                         </div>
 
                     </div>
                     <div class="text-center">
-                        <button class="btn btn-box btn-success - col-sm-2" type="submit" id="add-product">
+                        <button class="btn btn-box btn-success col-sm-2" type="submit" id="add-product">
                             Add Product
                         </button>
                     </div>
@@ -119,7 +119,7 @@
 
         <script>
             document.getElementById('products_page').classList.add('active');
-            document.getElementById('products_page').className.replace('link-dark', '');
+            document.getElementById('products_page').classList.remove('link-dark');
 
 
             function checkProductName() {

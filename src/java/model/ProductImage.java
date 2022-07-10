@@ -48,6 +48,7 @@ public class ProductImage extends Product {
 
     public void setImageUrl(String url) {
         this.imageUrl = url;
+        super.setImage(url);
     }
 
     public Date getDate() {

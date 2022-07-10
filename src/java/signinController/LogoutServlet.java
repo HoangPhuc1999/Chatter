@@ -27,6 +27,9 @@ public class LogoutServlet extends HttpServlet {
         y.setMaxAge(0);
         response.addCookie(y);
         request.getSession().setAttribute("user", null);
+        request.getSession().setAttribute("user_account", null);
+        request.getSession().setAttribute("user_address", null);
+        request.getSession().setAttribute("reviewmessage", null);
         request.getRequestDispatcher("/Index.jsp").include(request, response);
     }
 

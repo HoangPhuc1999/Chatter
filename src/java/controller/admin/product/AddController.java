@@ -8,11 +8,6 @@ import DAO.CategoryDAO;
 import DAO.ProductDAO;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintWriter;
-import java.net.URL;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
@@ -23,7 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import model.Category;
-import model.Product;
 import model.ProductDetails;
 
 /**
@@ -32,31 +26,12 @@ import model.ProductDetails;
  */
 @WebServlet(name = "AddProductController", urlPatterns = {"/admin/add_product"})
 @MultipartConfig(
+        location = "F:\\FPTU\\FPT class\\Semester 5\\SWP391\\Week 7\\Code\\Chatter\\web\\images",
         fileSizeThreshold = 1024 * 1024 * 1, // 1 MB
         maxFileSize = 1024 * 1024 * 10, // 10 MB
         maxRequestSize = 1024 * 1024 * 100 // 100 MB
 )
 public class AddController extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        ProductDAO productDAO = new ProductDAO();
-        CategoryDAO categoryDAO = new CategoryDAO();
-        ArrayList<Category> categorys = categoryDAO.listAllCategory();
-        ArrayList<ProductDetails> products = (ArrayList<ProductDetails>) productDAO.getAllProductDetailses();
-        request.setAttribute("products", products);
-        request.setAttribute("categorys", categorys);
-        request.getRequestDispatcher("../view/admin/AddProduct.jsp").forward(request, response);
-    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -70,7 +45,13 @@ public class AddController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        ProductDAO productDAO = new ProductDAO();
+        CategoryDAO categoryDAO = new CategoryDAO();
+        ArrayList<Category> categorys = categoryDAO.listAllCategory();
+        ArrayList<ProductDetails> products = (ArrayList<ProductDetails>) productDAO.getAllProductDetailses();
+        request.setAttribute("products", products);
+        request.setAttribute("categorys", categorys);
+        request.getRequestDispatcher("../view/admin/AddProduct.jsp").forward(request, response);
     }
 
     /**
@@ -90,18 +71,12 @@ public class AddController extends HttpServlet {
         productDetails.setName(request.getParameter("productname"));
         LocalDateTime createAt = LocalDateTime.now();
         productDetails.setCreateAt(createAt);
+        productDetails.setModifyAt(createAt);
         productDetails.setQuantity(Integer.parseInt(request.getParameter("quantity")));
         productDetails.setPrice(Double.parseDouble(request.getParameter("price")));
         productDetails.setTitle(request.getParameter("title"));
         productDetails.setDescription(request.getParameter("description"));
-//        //set image
-        Part filePart = request.getPart("formFile");
-        response.getWriter().print(request.getServletContext().getRealPath("").replace('\\', '/')+'/' + "images");
-//        String fileName = createAt + "_" + filePart.getSubmittedFileName();
-//        for (Part part : request.getParts()) {
-//            part.write("../avartar" + fileName);
-//        }
-//        productDetails.setImage("/avartar/" + fileName);
+
         //set cateid
         String[] categoryIds = request.getParameterValues("category");
         ArrayList<Category> categorys = new ArrayList<>();
@@ -112,34 +87,57 @@ public class AddController extends HttpServlet {
 
         response.getWriter().print(productDetails);
 
-//        response.sendRedirect("../productdetail?id=1");
+        ProductDAO productDAO = new ProductDAO();
+
+        productDetails.setId(productDAO.addProductDetailsToProducts(productDetails));
+
+        //set image
+//        String fullPath = request.getServletContext().getRealPath("").replace("\\", File.separator) + File.separator + "images";
+//        response.getWriter().println("Write attachment to file: " + fullPath);
+        String fileName;
+        for (Part part : request.getParts()) {
+            fileName = extractFileName(part);
+
+            if (fileName != null && fileName.length() > 0) {
+                String filePath = File.separator + productDetails.getId() + "_" + fileName;
+
+                // Ghi vào file.
+                part.write(filePath);
+                productDetails.setImageUrl("images/" + productDetails.getId() + '_' + fileName);
+            }
+        }
+
+        productDAO.addProductDetailsToProductsImage(productDetails);
+
+        productDAO.addProductDetailsToProductsInventory(productDetails);
+
+        productDAO.addProductDetailsToProductsCategory(productDetails);
+
+        response.sendRedirect("../productdetail?id=" + productDetails.getId());
     }
 
     /**
      * Extracts file name from HTTP header content-disposition
      */
- 
-
-     private String extractFileName(Part part) {
-       // form-data; name="file"; filename="C:\file1.zip"
-       // form-data; name="file"; filename="C:\Note\file2.zip"
-       String contentDisp = part.getHeader("content-disposition");
-       String[] items = contentDisp.split(";");
-       for (String s : items) {
-           if (s.trim().startsWith("filename")) {
-               // C:\file1.zip
-               // C:\Note\file2.zip
-               String clientFileName = s.substring(s.indexOf("=") + 2, s.length() - 1);
-               clientFileName = clientFileName.replace("\\", "/");
-               int i = clientFileName.lastIndexOf('/');
-               // file1.zip
-               // file2.zip
-               return clientFileName.substring(i + 1);
-           }
-       }
-       return null;
-   }
-    
+    private String extractFileName(Part part) {
+        // form-data; name="file"; filename="C:\file1.zip"
+        // form-data; name="file"; filename="C:\Note\file2.zip"
+        String contentDisp = part.getHeader("content-disposition");
+        String[] items = contentDisp.split(";");
+        for (String s : items) {
+            if (s.trim().startsWith("filename")) {
+                // C:\file1.zip
+                // C:\Note\file2.zip
+                String clientFileName = s.substring(s.indexOf("=") + 2, s.length() - 1);
+                clientFileName = clientFileName.replace("\\", File.separator);
+                int i = clientFileName.lastIndexOf(File.separator);
+                // file1.zip
+                // file2.zip
+                return clientFileName.substring(i + 1);
+            }
+        }
+        return null;
+    }
 
     /**
      * Returns a short description of the servlet.

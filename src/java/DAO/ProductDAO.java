@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -248,8 +249,8 @@ public class ProductDAO extends DAO {
                     productDetailses.add(productDetails);
 
                 } else {
-                    productDetailses.get(productDetailses.size() - 1).getCategorys().add(
-                            new Category(rs.getInt(14), rs.getString("category_name")));
+                    productDetailses.get(productDetailses.size() - 1).getCategorys()
+                            .add(new Category(rs.getInt(14), rs.getString("category_name")));
                 }
             }
 
@@ -257,56 +258,148 @@ public class ProductDAO extends DAO {
         }
         return productDetailses;
     }
-    
-//    public boolean addProductDetails(ProductDetails pd){
-//        int pdid = 0;
-//        try {
-//            String sql = "INSERT INTO [users]\n"
-//                    + "           ([firstname]\n"
-//                    + "           ,[lastname]\n"
-//                    + "           ,[phonenumber]\n"
-//                    + "           ,[email]\n"
-//                    + "           ,[gender]\n"
-//                    + "           ,[avatar])\n"
-//                    + "     VALUES\n"
-//                    + "           (?\n"
-//                    + "           ,?\n"
-//                    + "           ,?\n"
-//                    + "           ,?\n"
-//                    + "           ,?\n"
-//                    + "           ,?)";
-//            PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-//
-//            statement.setString(1, user.getFirstname() == null || user.getFirstname().trim().length() == 0 ? "Your first name" : user.getFirstname());
-//            statement.setString(2, user.getLastname() == null || user.getLastname().trim().length() == 0 ? "Your last name" : user.getLastname());
-//            statement.setString(3, user.getPhonenumber());
-//            statement.setString(4, user.getEmail());
-//            statement.setBoolean(5, user.getGender().equals("male"));
-//            statement.setString(6, user.getAvatar());
-//
-//            statement.executeUpdate();
-//
-//            ResultSet resultSet = statement.getGeneratedKeys();
-//
-//            while (resultSet.next()) {
-//                userid = resultSet.getInt(1);
-//                xSql = "INSERT INTO [users_role]\n"
-//                        + "           ([users_id]\n"
-//                        + "           ,[user_role])\n"
-//                        + "     VALUES\n"
-//                        + "           (?\n"
-//                        + "           ,?)";
-//                PreparedStatement prepareStatement = connection.prepareStatement(xSql);
-//                prepareStatement.setInt(1, userid);
-//                prepareStatement.setString(2, user.getRole());
-//                prepareStatement.executeUpdate();
-//
-//            }
-//        } catch (SQLException ex) {
-//            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        return userid;
-//    }
+
+    /**
+     *
+     * Do Tuan Phong: insert to products table
+     *
+     *
+     * @param ProductDetails
+     * @return int new product id
+     */
+    public int addProductDetailsToProducts(ProductDetails pd) {
+        try {
+            String sql = "INSERT INTO [products]\n"
+                    + "           ([product_name]\n"
+                    + "           ,[product_price]\n"
+                    + "           ,[product_title]\n"
+                    + "           ,[product_description])\n"
+                    + "     VALUES\n"
+                    + "           (?\n"
+                    + "           ,?\n"
+                    + "           ,?\n"
+                    + "           ,?)";
+            PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+            statement.setString(1, pd.getName());
+            statement.setDouble(2, pd.getPrice());
+            statement.setString(3, pd.getTitle());
+            statement.setString(4, pd.getDescription());
+            statement.executeUpdate();
+
+            ResultSet resultSet = statement.getGeneratedKeys();
+
+            if (resultSet.next()) {
+                return resultSet.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+    /**
+     * Do Tuan Phong: insert to products_image table, should get productid from
+     * addProductDetailsToDBproducts
+     *
+     * @param ProductDetails
+     * @return boolean is executeUpdate successful insert to Database
+     */
+    public boolean addProductDetailsToProductsImage(ProductDetails pd) {
+        try {
+            String sql = "INSERT INTO [products_image]\n"
+                    + "           ([product_id]\n"
+                    + "           ,[product_image_path]\n"
+                    + "           ,[modified_at])\n"
+                    + "     VALUES\n"
+                    + "           (?\n"
+                    + "           ,?\n"
+                    + "           ,?)";
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            statement.setInt(1, pd.getId());
+            statement.setString(2, pd.getImage());
+            statement.setTimestamp(3, Timestamp.valueOf(pd.getCreateAt()));
+            return statement.executeUpdate() != 0;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
+    /**
+     * Do Tuan Phong: insert to products_image table, should get productid from
+     * addProductDetailsToDBproducts
+     *
+     * @param ProductDetails
+     * @return boolean is executeUpdate successful insert to Database
+     */
+    public boolean addProductDetailsToProductsInventory(ProductDetails pd) {
+        try {
+            String sql = "INSERT INTO [products_inventory]\n"
+                    + "           ([product_id]\n"
+                    + "           ,[product_quantity]\n"
+                    + "           ,[modified_at]\n"
+                    + "           ,[created_at])\n"
+                    + "     VALUES\n"
+                    + "           (?\n"
+                    + "           ,?\n"
+                    + "           ,?\n"
+                    + "           ,?)";
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            statement.setInt(1, pd.getId());
+            statement.setInt(2, pd.getQuantity());
+            statement.setTimestamp(3, Timestamp.valueOf(pd.getModifyAt()));
+            statement.setTimestamp(4, Timestamp.valueOf(pd.getCreateAt()));
+            return statement.executeUpdate() != 0;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
+    /**
+     * Do Tuan Phong: insert to products_category table, should get productid
+     * from addProductDetailsToDBproducts
+     *
+     * @param pd
+     * @return boolean: is executeUpdate successful insert to Database
+     */
+    public boolean addProductDetailsToProductsCategory(ProductDetails pd) {
+        try {
+            int size = pd.getCategorys().size();
+
+            if (size == 0) {
+                return false;
+            }
+
+            String sql = "INSERT INTO [products_category]\n"
+                    + "           ([product_id]\n"
+                    + "           ,[category_id])\n"
+                    + "     VALUES\n";
+
+            for (int i = 0; i < size; i++) {
+                sql += "           (?\n"
+                        + "           ,?)" + (i == size - 1 ? "" : ",\n");
+            }
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            for (int i = 0; i < size; i++) {
+                statement.setInt(2 * i + 1, pd.getId());
+                statement.setInt(2 * i + 2, pd.getCategorys().get(i).getCid());
+            }
+
+            return statement.executeUpdate() != 0;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
 
     public static void main(String[] args) {
         ProductDAO dao = new ProductDAO();

@@ -18,8 +18,19 @@ import model.*;
 public class UserDAO extends DAO {
 
     //author : phuc 
+    /**
+     * author : Phuc,
+     *
+     * Phong: add user_role
+     *
+     * @param xUserName
+     * @param xPass
+     * @return
+     */
     public UserAccount getUser(String xUserName, String xPass) {
-        xSql = "select * from users_account where username = ? and password = ?";
+        xSql = "select ua.users_id users_id, user_role\n"
+                + "from users_account ua LEFT JOIN users_role ur ON ua.users_id = ur.users_id\n"
+                + "where username = ? and password = ?";
         UserAccount x = null;
         int user_id;
         try {
@@ -31,6 +42,8 @@ public class UserDAO extends DAO {
             if (rs.next()) {
                 user_id = rs.getInt("users_id");
                 x = new UserAccount(user_id, xUserName, xPass);
+                x.setRole(rs.getString("user_role"));
+
             } else {
                 x = null;
             }
@@ -118,10 +131,10 @@ public class UserDAO extends DAO {
     //author: an 
     //edit user profile.jsp
     //29/6 
-    public void editProfile(int users_id ,User editUser, UserAccount editUserAccount, UserAddress editUserAddress) {
-        String query ="UPDATE users "
-                    + "SET firstname = ? , lastname= ? , phonenumber= ?, email= ?, gender= ?, avatar= ?"
-                    + "WHERE users_id = ? ;";
+    public void editProfile(int users_id, User editUser, UserAccount editUserAccount, UserAddress editUserAddress) {
+        String query = "UPDATE users "
+                + "SET firstname = ? , lastname= ? , phonenumber= ?, email= ?, gender= ?, avatar= ?"
+                + "WHERE users_id = ? ;";
         String query2 = "UPDATE users_account"
                 + "SET username = ? ,password =?"
                 + "WHERE users_id = ?";
@@ -165,7 +178,7 @@ public class UserDAO extends DAO {
             System.out.println(e.toString());
         }
     }
-    
+
     //author: an 
     //Them user vao 4 bang User,user account, user address, user role
     //state: insert xong bang users thi dung lai
@@ -500,8 +513,7 @@ public class UserDAO extends DAO {
 
     /**
      *
-     * Do Tuan Phong: lay du lieu day du cua user bang userid chac la xong, chua
-     * check
+     * Do Tuan Phong: lay du lieu day du cua user bang userid
      *
      * @param userid
      * @return UserDetails
@@ -612,13 +624,12 @@ public class UserDAO extends DAO {
 //        System.out.println(dao.getUserAccountById(1));
 //        System.out.println(dao.getUserRoleById(1));
 //        System.out.println(dao.getUserFromId(1));
-
-    //check edit
-    UserAccount editAcc = new UserAccount("user1","user1");  
-    UserAddress eAccAddress= new UserAddress("Hoan kiem","Hanoi","Vietnam");
-    User eAccUser = new User("make","gg","0675565454","user3@fpt.edu.vn","0",null);
-    dao.editProfile(1, eAccUser, editAcc, eAccAddress);
-    System.out.println(dao.getUserFromId(1));
+        //check edit
+        UserAccount editAcc = new UserAccount("user1", "user1");
+        UserAddress eAccAddress = new UserAddress("Hoan kiem", "Hanoi", "Vietnam");
+        User eAccUser = new User("make", "gg", "0675565454", "user3@fpt.edu.vn", "0", null);
+        dao.editProfile(1, eAccUser, editAcc, eAccAddress);
+        System.out.println(dao.getUserFromId(1));
     }
 
 }
