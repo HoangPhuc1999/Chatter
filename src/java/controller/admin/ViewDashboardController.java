@@ -29,11 +29,11 @@ public class ViewDashboardController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if (request.getRequestURI().endsWith("/admin")) {
-            response.sendRedirect("admin/dashboard");
-        } else {
-            request.getRequestDispatcher("../view/admin/Dashboard.jsp").forward(request, response);
-        }
+//        if (request.getRequestURI().endsWith("/admin")) {
+//            response.sendRedirect("admin/dashboard");
+//        } else {
+            request.getRequestDispatcher("/view/admin/Dashboard.jsp").forward(request, response);
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
