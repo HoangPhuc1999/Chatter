@@ -30,6 +30,10 @@
                 background: rgba(255,255,255,0.4);
 
             }
+            .form-control{
+                background: rgba(255,255,255,0.4);
+
+            }
             .avatar {
                 border-radius: 50%;
                 width: 50px;
@@ -82,7 +86,7 @@
             ${user}
             <div class="blockquote">
                 <div class="display-6">
-                    <img src="../avatar/female.jpg" class="avatar" alt="avatar">  ${user.account.username}
+                    <img src="/Chatter/${user.avatar}" class="avatar" alt="avatar">  ${user.account.username}
                     <em class="display-6 blockquote-footer">(User ID: ${user.users_id})</em></div></div>
 
             <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -216,7 +220,7 @@
 
                     <!--Edit mode-->
                     <div id="editmode">
-                        <form class=" form-control">
+                        <form class=" form-control ">
                             <div class="container-content border border-light rounded row" id="UserDetails">
                                 <div class="col-6 row g-2">
                                     <div class="col-11">
@@ -225,7 +229,7 @@
                                                 <i class="fa-duotone fa-ballot"></i>
                                                 General Info</div>
 
-                                            <div class="card-body row row-cols-6 row-cols-lg-2 g-2 g-lg-3">
+                                            <div class="card-body row row-cols-7 row-cols-lg-2 g-2 g-lg-3">
                                                 <div class="col">
                                                     <i class="fa-duotone fa-square-1"></i>
                                                     First name
@@ -292,7 +296,16 @@
                                                 </div>
                                                 <div class="col">
                                                     <input id="inputEmail" name="email" type="email" value="${user.email}" class="form-control" placeholder="mee@example.com" required value=${email}>
+                                                </div>
 
+                                                <div class="col">
+                                                    <i class="fa-duotone fa-camera-retro"></i>
+                                                    Avatar
+                                                </div>
+                                                <div class="col">
+                                                    <input accept="image/*" class="form-control" type="file" id="formFile" name="image">
+                                                    <p class=" text-dark"><em>Preview avatar</em><img id="img-preview" alt="preview avatar" class="avatar rounded-circle me-2 justify-content-lg-end" src="/Chatter/${user.avatar}"/>
+                                                </p>
                                                 </div>
                                             </div>
                                         </div>
@@ -343,7 +356,7 @@
                         <div class="col text-center">
                             <button class="btn btn-outline-success btn-box me-md-4" 
                                     onclick="controlEditmode(0);controlViewmode(1);">
-                                <i class="fa-duotone fa-file-lines"></i>                                Save
+                                <i class="fa-duotone fa-file-lines"></i>Save
                             </button>
                             <button class="btn btn-outline-danger btn-box" 
                                     onclick="controlEditmode(0);controlViewmode(1);">
@@ -373,33 +386,15 @@
             document.getElementById('users_page').className.replace('link-dark', '');
 
 
-            function checkUsername() {
-                let username = document.getElementById('username').value;
-                const isDumlicate = usernames.some(element => {
-                    return element === username;
-                });
+            const input = document.getElementById('formFile');
+            const image = document.getElementById('img-preview');
 
-                if (isDumlicate) {
-                    document.getElementById('dumlicate_username').style.color = 'red';
-                    document.getElementById('dumlicate_username').innerHTML =
-                            'Username already exist!';
-                    document.getElementById('add-user').disabled = true;
-                    document.getElementById('add-user').style.opacity = (0.4);
-                } else if (username === '') {
-                    document.getElementById('dumlicate_username').style.color = 'red';
-                    document.getElementById('dumlicate_username').innerHTML =
-                            'Please enter a username!';
-                    document.getElementById('add-user').disabled = true;
-                    document.getElementById('add-user').style.opacity = (0.4);
-                } else
-                {
-                    document.getElementById('dumlicate_username').style.color = 'green';
-                    document.getElementById('dumlicate_username').innerHTML =
-                            'Valid Username ';
-                    document.getElementById('add-user').disabled = false;
-                    document.getElementById('add-user').style.opacity = (1);
+            input.addEventListener('change', (e) => {
+                if (e.target.files.length) {
+                    const src = URL.createObjectURL(e.target.files[0]);
+                    image.src = src;
                 }
-            }
+            });
         </script>  
 
     </body>
