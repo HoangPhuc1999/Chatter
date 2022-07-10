@@ -363,12 +363,12 @@
                                     </div>
                                 </div>
                                 <div class="col text-center p-3">
-                                    <button class="btn btn-outline-warning btn-box me-md-4" type="submit">
+                                    <button type="submit" class="btn btn-outline-warning btn-box me-md-4">
                                         <i class="fa-duotone fa-file-lines"></i>
                                         Save
                                     </button>
 
-                                    <button class="btn btn-outline-danger btn-box" onclick="controlEditmode(0);controlViewmode(1);">
+                                    <button type="reset" class="btn btn-outline-danger btn-box" onclick="controlEditmode(0);controlViewmode(1);">
                                         <i class="fa-duotone fa-eraser"></i>
                                         Cancel
                                     </button>
@@ -398,7 +398,7 @@
 
         <script>
 
-            controlViewmode(0);
+            controlEditmode(0);
 
             document.getElementById('users_page').classList.add('active');
             document.getElementById('users_page').className.replace('link-dark', '');
