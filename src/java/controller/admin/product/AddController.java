@@ -98,14 +98,14 @@ public class AddController extends HttpServlet {
         String fileName;
         for (Part part : request.getParts()) {
             fileName = extractFileName(part);
-            String extension = fileName.substring(fileName.lastIndexOf('.')-1);
 
             if (fileName != null && fileName.length() > 0) {
-                String filePath = File.separator + "product_" + productDetails.getId() + productDetails.getName() + extension;
+                String extension = fileName.substring(fileName.lastIndexOf('.') - 1);
+                String filePath = File.separator + "product" + productDetails.getId() + '_' + productDetails.getName() + extension;
 
                 // Ghi vào file.
                 part.write(filePath);
-                productDetails.setImageUrl("images/" + "product_" + productDetails.getId() + productDetails.getName() + extension);
+                productDetails.setImageUrl("images/" + "product" + productDetails.getId() + '_' + productDetails.getName() + extension);
             }
         }
 
@@ -114,11 +114,11 @@ public class AddController extends HttpServlet {
         productDAO.addProductDetailsToProductsInventory(productDetails);
 
         productDAO.addProductDetailsToProductsCategory(productDetails);
-        try {
-            TimeUnit.MILLISECONDS.sleep(500);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(AddController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//            TimeUnit.MILLISECONDS.sleep(500);
+//        } catch (InterruptedException ex) {
+//            Logger.getLogger(AddController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
 
         response.sendRedirect("../productdetail?id=" + productDetails.getId());
     }
