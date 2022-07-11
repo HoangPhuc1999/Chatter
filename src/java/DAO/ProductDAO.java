@@ -108,7 +108,9 @@ public class ProductDAO extends DAO {
         }
         return list;
     }
-
+  
+    
+    
     public ProductImage getProductImageById(String id) {
 
         ProductImage x = new ProductImage();
@@ -200,7 +202,7 @@ public class ProductDAO extends DAO {
     }
 
     /**
-     * Do Tuan Phong Lay tu database tat ca ProductDetails
+     * Do Tuan Phong Lay tu database tat ca info ProductDetails
      *
      * @return List<ProductDetails>
      */

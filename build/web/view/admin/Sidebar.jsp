@@ -67,7 +67,7 @@
 
                     </li>
                     <li>
-                        <a href="/Chatter/admin/booking" class="nav-link link-dark" id="bookings_page">
+                        <a href="../admin/booking" class="nav-link link-dark" id="bookings_page">
                            <i class="fa-duotone fa-table-picnic"></i>
                             Bookings list
                         </a>
@@ -86,13 +86,13 @@
                             class="collapse list-group list-group-flush"
                             >
                             <li class="list-group-item py-1">
-                                <a href="/Chatter/admin/products" class="text-reset text-decoration-none">Products</a>
+                                <a href="../admin/products" class="text-reset text-decoration-none">Products</a>
                             </li>
                             <li class="list-group-item py-1">
-                                <a href="/Chatter/admin/add_product" class="text-reset text-decoration-none">Add Product</a>
+                                <a href="../admin/add_product" class="text-reset text-decoration-none">Add Product</a>
                             </li>
                             <li class="list-group-item py-1">
-                                <a href="/Chatter/admin/edit_product" class="text-reset text-decoration-none">Edit Product</a>
+                                <a href="../admin/edit_product" class="text-reset text-decoration-none">Edit Product</a>
                             </li>
                             <li class="list-group-item py-1">
                                 <a href="" class="text-reset text-decoration-none">...</a>
