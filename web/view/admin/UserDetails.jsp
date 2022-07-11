@@ -243,7 +243,7 @@
                                                         First name
                                                     </div>
                                                     <div class="col">
-                                                        <input type="text" class="form-control" autofocus pattern="^[a-z ,.'-]+$" value="${user.firstname}" name="firstname"/>
+                                                        <input type="text" class="form-control" autofocus pattern="A-Z^[a-z ,.'-]+$" value="${user.firstname}" name="firstname"/>
                                                     </div>
 
                                                     <div class="col">
@@ -251,7 +251,7 @@
                                                         Last name
                                                     </div>
                                                     <div class="col">
-                                                        <input type="text" class="form-control" pattern="^[a-z ,.'-]+$"  value="${user.lastname}" name="lastname"/>
+                                                        <input type="text" class="form-control" pattern="A-Z^[a-z ,.'-]+$"  value="${user.lastname}" name="lastname"/>
                                                     </div>
 
                                                     <div class="col">
@@ -357,7 +357,7 @@
                                                     </div>
 
                                                     <input type="hidden" name="userid" value="${user.users_id}"/>
-                                                    <input type="hidden" name="username" value="${user.username}"/>
+                                                    <input type="hidden" name="userid" value="${user.username}"/>
                                                 </div>
                                             </div>
                                         </div>
