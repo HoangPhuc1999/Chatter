@@ -357,6 +357,7 @@
                                                     </div>
 
                                                     <input type="hidden" name="userid" value="${user.users_id}"/>
+                                                    <input type="hidden" name="username" value="${user.username}"/>
                                                 </div>
                                             </div>
                                         </div>
