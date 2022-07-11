@@ -9,6 +9,7 @@ import DAO.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,19 +20,14 @@ import javax.servlet.http.HttpServletResponse;
  * @author Tuan Phong
  */
 @WebServlet(name="EditUserDetailsController", urlPatterns={"/admin/edit_user"})
+@MultipartConfig(
+        location = "F:\\FPTU\\FPT class\\Semester 5\\SWP391\\Week 7\\Code\\Chatter\\web\\images",
+        fileSizeThreshold = 1024 * 1024 * 1, // 1 MB
+        maxFileSize = 1024 * 1024 * 10, // 10 MB
+        maxRequestSize = 1024 * 1024 * 100 // 100 MB
+)
 public class EditController extends HttpServlet {
            UserDAO userDAO = new UserDAO();
-
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-    } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
@@ -44,7 +40,6 @@ public class EditController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
     } 
 
     /** 
@@ -57,9 +52,11 @@ public class EditController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
-        response.getWriter().print("fsfadsf");
-        
+               String phonenumber = request.getParameter("phonenumber");
+               String firstname = request.getParameter("firstname");
+               
+               response.getWriter().print(phonenumber + " " + firstname);
+               
     }
 
     /** 
