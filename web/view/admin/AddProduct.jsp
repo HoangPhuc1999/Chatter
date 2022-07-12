@@ -35,13 +35,13 @@
 
 
         <title> Chatter </title>
-        <script>
+<!--        <script>
             var productnames = [];
 
             <c:forEach items="${requestScope.products}" var="product">
             productnames.push('${product.name}');
             </c:forEach>
-        </script>
+        </script>-->
     </head>
     <body class="row main_content">
 
@@ -130,33 +130,33 @@
             document.getElementById('products_page').classList.remove('link-dark');
 
 
-            function checkProductName() {
-                let productname = document.getElementById('productname').value;
-                const isDumlicate = productnames.some(element => {
-                    return element === productname;
-                });
-
-                if (isDumlicate) {
-                    document.getElementById('dumlicate_productname').style.color = 'red';
-                    document.getElementById('dumlicate_productname').innerHTML =
-                            'Product already exist!';
-                    document.getElementById('add-product').disabled = true;
-                    document.getElementById('add-product').style.opacity = (0.4);
-                } else if (productname.trim() === '') {
-                    document.getElementById('dumlicate_productname').style.color = 'red';
-                    document.getElementById('dumlicate_productname').innerHTML =
-                            'Please enter the product\'s name!';
-                    document.getElementById('add-product').disabled = true;
-                    document.getElementById('add-product').style.opacity = (0.4);
-                } else
-                {
-                    document.getElementById('dumlicate_productname').style.color = 'green';
-                    document.getElementById('dumlicate_productname').innerHTML =
-                            '';
-                    document.getElementById('add-product').disabled = false;
-                    document.getElementById('add-product').style.opacity = (1);
-                }
-            }
+//            function checkProductName() {
+//                let productname = document.getElementById('productname').value;
+//                const isDumlicate = productnames.some(element => {
+//                    return element === productname;
+//                });
+//
+//                if (isDumlicate) {
+//                    document.getElementById('dumlicate_productname').style.color = 'red';
+//                    document.getElementById('dumlicate_productname').innerHTML =
+//                            'Product already exist!';
+//                    document.getElementById('add-product').disabled = true;
+//                    document.getElementById('add-product').style.opacity = (0.4);
+//                } else if (productname.trim() === '') {
+//                    document.getElementById('dumlicate_productname').style.color = 'red';
+//                    document.getElementById('dumlicate_productname').innerHTML =
+//                            'Please enter the product\'s name!';
+//                    document.getElementById('add-product').disabled = true;
+//                    document.getElementById('add-product').style.opacity = (0.4);
+//                } else
+//                {
+//                    document.getElementById('dumlicate_productname').style.color = 'green';
+//                    document.getElementById('dumlicate_productname').innerHTML =
+//                            '';
+//                    document.getElementById('add-product').disabled = false;
+//                    document.getElementById('add-product').style.opacity = (1);
+//                }
+//            }
 
             const input = document.getElementById('formFile');
             const image = document.getElementById('img-preview');
