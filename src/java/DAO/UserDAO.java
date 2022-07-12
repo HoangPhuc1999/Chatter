@@ -499,7 +499,7 @@ public class UserDAO extends DAO {
                     + "      ,[phonenumber] = ?\n"
                     + "      ,[email] = ?\n"
                     + "      ,[gender] = ?\n"
-                    + "      ,[avatar] = ?\n"
+                    + (user.getAvatar() == null ? "" : "      ,[avatar] = ?\n")
                     + " WHERE users_id = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
 
@@ -508,8 +508,12 @@ public class UserDAO extends DAO {
             statement.setString(3, user.getPhonenumber());
             statement.setString(4, user.getEmail());
             statement.setBoolean(5, user.getGender().equals("male"));
-            statement.setString(6, user.getAvatar());
-            statement.setInt(7, user.getUsers_id());
+            if (user.getAvatar() == null) {
+                statement.setInt(6, user.getUsers_id());
+            } else {
+                statement.setString(6, user.getAvatar());
+                statement.setInt(7, user.getUsers_id());
+            }
 
             return statement.executeUpdate();
 
@@ -607,13 +611,13 @@ public class UserDAO extends DAO {
      */
     public UserDetails getUserDetailsById(int userid) {
         String query = "SELECT *\n"
-                + "FROM users u LEFT JOIN users_role ur on u.users_id = ur.users_id\n"
-                + "RIGHT JOIN users_account uac on u.users_id = uac.users_id\n"
-                + "LEFT JOIN users_address uar on u.users_id = uar.users_id\n"
-                + "LEFT JOIN orders o on u.users_id = o.order_by\n"
-                + "LEFT JOIN orders_details od on o.order_id = od.order_id\n"
-                + "LEFT JOIN products p on p.product_id  = od.order_product_id\n"
-                + "LEFT JOIN products_image pi on pi.product_id = p.product_id\n"
+                + "FROM users u LEFT JOIN users_role ur ON u.users_id = ur.users_id\n"
+                + "RIGHT JOIN users_account uac ON u.users_id = uac.users_id\n"
+                + "LEFT JOIN users_address uar ON u.users_id = uar.users_id\n"
+                + "LEFT JOIN orders o ON u.users_id = o.order_by\n"
+                + "LEFT JOIN orders_details od ON o.order_id = od.order_id\n"
+                + "LEFT JOIN products p ON p.product_id  = od.order_product_id\n"
+                + "LEFT JOIN products_image pi ON pi.product_id = p.product_id\n"
                 + "WHERE u.users_id = ?";
 
         ArrayList<Order> orders = new ArrayList<>();
