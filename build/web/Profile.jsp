@@ -85,7 +85,7 @@
     <header class="header_section">
       <div class="container">
         <nav class="navbar navbar-expand-lg custom_nav-container ">
-          <a class="navbar-brand" href="Index.jsp">
+          <a class="navbar-brand" href="home">
             <span>
               Chatter
             </span>
@@ -98,7 +98,7 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav  mx-auto ">
               <li class="nav-item">
-                <a class="nav-link" href="Index.jsp">Home </a>
+                <a class="nav-link" href="home">Home </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="Menu.jsp">Menu</a>

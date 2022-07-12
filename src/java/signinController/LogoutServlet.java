@@ -30,7 +30,7 @@ public class LogoutServlet extends HttpServlet {
         request.getSession().setAttribute("user_account", null);
         request.getSession().setAttribute("user_address", null);
         request.getSession().setAttribute("reviewmessage", null);
-        request.getRequestDispatcher("/Index.jsp").include(request, response);
+        request.getRequestDispatcher("/home").include(request, response);
     }
 
 }

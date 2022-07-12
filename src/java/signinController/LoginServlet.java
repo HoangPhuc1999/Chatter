@@ -50,7 +50,7 @@ public class LoginServlet extends HttpServlet {
         x = t.getUser(xName, xPass);
 
         if (x == null) {
-            request.setAttribute("message", "Sign up Fail");
+            request.setAttribute("message", "Sign in Fail");
             request.setAttribute("warning", "Check your username and password");
             request.getRequestDispatcher("Login.jsp").forward(request, response);
         } else {

@@ -122,7 +122,7 @@ public class UserFilter implements Filter {
         if (isLoggedIn && (isLoginRequest || isLoginPage)) {
             // the user is already logged in and he's trying to login again
             // then forward to the homepage
-            httpRequest.getRequestDispatcher("/Index.jsp").forward(request, response);
+            httpRequest.getRequestDispatcher("/home").forward(request, response);
  
         } else if (!isLoggedIn && isLoginRequired()) {
             // the user is not logged in, and the requested page requires

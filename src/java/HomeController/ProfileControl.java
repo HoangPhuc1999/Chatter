@@ -98,7 +98,7 @@ public class ProfileControl extends HttpServlet {
                 String phone = request.getParameter("phonenumber");
                 String email = request.getParameter("email");
                 String gender = request.getParameter("gender");
-                String avapath=request.getParameter("avatar");;
+                String avapath=request.getParameter("avatar");
                 
                 UserDAO udao = new UserDAO();
                 UserAccount editAcc = new UserAccount(user, pass);
