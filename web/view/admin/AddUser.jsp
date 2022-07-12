@@ -98,8 +98,8 @@
                                 Role
                             </label>
 
-                            <input type="radio" class="btn-check" name="role" value="customer" id="btnradio1" checked>
-                            <label class="btn btn-outline-primary" for="btnradio1">Customer</label>
+                            <input type="radio" class="btn-check" name="role" value="user" id="btnradio1" checked>
+                            <label class="btn btn-outline-primary" for="btnradio1">User</label>
 
                             <input type="radio" class="btn-check" name="role" value="seller" id="btnradio2">
                             <label class="btn btn-outline-primary" for="btnradio2">Seller</label>

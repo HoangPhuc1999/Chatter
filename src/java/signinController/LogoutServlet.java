@@ -26,11 +26,12 @@ public class LogoutServlet extends HttpServlet {
         Cookie y = new Cookie("user", "");
         y.setMaxAge(0);
         response.addCookie(y);
-        request.getSession().setAttribute("user", null);
-        request.getSession().setAttribute("user_account", null);
-        request.getSession().setAttribute("user_address", null);
-        request.getSession().setAttribute("reviewmessage", null);
-        request.getRequestDispatcher("/home").include(request, response);
+//        request.getSession().setAttribute("user", null);
+//        request.getSession().setAttribute("user_account", null);
+//        request.getSession().setAttribute("user_address", null);
+//        request.getSession().setAttribute("reviewmessage", null);
+        request.getSession().invalidate();
+        request.getRequestDispatcher("/Index.jsp").include(request, response);
     }
 
 }

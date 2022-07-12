@@ -75,7 +75,7 @@ public class ManageBookServlet extends HttpServlet {
         List<Book> lst = u.searchBookItem(xPhoneNumber);
         request.setAttribute("bookinglist", lst);
         request.getRequestDispatcher("../ManageBooking.jsp").forward(request, response);
-        processRequest(request, response);
+       
     }
     /**
      * Returns a short description of the servlet.
