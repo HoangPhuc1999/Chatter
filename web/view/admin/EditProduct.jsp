@@ -35,13 +35,11 @@
 
 
         <title> Chatter </title>
-<!--        <script>
+        <script>
             var productnames = [];
 
-            <c:forEach items="${requestScope.products}" var="product">
-            productnames.push('${product.name}');
-            </c:forEach>
-        </script>-->
+            
+        </script>
     </head>
     <body class="row main_content">
 
@@ -51,9 +49,11 @@
         </div>
 
         <div class="col-sm-9 gy-2">
+            <c:set var = "product" scope = "session" value = "${requestScope.product}"/>
+            ${product}
             <h3 class="text-info p-3" >
                 <span class="text-info fa-duotone fa-user-group"></span>
-                Add new product </h3>
+                Edit product </h3>
             <div class="form_container d-flex g-lg-6">
                 <form action="add_product" method="POST" class="row g-3 form-control" enctype="multipart/form-data" >
                     <div class="row">
@@ -130,33 +130,33 @@
             document.getElementById('products_page').classList.remove('link-dark');
 
 
-//            function checkProductName() {
-//                let productname = document.getElementById('productname').value;
-//                const isDumlicate = productnames.some(element => {
-//                    return element === productname;
-//                });
-//
-//                if (isDumlicate) {
-//                    document.getElementById('dumlicate_productname').style.color = 'red';
-//                    document.getElementById('dumlicate_productname').innerHTML =
-//                            'Product already exist!';
-//                    document.getElementById('add-product').disabled = true;
-//                    document.getElementById('add-product').style.opacity = (0.4);
-//                } else if (productname.trim() === '') {
-//                    document.getElementById('dumlicate_productname').style.color = 'red';
-//                    document.getElementById('dumlicate_productname').innerHTML =
-//                            'Please enter the product\'s name!';
-//                    document.getElementById('add-product').disabled = true;
-//                    document.getElementById('add-product').style.opacity = (0.4);
-//                } else
-//                {
-//                    document.getElementById('dumlicate_productname').style.color = 'green';
-//                    document.getElementById('dumlicate_productname').innerHTML =
-//                            '';
-//                    document.getElementById('add-product').disabled = false;
-//                    document.getElementById('add-product').style.opacity = (1);
-//                }
-//            }
+            function checkProductName() {
+                let productname = document.getElementById('productname').value;
+                const isDumlicate = productnames.some(element => {
+                    return element === productname;
+                });
+
+                if (isDumlicate) {
+                    document.getElementById('dumlicate_productname').style.color = 'red';
+                    document.getElementById('dumlicate_productname').innerHTML =
+                            'Product already exist!';
+                    document.getElementById('add-product').disabled = true;
+                    document.getElementById('add-product').style.opacity = (0.4);
+                } else if (productname.trim() === '') {
+                    document.getElementById('dumlicate_productname').style.color = 'red';
+                    document.getElementById('dumlicate_productname').innerHTML =
+                            'Please enter the product\'s name!';
+                    document.getElementById('add-product').disabled = true;
+                    document.getElementById('add-product').style.opacity = (0.4);
+                } else
+                {
+                    document.getElementById('dumlicate_productname').style.color = 'green';
+                    document.getElementById('dumlicate_productname').innerHTML =
+                            '';
+                    document.getElementById('add-product').disabled = false;
+                    document.getElementById('add-product').style.opacity = (1);
+                }
+            }
 
             const input = document.getElementById('formFile');
             const image = document.getElementById('img-preview');

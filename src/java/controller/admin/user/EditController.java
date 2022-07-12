@@ -23,7 +23,7 @@ import model.UserDetails;
  */
 @WebServlet(name = "EditUserDetailsController", urlPatterns = {"/admin/edit_user"})
 @MultipartConfig(
-        location = "F:\\FPTU\\FPT class\\Semester 5\\SWP391\\Week 7\\Code\\Chatter\\web\\images",
+        location = "F:\\FPTU\\FPT class\\Semester 5\\SWP391\\Week 8\\Code\\Chatter\\web\\avatar",
         fileSizeThreshold = 1024 * 1024 * 1, // 1 MB
         maxFileSize = 1024 * 1024 * 10, // 10 MB
         maxRequestSize = 1024 * 1024 * 100 // 100 MB
@@ -59,26 +59,39 @@ public class EditController extends HttpServlet {
             throws ServletException, IOException {
 
         UserDetails userDetails = new UserDetails();
+        userDetails.setUsers_id(Integer.parseInt(request.getParameter("userid")));
+        String firstName = request.getParameter("firstname");
+        String lastName = request.getParameter("lastname");
+        userDetails.setFirstname(firstName == null || firstName.trim().isEmpty() ? "First name" : firstName);
+        userDetails.setLastname(lastName == null || lastName.trim().isEmpty() ? "Last name" : lastName);
+        userDetails.setGender(request.getParameter("gender"));
+        userDetails.setRole(request.getParameter("role"));
+        userDetails.setPhonenumber(request.getParameter("phonenumber"));
+        userDetails.setEmail(request.getParameter("email"));
 
-        String phonenumber = request.getParameter("phonenumber");
-        String firstname = request.getParameter("firstname");
-
-        response.getWriter().print(phonenumber + " " + firstname);
+        userDetails.setHome_address(request.getParameter("homeAddress"));
+        userDetails.setDistrict(request.getParameter("district"));
+        userDetails.setCity(request.getParameter("city"));
 
         String fileName;
         for (Part part : request.getParts()) {
             fileName = extractFileName(part);
 
             if (fileName != null && fileName.length() > 0) {
-                String extension = fileName.substring(fileName.lastIndexOf('.') - 1);
+                String extension = fileName.substring(fileName.lastIndexOf('.'));
 
-                String filePath = File.separator + "user" + userDetails.getUsers_id() + '_' + userDetails.getAccount().getUsername() + extension;
+                String filePath = File.separator + "user" + userDetails.getUsers_id() + '_' + request.getParameter("username") + extension;
 
                 // Ghi vào file.
                 part.write(filePath);
-                userDetails.setAvatar("images/" + "user" + userDetails.getUsers_id() + '_' + userDetails.getAccount().getUsername() + extension);
+                userDetails.setAvatar("avatar/" + "user" + userDetails.getUsers_id() + '_' + request.getParameter("username") + extension);
             }
         }
+        log(String.valueOf(userDAO.updateUserDetailsTousers(userDetails)));
+        log(String.valueOf(userDAO.updateUserDetailsTousersRole(userDetails)));
+        log(String.valueOf(userDAO.updateUserDetailsTousersaddress(userDetails)));
+
+        response.sendRedirect("user?user_id=" + userDetails.getUsers_id());
     }
 
     /**
