@@ -51,7 +51,7 @@ public class AddController extends HttpServlet {
         ProductDAO productDAO = new ProductDAO();
         CategoryDAO categoryDAO = new CategoryDAO();
         ArrayList<Category> categorys = categoryDAO.listAllCategory();
-        ArrayList<ProductDetails> products = (ArrayList<ProductDetails>) productDAO.getAllProductDetailses();
+        ArrayList<ProductDetails> products = (ArrayList<ProductDetails>) productDAO.getAllProductDetailses(0,"");
         request.setAttribute("products", products);
         request.setAttribute("categorys", categorys);
         request.getRequestDispatcher("../view/admin/AddProduct.jsp").forward(request, response);
