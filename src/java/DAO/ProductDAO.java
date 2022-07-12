@@ -29,7 +29,7 @@ public class ProductDAO extends DAO {
     //author: an
     //last changed by : AN
     public Product getProductById(String id) {
-
+        
         xSql = "select * from products p\n"
                 + "join products_image i\n"
                 + "on p.product_id = i.product_id\n"
@@ -108,16 +108,14 @@ public class ProductDAO extends DAO {
         }
         return list;
     }
-  
-    
     
     public ProductImage getProductImageById(String id) {
-
+        
         ProductImage x = new ProductImage();
         int product_id = Integer.parseInt(id);
         String imageUrl;
         Date date;
-
+        
         xSql = "select * from products_image where product_id=?";
         try {
             ps = con.prepareStatement(xSql);
@@ -137,7 +135,7 @@ public class ProductDAO extends DAO {
         }
         return (x);
     }
-
+    
     public List<Category> getAllCategory() {
         List<Category> list = new ArrayList<>();
         String query = "select * from category";
@@ -162,7 +160,7 @@ public class ProductDAO extends DAO {
         String sql = "select p.product_id, p.product_name, i.product_image_path, "
                 + "p.product_price, p.product_title, p.product_description from products p join products_image i \n"
                 + "on p.product_id = i.product_id where cid = ?";
-
+        
         try {
             ps = con.prepareStatement(sql);
             if (cid != null) {
@@ -195,7 +193,7 @@ public class ProductDAO extends DAO {
             while (rs.next()) {
                 return discount = rs.getInt(3);
             }
-
+            
         } catch (Exception e) {
         }
         return discount;
@@ -204,28 +202,37 @@ public class ProductDAO extends DAO {
     /**
      * Do Tuan Phong Lay tu database tat ca info ProductDetails
      *
+     * @param type
+     * @param str
      * @return List<ProductDetails>
      */
-    public List<ProductDetails> getAllProductDetailses() {
+    public List<ProductDetails> getAllProductDetailses(int type, String str) {
         ArrayList<ProductDetails> productDetailses = new ArrayList<>();
-        String query = "SELECT *\n"
+        String sql = "SELECT *\n"
                 + "FROM products p LEFT JOIN products_image pi on p.product_id  = pi.product_id\n"
                 + "LEFT JOIN products_inventory pin on p.product_id = pin.product_id\n"
                 + "LEFT JOIN products_category pc on p.product_id = pc.product_id\n"
-                + "JOIN category c on pc.category_id = c.category_id\n"
-                + "ORDER BY p.product_id";
+                + "JOIN category c on pc.category_id = c.category_id\n";
+        if (type == 1) {
+            sql += "WHERE p.product_id = ?\n";
+        }
+        sql += "ORDER BY p.product_id";
         try {
-            ps = con.prepareStatement(query);
+            ps = con.prepareStatement(sql);
+            if (type == 1) {
+                ps.setInt(1, Integer.parseInt(str));
+            }
+            
             rs = ps.executeQuery();
             ProductDetails productDetailsTemp = new ProductDetails();
             productDetailsTemp.setId(0);
-
+            
             while (rs.next()) {
                 if (productDetailsTemp.getId() != rs.getInt(1)) {
                     productDetailsTemp.setId(rs.getInt(1));
-
+                    
                     ProductDetails productDetails = new ProductDetails();
-
+                    
                     productDetails.setId(rs.getInt(1));
                     productDetails.setName(rs.getString("product_name"));
                     productDetails.setTitle(rs.getString("product_title"));
@@ -237,25 +244,25 @@ public class ProductDAO extends DAO {
                     productDetails.setCreateAt(
                             rs.getTimestamp("created_at") != null
                             ? rs.getTimestamp("created_at").toLocalDateTime() : null);
-
+                    
                     if (rs.getInt(14) != 0) {
                         productDetails.setCategorys(new ArrayList<>());
                         productDetails.getCategorys().add(
                                 new Category(rs.getInt(14),
                                         rs.getString("category_name")));
-
+                        
                         productDetails.setCname(rs.getString("category_name"));
-
+                        
                     }
-
+                    
                     productDetailses.add(productDetails);
-
+                    
                 } else {
                     productDetailses.get(productDetailses.size() - 1).getCategorys()
                             .add(new Category(rs.getInt(14), rs.getString("category_name")));
                 }
             }
-
+            
         } catch (SQLException e) {
         }
         return productDetailses;
@@ -282,15 +289,15 @@ public class ProductDAO extends DAO {
                     + "           ,?\n"
                     + "           ,?)";
             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-
+            
             statement.setString(1, pd.getName());
             statement.setDouble(2, pd.getPrice());
             statement.setString(3, pd.getTitle());
             statement.setString(4, pd.getDescription());
             statement.executeUpdate();
-
+            
             ResultSet resultSet = statement.getGeneratedKeys();
-
+            
             if (resultSet.next()) {
                 return resultSet.getInt(1);
             }
@@ -318,12 +325,12 @@ public class ProductDAO extends DAO {
                     + "           ,?\n"
                     + "           ,?)";
             PreparedStatement statement = connection.prepareStatement(sql);
-
+            
             statement.setInt(1, pd.getId());
             statement.setString(2, pd.getImage());
             statement.setTimestamp(3, Timestamp.valueOf(pd.getCreateAt()));
             return statement.executeUpdate() != 0;
-
+            
         } catch (SQLException ex) {
             Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -350,13 +357,13 @@ public class ProductDAO extends DAO {
                     + "           ,?\n"
                     + "           ,?)";
             PreparedStatement statement = connection.prepareStatement(sql);
-
+            
             statement.setInt(1, pd.getId());
             statement.setInt(2, pd.getQuantity());
             statement.setTimestamp(3, Timestamp.valueOf(pd.getModifyAt()));
             statement.setTimestamp(4, Timestamp.valueOf(pd.getCreateAt()));
             return statement.executeUpdate() != 0;
-
+            
         } catch (SQLException ex) {
             Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -373,36 +380,36 @@ public class ProductDAO extends DAO {
     public boolean addProductDetailsToProductsCategory(ProductDetails pd) {
         try {
             int size = pd.getCategorys().size();
-
+            
             if (size == 0) {
                 return false;
             }
-
+            
             String sql = "INSERT INTO [products_category]\n"
                     + "           ([product_id]\n"
                     + "           ,[category_id])\n"
                     + "     VALUES\n";
-
+            
             for (int i = 0; i < size; i++) {
                 sql += "           (?\n"
                         + "           ,?)" + (i == size - 1 ? "" : ",\n");
             }
-
+            
             PreparedStatement statement = connection.prepareStatement(sql);
-
+            
             for (int i = 0; i < size; i++) {
                 statement.setInt(2 * i + 1, pd.getId());
                 statement.setInt(2 * i + 2, pd.getCategorys().get(i).getCid());
             }
-
+            
             return statement.executeUpdate() != 0;
-
+            
         } catch (SQLException ex) {
             Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
-
+    
     public static void main(String[] args) {
         ProductDAO dao = new ProductDAO();
 //        List<Product> list = dao.getProductByCID(cid);
@@ -412,5 +419,5 @@ public class ProductDAO extends DAO {
         //System.out.println(dao.getAllProductWithCategory());
 
     }
-
+    
 }
