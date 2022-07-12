@@ -486,9 +486,96 @@ public class UserDAO extends DAO {
     }
 
     /**
+     * DoTuanPhong: update User dung de them user moi vao bang user
+     *
+     * @param user
+     * @return cot vua duoc them
+     */
+    public int updateUserDetailsTousers(UserDetails user) {
+        try {
+            String sql = "UPDATE [users]\n"
+                    + "   SET [firstname] = ?\n"
+                    + "      ,[lastname] = ?\n"
+                    + "      ,[phonenumber] = ?\n"
+                    + "      ,[email] = ?\n"
+                    + "      ,[gender] = ?\n"
+                    + "      ,[avatar] = ?\n"
+                    + " WHERE users_id = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            statement.setString(1, user.getFirstname());
+            statement.setString(2, user.getLastname());
+            statement.setString(3, user.getPhonenumber());
+            statement.setString(4, user.getEmail());
+            statement.setBoolean(5, user.getGender().equals("male"));
+            statement.setString(6, user.getAvatar());
+            statement.setInt(7, user.getUsers_id());
+
+            return statement.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+    /**
+     * DoTuanPhong: addUser dung de them user moi vao bang usersrole
+     *
+     * @param user
+     * @return cot vua duoc sua
+     */
+    public int updateUserDetailsTousersRole(UserDetails user) {
+        try {
+            String sql = "UPDATE [users_role]\n"
+                    + "   SET [user_role] = ?\n"
+                    + " WHERE users_id = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            statement.setString(1, user.getRole());
+            statement.setInt(2, user.getUsers_id());
+
+            return statement.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+    /**
+     * DoTuanPhong: addUser dung de them user moi vao bang users_address
+     *
+     * @param user
+     * @return cot vua duoc sua
+     */
+    public int updateUserDetailsTousersaddress(UserDetails user) {
+        try {
+            String sql = "UPDATE [users_address]\n"
+                    + "   SET [home_address] = ?\n"
+                    + "      ,[district] = ?\n"
+                    + "      ,[city] = ?\n"
+                    + " WHERE [users_id] = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            statement.setString(1, user.getHome_address());
+            statement.setString(2, user.getDistrict());
+            statement.setString(3, user.getCity());
+            statement.setInt(4, user.getUsers_id());
+
+            return statement.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+    /**
      * DoTuanPhong them account moi vao bang account
      *
      * @param account
+     * @return cot moi them
      */
     public int addAccount(UserAccount account) {
         try {
@@ -504,11 +591,11 @@ public class UserDAO extends DAO {
             ps.setInt(1, account.getUsers_id());
             ps.setString(2, account.getUsername());
             ps.setString(3, account.getPassword());
-            ps.executeUpdate();
+            return ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return account.getUsers_id();
+        return 0;
     }
 
     /**
@@ -554,7 +641,7 @@ public class UserDAO extends DAO {
                     details.setAccount(new UserAccount(userid, rs.getString("username"), null));
                     details.setHome_address(rs.getString("home_address"));
                     details.setDistrict(rs.getString("district"));
-                    details.setCity("city");
+                    details.setCity(rs.getString("city"));
 
                     if (rs.getInt(17) == 0) {
                         return details;
