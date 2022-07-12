@@ -31,60 +31,77 @@
         <!--<link href="../css/style.css" rel="stylesheet" />-->
         <!-- responsive style -->
         <!--<link href="../css/responsive.css" rel="stylesheet" />-->
-        <link href="../css/adminstyle.css" rel="stylesheet" />
+        <link href="/Chatter/css/adminstyle.css" rel="stylesheet" />
+        <style>
+            img:hover {
+                box-shadow: 0 0 4px 2px rgba(0, 140, 186, 0.5);
+            }
+        </style>
 
+        <title> Edit Product </title>
 
-        <title> Chatter </title>
-        <script>
-            var productnames = [];
-
-            
-        </script>
     </head>
     <body class="row main_content">
 
 
-        <div class="col-sm-3 g-2">
+        <div class="col-sm-3 g-2 overflow-hidden">
             <jsp:include page="Sidebar.jsp" />
         </div>
 
-        <div class="col-sm-9 gy-2">
+        <div class="col-9 gy-2">
+            <form class="input-group justify-content-end" action="/Chatter/admin/edit_product" method="get">
+                <div class="form-floating">
+                    <input type="number" class="form-control" name="productid" id="searchbar" placeholder="ProductID" aria-label="ProductID" min="0" max="65536" aria-describedby="button-addon2">
+                    <label for="searchbar">Product ID</label>
+                </div>
+                <button class="btn btn-outline-primary fa-2x fa-duotone fa-magnifying-glass-plus" type="submit" id="button-addon2">
+                </button>
+            </form>
+
+
+            <h3 class="text-info" >
+                <span class="text-info fa-duotone fa-candy-corn"></span>
+                Edit product
+            </h3>
             <c:set var = "product" scope = "session" value = "${requestScope.product}"/>
-            ${product}
-            <h3 class="text-info p-3" >
-                <span class="text-info fa-duotone fa-user-group"></span>
-                Edit product </h3>
-            <div class="form_container d-flex g-lg-6">
-                <form action="add_product" method="POST" class="row g-3 form-control" enctype="multipart/form-data" >
+
+            <p class="h5 text-danger">
+                ${product.name} <em class="display-6 blockquote-footer">(Product ID: ${product.id})</em>
+            </p>
+
+            <div class="form_container g-lg-6">
+                <form action="edit_product" method="POST" class="row g-3 form-control" enctype="multipart/form-data" >
                     <div class="row">
                         <div class="col-md-6">
                             <label for="inputProductname" class="col-form-label">Product name</label>
-                            <input id="productname"  name="productname"  type="text" class="form-control" placeholder="Enter the product name" onkeyup="checkProductName()" required autofocus>
+                            <input id="productname"  name="productname" value="${product.name}" type="text" class="form-control" placeholder="Enter the product name" onkeyup="checkProductName()" required autofocus>
                             <span id="dumlicate_productname"></span>
                         </div> 
                         <div class="col-md-2">
                             <label for="inputQuantity" class=" col-form-label">Quantity</label>
-                            <input id="inputQuantity" name="quantity" type="number" class="form-control" placeholder="" min="0" max="65536">
+                            <input id="inputQuantity" name="quantity" value="${product.quantity}" type="number" class="form-control" placeholder="" min="0" max="65536">
                         </div>
                         <div class="col-md-4">
                             <label for="inputPrice" class="col-form-label">Product price</label>
                             <div class="btn-group">
-                                <input id="inputPrice" name="price" type="text" class="form-control" pattern="[0-9]+(.?[0-9]+)?" title="Please input a number!" placeholder="" value=${last}>
+                                <input id="inputPrice" name="price" value="${product.price}"  type="text" class="form-control" pattern="[0-9]+(.?[0-9]+)?" title="Please input a number!" placeholder="" value=${last}>
                                 <span class="input-group-text" id="basic-addon2">$</span>
                             </div>
                         </div>
 
                         <div class="col-md-6">
                             <label for="inputTitle" class="col-sm-2 col-form-label">Title</label>
-                            <input id="inputTitle" name="title" type="text" class="form-control" placeholder="Example title" required value="">
+                            <input id="inputTitle" name="title" value="${product.title}"  type="text" class="form-control" placeholder="Example title" required value="">
                         </div>
 
                         <div class="col">
                         </div>
 
                         <div class="col-md-6 p-3">
-                            <label for="inputDescription" class="col-sm-2 col-form-label">Description</label>
-                            <textarea id="inputDescription" name="description" type="text" class="form-control" placeholder="Enter product description" required></textarea>
+                            <label for="inputDescription" class="col-sm-2 col-form-label">Description </label>
+                            <textarea id="inputDescription" name="description" value="${product.description}" 
+                                      type="text" class="form-control" placeholder="Enter product description" required
+                                      >${product.description}</textarea>
 
                         </div>
                         <div class="col-md-6">
@@ -96,7 +113,13 @@
                                 Category 
                             </label>
                             <c:forEach items="${requestScope.categorys}" var="category">
-                                <input type="checkbox" class="btn-check" name="category" value="${category.cid}" id="btnradio${category.cid}">
+                                <c:set var="checked" value=""></c:set>
+                                <c:forEach items="${product.categorys}" var="pcategory">
+                                    <c:if test="${category.cid eq pcategory.cid}">
+                                        <c:set var="checked" value="checked"></c:set>
+                                    </c:if>
+                                </c:forEach>
+                                <input type="checkbox" class="btn-check" ${checked} name="category" value="${category.cid}" id="btnradio${category.cid}">
                                 <label class="btn btn-outline-primary rounded-pill" for="btnradio${category.cid}">${category.cname}</label>
                             </c:forEach>
                         </div>
@@ -104,13 +127,15 @@
                         <div class="col-md-6">
                             <label for="formFile" class="form-label">Product Image</label>
                             <input accept="image/*" class="form-control" type="file" id="formFile" name="image">
-                            <img id="img-preview" class="img-thumbnail" max-width=180px src="image/1.png" />
+                            <img id="img-preview" class="img-thumbnail" src="/Chatter/${product.image}" />
                         </div>
                     </div>
 
                     <div class="text-center">
-                        <button class="btn btn-box btn-success col-sm-2" type="submit" id="add-product">
-                            Add Product
+                        <input id="inputTitle" name="productid" value="${product.id}"  type="hidden">
+
+                        <button class="btn btn-box btn-outline-success col-2" type="submit" id="add-product">
+                            Edit Product
                         </button>
                     </div>
                 </form>
@@ -130,33 +155,6 @@
             document.getElementById('products_page').classList.remove('link-dark');
 
 
-            function checkProductName() {
-                let productname = document.getElementById('productname').value;
-                const isDumlicate = productnames.some(element => {
-                    return element === productname;
-                });
-
-                if (isDumlicate) {
-                    document.getElementById('dumlicate_productname').style.color = 'red';
-                    document.getElementById('dumlicate_productname').innerHTML =
-                            'Product already exist!';
-                    document.getElementById('add-product').disabled = true;
-                    document.getElementById('add-product').style.opacity = (0.4);
-                } else if (productname.trim() === '') {
-                    document.getElementById('dumlicate_productname').style.color = 'red';
-                    document.getElementById('dumlicate_productname').innerHTML =
-                            'Please enter the product\'s name!';
-                    document.getElementById('add-product').disabled = true;
-                    document.getElementById('add-product').style.opacity = (0.4);
-                } else
-                {
-                    document.getElementById('dumlicate_productname').style.color = 'green';
-                    document.getElementById('dumlicate_productname').innerHTML =
-                            '';
-                    document.getElementById('add-product').disabled = false;
-                    document.getElementById('add-product').style.opacity = (1);
-                }
-            }
 
             const input = document.getElementById('formFile');
             const image = document.getElementById('img-preview');
