@@ -62,8 +62,8 @@ public class EditController extends HttpServlet {
         userDetails.setUsers_id(Integer.parseInt(request.getParameter("userid")));
         String firstName = request.getParameter("firstname");
         String lastName = request.getParameter("lastname");
-        userDetails.setFirstname(firstName==null||firstName.trim().isEmpty()?"First name":firstName);
-        userDetails.setLastname(lastName==null||lastName.trim().isEmpty()?"Last name":lastName);
+        userDetails.setFirstname(firstName == null || firstName.trim().isEmpty() ? "First name" : firstName);
+        userDetails.setLastname(lastName == null || lastName.trim().isEmpty() ? "Last name" : lastName);
         userDetails.setGender(request.getParameter("gender"));
         userDetails.setRole(request.getParameter("role"));
         userDetails.setPhonenumber(request.getParameter("phonenumber"));
@@ -78,7 +78,7 @@ public class EditController extends HttpServlet {
             fileName = extractFileName(part);
 
             if (fileName != null && fileName.length() > 0) {
-                String extension = fileName.substring(fileName.lastIndexOf('.') - 1);
+                String extension = fileName.substring(fileName.lastIndexOf('.'));
 
                 String filePath = File.separator + "user" + userDetails.getUsers_id() + '_' + request.getParameter("username") + extension;
 
@@ -87,7 +87,11 @@ public class EditController extends HttpServlet {
                 userDetails.setAvatar("avatar/" + "user" + userDetails.getUsers_id() + '_' + request.getParameter("username") + extension);
             }
         }
-        response.sendRedirect("user?users_id="+userDetails.getUsers_id());
+        log(String.valueOf(userDAO.updateUserDetailsTousers(userDetails)));
+        log(String.valueOf(userDAO.updateUserDetailsTousersRole(userDetails)));
+        log(String.valueOf(userDAO.updateUserDetailsTousersaddress(userDetails)));
+
+        response.sendRedirect("user?user_id=" + userDetails.getUsers_id());
     }
 
     /**
