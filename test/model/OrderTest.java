@@ -45,7 +45,7 @@ public class OrderTest {
         int expResult = 0;
         int result = instance.getOrderid();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -54,7 +54,7 @@ public class OrderTest {
         int orderid = 0;
         Order instance = new Order();
         instance.setOrderid(orderid);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -64,7 +64,7 @@ public class OrderTest {
         int expResult = 0;
         int result = instance.getOrderaid();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -73,7 +73,7 @@ public class OrderTest {
         int orderaid = 0;
         Order instance = new Order();
         instance.setOrderaid(orderaid);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -83,7 +83,7 @@ public class OrderTest {
         int expResult = 0;
         int result = instance.getOrderpid();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -92,7 +92,7 @@ public class OrderTest {
         int orderpid = 0;
         Order instance = new Order();
         instance.setOrderpid(orderpid);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -102,7 +102,7 @@ public class OrderTest {
         int expResult = 0;
         int result = instance.getOrderamount();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -111,7 +111,7 @@ public class OrderTest {
         int orderamount = 0;
         Order instance = new Order();
         instance.setOrderamount(orderamount);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -121,7 +121,7 @@ public class OrderTest {
         Date expResult = null;
         Date result = instance.getOrderdate();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -130,7 +130,7 @@ public class OrderTest {
         Date orderdate = null;
         Order instance = new Order();
         instance.setOrderdate(orderdate);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -140,7 +140,7 @@ public class OrderTest {
         String expResult = "";
         String result = instance.toString();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
     
 }

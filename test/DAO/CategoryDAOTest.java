@@ -46,7 +46,7 @@ public class CategoryDAOTest {
         ArrayList<Category> expResult = null;
         ArrayList<Category> result = instance.listAllCategory();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -55,7 +55,7 @@ public class CategoryDAOTest {
         Category category = null;
         CategoryDAO instance = new CategoryDAO();
         instance.insert(category);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -64,7 +64,7 @@ public class CategoryDAOTest {
         Category category = null;
         CategoryDAO instance = new CategoryDAO();
         instance.update(category);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -73,7 +73,7 @@ public class CategoryDAOTest {
         int categoryId = 0;
         CategoryDAO instance = new CategoryDAO();
         instance.delete(categoryId);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -82,7 +82,7 @@ public class CategoryDAOTest {
         int categoryId = 0;
         CategoryDAO instance = new CategoryDAO();
         instance.deleteInProductsCategory(categoryId);
-        fail("The test case is a prototype.");
+        
     }
     
 }

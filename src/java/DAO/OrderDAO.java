@@ -20,6 +20,8 @@ public class OrderDAO extends MyDAO{
     //them order vao bang order, order detail sau khi nguoi dung mua hang
     //author an 
     //27/6/2022
+    //orders chay 2 lan 
+    //not workjing 
     public void insertOrder(ArrayList<Item> list, int users_id) {
         String query = "Insert into orders(order_by)"
                         + "Values(?)";
@@ -58,5 +60,11 @@ public class OrderDAO extends MyDAO{
             } catch (Exception e) {
                 System.out.println(e.toString());
             }
+    }
+    
+    public static void main(String[] args) {
+        OrderDAO dao = new OrderDAO();
+        ArrayList<Item> a = new ArrayList();
+        dao.insertOrder();
     }
 }

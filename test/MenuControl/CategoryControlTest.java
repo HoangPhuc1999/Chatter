@@ -46,7 +46,7 @@ public class CategoryControlTest {
         HttpServletResponse response = null;
         CategoryControl instance = new CategoryControl();
         instance.processRequest(request, response);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -56,7 +56,7 @@ public class CategoryControlTest {
         HttpServletResponse response = null;
         CategoryControl instance = new CategoryControl();
         instance.doGet(request, response);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -66,7 +66,7 @@ public class CategoryControlTest {
         HttpServletResponse response = null;
         CategoryControl instance = new CategoryControl();
         instance.doPost(request, response);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -76,7 +76,7 @@ public class CategoryControlTest {
         String expResult = "";
         String result = instance.getServletInfo();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
     
 }

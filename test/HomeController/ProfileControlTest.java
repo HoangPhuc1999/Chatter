@@ -46,7 +46,7 @@ public class ProfileControlTest {
         HttpServletResponse response = null;
         ProfileControl instance = new ProfileControl();
         instance.processRequest(request, response);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -56,7 +56,7 @@ public class ProfileControlTest {
         HttpServletResponse response = null;
         ProfileControl instance = new ProfileControl();
         instance.doGet(request, response);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -66,7 +66,7 @@ public class ProfileControlTest {
         HttpServletResponse response = null;
         ProfileControl instance = new ProfileControl();
         instance.doGet_EditProfile(request, response);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -76,7 +76,7 @@ public class ProfileControlTest {
         HttpServletResponse response = null;
         ProfileControl instance = new ProfileControl();
         instance.doGet_DisplayProfile(request, response);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -86,7 +86,7 @@ public class ProfileControlTest {
         HttpServletResponse response = null;
         ProfileControl instance = new ProfileControl();
         instance.doPost(request, response);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -96,7 +96,7 @@ public class ProfileControlTest {
         String expResult = "";
         String result = instance.getServletInfo();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
     
 }

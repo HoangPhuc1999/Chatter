@@ -44,7 +44,7 @@ public class UserAddressTest {
         int expResult = 0;
         int result = instance.getUsers_id();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -53,7 +53,7 @@ public class UserAddressTest {
         int users_id = 0;
         UserAddress instance = new UserAddress();
         instance.setUsers_id(users_id);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -63,7 +63,7 @@ public class UserAddressTest {
         String expResult = "";
         String result = instance.getHome_address();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -72,7 +72,7 @@ public class UserAddressTest {
         String home_address = "";
         UserAddress instance = new UserAddress();
         instance.setHome_address(home_address);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -82,7 +82,7 @@ public class UserAddressTest {
         String expResult = "";
         String result = instance.getDistrict();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -91,7 +91,7 @@ public class UserAddressTest {
         String district = "";
         UserAddress instance = new UserAddress();
         instance.setDistrict(district);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -101,7 +101,7 @@ public class UserAddressTest {
         String expResult = "";
         String result = instance.getCity();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -110,7 +110,7 @@ public class UserAddressTest {
         String city = "";
         UserAddress instance = new UserAddress();
         instance.setCity(city);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -120,7 +120,7 @@ public class UserAddressTest {
         String expResult = "";
         String result = instance.toString();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
     
 }

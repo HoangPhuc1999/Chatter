@@ -50,7 +50,7 @@ public class CartDAOTest {
         CartDAO instance = new CartDAO();
         instance.deleteCartAfterBuy(a);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -65,7 +65,7 @@ public class CartDAOTest {
         CartDAO instance = new CartDAO();
         instance.updateCartInDB(users_id, product_id, amount);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -80,7 +80,7 @@ public class CartDAOTest {
         List<Item> result = instance.getCart(users_id);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -92,7 +92,7 @@ public class CartDAOTest {
         String[] args = null;
         CartDAO.main(args);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
     
 }

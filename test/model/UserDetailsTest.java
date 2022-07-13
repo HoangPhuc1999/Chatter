@@ -45,7 +45,7 @@ public class UserDetailsTest {
         UserAccount expResult = null;
         UserAccount result = instance.getAccount();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -54,7 +54,7 @@ public class UserDetailsTest {
         UserAccount account = null;
         UserDetails instance = new UserDetails();
         instance.setAccount(account);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -64,7 +64,7 @@ public class UserDetailsTest {
         ArrayList<Order> expResult = null;
         ArrayList<Order> result = instance.getOrders();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -73,7 +73,7 @@ public class UserDetailsTest {
         ArrayList<Order> orders = null;
         UserDetails instance = new UserDetails();
         instance.setOrders(orders);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -83,7 +83,7 @@ public class UserDetailsTest {
         String expResult = "";
         String result = instance.toString();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
     
 }

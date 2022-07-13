@@ -13,6 +13,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 /**
  *
@@ -41,11 +42,12 @@ public class BookDAOTest {
 
     @Test
     public void testInsertBook() {
-        System.out.println("insertBook");
-        Book x = null;
+        System.out.println("insertBook test ");
+        Book bookMock = mock(Book.class);
+        when(bookMock.retrieveAllData()).thenReturn();
         BookDAO instance = new BookDAO();
         instance.insertBook(x);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -55,7 +57,7 @@ public class BookDAOTest {
         List<Book> expResult = null;
         List<Book> result = instance.getBookItem();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -66,7 +68,7 @@ public class BookDAOTest {
         List<Book> expResult = null;
         List<Book> result = instance.searchBookItem(phonenumber);
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
     
 }

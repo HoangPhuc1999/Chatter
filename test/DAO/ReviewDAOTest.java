@@ -49,7 +49,7 @@ public class ReviewDAOTest {
         ReviewDAO instance = new ReviewDAO();
         instance.postReview(reviewItem);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -59,7 +59,7 @@ public class ReviewDAOTest {
         List<Review> expResult = null;
         List<Review> result = instance.getAllReviews();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -70,7 +70,7 @@ public class ReviewDAOTest {
         List<Review> expResult = null;
         List<Review> result = instance.getAllReviewsFromId(id);
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -81,7 +81,7 @@ public class ReviewDAOTest {
         String expResult = "";
         String result = instance.getReviewAuthor(id);
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
     
 }

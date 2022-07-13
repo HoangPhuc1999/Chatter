@@ -45,7 +45,7 @@ public class ProductDetailsTest {
         int expResult = 0;
         int result = instance.getQuantity();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -54,7 +54,7 @@ public class ProductDetailsTest {
         int quantity = 0;
         ProductDetails instance = new ProductDetails();
         instance.setQuantity(quantity);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -64,7 +64,7 @@ public class ProductDetailsTest {
         LocalDateTime expResult = null;
         LocalDateTime result = instance.getModifyAt();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -73,7 +73,7 @@ public class ProductDetailsTest {
         LocalDateTime modifyAt = null;
         ProductDetails instance = new ProductDetails();
         instance.setModifyAt(modifyAt);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -83,7 +83,7 @@ public class ProductDetailsTest {
         LocalDateTime expResult = null;
         LocalDateTime result = instance.getCreateAt();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -92,7 +92,7 @@ public class ProductDetailsTest {
         LocalDateTime createAt = null;
         ProductDetails instance = new ProductDetails();
         instance.setCreateAt(createAt);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -102,7 +102,7 @@ public class ProductDetailsTest {
         String expResult = "";
         String result = instance.toString();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
     
 }

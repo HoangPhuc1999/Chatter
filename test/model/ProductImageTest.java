@@ -46,7 +46,7 @@ public class ProductImageTest {
         int expResult = 0;
         int result = instance.getId();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -55,7 +55,7 @@ public class ProductImageTest {
         int id = 0;
         ProductImage instance = new ProductImage();
         instance.setId(id);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -65,7 +65,7 @@ public class ProductImageTest {
         String expResult = "";
         String result = instance.getImageUrl();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -74,7 +74,7 @@ public class ProductImageTest {
         String url = "";
         ProductImage instance = new ProductImage();
         instance.setImageUrl(url);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -84,7 +84,7 @@ public class ProductImageTest {
         Date expResult = null;
         Date result = instance.getDate();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -93,7 +93,7 @@ public class ProductImageTest {
         Date dateTime = null;
         ProductImage instance = new ProductImage();
         instance.setDate(dateTime);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -103,7 +103,7 @@ public class ProductImageTest {
         ArrayList<Category> expResult = null;
         ArrayList<Category> result = instance.getCategorys();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -112,7 +112,7 @@ public class ProductImageTest {
         ArrayList<Category> categorys = null;
         ProductImage instance = new ProductImage();
         instance.setCategorys(categorys);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -122,7 +122,7 @@ public class ProductImageTest {
         String expResult = "";
         String result = instance.toString();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
     
 }

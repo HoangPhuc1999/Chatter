@@ -44,7 +44,7 @@ public class ProductTest {
         int expResult = 0;
         int result = instance.getId();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -53,7 +53,7 @@ public class ProductTest {
         int id = 0;
         Product instance = new Product();
         instance.setId(id);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -63,7 +63,7 @@ public class ProductTest {
         String expResult = "";
         String result = instance.getName();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -72,7 +72,7 @@ public class ProductTest {
         String name = "";
         Product instance = new Product();
         instance.setName(name);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -82,7 +82,7 @@ public class ProductTest {
         String expResult = "";
         String result = instance.getImage();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -91,7 +91,7 @@ public class ProductTest {
         String image = "";
         Product instance = new Product();
         instance.setImage(image);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -101,7 +101,7 @@ public class ProductTest {
         double expResult = 0.0;
         double result = instance.getPrice();
         assertEquals(expResult, result, 0.0);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -110,7 +110,7 @@ public class ProductTest {
         double price = 0.0;
         Product instance = new Product();
         instance.setPrice(price);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -120,7 +120,7 @@ public class ProductTest {
         String expResult = "";
         String result = instance.getTitle();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -129,7 +129,7 @@ public class ProductTest {
         String title = "";
         Product instance = new Product();
         instance.setTitle(title);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -139,7 +139,7 @@ public class ProductTest {
         String expResult = "";
         String result = instance.getDescription();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -148,7 +148,7 @@ public class ProductTest {
         String description = "";
         Product instance = new Product();
         instance.setDescription(description);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -158,7 +158,7 @@ public class ProductTest {
         String expResult = "";
         String result = instance.getCname();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -167,7 +167,7 @@ public class ProductTest {
         String cname = "";
         Product instance = new Product();
         instance.setCname(cname);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -177,7 +177,7 @@ public class ProductTest {
         String expResult = "";
         String result = instance.toString();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
     
 }

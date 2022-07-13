@@ -44,7 +44,7 @@ public class CategoryTest {
         int expResult = 0;
         int result = instance.getCid();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -53,7 +53,7 @@ public class CategoryTest {
         int cid = 0;
         Category instance = new Category();
         instance.setCid(cid);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -63,7 +63,7 @@ public class CategoryTest {
         String expResult = "";
         String result = instance.getCname();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -72,7 +72,7 @@ public class CategoryTest {
         String cname = "";
         Category instance = new Category();
         instance.setCname(cname);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -82,7 +82,7 @@ public class CategoryTest {
         String expResult = "";
         String result = instance.toString();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
     
 }

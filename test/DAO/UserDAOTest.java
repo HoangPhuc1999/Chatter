@@ -26,8 +26,10 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Assert;
 import org.junit.Test;
+import static org.junit.runner.Request.method;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import static org.mockito.Mockito.*;
 import org.mockito.junit.MockitoJUnitRunner;
 
@@ -62,7 +64,7 @@ public class UserDAOTest {
     }
     
     @Before
-    public void setUp() throws SQLException {
+    public void setUp() throws SQLException {       
        
     }
     
@@ -165,7 +167,8 @@ public class UserDAOTest {
         UserAddress editUserAddress = null;
         UserDAO instance = new UserDAO();
         instance.editProfile(users_id, editUser, editUserAccount, editUserAddress);
-        
+        Mockito.doCallRealMethod().when(instance).editProfile(users_id, editUser, editUserAccount, editUserAddress);
+        //<objectInstance>.<method>();
     }
     
     /**
@@ -207,10 +210,7 @@ public class UserDAOTest {
         }
         
             //assertEquals(x, result);
-
-        
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+         
     }
     
 
@@ -226,7 +226,7 @@ public class UserDAOTest {
         UserRole result = instance.getUserRoleById(users_id);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -241,7 +241,7 @@ public class UserDAOTest {
         UserAccount result = instance.getUserAccountById(users_id);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -282,7 +282,7 @@ public class UserDAOTest {
         int result = instance.getUserID();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -297,7 +297,7 @@ public class UserDAOTest {
         UserAccount result = instance.checkAccountExist(user);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -313,7 +313,7 @@ public class UserDAOTest {
         Boolean result = instance.checkAccountAndEmailMatch(user, email);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -391,7 +391,7 @@ public class UserDAOTest {
         UserDetails result = instance.getUserDetailsById(userid);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -403,7 +403,7 @@ public class UserDAOTest {
         String[] args = null;
         UserDAO.main(args);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
     
 }

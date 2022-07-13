@@ -45,7 +45,7 @@ public class UserTest {
         String expResult = "";
         String result = instance.getFirstname();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -54,7 +54,7 @@ public class UserTest {
         String firstname = "";
         User instance = new User();
         instance.setFirstname(firstname);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -64,7 +64,7 @@ public class UserTest {
         String expResult = "";
         String result = instance.getLastname();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -73,7 +73,7 @@ public class UserTest {
         String lastname = "";
         User instance = new User();
         instance.setLastname(lastname);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -83,7 +83,7 @@ public class UserTest {
         int expResult = 0;
         int result = instance.getUsers_id();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -92,7 +92,7 @@ public class UserTest {
         int users_id = 0;
         User instance = new User();
         instance.setUsers_id(users_id);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -102,7 +102,7 @@ public class UserTest {
         String expResult = "";
         String result = instance.getRole();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -111,7 +111,7 @@ public class UserTest {
         String role = "";
         User instance = new User();
         instance.setRole(role);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -121,7 +121,7 @@ public class UserTest {
         String expResult = "";
         String result = instance.getPhonenumber();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -130,7 +130,7 @@ public class UserTest {
         String phonenumber = "";
         User instance = new User();
         instance.setPhonenumber(phonenumber);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -140,7 +140,7 @@ public class UserTest {
         String expResult = "";
         String result = instance.getEmail();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -149,7 +149,7 @@ public class UserTest {
         String email = "";
         User instance = new User();
         instance.setEmail(email);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -159,7 +159,7 @@ public class UserTest {
         String expResult = "";
         String result = instance.getGender();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -168,7 +168,7 @@ public class UserTest {
         String gender = "";
         User instance = new User();
         instance.setGender(gender);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -178,7 +178,7 @@ public class UserTest {
         String expResult = "";
         String result = instance.getAvatar();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -187,7 +187,7 @@ public class UserTest {
         String avatar = "";
         User instance = new User();
         instance.setAvatar(avatar);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -197,7 +197,7 @@ public class UserTest {
         ArrayList<Item> expResult = null;
         ArrayList<Item> result = instance.getCart();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -206,7 +206,7 @@ public class UserTest {
         ArrayList<Item> cart = null;
         User instance = new User();
         instance.setCart(cart);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -216,7 +216,7 @@ public class UserTest {
         String expResult = "";
         String result = instance.toString();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
     
 }

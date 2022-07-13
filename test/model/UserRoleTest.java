@@ -44,7 +44,7 @@ public class UserRoleTest {
         int expResult = 0;
         int result = instance.getUsers_id();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -53,7 +53,7 @@ public class UserRoleTest {
         int users_id = 0;
         UserRole instance = null;
         instance.setUsers_id(users_id);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -63,7 +63,7 @@ public class UserRoleTest {
         String expResult = "";
         String result = instance.getRole();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -72,7 +72,7 @@ public class UserRoleTest {
         String role = "";
         UserRole instance = null;
         instance.setRole(role);
-        fail("The test case is a prototype.");
+        
     }
     
 }

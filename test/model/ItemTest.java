@@ -44,7 +44,7 @@ public class ItemTest {
         Product expResult = null;
         Product result = instance.getProduct();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -53,7 +53,7 @@ public class ItemTest {
         Product product = null;
         Item instance = new Item();
         instance.setProduct(product);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -63,7 +63,7 @@ public class ItemTest {
         int expResult = 0;
         int result = instance.getQuantity();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -72,7 +72,7 @@ public class ItemTest {
         int quantity = 0;
         Item instance = new Item();
         instance.setQuantity(quantity);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -82,7 +82,7 @@ public class ItemTest {
         String expResult = "";
         String result = instance.toString();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
     
 }

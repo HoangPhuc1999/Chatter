@@ -42,7 +42,7 @@ public class MyDAOTest {
         System.out.println("finalize");
         MyDAO instance = new MyDAO();
         instance.finalize();
-        fail("The test case is a prototype.");
+        
     }
     
 }

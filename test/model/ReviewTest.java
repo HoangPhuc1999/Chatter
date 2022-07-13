@@ -45,7 +45,7 @@ public class ReviewTest {
         String expResult = "";
         String result = instance.getName();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -54,7 +54,7 @@ public class ReviewTest {
         String name = "";
         Review instance = new Review();
         instance.setName(name);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -64,7 +64,7 @@ public class ReviewTest {
         String expResult = "";
         String result = instance.getTitle();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -74,7 +74,7 @@ public class ReviewTest {
         String expResult = "";
         String result = instance.getReviewContent();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -84,7 +84,7 @@ public class ReviewTest {
         String expResult = "";
         String result = instance.getReviewImageUrl();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -94,7 +94,7 @@ public class ReviewTest {
         Date expResult = null;
         Date result = instance.getDate();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -104,7 +104,7 @@ public class ReviewTest {
         int expResult = 0;
         int result = instance.getReviewId();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -114,7 +114,7 @@ public class ReviewTest {
         int expResult = 0;
         int result = instance.getProductId();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -124,7 +124,7 @@ public class ReviewTest {
         String expResult = "";
         String result = instance.getRating();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -134,7 +134,7 @@ public class ReviewTest {
         int expResult = 0;
         int result = instance.getUserId();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -143,7 +143,7 @@ public class ReviewTest {
         String title = "";
         Review instance = new Review();
         instance.setTitle(title);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -152,7 +152,7 @@ public class ReviewTest {
         String reviewContent = "";
         Review instance = new Review();
         instance.setReviewContent(reviewContent);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -161,7 +161,7 @@ public class ReviewTest {
         String url = "";
         Review instance = new Review();
         instance.setReviewImageUrl(url);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -170,7 +170,7 @@ public class ReviewTest {
         Date date = null;
         Review instance = new Review();
         instance.setDate(date);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -179,7 +179,7 @@ public class ReviewTest {
         int id = 0;
         Review instance = new Review();
         instance.setReviewId(id);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -188,7 +188,7 @@ public class ReviewTest {
         int id = 0;
         Review instance = new Review();
         instance.setProductId(id);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -197,7 +197,7 @@ public class ReviewTest {
         String rating = "";
         Review instance = new Review();
         instance.setRating(rating);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -206,7 +206,7 @@ public class ReviewTest {
         int id = 0;
         Review instance = new Review();
         instance.setUserId(id);
-        fail("The test case is a prototype.");
+        
     }
     
 }

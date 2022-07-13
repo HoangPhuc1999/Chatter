@@ -39,7 +39,7 @@ public class AboutDAOTest {
 
     @Test
     public void testSomeMethod() {
-        fail("The test case is a prototype.");
+        
     }
     
 }

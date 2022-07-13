@@ -54,7 +54,7 @@ public class ProductDAOTest {
         Product result = instance.getProductById(id);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -68,7 +68,7 @@ public class ProductDAOTest {
         List<Product> result = instance.getAllProduct();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -82,7 +82,7 @@ public class ProductDAOTest {
         List<Product> result = instance.getAllProductWithCategory();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -97,7 +97,7 @@ public class ProductDAOTest {
         ProductImage result = instance.getProductImageById(id);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -111,7 +111,7 @@ public class ProductDAOTest {
         List<Category> result = instance.getAllCategory();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -126,7 +126,7 @@ public class ProductDAOTest {
         List<Product> result = instance.getProductByCID(cid);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -141,7 +141,7 @@ public class ProductDAOTest {
         int result = instance.couponCheck(code);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -155,7 +155,7 @@ public class ProductDAOTest {
         List<ProductDetails> result = instance.getAllProductDetailses();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -167,7 +167,7 @@ public class ProductDAOTest {
         String[] args = null;
         ProductDAO.main(args);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -178,7 +178,7 @@ public class ProductDAOTest {
         int expResult = 0;
         int result = instance.addProductDetailsToProducts(pd);
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -189,7 +189,7 @@ public class ProductDAOTest {
         boolean expResult = false;
         boolean result = instance.addProductDetailsToProductsImage(pd);
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -200,7 +200,7 @@ public class ProductDAOTest {
         boolean expResult = false;
         boolean result = instance.addProductDetailsToProductsInventory(pd);
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -211,7 +211,7 @@ public class ProductDAOTest {
         boolean expResult = false;
         boolean result = instance.addProductDetailsToProductsCategory(pd);
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
     
 }

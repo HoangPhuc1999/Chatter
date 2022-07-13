@@ -45,7 +45,7 @@ public class BookTest {
         int expResult = 0;
         int result = instance.getBookId();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -55,7 +55,7 @@ public class BookTest {
         String expResult = "";
         String result = instance.getName();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -65,7 +65,7 @@ public class BookTest {
         String expResult = "";
         String result = instance.getEmail();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -75,7 +75,7 @@ public class BookTest {
         String expResult = "";
         String result = instance.getPhoneNumber();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -85,7 +85,7 @@ public class BookTest {
         int expResult = 0;
         int result = instance.getUsersId();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -95,7 +95,7 @@ public class BookTest {
         Date expResult = null;
         Date result = instance.getDob();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -104,7 +104,7 @@ public class BookTest {
         int book_id = 0;
         Book instance = new Book();
         instance.setBookId(book_id);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -113,7 +113,7 @@ public class BookTest {
         String name = "";
         Book instance = new Book();
         instance.setName(name);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -122,7 +122,7 @@ public class BookTest {
         String email = "";
         Book instance = new Book();
         instance.setEmail(email);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -131,7 +131,7 @@ public class BookTest {
         String phonenumber = "";
         Book instance = new Book();
         instance.setPhoneNumber(phonenumber);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -140,7 +140,7 @@ public class BookTest {
         int person = 0;
         Book instance = new Book();
         instance.setPerson(person);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -149,7 +149,7 @@ public class BookTest {
         Date dob = null;
         Book instance = new Book();
         instance.setDob(dob);
-        fail("The test case is a prototype.");
+        
     }
     
 }

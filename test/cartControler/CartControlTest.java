@@ -47,7 +47,7 @@ public class CartControlTest {
         HttpServletResponse response = null;
         CartControl instance = new CartControl();
         instance.doGet(request, response);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -57,7 +57,7 @@ public class CartControlTest {
         HttpServletResponse response = null;
         CartControl instance = new CartControl();
         instance.doGet_DisplayCart(request, response);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -67,7 +67,7 @@ public class CartControlTest {
         HttpServletResponse response = null;
         CartControl instance = new CartControl();
         instance.doGet_Remove(request, response);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -77,7 +77,7 @@ public class CartControlTest {
         HttpServletResponse response = null;
         CartControl instance = new CartControl();
         instance.doGet_Buy(request, response);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -87,7 +87,7 @@ public class CartControlTest {
         HttpServletResponse response = null;
         CartControl instance = new CartControl();
         instance.doGet_Add(request, response);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -97,7 +97,7 @@ public class CartControlTest {
         HttpServletResponse response = null;
         CartControl instance = new CartControl();
         instance.doGet_Discard(request, response);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -107,7 +107,7 @@ public class CartControlTest {
         HttpServletResponse response = null;
         CartControl instance = new CartControl();
         instance.doPost(request, response);
-        fail("The test case is a prototype.");
+        
     }
 
     @Test
@@ -116,7 +116,7 @@ public class CartControlTest {
         User a = null;
         CartControl instance = new CartControl();
         instance.updateCartInDatabase(a);
-        fail("The test case is a prototype.");
+        
     }
     
 }
