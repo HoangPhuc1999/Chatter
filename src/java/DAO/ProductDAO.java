@@ -543,7 +543,9 @@ public class ProductDAO extends DAO {
      * @return info of 4 subs method
      */
     public String addProductDetails(ProductDetails pd) {
-        return "\nProduct table: " + addProductDetailsToProducts(pd)
+        int pdid = addProductDetailsToProducts(pd);
+        pd.setId(pdid);
+        return "\nProduct table: product ID = " + pdid
                 + "\nProduct_image table:" + addProductDetailsToProductsImage(pd)
                 + "\nInventory table: " + addProductDetailsToProductsInventory(pd)
                 + "\nProduct_category table: " + addProductDetailsToProductsCategory(pd);
