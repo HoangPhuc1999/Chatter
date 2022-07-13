@@ -358,11 +358,11 @@ public class ProductDAO extends DAO {
             statement.setTimestamp(2, Timestamp.valueOf(pd.getModifyAt()));
             statement.setInt(3, pd.getId());
             int column = statement.executeUpdate();
-
-            if (column == 0) {
-                pd.setCreateAt(pd.getModifyAt());
-                addProductDetailsToProductsInventory(pd);
+            if (column != 0) {
+                return column;
             }
+                pd.setCreateAt(pd.getModifyAt());
+                return addProductDetailsToProductsInventory(pd);
 
         } catch (SQLException ex) {
             Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -393,7 +393,7 @@ public class ProductDAO extends DAO {
             if (column != 0) {
                 return column;
             }
-            return addProductDetailsToProductsImage(pd) ? 1 : 0;
+            return addProductDetailsToProductsImage(pd);
 
         } catch (SQLException ex) {
             Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -406,9 +406,9 @@ public class ProductDAO extends DAO {
      * addProductDetailsToDBproducts
      *
      * @param pd
-     * @return boolean is executeUpdate successful insert to Database
+     * @return column add to database, 0 if false
      */
-    public boolean addProductDetailsToProductsImage(ProductDetails pd) {
+    public int addProductDetailsToProductsImage(ProductDetails pd) {
         try {
             String sql = "INSERT INTO [products_image]\n"
                     + "           ([product_id]\n"
@@ -423,21 +423,21 @@ public class ProductDAO extends DAO {
             statement.setInt(1, pd.getId());
             statement.setString(2, pd.getImageUrl());
             statement.setTimestamp(3, Timestamp.valueOf(pd.getCreateAt()));
-            return statement.executeUpdate() != 0;
+            return statement.executeUpdate();
 
         } catch (SQLException ex) {
             Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return false;
+        return 0;
     }
 
     /**
      * Do Tuan Phong: insert to products_image table, should get productid from
      * addProductDetailsToDBproducts
      *
-     * @return boolean is executeUpdate successful insert to Database
+     * @return  column number, 0 if false
      */
-    public boolean addProductDetailsToProductsInventory(ProductDetails pd) {
+    public int addProductDetailsToProductsInventory(ProductDetails pd) {
         try {
             String sql = "INSERT INTO [products_inventory]\n"
                     + "           ([product_id]\n"
@@ -455,12 +455,12 @@ public class ProductDAO extends DAO {
             statement.setInt(2, pd.getQuantity());
             statement.setTimestamp(3, Timestamp.valueOf(pd.getModifyAt()));
             statement.setTimestamp(4, Timestamp.valueOf(pd.getCreateAt()));
-            return statement.executeUpdate() != 0;
+            return statement.executeUpdate();
 
         } catch (SQLException ex) {
             Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return false;
+        return 0;
     }
 
     /**
@@ -468,14 +468,14 @@ public class ProductDAO extends DAO {
      * from addProductDetailsToDBproducts
      *
      * @param pd
-     * @return boolean: is executeUpdate successful insert to Database
+     * @return column number, 0 if no data add to database
      */
-    public boolean addProductDetailsToProductsCategory(ProductDetails pd) {
+    public int addProductDetailsToProductsCategory(ProductDetails pd) {
         try {
             int size = pd.getCategorys().size();
 
             if (size == 0) {
-                return false;
+                return 0;
             }
 
             String sql = "INSERT INTO [products_category]\n"
@@ -495,12 +495,12 @@ public class ProductDAO extends DAO {
                 statement.setInt(2 * i + 2, pd.getCategorys().get(i).getCid());
             }
 
-            return statement.executeUpdate() != 0;
+            return statement.executeUpdate();
 
         } catch (SQLException ex) {
             Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return false;
+        return 0;
     }
 
     /**
@@ -531,21 +531,34 @@ public class ProductDAO extends DAO {
      * @param pd
      * @return boolean: is executeUpdate successful update to Database
      */
-    public boolean updateProductDetailsToProductsCategory(ProductDetails pd) {
+    public int updateProductDetailsToProductsCategory(ProductDetails pd) {
         deleteProductDetailsToProductsCategory(pd);
         return addProductDetailsToProductsCategory(pd);
     }
 
     /**
-     * Do Tuan Phong: update to all table using 3 other update method
+     * Do Tuan Phong: add to all table using 4 other update method
      *
      * @param pd
-     * @return boolean: is executeUpdate successful update to Database
+     * @return info of 4 subs method
+     */
+    public String addProductDetails(ProductDetails pd) {
+        return "\nProduct table: " + addProductDetailsToProducts(pd)
+                + "\nProduct_image table:" + addProductDetailsToProductsImage(pd)
+                + "\nInventory table: " + addProductDetailsToProductsInventory(pd)
+                + "\nProduct_category table: " + addProductDetailsToProductsCategory(pd);
+    }
+
+    /**
+     * Do Tuan Phong: update to all table using 4 other update method
+     *
+     * @param pd
+     * @return String: info of 4 subs method
      */
     public String updateProductDetails(ProductDetails pd) {
         return "\nProduct table: " + updateProductDetailsToProducts(pd)
-                + "\nProduct_image table:" + String.valueOf(updateProductDetailsToProductsImage(pd))
-                + "\nInventory table: " + String.valueOf(updateProductDetailsToProductsInventory(pd))
+                + "\nProduct_image table:" + updateProductDetailsToProductsImage(pd)
+                + "\nInventory table: " + updateProductDetailsToProductsInventory(pd)
                 + "\nProduct_category table: " + updateProductDetailsToProductsCategory(pd);
     }
 
