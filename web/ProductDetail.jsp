@@ -71,7 +71,7 @@
                     <div id="product-carousel" class="carousel slide" data-ride="carousel">
                         <div class="carousel-inner bg-light">
 
-                            <img class="w-100 h-100"src=<%=x.getImage()%> alt="">
+                            <img class="w-100 h-100" src="<%=x.getImage()%>" alt="">
 
                         </div>
 
