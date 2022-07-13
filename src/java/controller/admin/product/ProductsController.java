@@ -47,7 +47,7 @@ public class ProductsController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ProductDAO productDAO = new ProductDAO();
-        ArrayList<ProductDetails> productDetailses = (ArrayList<ProductDetails>) productDAO.getAllProductDetailses(0,"");
+        ArrayList<ProductDetails> productDetailses = (ArrayList<ProductDetails>) productDAO.getAllProductDetailses(0,"",42,10);
 //        response.getWriter().print();
         request.setAttribute("productDetailses", productDetailses);
         request.getRequestDispatcher("../view/admin/Products.jsp").forward(request, response);
