@@ -6,13 +6,12 @@ package controller.admin.product;
 
 import DAO.CategoryDAO;
 import DAO.ProductDAO;
+import DAO.UserDAO;
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -22,22 +21,26 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import model.Category;
 import model.ProductDetails;
+import model.User;
+import model.UserAccount;
 
 /**
  *
  * @author Tuan Phong
  */
-@WebServlet(name = "AddProductController", urlPatterns = {"/admin/add_product"})
+@WebServlet(name = "EditProductController", urlPatterns = {"/admin/edit_product"})
 @MultipartConfig(
         location = "F:\\FPTU\\FPT class\\Semester 5\\SWP391\\Week 8\\Code\\Chatter\\web\\images",
         fileSizeThreshold = 1024 * 1024 * 1, // 1 MB
         maxFileSize = 1024 * 1024 * 10, // 10 MB
         maxRequestSize = 1024 * 1024 * 100 // 100 MB
 )
-public class AddController extends HttpServlet {
+public class EditController extends HttpServlet {
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
+    /**      *
+     * //
+     * <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+     * /**
      * Handles the HTTP <code>GET</code> method.
      *
      * @param request servlet request
@@ -51,13 +54,13 @@ public class AddController extends HttpServlet {
         ProductDAO productDAO = new ProductDAO();
         CategoryDAO categoryDAO = new CategoryDAO();
         ArrayList<Category> categorys = categoryDAO.listAllCategory();
-        ArrayList<ProductDetails> products = (ArrayList<ProductDetails>) productDAO.getAllProductDetailses(0,"");
-        request.setAttribute("products", products);
+        ArrayList<ProductDetails> productDetailses = (ArrayList<ProductDetails>) productDAO.getAllProductDetailses(1, request.getParameter("productid"));
+        request.setAttribute("product", productDetailses.get(0));
         request.setAttribute("categorys", categorys);
-        request.getRequestDispatcher("../view/admin/AddProduct.jsp").forward(request, response);
+        request.getRequestDispatcher("../view/admin/EditProduct.jsp").forward(request, response);
     }
 
-    /**
+      /**
      * Handles the HTTP <code>POST</code> method.
      *
      * @param request servlet request
@@ -71,10 +74,10 @@ public class AddController extends HttpServlet {
 
         ProductDetails productDetails = new ProductDetails();
         //set details
+        productDetails.setId(Integer.parseInt(request.getParameter("productid")));
         productDetails.setName(request.getParameter("productname"));
-        LocalDateTime createAt = LocalDateTime.now();
-        productDetails.setCreateAt(createAt);
-        productDetails.setModifyAt(createAt);
+        LocalDateTime modifyAt = LocalDateTime.now();
+        productDetails.setModifyAt(modifyAt);
         productDetails.setQuantity(Integer.parseInt(request.getParameter("quantity")));
         productDetails.setPrice(Double.parseDouble(request.getParameter("price")));
         productDetails.setTitle(request.getParameter("title"));
@@ -145,6 +148,7 @@ public class AddController extends HttpServlet {
         }
         return null;
     }
+
 
     /**
      * Returns a short description of the servlet.

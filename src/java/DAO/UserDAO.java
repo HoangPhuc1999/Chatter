@@ -493,9 +493,100 @@ public class UserDAO extends DAO {
     }
 
     /**
+     * DoTuanPhong: update User dung de them user moi vao bang user
+     *
+     * @param user
+     * @return cot vua duoc them
+     */
+    public int updateUserDetailsTousers(UserDetails user) {
+        try {
+            String sql = "UPDATE [users]\n"
+                    + "   SET [firstname] = ?\n"
+                    + "      ,[lastname] = ?\n"
+                    + "      ,[phonenumber] = ?\n"
+                    + "      ,[email] = ?\n"
+                    + "      ,[gender] = ?\n"
+                    + (user.getAvatar() == null ? "" : "      ,[avatar] = ?\n")
+                    + " WHERE users_id = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            statement.setString(1, user.getFirstname());
+            statement.setString(2, user.getLastname());
+            statement.setString(3, user.getPhonenumber());
+            statement.setString(4, user.getEmail());
+            statement.setBoolean(5, user.getGender().equals("male"));
+            if (user.getAvatar() == null) {
+                statement.setInt(6, user.getUsers_id());
+            } else {
+                statement.setString(6, user.getAvatar());
+                statement.setInt(7, user.getUsers_id());
+            }
+
+            return statement.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+    /**
+     * DoTuanPhong: addUser dung de them user moi vao bang usersrole
+     *
+     * @param user
+     * @return cot vua duoc sua
+     */
+    public int updateUserDetailsTousersRole(UserDetails user) {
+        try {
+            String sql = "UPDATE [users_role]\n"
+                    + "   SET [user_role] = ?\n"
+                    + " WHERE users_id = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            statement.setString(1, user.getRole());
+            statement.setInt(2, user.getUsers_id());
+
+            return statement.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+    /**
+     * DoTuanPhong: addUser dung de them user moi vao bang users_address
+     *
+     * @param user
+     * @return cot vua duoc sua
+     */
+    public int updateUserDetailsTousersaddress(UserDetails user) {
+        try {
+            String sql = "UPDATE [users_address]\n"
+                    + "   SET [home_address] = ?\n"
+                    + "      ,[district] = ?\n"
+                    + "      ,[city] = ?\n"
+                    + " WHERE [users_id] = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            statement.setString(1, user.getHome_address());
+            statement.setString(2, user.getDistrict());
+            statement.setString(3, user.getCity());
+            statement.setInt(4, user.getUsers_id());
+
+            return statement.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+    /**
      * DoTuanPhong them account moi vao bang account
      *
      * @param account
+     * @return cot moi them
      */
     public int addAccount(UserAccount account) {
         try {
@@ -511,11 +602,11 @@ public class UserDAO extends DAO {
             ps.setInt(1, account.getUsers_id());
             ps.setString(2, account.getUsername());
             ps.setString(3, account.getPassword());
-            ps.executeUpdate();
+            return ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return account.getUsers_id();
+        return 0;
     }
 
     /**
@@ -527,13 +618,13 @@ public class UserDAO extends DAO {
      */
     public UserDetails getUserDetailsById(int userid) {
         String query = "SELECT *\n"
-                + "FROM users u LEFT JOIN users_role ur on u.users_id = ur.users_id\n"
-                + "RIGHT JOIN users_account uac on u.users_id = uac.users_id\n"
-                + "LEFT JOIN users_address uar on u.users_id = uar.users_id\n"
-                + "LEFT JOIN orders o on u.users_id = o.order_by\n"
-                + "LEFT JOIN orders_details od on o.order_id = od.order_id\n"
-                + "LEFT JOIN products p on p.product_id  = od.order_product_id\n"
-                + "LEFT JOIN products_image pi on pi.product_id = p.product_id\n"
+                + "FROM users u LEFT JOIN users_role ur ON u.users_id = ur.users_id\n"
+                + "RIGHT JOIN users_account uac ON u.users_id = uac.users_id\n"
+                + "LEFT JOIN users_address uar ON u.users_id = uar.users_id\n"
+                + "LEFT JOIN orders o ON u.users_id = o.order_by\n"
+                + "LEFT JOIN orders_details od ON o.order_id = od.order_id\n"
+                + "LEFT JOIN products p ON p.product_id  = od.order_product_id\n"
+                + "LEFT JOIN products_image pi ON pi.product_id = p.product_id\n"
                 + "WHERE u.users_id = ?";
 
         ArrayList<Order> orders = new ArrayList<>();
@@ -561,7 +652,7 @@ public class UserDAO extends DAO {
                     details.setAccount(new UserAccount(userid, rs.getString("username"), null));
                     details.setHome_address(rs.getString("home_address"));
                     details.setDistrict(rs.getString("district"));
-                    details.setCity("city");
+                    details.setCity(rs.getString("city"));
 
                     if (rs.getInt(17) == 0) {
                         return details;

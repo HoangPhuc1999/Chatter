@@ -243,7 +243,7 @@
                                                         First name
                                                     </div>
                                                     <div class="col">
-                                                        <input type="text" class="form-control" autofocus  value="${user.firstname}" name="firstname"/>
+                                                        <input type="text" class="form-control" autofocus pattern="[A-Z][a-z]+$" value="${user.firstname}" name="firstname"/>
                                                     </div>
 
                                                     <div class="col">
@@ -251,7 +251,7 @@
                                                         Last name
                                                     </div>
                                                     <div class="col">
-                                                        <input type="text" class="form-control"  value="${user.lastname}" name="lastname"/>
+                                                        <input type="text" class="form-control" pattern="[A-Z][a-z]+$"  value="${user.lastname}" name="lastname"/>
                                                     </div>
 
                                                     <div class="col">
@@ -315,6 +315,7 @@
                                                         <input accept="image/*" class="form-control" type="file" id="formFile" name="image">
                                                         <p class=" text-dark"><em>Preview avatar</em><img id="img-preview" alt="preview avatar" class="avatar rounded-circle me-2 justify-content-lg-end" src="/Chatter/${user.avatar}"/>
                                                         </p>
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -331,7 +332,7 @@
                                                     <i class="fa-duotone fa-address-book"></i>
                                                     Address</div>
 
-                                                <div class="card-body row row-cols-5 row-cols-lg-2 g-2 g-lg-3">
+                                                <div class="card-body row row-cols-6 row-cols-lg-2 g-2 g-lg-3">
                                                     <div class="col">
                                                         <i class="fa-duotone fa-house-tree"></i>
                                                         Home address
@@ -356,12 +357,14 @@
                                                         <input type="text" class="form-control"  value="${user.city}" name="city"/>
                                                     </div>
 
-                                                    <input type="hidden" name="userid" value="${user.users_id}"/>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
+                                <input type="hidden" name="userid" value="${user.users_id}"/>
+                                <input type="hidden" name="username" value="${user.account.username}"/>
                                 <div class="col text-center p-3">
                                     <button type="submit" class="btn btn-outline-warning btn-box me-md-4">
                                         <i class="fa-duotone fa-file-lines"></i>
@@ -382,7 +385,9 @@
                     <div class="tab-pane fade" id="order" role="tabpanel" aria-labelledby="order-tab">
                         aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
                     </div>
-                    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+                    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                        ...
+                    </div>
                 </div>
             </c:if>
         </div>
