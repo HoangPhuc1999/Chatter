@@ -67,7 +67,7 @@
 
                     </li>
                     <li>
-                        <a href="Chatter/admin/booking" class="nav-link link-dark" id="bookings_page">
+                        <a href="admin/booking" class="nav-link link-dark" id="bookings_page">
                            <i class="fa-duotone fa-table-picnic"></i>
                             Bookings list
                         </a>

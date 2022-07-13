@@ -27,7 +27,7 @@
             <div class="list-group list-group-flush mx-3 mt-4">
                 <ul class="nav nav-pills flex-column mb-auto">
                     <li class="nav-item">
-                        <a href="dashboard" class="nav-link link-dark" aria-current="page">
+                        <a href="admin/dashboard" class="nav-link link-dark" aria-current="page">
                             <i class="fa-solid fa-house-chimney-window"></i>
                             Home
                         </a>
@@ -67,7 +67,7 @@
 
                     </li>
                     <li>
-                        <a href="../admin/booking" class="nav-link link-dark" id="bookings_page">
+                        <a href="admin/booking" class="nav-link link-dark" id="bookings_page">
                            <i class="fa-duotone fa-table-picnic"></i>
                             Bookings list
                         </a>
@@ -86,13 +86,13 @@
                             class="collapse list-group list-group-flush"
                             >
                             <li class="list-group-item py-1">
-                                <a href="../admin/products" class="text-reset text-decoration-none">Products</a>
+                                <a href="/Chatter/admin/products" class="text-reset text-decoration-none">Products</a>
                             </li>
                             <li class="list-group-item py-1">
-                                <a href="../admin/add_product" class="text-reset text-decoration-none">Add Product</a>
+                                <a href="/Chatter/admin/add_product" class="text-reset text-decoration-none">Add Product</a>
                             </li>
                             <li class="list-group-item py-1">
-                                <a href="../admin/edit_product" class="text-reset text-decoration-none">Edit Product</a>
+                                <a href="/Chatter/admin/edit_product" class="text-reset text-decoration-none">Edit Product</a>
                             </li>
                             <li class="list-group-item py-1">
                                 <a href="" class="text-reset text-decoration-none">...</a>
@@ -137,7 +137,7 @@
             <hr>
             <div class="dropdown">
                 <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="../${sessionScope.user.avatar}" alt="Avatar" width="32" height="32" class="rounded-circle me-2">
+                    <img src="/Chatter/${sessionScope.user.avatar}" alt="Avatar" width="32" height="32" class="rounded-circle me-2">
                     <strong>${sessionScope.user_account.username}</strong>
                 </a>
                 <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
