@@ -6,10 +6,8 @@ package controller.admin.product;
 
 import DAO.CategoryDAO;
 import DAO.ProductDAO;
-import DAO.UserDAO;
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
@@ -21,8 +19,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import model.Category;
 import model.ProductDetails;
-import model.User;
-import model.UserAccount;
 
 /**
  *
@@ -36,8 +32,9 @@ import model.UserAccount;
         maxRequestSize = 1024 * 1024 * 100 // 100 MB
 )
 public class EditController extends HttpServlet {
-
-    /**      *
+ProductDAO productDAO = new ProductDAO();
+    /**
+     * *
      * //
      * <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
      * /**
@@ -51,7 +48,7 @@ public class EditController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ProductDAO productDAO = new ProductDAO();
+        
         CategoryDAO categoryDAO = new CategoryDAO();
         ArrayList<Category> categorys = categoryDAO.listAllCategory();
         ArrayList<ProductDetails> productDetailses = (ArrayList<ProductDetails>) productDAO.getAllProductDetailses(1, request.getParameter("productid"));
@@ -60,7 +57,7 @@ public class EditController extends HttpServlet {
         request.getRequestDispatcher("../view/admin/EditProduct.jsp").forward(request, response);
     }
 
-      /**
+    /**
      * Handles the HTTP <code>POST</code> method.
      *
      * @param request servlet request
@@ -91,9 +88,6 @@ public class EditController extends HttpServlet {
         }
         productDetails.setCategorys(categorys);
 
-        ProductDAO productDAO = new ProductDAO();
-
-        productDetails.setId(productDAO.addProductDetailsToProducts(productDetails));
 
         //set image
 //        String fullPath = request.getServletContext().getRealPath("").replace("\\", File.separator) + File.separator + "images";
@@ -103,7 +97,7 @@ public class EditController extends HttpServlet {
             fileName = extractFileName(part);
 
             if (fileName != null && fileName.length() > 0) {
-                String extension = fileName.substring(fileName.lastIndexOf('.') - 1);
+                String extension = fileName.substring(fileName.lastIndexOf('.'));
                 String filePath = File.separator + "product" + productDetails.getId() + '_' + productDetails.getName() + extension;
 
                 // Ghi vào file.
@@ -111,18 +105,13 @@ public class EditController extends HttpServlet {
                 productDetails.setImageUrl("images/" + "product" + productDetails.getId() + '_' + productDetails.getName() + extension);
             }
         }
-
-        productDAO.addProductDetailsToProductsImage(productDetails);
-
-        productDAO.addProductDetailsToProductsInventory(productDetails);
-
-        productDAO.addProductDetailsToProductsCategory(productDetails);
+        
+        log(productDAO.updateProductDetails(productDetails));
 //        try {
 //            TimeUnit.MILLISECONDS.sleep(500);
 //        } catch (InterruptedException ex) {
 //            Logger.getLogger(AddController.class.getName()).log(Level.SEVERE, null, ex);
 //        }
-
         response.sendRedirect("../productdetail?id=" + productDetails.getId());
     }
 
@@ -148,7 +137,6 @@ public class EditController extends HttpServlet {
         }
         return null;
     }
-
 
     /**
      * Returns a short description of the servlet.
