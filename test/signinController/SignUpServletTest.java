@@ -129,5 +129,15 @@ public class SignUpServletTest {
         instance.doPost(request, response);
         fail("The test case is a prototype.");
     }
+
+    @Test
+    public void testDoPost() throws Exception {
+        System.out.println("doPost");
+        HttpServletRequest request = null;
+        HttpServletResponse response = null;
+        SignUpServlet instance = new SignUpServlet();
+        instance.doPost(request, response);
+        fail("The test case is a prototype.");
+    }
     
 }

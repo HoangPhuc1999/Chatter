@@ -75,5 +75,14 @@ public class CategoryDAOTest {
         instance.delete(categoryId);
         fail("The test case is a prototype.");
     }
+
+    @Test
+    public void testDeleteInProductsCategory() {
+        System.out.println("deleteInProductsCategory");
+        int categoryId = 0;
+        CategoryDAO instance = new CategoryDAO();
+        instance.deleteInProductsCategory(categoryId);
+        fail("The test case is a prototype.");
+    }
     
 }

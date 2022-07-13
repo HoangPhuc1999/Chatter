@@ -5,6 +5,7 @@
  */
 package DAO;
 
+import java.util.List;
 import model.Review;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -48,6 +49,38 @@ public class ReviewDAOTest {
         ReviewDAO instance = new ReviewDAO();
         instance.postReview(reviewItem);
         // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    @Test
+    public void testGetAllReviews() {
+        System.out.println("getAllReviews");
+        ReviewDAO instance = new ReviewDAO();
+        List<Review> expResult = null;
+        List<Review> result = instance.getAllReviews();
+        assertEquals(expResult, result);
+        fail("The test case is a prototype.");
+    }
+
+    @Test
+    public void testGetAllReviewsFromId() {
+        System.out.println("getAllReviewsFromId");
+        String id = "";
+        ReviewDAO instance = new ReviewDAO();
+        List<Review> expResult = null;
+        List<Review> result = instance.getAllReviewsFromId(id);
+        assertEquals(expResult, result);
+        fail("The test case is a prototype.");
+    }
+
+    @Test
+    public void testGetReviewAuthor() {
+        System.out.println("getReviewAuthor");
+        int id = 0;
+        ReviewDAO instance = new ReviewDAO();
+        String expResult = "";
+        String result = instance.getReviewAuthor(id);
+        assertEquals(expResult, result);
         fail("The test case is a prototype.");
     }
     

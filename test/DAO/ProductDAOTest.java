@@ -169,5 +169,49 @@ public class ProductDAOTest {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
+
+    @Test
+    public void testAddProductDetailsToProducts() {
+        System.out.println("addProductDetailsToProducts");
+        ProductDetails pd = null;
+        ProductDAO instance = new ProductDAO();
+        int expResult = 0;
+        int result = instance.addProductDetailsToProducts(pd);
+        assertEquals(expResult, result);
+        fail("The test case is a prototype.");
+    }
+
+    @Test
+    public void testAddProductDetailsToProductsImage() {
+        System.out.println("addProductDetailsToProductsImage");
+        ProductDetails pd = null;
+        ProductDAO instance = new ProductDAO();
+        boolean expResult = false;
+        boolean result = instance.addProductDetailsToProductsImage(pd);
+        assertEquals(expResult, result);
+        fail("The test case is a prototype.");
+    }
+
+    @Test
+    public void testAddProductDetailsToProductsInventory() {
+        System.out.println("addProductDetailsToProductsInventory");
+        ProductDetails pd = null;
+        ProductDAO instance = new ProductDAO();
+        boolean expResult = false;
+        boolean result = instance.addProductDetailsToProductsInventory(pd);
+        assertEquals(expResult, result);
+        fail("The test case is a prototype.");
+    }
+
+    @Test
+    public void testAddProductDetailsToProductsCategory() {
+        System.out.println("addProductDetailsToProductsCategory");
+        ProductDetails pd = null;
+        ProductDAO instance = new ProductDAO();
+        boolean expResult = false;
+        boolean result = instance.addProductDetailsToProductsCategory(pd);
+        assertEquals(expResult, result);
+        fail("The test case is a prototype.");
+    }
     
 }
