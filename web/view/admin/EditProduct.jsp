@@ -64,7 +64,7 @@
                 Edit product
             </h3>
             <c:set var = "product" scope = "session" value = "${requestScope.product}"/>
-
+            ${product}
             <p class="h5 text-danger">
                 ${product.name} <em class="display-6 blockquote-footer">(Product ID: ${product.id})</em>
             </p>

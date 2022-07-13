@@ -29,7 +29,7 @@ public class ProductDAO extends DAO {
     //author: an
     //last changed by : AN
     public Product getProductById(String id) {
-        
+
         xSql = "select * from products p\n"
                 + "join products_image i\n"
                 + "on p.product_id = i.product_id\n"
@@ -108,14 +108,14 @@ public class ProductDAO extends DAO {
         }
         return list;
     }
-    
+
     public ProductImage getProductImageById(String id) {
-        
+
         ProductImage x = new ProductImage();
         int product_id = Integer.parseInt(id);
         String imageUrl;
         Date date;
-        
+
         xSql = "select * from products_image where product_id=?";
         try {
             ps = con.prepareStatement(xSql);
@@ -135,7 +135,7 @@ public class ProductDAO extends DAO {
         }
         return (x);
     }
-    
+
     public List<Category> getAllCategory() {
         List<Category> list = new ArrayList<>();
         String query = "select * from category";
@@ -160,7 +160,7 @@ public class ProductDAO extends DAO {
         String sql = "select p.product_id, p.product_name, i.product_image_path, "
                 + "p.product_price, p.product_title, p.product_description from products p join products_image i \n"
                 + "on p.product_id = i.product_id where cid = ?";
-        
+
         try {
             ps = con.prepareStatement(sql);
             if (cid != null) {
@@ -193,7 +193,7 @@ public class ProductDAO extends DAO {
             while (rs.next()) {
                 return discount = rs.getInt(3);
             }
-            
+
         } catch (Exception e) {
         }
         return discount;
@@ -209,10 +209,10 @@ public class ProductDAO extends DAO {
     public List<ProductDetails> getAllProductDetailses(int type, String str) {
         ArrayList<ProductDetails> productDetailses = new ArrayList<>();
         String sql = "SELECT *\n"
-                + "FROM products p LEFT JOIN products_image pi on p.product_id  = pi.product_id\n"
-                + "LEFT JOIN products_inventory pin on p.product_id = pin.product_id\n"
-                + "LEFT JOIN products_category pc on p.product_id = pc.product_id\n"
-                + "JOIN category c on pc.category_id = c.category_id\n";
+                + "FROM products p LEFT JOIN products_image pi ON p.product_id  = pi.product_id\n"
+                + "LEFT JOIN products_inventory pin ON p.product_id = pin.product_id\n"
+                + "LEFT JOIN products_category pc ON p.product_id = pc.product_id\n"
+                + "JOIN category c ON pc.category_id = c.category_id\n";
         if (type == 1) {
             sql += "WHERE p.product_id = ?\n";
         }
@@ -222,47 +222,47 @@ public class ProductDAO extends DAO {
             if (type == 1) {
                 ps.setInt(1, Integer.parseInt(str));
             }
-            
+
             rs = ps.executeQuery();
             ProductDetails productDetailsTemp = new ProductDetails();
             productDetailsTemp.setId(0);
-            
+
             while (rs.next()) {
                 if (productDetailsTemp.getId() != rs.getInt(1)) {
                     productDetailsTemp.setId(rs.getInt(1));
-                    
+
                     ProductDetails productDetails = new ProductDetails();
-                    
+
                     productDetails.setId(rs.getInt(1));
                     productDetails.setName(rs.getString("product_name"));
                     productDetails.setTitle(rs.getString("product_title"));
+                    productDetails.setQuantity(rs.getInt("product_quantity"));
                     productDetails.setPrice(rs.getDouble("product_price"));
                     productDetails.setDescription(rs.getString("product_description"));
                     productDetails.setImageUrl(rs.getString("product_image_path"));
-                    productDetails.setImage(rs.getString("product_image_path"));
                     productDetails.setModifyAt(rs.getTimestamp(8).toLocalDateTime());
                     productDetails.setCreateAt(
                             rs.getTimestamp("created_at") != null
                             ? rs.getTimestamp("created_at").toLocalDateTime() : null);
-                    
+
                     if (rs.getInt(14) != 0) {
                         productDetails.setCategorys(new ArrayList<>());
                         productDetails.getCategorys().add(
                                 new Category(rs.getInt(14),
                                         rs.getString("category_name")));
-                        
+
                         productDetails.setCname(rs.getString("category_name"));
-                        
+
                     }
-                    
+
                     productDetailses.add(productDetails);
-                    
+
                 } else {
                     productDetailses.get(productDetailses.size() - 1).getCategorys()
                             .add(new Category(rs.getInt(14), rs.getString("category_name")));
                 }
             }
-            
+
         } catch (SQLException e) {
         }
         return productDetailses;
@@ -289,15 +289,15 @@ public class ProductDAO extends DAO {
                     + "           ,?\n"
                     + "           ,?)";
             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            
+
             statement.setString(1, pd.getName());
             statement.setDouble(2, pd.getPrice());
             statement.setString(3, pd.getTitle());
             statement.setString(4, pd.getDescription());
             statement.executeUpdate();
-            
+
             ResultSet resultSet = statement.getGeneratedKeys();
-            
+
             if (resultSet.next()) {
                 return resultSet.getInt(1);
             }
@@ -308,13 +308,107 @@ public class ProductDAO extends DAO {
     }
 
     /**
+     *
+     * Do Tuan Phong: update to products table
+     *
+     *
+     * @param ProductDetails
+     * @return int update column
+     */
+    public int updateProductDetailsToProducts(ProductDetails pd) {
+        try {
+            String sql = "UPDATE  [products]\n"
+                    + "   SET [product_name] =?\n"
+                    + "      ,[product_price] =?\n"
+                    + "      ,[product_title] =?\n"
+                    + "      ,[product_description] = ?\n"
+                    + " WHERE product_id = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            statement.setString(1, pd.getName());
+            statement.setDouble(2, pd.getPrice());
+            statement.setString(3, pd.getTitle());
+            statement.setString(4, pd.getDescription());
+            statement.setInt(5, pd.getId());
+            return statement.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+    /**
+     *
+     * Do Tuan Phong: update to products_inventory table
+     *
+     *
+     * @param ProductDetails
+     * @return int updated column
+     */
+    public int updateProductDetailsToProductsInventory(ProductDetails pd) {
+        try {
+            String sql = "UPDATE [products_inventory]\n"
+                    + "   SET [product_quantity] = ?\n"
+                    + "      ,[modified_at] = ?\n"
+                    + " WHERE product_id = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            statement.setInt(1, pd.getQuantity());
+            statement.setTimestamp(2, Timestamp.valueOf(pd.getModifyAt()));
+            statement.setInt(3, pd.getId());
+            int column = statement.executeUpdate();
+            if (column != 0) {
+                return column;
+            }
+                pd.setCreateAt(pd.getModifyAt());
+                return addProductDetailsToProductsInventory(pd);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+    /**
+     *
+     * Do Tuan Phong: update to products_inventory table
+     *
+     *
+     * @param pd
+     * @return int updated column
+     */
+    public int updateProductDetailsToProductsImage(ProductDetails pd) {
+        try {
+            String sql = "UPDATE [products_image]\n"
+                    + "     SET [product_image_path] =?\n"
+                    + "      ,[modified_at] =?\n"
+                    + " WHERE product_id= ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            statement.setString(1, pd.getImageUrl());
+            statement.setTimestamp(2, Timestamp.valueOf(pd.getModifyAt()));
+            statement.setInt(3, pd.getId());
+            int column = statement.executeUpdate();
+            if (column != 0) {
+                return column;
+            }
+            return addProductDetailsToProductsImage(pd);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+    /**
      * Do Tuan Phong: insert to products_image table, should get productid from
      * addProductDetailsToDBproducts
      *
-     * @param ProductDetails
-     * @return boolean is executeUpdate successful insert to Database
+     * @param pd
+     * @return column add to database, 0 if false
      */
-    public boolean addProductDetailsToProductsImage(ProductDetails pd) {
+    public int addProductDetailsToProductsImage(ProductDetails pd) {
         try {
             String sql = "INSERT INTO [products_image]\n"
                     + "           ([product_id]\n"
@@ -325,26 +419,25 @@ public class ProductDAO extends DAO {
                     + "           ,?\n"
                     + "           ,?)";
             PreparedStatement statement = connection.prepareStatement(sql);
-            
+
             statement.setInt(1, pd.getId());
-            statement.setString(2, pd.getImage());
+            statement.setString(2, pd.getImageUrl());
             statement.setTimestamp(3, Timestamp.valueOf(pd.getCreateAt()));
-            return statement.executeUpdate() != 0;
-            
+            return statement.executeUpdate();
+
         } catch (SQLException ex) {
             Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return false;
+        return 0;
     }
 
     /**
      * Do Tuan Phong: insert to products_image table, should get productid from
      * addProductDetailsToDBproducts
      *
-     * @param ProductDetails
-     * @return boolean is executeUpdate successful insert to Database
+     * @return  column number, 0 if false
      */
-    public boolean addProductDetailsToProductsInventory(ProductDetails pd) {
+    public int addProductDetailsToProductsInventory(ProductDetails pd) {
         try {
             String sql = "INSERT INTO [products_inventory]\n"
                     + "           ([product_id]\n"
@@ -357,17 +450,17 @@ public class ProductDAO extends DAO {
                     + "           ,?\n"
                     + "           ,?)";
             PreparedStatement statement = connection.prepareStatement(sql);
-            
+
             statement.setInt(1, pd.getId());
             statement.setInt(2, pd.getQuantity());
             statement.setTimestamp(3, Timestamp.valueOf(pd.getModifyAt()));
             statement.setTimestamp(4, Timestamp.valueOf(pd.getCreateAt()));
-            return statement.executeUpdate() != 0;
-            
+            return statement.executeUpdate();
+
         } catch (SQLException ex) {
             Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return false;
+        return 0;
     }
 
     /**
@@ -375,41 +468,102 @@ public class ProductDAO extends DAO {
      * from addProductDetailsToDBproducts
      *
      * @param pd
-     * @return boolean: is executeUpdate successful insert to Database
+     * @return column number, 0 if no data add to database
      */
-    public boolean addProductDetailsToProductsCategory(ProductDetails pd) {
+    public int addProductDetailsToProductsCategory(ProductDetails pd) {
         try {
             int size = pd.getCategorys().size();
-            
+
             if (size == 0) {
-                return false;
+                return 0;
             }
-            
+
             String sql = "INSERT INTO [products_category]\n"
                     + "           ([product_id]\n"
                     + "           ,[category_id])\n"
                     + "     VALUES\n";
-            
+
             for (int i = 0; i < size; i++) {
                 sql += "           (?\n"
                         + "           ,?)" + (i == size - 1 ? "" : ",\n");
             }
-            
+
             PreparedStatement statement = connection.prepareStatement(sql);
-            
+
             for (int i = 0; i < size; i++) {
                 statement.setInt(2 * i + 1, pd.getId());
                 statement.setInt(2 * i + 2, pd.getCategorys().get(i).getCid());
             }
-            
+
+            return statement.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+    /**
+     * Do Tuan Phong: delete to products_category table, should get productid
+     * from addProductDetailsToDBproducts
+     *
+     * @param pd
+     * @return boolean: is executeUpdate successful deleted to Database
+     */
+    public boolean deleteProductDetailsToProductsCategory(ProductDetails pd) {
+        try {
+            String sql = "DELETE FROM [products_category]\n"
+                    + "      WHERE product_id = ?";
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, pd.getId());
             return statement.executeUpdate() != 0;
-            
         } catch (SQLException ex) {
             Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
-    
+
+    /**
+     * Do Tuan Phong: update to products_category table, should get productid
+     * from addProductDetailsToDBproducts
+     *
+     * @param pd
+     * @return boolean: is executeUpdate successful update to Database
+     */
+    public int updateProductDetailsToProductsCategory(ProductDetails pd) {
+        deleteProductDetailsToProductsCategory(pd);
+        return addProductDetailsToProductsCategory(pd);
+    }
+
+    /**
+     * Do Tuan Phong: add to all table using 4 other update method
+     *
+     * @param pd
+     * @return info of 4 subs method
+     */
+    public String addProductDetails(ProductDetails pd) {
+        int pdid = addProductDetailsToProducts(pd);
+        pd.setId(pdid);
+        return "\nProduct table: product ID = " + pdid
+                + "\nProduct_image table:" + addProductDetailsToProductsImage(pd)
+                + "\nInventory table: " + addProductDetailsToProductsInventory(pd)
+                + "\nProduct_category table: " + addProductDetailsToProductsCategory(pd);
+    }
+
+    /**
+     * Do Tuan Phong: update to all table using 4 other update method
+     *
+     * @param pd
+     * @return String: info of 4 subs method
+     */
+    public String updateProductDetails(ProductDetails pd) {
+        return "\nProduct table: " + updateProductDetailsToProducts(pd)
+                + "\nProduct_image table:" + updateProductDetailsToProductsImage(pd)
+                + "\nInventory table: " + updateProductDetailsToProductsInventory(pd)
+                + "\nProduct_category table: " + updateProductDetailsToProductsCategory(pd);
+    }
+
     public static void main(String[] args) {
         ProductDAO dao = new ProductDAO();
 //        List<Product> list = dao.getProductByCID(cid);
@@ -419,5 +573,5 @@ public class ProductDAO extends DAO {
         //System.out.println(dao.getAllProductWithCategory());
 
     }
-    
+
 }

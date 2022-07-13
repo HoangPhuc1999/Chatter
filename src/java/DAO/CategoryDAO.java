@@ -95,6 +95,7 @@ public class CategoryDAO extends MyDAO {
         } catch (SQLException ex) {
             Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        deleteInProductsCategory(categoryId);
     }
 
     /**

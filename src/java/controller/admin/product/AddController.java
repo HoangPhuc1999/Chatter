@@ -90,7 +90,7 @@ public class AddController extends HttpServlet {
 
         ProductDAO productDAO = new ProductDAO();
 
-        productDetails.setId(productDAO.addProductDetailsToProducts(productDetails));
+//        productDetails.setId(productDAO.addProductDetailsToProducts(productDetails));
 
         //set image
 //        String fullPath = request.getServletContext().getRealPath("").replace("\\", File.separator) + File.separator + "images";
@@ -100,7 +100,7 @@ public class AddController extends HttpServlet {
             fileName = extractFileName(part);
 
             if (fileName != null && fileName.length() > 0) {
-                String extension = fileName.substring(fileName.lastIndexOf('.') - 1);
+                String extension = fileName.substring(fileName.lastIndexOf('.'));
                 String filePath = File.separator + "product" + productDetails.getId() + '_' + productDetails.getName() + extension;
 
                 // Ghi vào file.
@@ -108,12 +108,13 @@ public class AddController extends HttpServlet {
                 productDetails.setImageUrl("images/" + "product" + productDetails.getId() + '_' + productDetails.getName() + extension);
             }
         }
-
-        productDAO.addProductDetailsToProductsImage(productDetails);
-
-        productDAO.addProductDetailsToProductsInventory(productDetails);
-
-        productDAO.addProductDetailsToProductsCategory(productDetails);
+        productDAO.addProductDetails(productDetails);
+//
+//        productDAO.addProductDetailsToProductsImage(productDetails);
+//
+//        productDAO.addProductDetailsToProductsInventory(productDetails);
+//
+//        productDAO.addProductDetailsToProductsCategory(productDetails);
 //        try {
 //            TimeUnit.MILLISECONDS.sleep(500);
 //        } catch (InterruptedException ex) {
