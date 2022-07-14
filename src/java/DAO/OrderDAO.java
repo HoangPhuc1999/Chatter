@@ -55,6 +55,7 @@ public class OrderDAO extends MyDAO {
             }
 
         } catch (Exception e) {
+            // check ham nay
             System.out.println("Insert Order Fail");
             System.out.println(e.toString());
         }
