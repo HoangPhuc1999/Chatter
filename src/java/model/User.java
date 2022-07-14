@@ -42,6 +42,15 @@ public class User {
         this.role = role;
         this.gender = gender;
     }
+    
+    public User(String firstname, String lastname, String phonenumber, String email, String gender,String avatar,Long x) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.phonenumber = phonenumber;
+        this.email = email;
+        this.gender = gender;
+        this.avatar = avatar;
+    }
 
    
 
@@ -128,6 +137,11 @@ public class User {
     public String getGender() {
         return gender;
     }
+    
+    public int getGenderNum() {
+        if(gender.equals("male")) return 1;
+        else return 0;
+    }
 
     public void setGender(String gender) {
         this.gender = gender;
@@ -149,6 +163,7 @@ public class User {
         this.cart = cart;
     }
 
+    
     @Override
     public String toString() {
         return "User{" + "users_id=" + users_id + ", role=" + role + ", firstname=" + firstname + ", lastname=" + lastname + ", phonenumber=" + phonenumber + ", email=" + email + ", gender=" + gender + ", avatar=" + avatar + ", cart=" + cart + '}';
