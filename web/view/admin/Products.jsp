@@ -45,25 +45,40 @@
         <link href="../css/responsive.css" rel="stylesheet" />
         <link href="/Chatter/css/adminstyle.css" rel="stylesheet" />
         <title>JSP Page</title>
+
     </head>
     <body class="row">
-        <div class="col-sm-3 g-3">
+
+        <div class="col-sm-3 gy-3 overflow-hidden">
             <jsp:include page="Sidebar.jsp" />
         </div>
         <div class="col-sm-9 gy-2">
             <form class="input-group justify-content-end" action="/Chatter/admin/edit_product" method="get">
                 <div class="form-floating">
-                    <select class="form-select" id="floatingSelectGrid">
+                    <select onchange="selectForm();" onfocus="this.selectedIndex = 0;" class="form-select" name="searchtype" id="floatingSelectGrid" >
                         <option selected value="0">Product ID</option>
                         <option value="1">Product name</option>
-                        <option value="2">Product </option>
-                        <option value="3">Three</option>
+                        <option value="2">Product price</option>
+                        <option value="3">Modify date</option>
                     </select>
-                    <label for="floatingSelectGrid">Type of searched value</label>
+
+                    <label for="floatingSelectGrid">Search by</label>
                 </div>
-                <div class="form-floating ">
-                    <input type="number" class="form-control" name="productid" id="searchbar" placeholder="ProductID" aria-label="ProductID" min="0" max="65536" aria-describedby="button-addon2">
+                <div class="form-floating"  id="searchByID" >
+                    <input  type="number" class="form-control" name="productid" placeholder="ProductID" aria-label="ProductID" min="0" max="65536"  aria-describedby="button-addon2">
                     <label for="searchbar">Product ID</label>
+                </div>
+                <div class="form-floating col-sm-2"  id="searchByName" >
+                    <input  type="text" class="form-control" name="productname" placeholder="ProductID" aria-label="ProductID" aria-describedby="button-addon2" >
+                    <label for="searchbar">Product Name</label>
+                </div>
+                <div class="form-floating col-sm-2"  id="searchByPrice" >
+                    <input  type="number" step="0.01" class="form-control" name="productprice" placeholder="ProductID" aria-label="ProductID" min="0" max="65536" aria-describedby="button-addon2">
+                    <label for="searchbar">Product Price</label>
+                </div>
+                <div class="form-floating col-sm-2"  id="searchByDate" >
+                    <input  type="date" class="form-control" name="productid" placeholder="ProductID" aria-label="ProductID" min="0" max="65536" aria-describedby="button-addon2">
+                    <label for="searchbar">Modify Date</label>
                 </div>
                 <button class="btn btn-outline-primary fa-2x fa-duotone fa-magnifying-glass-plus" type="submit" id="button-addon2">
                 </button>
@@ -72,7 +87,7 @@
             <c:set value="${requestScope.productDetailses}" var="products"/>
 
             <div class="card">
-                <div class="card-header">List Products</div>
+                <div class="card-header">List Products${pageScope.searchtype}</div>
                 <table class="table table-hover table-striped table-responsive-md card-body">
                     <thead>
                         <tr>
@@ -100,9 +115,40 @@
                     </tbody>
                 </table>
                 <c:forEach items="${requestScope.productDetailses}" var="product">
-                    ${product}<br>
+                    ${product}<br><br>
                 </c:forEach>
             </div>
         </div>
+        <script>
+            document.getElementById('products_page').classList.add('active');
+            document.getElementById('products_page').classList.remove('link-dark');
+             document.getElementById("searchByID").style.display = "inline";
+             document.getElementById("searchByName").style.display = "none";
+             document.getElementById("searchByPrice").style.display = "none";
+             document.getElementById("searchByDate").style.display = "none";
+
+            function selectForm() {
+                var type = document.getElementById("floatingSelectGrid").value;
+                var byproductid = document.getElementById("searchByID");
+                byproductid.style.display = type == 0 ? "inline" : "none";
+                var byproductname = document.getElementById("searchByName");
+                byproductname.style.display = type == 1 ? "inline" : "none";
+                var byproductprice = document.getElementById("searchByPrice");
+                byproductprice.style.display = type == 2 ? "inline" : "none";
+                var byproductprice = document.getElementById("searchByDate");
+                byproductprice.style.display = type == 3 ? "inline" : "none";
+            }
+
+            const input = document.getElementById('floatingSelectGrid');
+            const image = document.getElementById('img-preview');
+
+            input.addEventListener('change', (e) => {
+                if (e.target.files.length) {
+                    const src = URL.createObjectURL(e.target.files[0]);
+                    image.src = src;
+                }
+            });
+
+        </script>  
     </body>
 </html>
