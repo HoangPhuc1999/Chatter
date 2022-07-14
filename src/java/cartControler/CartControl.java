@@ -56,10 +56,14 @@ public class CartControl extends HttpServlet {
         if (a == null) {
             request.setAttribute("message", "Ban chua dang nhap!");
             request.getRequestDispatcher("Login.jsp").forward(request, response);
+        } else {
+            System.out.println("Display Cart");
+            ArrayList<Item> cart = (ArrayList<Item>) cdao.getCart(a.getUsers_id()); //get cart of user in database
+            a.setCart(cart);
+            // System.out.println(a.getCart().get(0).getQuantity());
+            request.getRequestDispatcher("Cart.jsp").forward(request, response);
         }
-        ArrayList<Item> cart = (ArrayList<Item>) cdao.getCart(a.getUsers_id()); //get cart of user in database
-        a.setCart(cart);
-        request.getRequestDispatcher("Cart.jsp").forward(request, response);
+
     }
 
     //xoa item do trong cart 
@@ -91,39 +95,48 @@ public class CartControl extends HttpServlet {
             request.setAttribute("message", "Ban chua dang nhap!");
             request.getRequestDispatcher("Login.jsp").forward(request, response);
         } //neu day la mon hang dau tien -> tao cart va gan vao acc session
-        else if (a.getCart() == null) {
+        else {
+            if (a.getCart() == null) {
 
-            ArrayList<Item> cart = new ArrayList<Item>();
-            cart.add(new Item(dao.getProductById(request.getParameter("id")), 1));
-            a.setCart(cart);
+                ArrayList<Item> cart = new ArrayList<Item>();
+                cart.add(new Item(dao.getProductById(request.getParameter("id")), Integer.parseInt(request.getParameter("quantity"))));
+                System.out.println("Hoang Phuc check quantity" + Integer.parseInt(request.getParameter("quantity")));
+                a.setCart(cart);
+                System.out.println(a.getCart().get(0).getQuantity());
+                //update cart in database
+                CartDAO cdao = new CartDAO();
+                System.out.println("UPDATE CART TO DB");
 
-            //update cart in database
-            CartDAO cdao = new CartDAO();
-            cdao.updateCartInDB(a.getUsers_id(),
-                    Integer.parseInt(request.getParameter("id")),
-                    Integer.parseInt(request.getParameter("quantity")));
+                cdao.updateCartInDB(a.getUsers_id(),
+                        Integer.parseInt(request.getParameter("id")),
+                        Integer.parseInt(request.getParameter("quantity")));
 
-            request.setAttribute("message", "Items added to cart! ");
-            request.getRequestDispatcher("menu").forward(request, response);
-        } else {
-            ArrayList<Item> cart = (ArrayList<Item>) a.getCart();
-            int index = isExisting(request.getParameter("id"), cart);
-            int ammount = Integer.parseInt(request.getParameter("quantity"));
-            //neu product chua co trong cart -> tao item ms +1 
-            if (index == -1) {
-                cart.add(new Item(dao.getProductById(request.getParameter("id")), 1));
-            } //neu product da co tromg cart --> + amount 
-            else {
-                int quantity = cart.get(index).getQuantity() + ammount;
-                cart.get(index).setQuantity(quantity);
+                request.setAttribute("message", "Items added to cart! ");
+                response.sendRedirect("menu");
+                // request.getRequestDispatcher("menu").forward(request, response);
+
+            } else {
+                ArrayList<Item> cart = (ArrayList<Item>) a.getCart();
+                int index = isExisting(request.getParameter("id"), cart);
+                int ammount = Integer.parseInt(request.getParameter("quantity"));
+                //neu product chua co trong cart -> tao item ms +1 
+                if (index == -1) {
+                    cart.add(new Item(dao.getProductById(request.getParameter("id")), 1));
+                } //neu product da co tromg cart --> + amount 
+                else {
+                    int quantity = cart.get(index).getQuantity() + ammount;
+                    cart.get(index).setQuantity(quantity);
+                }
+                a.setCart(cart);
+
+                System.out.println("Check point 1");
+                updateCartInDatabase(a); //update in db
+                request.setAttribute("message", "Items added to cart! ");
+                response.sendRedirect("menu");
+                //added to cart alert to home      
             }
-            a.setCart(cart);
-            updateCartInDatabase(a); //update in db
-            request.setAttribute("message", "Items added to cart! ");
-            request.getRequestDispatcher("menu").forward(request, response);
-            //added to cart alert to home      
+
         }
-        //  request.getRequestDispatcher("home").forward(request, response);
 
     }
 
@@ -147,6 +160,8 @@ public class CartControl extends HttpServlet {
         int quantity = cart.get(index).getQuantity() + 1;
         cart.get(index).setQuantity(quantity);
         a.setCart(cart);
+        System.out.println("Check point 2");
+
         updateCartInDatabase(a); //update in db
         response.sendRedirect("Cart.jsp");
     }
@@ -164,6 +179,8 @@ public class CartControl extends HttpServlet {
             cart.remove(index);
         }
         a.setCart(cart);
+        System.out.println("Check point 3");
+
         updateCartInDatabase(a); //update in db
         response.sendRedirect("Cart.jsp");
     }
@@ -176,6 +193,8 @@ public class CartControl extends HttpServlet {
     protected void updateCartInDatabase(User a) {
         ArrayList<Item> cart = (ArrayList<Item>) a.getCart();
         CartDAO cdao = new CartDAO();
+        System.out.println("Update cart again");
+
         for (Item item : cart) {
             cdao.updateCartInDB(a.getUsers_id(),
                     item.getProduct().getId(),
