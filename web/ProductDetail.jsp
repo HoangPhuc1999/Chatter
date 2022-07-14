@@ -13,7 +13,7 @@
 <%
     Product x = (Product) request.getAttribute("product_detail");
     List<Review> list = (List<Review>) request.getAttribute("reviewproductlist");
-    Integer ratting = (Integer) request.getAttribute("ratting");
+    double ratting = (Double) request.getAttribute("ratting");
 
 %>  
 <html>
@@ -90,7 +90,7 @@
                                 <% }%> 
 
                             </div>
-
+                            <small class="pt-1">(ratting <%=ratting%> )</small>
                             <small class="pt-1">(<%=list.size()%> reviews)</small>
                         </div>
                         <h3 class="font-weight-semi-bold mb-4">$ <%=x.getPrice()%></h3>
