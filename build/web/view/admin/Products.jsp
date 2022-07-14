@@ -121,7 +121,7 @@
                                 <td>${product.quantity}</td>
                                 <td><img class="avatar img-thumbnail" src="/Chatter/${product.image}" alt="product ${product.name} image"/></td>
                                 <td>
-                                    <button type="submit" class="btn btn-outline-warning btn-box me-md-4">
+                                    <button type="submit" class="btn btn-outline-warning btn-box me-1">
                                         <i class="fa-duotone fa-file-lines"></i>
                                         Edit
                                     </button>
