@@ -53,7 +53,6 @@ public class ProductDetailServlet extends HttpServlet {
             }
             averageRating = (totalRating / list.size());
         }
-
         x.setImage(imageUrl);
         System.out.println(x.getImage());
         request.setAttribute("product_detail", x);
