@@ -27,7 +27,7 @@
             <div class="list-group list-group-flush mx-3 mt-4">
                 <ul class="nav nav-pills flex-column mb-auto">
                     <li class="nav-item">
-                        <a href="admin/dashboard" class="nav-link link-dark" aria-current="page">
+                        <a href="/Chatter/admin/dashboard" class="nav-link link-dark" aria-current="page">
                             <i class="fa-solid fa-house-chimney-window"></i>
                             Home
                         </a>

@@ -4,6 +4,7 @@
     Author     : Hoang Phuc
 --%>
 
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="java.util.List"%>
 <%@page import="model.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -13,8 +14,8 @@
 <%
     Product x = (Product) request.getAttribute("product_detail");
     List<Review> list = (List<Review>) request.getAttribute("reviewproductlist");
-    Integer ratting = (Integer) request.getAttribute("ratting");
-
+    double ratting = (Double) request.getAttribute("ratting");
+    DecimalFormat df = new DecimalFormat("0.0");
 %>  
 <html>
 
@@ -70,27 +71,21 @@
                 <div class="col-lg-5 mb-30">
                     <div id="product-carousel" class="carousel slide" data-ride="carousel">
                         <div class="carousel-inner bg-light">
-
                             <img class="w-100 h-100" src="<%=x.getImage()%>" alt="">
-
                         </div>
-
                     </div>
                 </div>
-
                 <div class="col-lg-7 h-auto mb-30">
                     <div class="h-100 bg-light p-30">
                         <h3>  <%=x.getName()%></h3>
                         <div class="d-flex mb-3">
                             <div class="text-primary mb-2">
-                                <%                           for (int i = 0; i < ratting; i++) {
+                                <%                           for (int i = 0; i <= ratting; i++) {
                                 %>
                                 <i class="fas fa-star"></i>
-
                                 <% }%> 
-
                             </div>
-
+                            <small class="pt-1">  <%=df.format(ratting)%> stars  </small>
                             <small class="pt-1">(<%=list.size()%> reviews)</small>
                         </div>
                         <h3 class="font-weight-semi-bold mb-4">$ <%=x.getPrice()%></h3>
@@ -104,15 +99,17 @@
                                         <i class="fa fa-minus"></i>
                                     </button>
                                 </div>
-                                <input type="text" class="form-control bg-secondary border-0 text-center" value="1">
+                                <input name="quantity" type="text" class="form-control bg-secondary border-0 text-center" value="1">
                                 <div class="input-group-btn">
                                     <button class="btn btn-primary btn-plus">
                                         <i class="fa fa-plus"></i>
                                     </button>
                                 </div>
                             </div>
+                            <a href="cart?&action=buy&id=<%=x.getId()%>&quantity=1"                               
                             <button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To
                                 Cart</button>
+                        </a>
                         </div>
 
                     </div>
@@ -163,9 +160,7 @@
                                                 <input type="radio" id="star1" name="rate" value="1" />
                                                 <label class = "full" for="star1" title="Sucks big time - 1 star"></label>
                                             </div>
-
                                         </div>
-
                                         <div class="form-group">
                                             <label>Add image</label> 
                                             <input name="avatar" type="file" class="form-control" placeholder="reviewImage"
@@ -173,7 +168,7 @@
                                             <img id="avatar" class="img-fluid" />
                                         </div>
                                         <div class="form-group">
-                                            <label for="message">Titile </label>
+                                            <label for="message">Title </label>
                                             <textarea id="message" cols="30" rows="5" class="form-control" name="reviewtitle"></textarea>
                                         </div>
                                         <div class="form-group">

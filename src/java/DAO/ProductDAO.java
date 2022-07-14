@@ -191,7 +191,7 @@ public class ProductDAO extends DAO {
             ps.setString(1, code);
             rs = ps.executeQuery();
             while (rs.next()) {
-                return discount = rs.getInt(3);
+                return discount = rs.getInt("discount_amount");
             }
 
         } catch (Exception e) {
