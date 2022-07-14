@@ -162,7 +162,8 @@ public class ProfileControl extends HttpServlet {
                 String gender = request.getParameter("gender");
                 String avapath=request.getParameter("avatar");
                      
-                
+              
+
                 try{
                     if(!user.matches("[a-zA-Z0-9 ]*")) throw new IOException("username is invalid");
                     if(!pass.matches("[a-zA-Z0-9]*")) throw new IOException("password is invalid");
