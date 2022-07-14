@@ -128,7 +128,6 @@ public class CartControl extends HttpServlet {
                     cart.get(index).setQuantity(quantity);
                 }
                 a.setCart(cart);
-
                 System.out.println("Check point 1");
                 updateCartInDatabase(a); //update in db
                 request.setAttribute("message", "Items added to cart! ");
