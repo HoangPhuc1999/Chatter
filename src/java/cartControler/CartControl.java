@@ -87,7 +87,7 @@ public class CartControl extends HttpServlet {
         User a = (User) request.getSession().getAttribute("user");
         //neu chua dang nhap ma an mua hang
         if (a == null) {
-            System.out.println("Hoang Phuc check");
+
             request.setAttribute("message", "Ban chua dang nhap!");
             request.getRequestDispatcher("Login.jsp").forward(request, response);
         } //neu day la mon hang dau tien -> tao cart va gan vao acc session
