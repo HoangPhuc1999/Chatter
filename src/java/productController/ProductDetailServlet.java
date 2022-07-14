@@ -9,6 +9,7 @@ import DAO.ProductDAO;
 import DAO.ReviewDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -41,11 +42,11 @@ public class ProductDetailServlet extends HttpServlet {
         ReviewDAO dao = new ReviewDAO();
         List<Review> list = new ArrayList<>();
         list = dao.getAllReviewsFromId(id);
-        int totalRating = 0;
-        int averageRating = 0;
+        double totalRating = 0;
+        double averageRating = 0;
         if (list.size() != 0) {
             for (int i = 0; i < list.size(); i++) {
-                totalRating = totalRating + Integer.parseInt(list.get(i).getRating());
+                totalRating = totalRating + Double.parseDouble(list.get(i).getRating());
                 String name = dao.getReviewAuthor(list.get(i).getUserId());
                 list.get(i).setName(name);
             }
