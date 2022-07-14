@@ -142,14 +142,6 @@ public class UserDAO extends DAO {
                 + "SET home_address = ? , district = ? , city = ? "
                 + "WHERE users_id = ?";
         try {
-            System.out.println(editUser);
-            System.out.println(editUserAccount);
-            System.out.println(editUserAddress);
-            
-            
-            
-            
-            
             //edit users
             ps = con.prepareStatement(query);
             ps.setString(1, editUser.getFirstname());
