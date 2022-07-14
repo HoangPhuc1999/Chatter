@@ -9,7 +9,7 @@ import DAO.ProductDAO;
 import DAO.ReviewDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.DecimalFormat;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -38,7 +38,6 @@ public class ProductDetailServlet extends HttpServlet {
         ProductImage pd = d.getProductImageById(id);
         Product x = d.getProductById(id);
         String imageUrl = pd.getImageUrl();
-        DecimalFormat df = new DecimalFormat("0.00");
 
         ReviewDAO dao = new ReviewDAO();
         List<Review> list = new ArrayList<>();
@@ -53,11 +52,12 @@ public class ProductDetailServlet extends HttpServlet {
             }
             averageRating = (totalRating / list.size());
         }
+
         x.setImage(imageUrl);
         System.out.println(x.getImage());
         request.setAttribute("product_detail", x);
         request.setAttribute("reviewproductlist", list);
-        request.setAttribute("ratting", df.format(averageRating));
+        request.setAttribute("ratting", averageRating);
         request.getRequestDispatcher("ProductDetail.jsp").forward(request, response);
     }
 

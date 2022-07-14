@@ -4,6 +4,7 @@
     Author     : Hoang Phuc
 --%>
 
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="java.util.List"%>
 <%@page import="model.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -14,6 +15,7 @@
     Product x = (Product) request.getAttribute("product_detail");
     List<Review> list = (List<Review>) request.getAttribute("reviewproductlist");
     double ratting = (Double) request.getAttribute("ratting");
+    DecimalFormat df = new DecimalFormat("0.00");
 
 %>  
 <html>
@@ -90,7 +92,7 @@
                                 <% }%> 
 
                             </div>
-                            <small class="pt-1">(ratting <%=ratting%> )</small>
+                            <small class="pt-1">(ratting <%=df.format(ratting)%> )</small>
                             <small class="pt-1">(<%=list.size()%> reviews)</small>
                         </div>
                         <h3 class="font-weight-semi-bold mb-4">$ <%=x.getPrice()%></h3>
