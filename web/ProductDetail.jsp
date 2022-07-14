@@ -16,7 +16,6 @@
     List<Review> list = (List<Review>) request.getAttribute("reviewproductlist");
     double ratting = (Double) request.getAttribute("ratting");
     DecimalFormat df = new DecimalFormat("0.0");
-
 %>  
 <html>
 
@@ -72,14 +71,10 @@
                 <div class="col-lg-5 mb-30">
                     <div id="product-carousel" class="carousel slide" data-ride="carousel">
                         <div class="carousel-inner bg-light">
-
                             <img class="w-100 h-100" src="<%=x.getImage()%>" alt="">
-
                         </div>
-
                     </div>
                 </div>
-
                 <div class="col-lg-7 h-auto mb-30">
                     <div class="h-100 bg-light p-30">
                         <h3>  <%=x.getName()%></h3>
@@ -88,9 +83,7 @@
                                 <%                           for (int i = 0; i <= ratting; i++) {
                                 %>
                                 <i class="fas fa-star"></i>
-
                                 <% }%> 
-
                             </div>
                             <small class="pt-1">  <%=df.format(ratting)%> stars  </small>
                             <small class="pt-1">(<%=list.size()%> reviews)</small>
@@ -167,9 +160,7 @@
                                                 <input type="radio" id="star1" name="rate" value="1" />
                                                 <label class = "full" for="star1" title="Sucks big time - 1 star"></label>
                                             </div>
-
                                         </div>
-
                                         <div class="form-group">
                                             <label>Add image</label> 
                                             <input name="avatar" type="file" class="form-control" placeholder="reviewImage"
@@ -177,7 +168,7 @@
                                             <img id="avatar" class="img-fluid" />
                                         </div>
                                         <div class="form-group">
-                                            <label for="message">Titile </label>
+                                            <label for="message">Title </label>
                                             <textarea id="message" cols="30" rows="5" class="form-control" name="reviewtitle"></textarea>
                                         </div>
                                         <div class="form-group">
