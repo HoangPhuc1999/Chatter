@@ -106,15 +106,17 @@
                                         <i class="fa fa-minus"></i>
                                     </button>
                                 </div>
-                                <input type="text" class="form-control bg-secondary border-0 text-center" value="1">
+                                <input name="quantity" type="text" class="form-control bg-secondary border-0 text-center" value="1">
                                 <div class="input-group-btn">
                                     <button class="btn btn-primary btn-plus">
                                         <i class="fa fa-plus"></i>
                                     </button>
                                 </div>
                             </div>
+                            <a href="cart?&action=buy&id=<%=x.getId()%>&quantity=1"                               
                             <button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To
                                 Cart</button>
+                        </a>
                         </div>
 
                     </div>
