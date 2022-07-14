@@ -172,7 +172,8 @@ public class ProfileControl extends HttpServlet {
                 UserDAO udao = new UserDAO();
                 UserAccount editAcc = new UserAccount(user, pass);
                 UserAddress editAccAddress = new UserAddress(home_address, district, city);
-                User editUser = new User(firstname, lastname, phone, email, gender, avapath,99);
+                
+                User editUser = new User(firstname, lastname, phone, email, gender, avapath,99);//constructor conflicts
                 
                 udao.editProfile(a.getUsers_id(), editUser, editAcc, editAccAddress);
                 

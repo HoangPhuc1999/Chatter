@@ -43,9 +43,6 @@
                         <a class="nav-link" href="Book.jsp">Book Table</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="Chatting.jsp">Chatting</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="getreview">Review</a>
                     </li>
                 </ul>

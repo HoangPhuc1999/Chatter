@@ -166,7 +166,7 @@ public class SignUpServlet extends HttpServlet {
         try{
             if(!user.matches("[a-zA-Z0-9 ]*")) throw new IOException("username is invalid");
             if(!pass.matches("[a-zA-Z0-9]*")) throw new IOException("password is invalid");
-            if(!phone.matches("[0-9]+")) throw new IOException("phone number is invalid");
+            if(!phone.matches("^(?=\\+?(?:\\d-?){9,13}$)\\+?\\d+(?:-\\d+)*$")) throw new IOException("phone number is invalid");
             
             UserDAO dao = new UserDAO();
             UserAccount a = dao.checkAccountExist(user); //kiem tra username trong database 

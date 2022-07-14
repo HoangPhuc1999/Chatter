@@ -46,7 +46,6 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[coupons](
 	[coupon_code] [varchar](255) NOT NULL,
-	[product_discount_id] [int] NULL,
 	[discount_amount] [int] NOT NULL,
 	[expire_date] [datetime] NOT NULL,
 PRIMARY KEY CLUSTERED 
@@ -504,6 +503,11 @@ INSERT [dbo].[users_role] ([users_id], [user_role]) VALUES (4, N'user')
 INSERT [dbo].[users_role] ([users_id], [user_role]) VALUES (5, N'user')
 INSERT [dbo].[users_role] ([users_id], [user_role]) VALUES (6, N'user')
 GO
+INSERT [dbo].[coupons] ([coupon_code], [discount_amount],[expire_date]) VALUES ('GIAM20',20,CAST(N'2023-06-22T11:57:52.040' AS DateTime))
+INSERT [dbo].[coupons] ([coupon_code], [discount_amount],[expire_date]) VALUES ('GIAM30',30,CAST(N'2023-06-22T11:57:52.040' AS DateTime))
+INSERT [dbo].[coupons] ([coupon_code], [discount_amount],[expire_date]) VALUES ('GIAM40',40,CAST(N'2023-06-22T11:57:52.040' AS DateTime))
+INSERT [dbo].[coupons] ([coupon_code], [discount_amount],[expire_date]) VALUES ('GIAM50',50,CAST(N'2023-06-22T11:57:52.040' AS DateTime))
+GO
 ALTER TABLE [dbo].[deleted_messages] ADD  DEFAULT (getdate()) FOR [deleted_at]
 GO
 ALTER TABLE [dbo].[messages_content] ADD  DEFAULT (getdate()) FOR [created_at]
@@ -519,12 +523,6 @@ GO
 ALTER TABLE [dbo].[users_cart] ADD  DEFAULT (getdate()) FOR [created_at]
 GO
 ALTER TABLE [dbo].[users_friends] ADD  DEFAULT (getdate()) FOR [date_modified]
-GO
-ALTER TABLE [dbo].[coupons]  WITH CHECK ADD FOREIGN KEY([product_discount_id])
-REFERENCES [dbo].[products] ([product_id])
-GO
-ALTER TABLE [dbo].[coupons]  WITH CHECK ADD FOREIGN KEY([product_discount_id])
-REFERENCES [dbo].[products] ([product_id])
 GO
 ALTER TABLE [dbo].[deleted_messages]  WITH CHECK ADD FOREIGN KEY([messages_id])
 REFERENCES [dbo].[messages] ([messages_id])

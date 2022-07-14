@@ -43,7 +43,7 @@ public class User {
         this.gender = gender;
     }
     
-    public User(String firstname, String lastname, String phonenumber, String email, String gender,String avatar,Long x) {
+    public User(String firstname, String lastname, String phonenumber, String email, String gender,String avatar,long x) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.phonenumber = phonenumber;
