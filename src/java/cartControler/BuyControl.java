@@ -39,19 +39,17 @@ public class BuyControl extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         CartDAO cdao = new CartDAO();
         User a = (User) request.getSession().getAttribute("user");
-                if(a==null){
-                    request.setAttribute("message","Ban chua dang nhap!");
-                    request.getRequestDispatcher("Login.jsp").forward(request,response);
-                }
+        if (a == null) {
+            request.setAttribute("message", "Ban chua dang nhap!");
+            request.getRequestDispatcher("Login.jsp").forward(request, response);
+        }
         ArrayList<Item> cart = (ArrayList<Item>) cdao.getCart(a.getUsers_id()); //get cart of user in database
         OrderDAO odao = new OrderDAO();
         odao.insertOrder(cart, a.getUsers_id());//insert order to db
-        
+
         cdao.deleteCartAfterBuy(a); //xoa gio hang
-        request.setAttribute("message","Mua hang thanh cong");
-        request.getRequestDispatcher("home").forward(request,response);        
-                
-                
+        request.setAttribute("message", "Mua hang thanh cong");
+        request.getRequestDispatcher("home").forward(request, response);      
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -92,6 +90,4 @@ public class BuyControl extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
-    
 }
