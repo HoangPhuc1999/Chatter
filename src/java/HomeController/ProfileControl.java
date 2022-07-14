@@ -160,6 +160,9 @@ public class ProfileControl extends HttpServlet {
                 String phone = request.getParameter("phonenumber");
                 String email = request.getParameter("email");
                 String gender = request.getParameter("gender");
+                if(gender.equals("female")) gender="0";
+                else if(gender.equalsIgnoreCase("male")) gender = "1";
+                else gender = "undefined";
                 String avapath=request.getParameter("avatar");
                      
               
