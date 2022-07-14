@@ -15,7 +15,7 @@
     Product x = (Product) request.getAttribute("product_detail");
     List<Review> list = (List<Review>) request.getAttribute("reviewproductlist");
     double ratting = (Double) request.getAttribute("ratting");
-    DecimalFormat df = new DecimalFormat("0.00");
+    DecimalFormat df = new DecimalFormat("0.0");
 
 %>  
 <html>
