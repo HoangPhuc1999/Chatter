@@ -34,8 +34,7 @@
                 box-shadow: 0 0 4px 2px rgba(0, 140, 186, 0.5);
             }
             .avatar {
-                width: 50px;
-                height: auto;
+                border-radius: 0 !important;
             }
         </style>
 
@@ -45,25 +44,50 @@
         <link href="../css/responsive.css" rel="stylesheet" />
         <link href="/Chatter/css/adminstyle.css" rel="stylesheet" />
         <title>JSP Page</title>
+
     </head>
     <body class="row">
-        <div class="col-sm-3 g-3">
+
+        <div class="col-sm-3 gy-3 overflow-hidden">
             <jsp:include page="Sidebar.jsp" />
         </div>
         <div class="col-sm-9 gy-2">
-            <form class="input-group justify-content-end" action="/Chatter/admin/edit_product" method="get">
+            <form class="input-group justify-content-end" action="/Chatter/admin/edit_product" method="get" id="searchForm">
                 <div class="form-floating">
-                    <select class="form-select" id="floatingSelectGrid">
+                    <select onchange="selectForm();" class="form-select" name="searchtype" id="floatingSelectGrid" >
                         <option selected value="0">Product ID</option>
                         <option value="1">Product name</option>
-                        <option value="2">Product </option>
-                        <option value="3">Three</option>
+                        <option value="2">Product price</option>
+                        <option value="3">Modify date</option>
                     </select>
-                    <label for="floatingSelectGrid">Type of searched value</label>
+
+                    <label for="floatingSelectGrid">Search by</label>
                 </div>
-                <div class="form-floating ">
-                    <input type="number" class="form-control" name="productid" id="searchbar" placeholder="ProductID" aria-label="ProductID" min="0" max="65536" aria-describedby="button-addon2">
-                    <label for="searchbar">Product ID</label>
+                <div class="form-floating"  id="searchByID" >
+                    <input  type="number" class="form-control" name="productid" placeholder="ProductID" aria-label="ProductID" min="0" max="65536"  aria-describedby="button-addon2">
+                    <label for="">Product ID</label>
+                </div>
+                <div class="form-floating col-sm-2"  id="searchByName" >
+                    <input  type="text" class="form-control" name="productname" placeholder="ProductID" aria-label="ProductID" aria-describedby="button-addon2" >
+                    <label for="">Product Name</label>
+                </div>
+                <div class="form-floating col-sm-2"  id="searchByMinPrice" >
+                    <input  type="number" step="0.01" class="form-control" name="minprice" placeholder="ProductPrice" aria-label="ProductPrice" min="0" max="65536" aria-describedby="button-addon2">
+                    <label for="">Min Price</label>
+                </div>
+                <div class="form-floating col-sm-2"  id="searchByMaxPrice" >
+                    <input  type="number" step="0.01" class="form-control" name="maxprice" placeholder="ProductPrice" aria-label="ProductPrice" min="0" max="65536" aria-describedby="button-addon2">
+                    <label for="">Max Price</label>
+                </div>
+                <div class="form-floating col-sm-2"  id="searchByStartDate" >
+                    <input  type="date" value="2018-06-12" class="form-control" name="startdate" placeholder="ProductID" 
+                            aria-label="ProductID" min="2018-06-07" max="2218-06-07"   aria-describedby="button-addon2">
+                    <label for="">Start Date</label>
+                </div>
+                <div class="form-floating col-sm-2"  id="searchByEndDate" >
+                    <input  type="date" value="2018-06-12"  class="form-control" name="enddate" placeholder="ProductID"
+                            aria-label="ProductID" min="2018-06-07" max="2218-06-07" aria-describedby="button-addon2">
+                    <label for="">End Date</label>
                 </div>
                 <button class="btn btn-outline-primary fa-2x fa-duotone fa-magnifying-glass-plus" type="submit" id="button-addon2">
                 </button>
@@ -72,7 +96,7 @@
             <c:set value="${requestScope.productDetailses}" var="products"/>
 
             <div class="card">
-                <div class="card-header">List Products</div>
+                <div class="card-header">List Products${pageScope.searchtype}</div>
                 <table class="table table-hover table-striped table-responsive-md card-body">
                     <thead>
                         <tr>
@@ -83,6 +107,7 @@
                             <th>Price</th>
                             <th>Quantity</th>
                             <th>Image</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody class=" ">
@@ -94,15 +119,64 @@
                                 <!--<td class="overflow-hidden">${product.description}</td>-->
                                 <td>${product.price}</td>
                                 <td>${product.quantity}</td>
-                                <td><img class="avatar" src="/Chatter/${product.image}" alt="product ${product.name} image"/></td>
+                                <td><img class="avatar img-thumbnail" src="/Chatter/${product.image}" alt="product ${product.name} image"/></td>
+                                <td>
+                                    <button type="submit" class="btn btn-outline-warning btn-box me-md-4">
+                                        <i class="fa-duotone fa-file-lines"></i>
+                                        Edit
+                                    </button>
+
+                                    <button type="reset" class="btn btn-outline-danger btn-box" onclick="controlEditmode(0);controlViewmode(1);">
+                                        <i class="fa-duotone fa-eraser"></i>
+                                        Delete
+                                    </button>
+                                </td>
                             </tr>
                         </c:forEach> 
                     </tbody>
                 </table>
                 <c:forEach items="${requestScope.productDetailses}" var="product">
-                    ${product}<br>
+                    ${product}<br><br>
                 </c:forEach>
             </div>
         </div>
+        <script>
+            document.getElementById('products_page').classList.add('active');
+            document.getElementById('products_page').classList.remove('link-dark');
+
+            document.getElementById("searchByID").style.display = "inline";
+            document.getElementById("searchByName").style.display = "none";
+            document.getElementById("searchByMinPrice").style.display = "none";
+            document.getElementById("searchByMaxPrice").style.display = "none";
+            document.getElementById("searchByStartDate").style.display = "none";
+            document.getElementById("searchByEndDate").style.display = "none";
+
+            function selectForm() {
+                var type = document.getElementById("floatingSelectGrid").value;
+
+                document.getElementById("searchByID").style.display = type == 0 ? "inline" : "none";
+                document.getElementById("searchByName").style.display = type == 1 ? "inline" : "none";
+                document.getElementById("searchByMinPrice").style.display = type == 2 ? "inline" : "none";
+                document.getElementById("searchByMaxPrice").style.display = type == 2 ? "inline" : "none";
+                document.getElementById("searchByStartDate").style.display = type == 3 ? "inline" : "none";
+                document.getElementById("searchByEndDate").style.display = type == 3 ? "inline" : "none";
+                document.getElementById("searchForm").reset();
+                document.getElementById("floatingSelectGrid").value = type;
+
+            }
+
+            const input = document.getElementById('floatingSelectGrid');
+            const image = document.getElementById('img-preview');
+
+            input.addEventListener('change', (e) => {
+                if (e.target.files.length) {
+                    const src = URL.createObjectURL(e.target.files[0]);
+                    image.src = src;
+                }
+            });
+
+    
+
+        </script>  
     </body>
 </html>
