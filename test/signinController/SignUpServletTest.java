@@ -6,6 +6,7 @@
 package signinController;
 
 import DAO.UserDAO;
+import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.junit.After;
@@ -20,17 +21,15 @@ import static org.mockito.Mockito.when;
  import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
+import static org.mockito.Mockito.mock;
 import org.mockito.MockitoAnnotations;
 /**
  *
  * @author khuat
  */
 public class SignUpServletTest {
-     @Mock
-    HttpServletRequest request;
- 
-    @Mock
-    HttpServletResponse response;
+    @Mock private HttpServletRequest request;
+    @Mock private HttpServletResponse response;
     
     public SignUpServletTest() {
     }
@@ -52,20 +51,12 @@ public class SignUpServletTest {
     public void tearDown() {
     }
 
-    @Test
-    public void testDoGet() throws Exception {
-        System.out.println("doGet");
-        HttpServletRequest request = null;
-        HttpServletResponse response = null;
-        SignUpServlet instance = new SignUpServlet();
-        instance.doGet(request, response);
-        fail("The test case is a prototype.");
-    }
+ 
 
     @Test
     public void testDoPostSignUpNormal() throws Exception {
-        System.out.println("doPost");
-        
+        System.out.println("doPost");     
+        when(request.getParameter("avatar")).thenReturn("avatar/female");
         when(request.getParameter("username")).thenReturn("testUsername");
         when(request.getParameter("password")).thenReturn("testPassword");
         when(request.getParameter("firstname")).thenReturn("testFirst");
@@ -76,58 +67,36 @@ public class SignUpServletTest {
         when(request.getParameter("home_address")).thenReturn("testhome");
         when(request.getParameter("district")).thenReturn("testdistrict");
         when(request.getParameter("city")).thenReturn("testcity");
- 
-        StringWriter sw = new StringWriter();
-        PrintWriter pw = new PrintWriter(sw);
-         
-        when(response.getWriter()).thenReturn(pw);
- 
-        SignUpServlet  signUpServlet =new SignUpServlet();
-        signUpServlet.doPost(request, response);
-        String result = sw.getBuffer().toString().trim();
-        assertEquals(result, new String("Full Name: Vinod Kashyap"));
-        
-        
-        
-        HttpServletRequest request = null;
-        HttpServletResponse response = null;
+
         SignUpServlet instance = new SignUpServlet();
         instance.doPost(request, response);
-        fail("The test case is a prototype.");
+        
+        
+        
     }
     
-    @Test
-    public void testDoPostSignUpWithoutUsername() throws Exception {
-        System.out.println("doPost");
-        
-        when(request.getParameter("username")).thenReturn(null);
+    
+    
+    @Test(expected = IOException.class)
+    public void testDoPostSignUpWithoutInvalidPhoneNumber() throws Exception {
+        System.out.println("doPost");    
+        when(request.getParameter("username")).thenReturn("testUserName");
         when(request.getParameter("password")).thenReturn("testPassword");
         when(request.getParameter("firstname")).thenReturn("testFirst");
         when(request.getParameter("lastname")).thenReturn("testLast");
-        when(request.getParameter("phonenumber")).thenReturn("0123456789");
+        when(request.getParameter("phonenumber")).thenReturn("012");
         when(request.getParameter("email")).thenReturn("testEmail@gmail.com");
         when(request.getParameter("gender")).thenReturn("1");
         when(request.getParameter("home_address")).thenReturn("testhome");
         when(request.getParameter("district")).thenReturn("testdistrict");
         when(request.getParameter("city")).thenReturn("testcity");
- 
-        StringWriter sw = new StringWriter();
-        PrintWriter pw = new PrintWriter(sw);
-         
-        when(response.getWriter()).thenReturn(pw);
- 
-        SignUpServlet  signUpServlet =new SignUpServlet();
-        signUpServlet.doPost(request, response);
-        String result = sw.getBuffer().toString().trim();
-        assertEquals(result, new String("Full Name: Vinod Kashyap"));
-        
-        
-        
-        HttpServletRequest request = null;
-        HttpServletResponse response = null;
+
         SignUpServlet instance = new SignUpServlet();
         instance.doPost(request, response);
-        fail("The test case is a prototype.");
-    }
+        
+        
+}
+    
+    
     
 }

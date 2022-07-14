@@ -132,24 +132,16 @@ public class UserDAO extends DAO {
     //edit user profile.jsp
     //29/6 
     public void editProfile(int users_id, User editUser, UserAccount editUserAccount, UserAddress editUserAddress) {
-        String query = "UPDATE users "
-                + "SET firstname = ? , lastname= ? , phonenumber= ?, email= ?, gender= ?, avatar= ?"
-                + "WHERE users_id = ? ;";
-        String query2 = "UPDATE users_account"
-                + "SET username = ? ,password =?"
-                + "WHERE users_id = ?";
+        String query = "UPDATE users\n" +
+                        "SET firstname = ? , lastname= ? , phonenumber= ?, email= ?, gender= ?, avatar= ?\n" +
+                        "WHERE users_id = ?";
+        String query2 = "UPDATE users_account\n" +
+                        "SET username = ?  ,password =?\n" +
+                        "WHERE users_id = ? ";
         String query3 = "UPDATE users_address"
                 + "SET home_address = ? , district = ? , city = ? "
                 + "WHERE users_id = ?";
         try {
-            System.out.println(editUser);
-            System.out.println(editUserAccount);
-            System.out.println(editUserAddress);
-            
-            
-            
-            
-            
             //edit users
             ps = con.prepareStatement(query);
             ps.setString(1, editUser.getFirstname());
