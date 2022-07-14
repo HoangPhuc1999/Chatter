@@ -142,6 +142,14 @@ public class UserDAO extends DAO {
                 + "SET home_address = ? , district = ? , city = ? "
                 + "WHERE users_id = ?";
         try {
+            System.out.println(editUser);
+            System.out.println(editUserAccount);
+            System.out.println(editUserAddress);
+            
+            
+            
+            
+            
             //edit users
             ps = con.prepareStatement(query);
             ps.setString(1, editUser.getFirstname());
@@ -377,10 +385,9 @@ public class UserDAO extends DAO {
     //reset mat khau table UserAccount 
     //Created by An at 27/5
     public void resetPassword(String username) {
-        String query = "Update users_account\n"
-                + "Set Password = '12345'"
-                + "where Username = ?\n"
-                + "";
+        String query = "Update users_account\n" +
+                        "Set password = '12345'\n" +
+                        "Where username = ?";
         try {
             ps = con.prepareStatement(query);
             ps.setString(1, username);
@@ -716,11 +723,12 @@ public class UserDAO extends DAO {
 //        System.out.println(dao.getUserRoleById(1));
 //        System.out.println(dao.getUserFromId(1));
         //check edit
-        UserAccount editAcc = new UserAccount("user1", "user1");
-        UserAddress eAccAddress = new UserAddress("Hoan kiem", "Hanoi", "Vietnam");
-        User eAccUser = new User("make", "gg", "0675565454", "user3@fpt.edu.vn", "0", null);
-        dao.editProfile(1, eAccUser, editAcc, eAccAddress);
-        System.out.println(dao.getUserFromId(1));
+//        UserAccount editAcc = new UserAccount("user1", "user1");
+//        UserAddress eAccAddress = new UserAddress("Hoan kiem", "Hanoi", "Vietnam");
+//        User eAccUser = new User("make", "gg", "0675565454", "user3@fpt.edu.vn", "0", null);
+//        dao.editProfile(1, eAccUser, editAcc, eAccAddress);
+//        System.out.println(dao.getUserFromId(1));
+
     }
 
 }
