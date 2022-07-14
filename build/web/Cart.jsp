@@ -82,7 +82,8 @@
                                     <th scope="row">
                                         <div class="p-2">
                                             <a href="productdetail?id=${o.product.id}">
-                                            <img src="${o.product.image}" alt="" width="70" class="img-fluid rounded shadow-sm">
+                                            <img src = "${o.product.image}" alt="" width="70" class="img-fluid rounded shadow-sm">
+                                 
                                         <div class="ml-3 d-inline-block align-middle">
                                             <h5 class="mb-0"> <a href="productdetail?id=${o.product.id}" class="text-dark d-inline-block">${o.product.name}</a></h5><span class="text-muted font-weight-normal font-italic"></span>
                                         </div>

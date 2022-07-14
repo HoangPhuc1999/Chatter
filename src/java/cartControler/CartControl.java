@@ -77,10 +77,13 @@ public class CartControl extends HttpServlet {
         ArrayList<Item> cart = (ArrayList<Item>) a.getCart();
         int index = isExisting(request.getParameter("id"), cart);
         //cart.remove(index);
-        cart.get(index).setQuantity(0); //dat so luong do dinh xoa = 0
-        updateCartInDatabase(a); //update in db
-        a.setCart(cart);
-        doGet_DisplayCart(request, response);
+        if (index != -1) {
+            cart.get(index).setQuantity(0); //dat so luong do dinh xoa = 0
+            updateCartInDatabase(a); //update in db
+            a.setCart(cart);
+            doGet_DisplayCart(request, response);
+        }
+
         //response.sendRedirect("Cart.jsp");
     }
 
