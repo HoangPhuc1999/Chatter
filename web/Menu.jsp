@@ -50,36 +50,36 @@
             <!-- end header section -->
         </div>
 
-  <!-- end offer section -->
+        <!-- end offer section -->
 
-  <!-- food section -->
+        <!-- food section -->
 
-  <section class="food_section layout_padding-bottom">
-    <div class="container">
-      <div class="heading_container heading_center">
-        <h2>
-          Our Menu
-        </h2>
-      </div>
+        <section class="food_section layout_padding-bottom">
+            <div class="container">
+                <div class="heading_container heading_center">
+                    <h2>
+                        Our Menu
+                    </h2>
+                </div>
 
-      <ul class="filters_menu">
+                <ul class="filters_menu">
                     <c:forEach items="${listC}" var="o">
                         <li data-filter=".${o.cname}">${o.cname}</li>
-                    </c:forEach>
-      </ul>
-        <div class="filters-content">
+                        </c:forEach>
+                </ul>
+                <div class="filters-content">
                     <div class="row grid">
 
                         <c:forEach items="${listP}"  var="p">
-                            
+
                             <div class="col-sm-6 col-lg-4 all ${p.cname}">
 
                                 <div class="box">
                                     <div>
                                         <a href="productdetail?id=${p.id}">
-                                        <div class="img-box">
-                                            <img src="${p.image}" alt="">
-                                        </div>
+                                            <div class="img-box">
+                                                <img src="${p.image}" alt="">
+                                            </div>
                                         </a>
                                         <div class="detail-box">
                                             <h5>
@@ -114,36 +114,7 @@
                                                           c1.024,28.16,24.064,50.688,52.224,50.688h1.024C193.536,443.31,216.576,418.734,215.04,389.55z" />
                                                     </g>
                                                     </g>
-                                                    <g>
-                                                    </g>
-                                                    <g>
-                                                    </g>
-                                                    <g>
-                                                    </g>
-                                                    <g>
-                                                    </g>
-                                                    <g>
-                                                    </g>
-                                                    <g>
-                                                    </g>
-                                                    <g>
-                                                    </g>
-                                                    <g>
-                                                    </g>
-                                                    <g>
-                                                    </g>
-                                                    <g>
-                                                    </g>
-                                                    <g>
-                                                    </g>
-                                                    <g>
-                                                    </g>
-                                                    <g>
-                                                    </g>
-                                                    <g>
-                                                    </g>
-                                                    <g>
-                                                    </g>
+
                                                     </svg>
                                                 </a>
                                             </div>
@@ -155,39 +126,39 @@
                         </c:forEach>
                     </div>
                 </div>
-      <div class="btn-box">
-        <a href="menu">
-          View More
-        </a>
-      </div>
-    </div>
-  </section>
+                <div class="btn-box">
+                    <a href="menu">
+                        View More
+                    </a>
+                </div>
+            </div>
+        </section>
 
 
 
-  <!-- end client section -->
-  <jsp:include page="Footer.jsp" />
-  <!-- start footer section -->
-  
-  <!-- end footer section -->
+        <!-- end client section -->
+        <jsp:include page="Footer.jsp" />
+        <!-- start footer section -->
 
-  <!-- jQery -->
-  <script src="js/jquery-3.4.1.min.js"></script>
-  <!-- popper js -->
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-  </script>
-  <!-- bootstrap js -->
-  <script src="js/bootstrap.js"></script>
-  <!-- owl slider -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
-  </script>
-  <!-- isotope js -->
-  <script src="https://unpkg.com/isotope-layout@3.0.4/dist/isotope.pkgd.min.js"></script>
-  <!-- nice select -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
-  <!-- custom js -->
-  <script src="js/custom.js"></script>
- 
-</body>
+        <!-- end footer section -->
+
+        <!-- jQery -->
+        <script src="js/jquery-3.4.1.min.js"></script>
+        <!-- popper js -->
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+        </script>
+        <!-- bootstrap js -->
+        <script src="js/bootstrap.js"></script>
+        <!-- owl slider -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
+        </script>
+        <!-- isotope js -->
+        <script src="https://unpkg.com/isotope-layout@3.0.4/dist/isotope.pkgd.min.js"></script>
+        <!-- nice select -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
+        <!-- custom js -->
+        <script src="js/custom.js"></script>
+
+    </body>
 
 </html>

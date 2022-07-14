@@ -85,14 +85,14 @@
                         <h3>  <%=x.getName()%></h3>
                         <div class="d-flex mb-3">
                             <div class="text-primary mb-2">
-                                <%                           for (int i = 0; i < ratting; i++) {
+                                <%                           for (int i = 0; i <= ratting; i++) {
                                 %>
                                 <i class="fas fa-star"></i>
 
                                 <% }%> 
 
                             </div>
-                            <small class="pt-1">(ratting <%=df.format(ratting)%> )</small>
+                            <small class="pt-1">  <%=df.format(ratting)%> stars  </small>
                             <small class="pt-1">(<%=list.size()%> reviews)</small>
                         </div>
                         <h3 class="font-weight-semi-bold mb-4">$ <%=x.getPrice()%></h3>
