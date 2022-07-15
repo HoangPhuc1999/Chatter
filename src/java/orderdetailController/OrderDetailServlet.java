@@ -34,7 +34,7 @@ public class OrderDetailServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
         PrintWriter pr = response.getWriter();
         OrderDetailDAO u = new OrderDetailDAO();
         List<OrderDetail> lst = u.getAllOrderDetail();
@@ -68,7 +68,18 @@ public class OrderDetailServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        PrintWriter pr = response.getWriter();
+        String order_id = request.getParameter("order_id");
+        OrderDetailDAO u = new OrderDetailDAO();
+        List<OrderDetail> lst;
+        if (order_id == null || order_id.isEmpty() || order_id.equals("all")) {
+            lst = u.getAllOrderDetail();
+        } else {
+            lst = u.getAllOrderDetailByID(order_id);
+
+        }
+        request.setAttribute("orderdetaillist", lst);
+        request.getRequestDispatcher("../OrderDetail.jsp").forward(request, response);
     }
 
     /**

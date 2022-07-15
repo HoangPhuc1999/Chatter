@@ -178,9 +178,9 @@
 
                     <div class="pb-5">
                         <div class="container">
-                            <form action="../admin/booking" method="post" id="search-box" class="form-row">
-                                <input type="search" name="phonenumber" id="search-text"
-                                       placeholder="Tra thông tin đặt bàn theo số điện thoại hoặc tên người đặt"
+                            <form action="../admin/orders" method="post" id="search-box" class="form-row">
+                                <input type="search" name="order_id" id="search-text"
+                                       placeholder="Tra order bằng order id"
                                        required>
                                 <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit" id="search-btn">
                                     <i class="fa fa-search" aria-hidden="true"></i>
@@ -201,7 +201,7 @@
                                                         <div class="p-2 px-3 text-uppercase">Product ID</div>
                                                     </th>
                                                     <th scope="col" class="border-0 bg-light">
-                                                        <div class="py-2 text-uppercase">Image</div>
+                                                        <div class="py-2 text-uppercase">Product Image</div>
                                                     </th>
                                                     <th scope="col" class="border-0 bg-light">
                                                         <div class="py-2 text-uppercase">Amount</div>
@@ -224,7 +224,7 @@
                                             <tbody>
                                             <div class="heading_container">
                                                 <div class ="text">
-                                                    No customer found
+                                                    No order found
                                                 </div>
                                             </div>
                                             </tbody>
@@ -241,13 +241,10 @@
                                                     <td class="align-middle"><strong><%=y.getOrderId()%></strong></td>
                                                     <td class="align-middle"><strong><%=y.getOrderProductId()%></strong></td>
                                                     <th scope="row">
-                                                        <div class="p-2">
-                                                            <img src=<%=y.getProductImagePath()%> alt="" width="70" class="img-fluid rounded shadow-sm">
-                                                            <div class="ml-3 d-inline-block align-middle">
-                                                                <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block">${o.name}</a></h5><span class="text-muted font-weight-normal font-italic"></span>
-                                                            </div>
-                                                        </div>
+
+                                                        <img src = "../<%=y.getProductImagePath()%>"  width="100" height="80">
                                                     </th>
+
                                                     <td class="align-middle"><strong><%=y.getOrderAmount()%></strong></td>
                                                     <td class="align-middle"><strong><%=y.getOrderDate()%></strong></td>
                                                     <td class="align-middle"><strong><%=y.getProductName()%></strong></td>
