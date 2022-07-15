@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -199,35 +200,68 @@ public class ProductDAO extends DAO {
         return discount;
     }
 
-    
     /**
      * Do Tuan Phong Lay tu database tat ca info ProductDetails
      *
+     * type 0 search by id
+     *
+     * type 1 search by name
+     *
+     * type 2 search by price
+     *
+     * type 1 search by modified date
+     *
+     *
      * @param type
-     * @param str
+     * @param strings
      * @param pageindex
      * @param pagesize
      * @return List<ProductDetails>
      */
-    public List<ProductDetails> getAllProductDetailses(int type, String str, int pageindex, int pagesize) {
+    public List<ProductDetails> getAllProductDetailses(int type, String[] strings, int pageindex, int pagesize) {
         ArrayList<ProductDetails> productDetailses = new ArrayList<>();
         String sql = "SELECT *\n"
-                + "FROM products p LEFT JOIN products_image pi ON p.product_id  = pi.product_id\n"
+                + "FROM products p \n"
                 + "LEFT JOIN products_inventory pin ON p.product_id = pin.product_id\n"
+                + " LEFT JOIN products_image pi ON p.product_id  = pi.product_id\n"
                 + "LEFT JOIN products_category pc ON p.product_id = pc.product_id\n"
                 + "JOIN category c ON pc.category_id = c.category_id\n";
-        if (type == 1) {
-            sql += "WHERE p.product_id = ?\n";
-        }
+
+        sql += handleString(type, strings);
+
         sql += "ORDER BY p.product_id OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
         try {
             ps = con.prepareStatement(sql);
-            if (type == 1) {
-                ps.setInt(1, Integer.parseInt(str));
+            if (strings[0] != null) {
+                if (strings[0].trim().length() != 0) {
+                    switch (type) {
+                        case 0:
+                        case 1:
+                            ps.setString(1, strings[0]);
+                            ps.setInt(2, pageindex);
+                            ps.setInt(3, pagesize);
+                            break;
+                        case 2:
+                            ps.setDouble(1, Double.parseDouble(strings[0]));
+                            ps.setDouble(2, Double.parseDouble(strings[1]));
+                            ps.setInt(3, pageindex);
+                            ps.setInt(4, pagesize);
+                            break;
+                        case 3:
+                            ps.setTimestamp(1, Timestamp.valueOf(strings[0]));
+                            ps.setTimestamp(2, Timestamp.valueOf(strings[1]));
+                            ps.setInt(3, pageindex);
+                            ps.setInt(4, pagesize);
+                            break;
+                        default:
+                            break;
 
+                    }
+                }
+            } else {
+                ps.setInt(1, pageindex);
+                ps.setInt(2, pagesize);
             }
-            ps.setInt(type == 1 ? 2 : 1, pageindex);
-            ps.setInt(type == 1 ? 3 : 2, pagesize);
 
             rs = ps.executeQuery();
             ProductDetails productDetailsTemp = new ProductDetails();
@@ -246,7 +280,10 @@ public class ProductDAO extends DAO {
                     productDetails.setPrice(rs.getDouble("product_price"));
                     productDetails.setDescription(rs.getString("product_description"));
                     productDetails.setImageUrl(rs.getString("product_image_path"));
-                    productDetails.setModifyAt(rs.getTimestamp(8).toLocalDateTime());
+                    if (rs.getTimestamp("modified_at") != null) {
+                        productDetails.setModifyAt(rs.getTimestamp("modified_at").toLocalDateTime());
+                    }
+
                     productDetails.setCreateAt(
                             rs.getTimestamp("created_at") != null
                             ? rs.getTimestamp("created_at").toLocalDateTime() : null);
@@ -273,78 +310,133 @@ public class ProductDAO extends DAO {
         return productDetailses;
     }
 
+    public String handleString(int type, String[] strings) {
+        if (strings[0] == null) {
+            return "";
+        }
+        if (strings[0].trim().length() == 0) {
+            return "";
+        }
+        switch (type) {
+            case 0:
+                return "WHERE p.product_id  LIKE ('%' + ? + '%')\n";
+            case 1:
+                return "WHERE p.product_name  LIKE ('%' + ? + '%')\n";
+            case 2:
+                return "WHERE product_price  BETWEEN ? AND ? \n";
+            case 3:
+                return "WHERE (pin.modified_at  BETWEEN ?  AND ?)\n"
+                        + "OR pin.modified_at IS NULL\n";
+            case 5:
+                return "WHERE p.product_id = ?\n";
+            default:
+                break;
+        }
+        return "";
+    }
     
-    /**
-     * Do Tuan Phong Lay tu database tat ca info ProductDetails
-     *
-     * type = 1 lay ra bang productid
-     *
+    /** Do Tuan Phong
+     * 
+     * tra ve so luong product trong ham getAllProducts
+     * 
      * @param type
-     * @param str
-     * @return List<ProductDetails>
+     * @param strings
+     * @return 
      */
-    public List<ProductDetails> getAllProductDetailses(int type, String str) {
-        ArrayList<ProductDetails> productDetailses = new ArrayList<>();
-        String sql = "SELECT *\n"
-                + "FROM products p LEFT JOIN products_image pi ON p.product_id  = pi.product_id\n"
-                + "LEFT JOIN products_inventory pin ON p.product_id = pin.product_id\n"
-                + "LEFT JOIN products_category pc ON p.product_id = pc.product_id\n"
-                + "JOIN category c ON pc.category_id = c.category_id\n";
-        if (type == 1) {
-            sql += "WHERE p.product_id like '?%'\n";
-        }
-        sql += "ORDER BY p.product_id";
+
+    public int countproducts(int type, String[] strings) {
         try {
-            ps = con.prepareStatement(sql);
-            if (type == 1) {
-                ps.setInt(1, Integer.parseInt(str));
+            String sql = "SELECT p.product_id as product_id\n"
+                    + "FROM products p \n"
+                    + "LEFT JOIN products_inventory pin ON p.product_id = pin.product_id\n"
+                    + " LEFT JOIN products_image pi ON p.product_id  = pi.product_id\n"
+                    + "LEFT JOIN products_category pc ON p.product_id = pc.product_id\n"
+                    + "JOIN category c ON pc.category_id = c.category_id\n";
+
+            sql = "SELECT COUNT(DISTINCT product_id) Total\n"
+                    + "FROM(" + sql + handleString(type, strings) + ") pd";
+
+            PreparedStatement stm = connection.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("Total");
             }
-
-            rs = ps.executeQuery();
-            ProductDetails productDetailsTemp = new ProductDetails();
-            productDetailsTemp.setId(0);
-
-            while (rs.next()) {
-                if (productDetailsTemp.getId() != rs.getInt("product_id")) {
-                    productDetailsTemp.setId(rs.getInt("product_id"));
-
-                    ProductDetails productDetails = new ProductDetails();
-
-                    productDetails.setId(rs.getInt("product_id"));
-                    productDetails.setName(rs.getString("product_name"));
-                    productDetails.setTitle(rs.getString("product_title"));
-                    productDetails.setQuantity(rs.getInt("product_quantity"));
-                    productDetails.setPrice(rs.getDouble("product_price"));
-                    productDetails.setDescription(rs.getString("product_description"));
-                    productDetails.setImageUrl(rs.getString("product_image_path"));
-                    productDetails.setModifyAt(rs.getTimestamp("modified_at").toLocalDateTime());
-                    productDetails.setCreateAt(
-                            rs.getTimestamp("created_at") != null
-                            ? rs.getTimestamp("created_at").toLocalDateTime() : null);
-
-                    if (rs.getInt(14) != 0) {
-                        productDetails.setCategorys(new ArrayList<>());
-                        productDetails.getCategorys().add(
-                                new Category(rs.getInt("category_id"),
-                                        rs.getString("category_name")));
-
-                        productDetails.setCname(rs.getString("category_name"));
-
-                    }
-
-                    productDetailses.add(productDetails);
-
-                } else {
-                    productDetailses.get(productDetailses.size() - 1).getCategorys()
-                            .add(new Category(rs.getInt("category_id"), rs.getString("category_name")));
-                }
-            }
-
-        } catch (SQLException e) {
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return productDetailses;
+        return -1;
     }
 
+//    /**
+//     * Do Tuan Phong Lay tu database tat ca info ProductDetails
+//     *
+//     * type = 1 lay ra bang productid
+//     *
+//     * @param type
+//     * @param str
+//     * @return List<ProductDetails>
+//     */
+//    public List<ProductDetails> getAllProductDetailses(int type, String str) {
+//        ArrayList<ProductDetails> productDetailses = new ArrayList<>();
+//        String sql = "SELECT *\n"
+//                + "FROM products p LEFT JOIN products_image pi ON p.product_id  = pi.product_id\n"
+//                + "LEFT JOIN products_inventory pin ON p.product_id = pin.product_id\n"
+//                + "LEFT JOIN products_category pc ON p.product_id = pc.product_id\n"
+//                + "JOIN category c ON pc.category_id = c.category_id\n";
+//        if (type == 1) {
+//            sql += "WHERE p.product_id like '?%'\n";
+//        }
+//        sql += "ORDER BY p.product_id";
+//        try {
+//            ps = con.prepareStatement(sql);
+//            if (type == 1) {
+//                ps.setInt(1, Integer.parseInt(str));
+//            }
+//
+//            rs = ps.executeQuery();
+//            ProductDetails productDetailsTemp = new ProductDetails();
+//            productDetailsTemp.setId(0);
+//
+//            while (rs.next()) {
+//                if (productDetailsTemp.getId() != rs.getInt("product_id")) {
+//                    productDetailsTemp.setId(rs.getInt("product_id"));
+//
+//                    ProductDetails productDetails = new ProductDetails();
+//
+//                    productDetails.setId(rs.getInt("product_id"));
+//                    productDetails.setName(rs.getString("product_name"));
+//                    productDetails.setTitle(rs.getString("product_title"));
+//                    productDetails.setQuantity(rs.getInt("product_quantity"));
+//                    productDetails.setPrice(rs.getDouble("product_price"));
+//                    productDetails.setDescription(rs.getString("product_description"));
+//                    productDetails.setImageUrl(rs.getString("product_image_path"));
+//                    productDetails.setModifyAt(rs.getTimestamp("modified_at").toLocalDateTime());
+//                    productDetails.setCreateAt(
+//                            rs.getTimestamp("created_at") != null
+//                            ? rs.getTimestamp("created_at").toLocalDateTime() : null);
+//
+//                    if (rs.getInt(14) != 0) {
+//                        productDetails.setCategorys(new ArrayList<>());
+//                        productDetails.getCategorys().add(
+//                                new Category(rs.getInt("category_id"),
+//                                        rs.getString("category_name")));
+//
+//                        productDetails.setCname(rs.getString("category_name"));
+//
+//                    }
+//
+//                    productDetailses.add(productDetails);
+//
+//                } else {
+//                    productDetailses.get(productDetailses.size() - 1).getCategorys()
+//                            .add(new Category(rs.getInt("category_id"), rs.getString("category_name")));
+//                }
+//            }
+//
+//        } catch (SQLException e) {
+//        }
+//        return productDetailses;
+//    }
     /**
      *
      * Do Tuan Phong: insert to products table
