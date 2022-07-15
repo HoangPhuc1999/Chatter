@@ -45,17 +45,27 @@ public class OrderDAO extends MyDAO {
 
             //insert to order details
             Iterator<Item> iterator = list.iterator();
-            while (iterator.hasNext()) {
-                ps = con.prepareStatement(query2);
+            
+//            while (iterator.hasNext()) {
+//                ps = con.prepareStatement(query2);
+//                ps.setInt(1, order_id);
+//                ps.setInt(2, iterator.next().getProduct().getId());
+//                ps.setInt(3, iterator.next().getQuantity());
+//                ps.executeUpdate();
+//                ps.clearParameters();
+//            }
+            for(int i = 0; i < list.size();i++){
+             ps = con.prepareStatement(query2);
                 ps.setInt(1, order_id);
-                ps.setInt(2, iterator.next().getProduct().getId());
-                ps.setInt(3, iterator.next().getQuantity());
+                ps.setInt(2, list.get(i).getProduct().getId());
+                ps.setInt(3, list.get(i).getQuantity());
                 ps.executeUpdate();
                 ps.clearParameters();
             }
+            
 
         } catch (Exception e) {
-            // check ham nay
+//             check ham nay
             System.out.println("Insert Order Fail");
             System.out.println(e.toString());
         }
