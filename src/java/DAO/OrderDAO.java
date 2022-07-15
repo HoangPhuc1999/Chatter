@@ -44,8 +44,8 @@ public class OrderDAO extends MyDAO {
             ps.clearParameters();
 
             //insert to order details
-            Iterator<Item> iterator = list.iterator();
-            
+ //           Iterator<Item> iterator = list.iterator();
+           
 //            while (iterator.hasNext()) {
 //                ps = con.prepareStatement(query2);
 //                ps.setInt(1, order_id);
@@ -63,9 +63,7 @@ public class OrderDAO extends MyDAO {
                 ps.clearParameters();
             }
             
-
         } catch (Exception e) {
-//             check ham nay
             System.out.println("Insert Order Fail");
             System.out.println(e.toString());
         }

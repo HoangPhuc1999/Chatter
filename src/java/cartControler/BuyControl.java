@@ -46,7 +46,6 @@ public class BuyControl extends HttpServlet {
             ArrayList<Item> cart = (ArrayList<Item>) a.getCart(); //get cart of user in database
             OrderDAO odao = new OrderDAO();
             odao.insertOrder(cart, a.getUsers_id());//insert order to db
-
             cdao.deleteCartAfterBuy(a); //xoa gio hang
             request.setAttribute("message", "Mua hang thanh cong");
             request.getRequestDispatcher("home").forward(request, response);
