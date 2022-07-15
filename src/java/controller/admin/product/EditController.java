@@ -51,7 +51,8 @@ ProductDAO productDAO = new ProductDAO();
         
         CategoryDAO categoryDAO = new CategoryDAO();
         ArrayList<Category> categorys = categoryDAO.listAllCategory();
-        ArrayList<ProductDetails> productDetailses = (ArrayList<ProductDetails>) productDAO.getAllProductDetailses(1, request.getParameter("productid"));
+        String [] str = {request.getParameter("productid")};
+        ArrayList<ProductDetails> productDetailses = (ArrayList<ProductDetails>) productDAO.getAllProductDetailses(0,str ,0,1);
         request.setAttribute("product", productDetailses.get(0));
         request.setAttribute("categorys", categorys);
         request.getRequestDispatcher("../view/admin/EditProduct.jsp").forward(request, response);
