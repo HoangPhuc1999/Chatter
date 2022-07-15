@@ -148,7 +148,7 @@ public class UserDAO extends DAO {
             ps.setString(2, editUser.getLastname());
             ps.setString(3, editUser.getPhonenumber());
             ps.setString(4, editUser.getEmail());
-            ps.setString(5, editUser.getGender());
+            ps.setInt(5, editUser.getGenderNum());
             ps.setString(6, editUser.getAvatar());
             ps.setInt(7, users_id);
             ps.executeUpdate();
