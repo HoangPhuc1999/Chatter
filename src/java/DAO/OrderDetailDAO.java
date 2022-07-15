@@ -17,11 +17,10 @@ public class OrderDetailDAO extends DAO {
 
     public List<OrderDetail> getAllOrderDetail() {
         List<OrderDetail> list = new ArrayList<>();
-        xSql = "select orders_details.order_id, orders_details.order_product_id,orders_details.order_amount,"
-                + "orders_details.order_date,products.product_name,products_image.product_image_path"
-                + "from orders_details"
-                + "join products on orders_details.order_product_id = products.product_id"
-                + "join products_image on orders_details.order_product_id = products_image.product_id";
+        xSql = "select orders_details.order_id, orders_details.order_product_id,orders_details.order_amount,orders_details.order_date,products.product_name,products_image.product_image_path\n"
+                + "from orders_details\n"
+                + "join products on orders_details.order_product_id = products.product_id\n"
+                + "join products_image on orders_details.order_product_id = products_image.product_id\n";
 
         try {
             ps = con.prepareStatement(xSql);
@@ -40,7 +39,7 @@ public class OrderDetailDAO extends DAO {
             ps.close();
         } catch (Exception e) {
             System.out.println("Get Order Detail Fail");
-            System.out.println(e.toString());
+            e.printStackTrace();
         }
         return (list);
 
