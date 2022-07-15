@@ -48,7 +48,7 @@ public class BuyControl extends HttpServlet {
             odao.insertOrder(cart, a.getUsers_id());//insert order to db
             cdao.deleteCartAfterBuy(a); //xoa gio hang
             request.setAttribute("message", "Mua hang thanh cong");
-            request.getRequestDispatcher("home").forward(request, response);
+            response.sendRedirect("home");
         }
     }
 
