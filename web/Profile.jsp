@@ -102,8 +102,8 @@
                 <input type="hidden" name="action" value="edit" />
                 
                     <label>Avatar:       </label> 
-
-                    <input name="avatar" type="text" class="form-control" placeholder="Avatar" value=${avapath}>                           
+                    <img id="avatar" class="img-fluid" href=${avapath}/>   
+                    <input name="avatar" type="file" class="form-control" placeholder="Avatar" value=${avapath}>                           
                 <div>
                     <label>Username:       </label> 
                   <input name="username" type="text" class="form-control" placeholder="Username" value=${user}>
