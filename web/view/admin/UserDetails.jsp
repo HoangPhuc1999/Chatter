@@ -406,7 +406,7 @@
             controlEditmode(0);
 
             document.getElementById('users_page').classList.add('active');
-            document.getElementById('users_page').className.replace('link-dark', '');
+            document.getElementById('users_page').classList.remove('link-dark');
 
 
             const input = document.getElementById('formFile');
@@ -422,4 +422,3 @@
 
     </body>
 </html>
-

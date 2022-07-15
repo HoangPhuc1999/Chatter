@@ -4,6 +4,7 @@
  */
 package controller.admin.product;
 
+import DAO.CategoryDAO;
 import DAO.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -47,8 +48,11 @@ public class ProductsController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ProductDAO productDAO = new ProductDAO();
-        ArrayList<ProductDetails> productDetailses = (ArrayList<ProductDetails>) productDAO.getAllProductDetailses(0,"",42,10);
+        CategoryDAO categoryDAO = new CategoryDAO();
+        ArrayList<Category> categorys = categoryDAO.listAllCategory();
+        ArrayList<ProductDetails> productDetailses = (ArrayList<ProductDetails>) productDAO.getAllProductDetailses(0,"",40,10);
 //        response.getWriter().print();
+        request.setAttribute("categorys", categorys);
         request.setAttribute("productDetailses", productDetailses);
         request.getRequestDispatcher("../view/admin/Products.jsp").forward(request, response);
     }
