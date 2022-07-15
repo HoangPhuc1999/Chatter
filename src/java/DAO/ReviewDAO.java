@@ -58,6 +58,7 @@ public class ReviewDAO extends DAO {
             rs.close();
             ps.close();
         } catch (Exception e) {
+            System.out.println(e.toString());
         }
         return (list);
 
