@@ -46,7 +46,6 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[coupons](
 	[coupon_code] [varchar](255) NOT NULL,
-	[product_discount_id] [int] NULL,
 	[discount_amount] [int] NOT NULL,
 	[expire_date] [datetime] NOT NULL,
 PRIMARY KEY CLUSTERED 
@@ -519,12 +518,6 @@ GO
 ALTER TABLE [dbo].[users_cart] ADD  DEFAULT (getdate()) FOR [created_at]
 GO
 ALTER TABLE [dbo].[users_friends] ADD  DEFAULT (getdate()) FOR [date_modified]
-GO
-ALTER TABLE [dbo].[coupons]  WITH CHECK ADD FOREIGN KEY([product_discount_id])
-REFERENCES [dbo].[products] ([product_id])
-GO
-ALTER TABLE [dbo].[coupons]  WITH CHECK ADD FOREIGN KEY([product_discount_id])
-REFERENCES [dbo].[products] ([product_id])
 GO
 ALTER TABLE [dbo].[deleted_messages]  WITH CHECK ADD FOREIGN KEY([messages_id])
 REFERENCES [dbo].[messages] ([messages_id])
