@@ -85,17 +85,17 @@ public class CategoryDAO extends MyDAO {
      *
      * @param categoryId
      */
-    public void delete(int categoryId) {
+    public int deleteInCategory(int categoryId) {
         try {
             xSql = "DELETE FROM [category]\n"
                     + "WHERE category_id = ?";
             ps = connection.prepareStatement(xSql);
             ps.setInt(1, categoryId);
-            ps.executeUpdate();
+            return ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        deleteInProductsCategory(categoryId);
+        return 0;
     }
 
     /**
@@ -103,16 +103,23 @@ public class CategoryDAO extends MyDAO {
      *
      * @param categoryId
      */
-    public void deleteInProductsCategory(int categoryId) {
+    public int deleteInProductsCategory(int categoryId) {
         try {
             xSql = "DELETE FROM [products_category]\n"
                     + "WHERE category_id = ?";
             ps = connection.prepareStatement(xSql);
             ps.setInt(1, categoryId);
-            ps.executeUpdate();
+            return ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return 0;
     }
+    
+    public String delete(int categoryId){
+        return "ProductsCategory table: " + deleteInProductsCategory(categoryId)
+                + "\nCategory table: " + deleteInCategory(categoryId);
+    }
+    
 
 }
