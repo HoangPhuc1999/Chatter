@@ -20,6 +20,7 @@ public class OrderDAO extends MyDAO {
     //author an 
     //27/6/2022
     public void insertOrder(ArrayList<Item> list, int users_id) {
+        System.out.println("Insert order in database");
         String query = "Insert into orders(order_by)"
                 + "Values(?)";
         String query2 = "Insert into orders_details(order_id,order_product_id,order_amount)"
