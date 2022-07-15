@@ -20,7 +20,6 @@ public class OrderDAO extends MyDAO {
     //author an 
     //27/6/2022
     public void insertOrder(ArrayList<Item> list, int users_id) {
-        System.out.println("Insert order in database");
         String query = "Insert into orders(order_by)"
                 + "Values(?)";
         String query2 = "Insert into orders_details(order_id,order_product_id,order_amount)"
@@ -43,7 +42,6 @@ public class OrderDAO extends MyDAO {
                 order_id = rs.getInt(1);
             }
             ps.clearParameters();
-
             //insert to order details
 //           Iterator<Item> iterator = list.iterator();
 //            while (iterator.hasNext()) {
@@ -54,15 +52,14 @@ public class OrderDAO extends MyDAO {
 //                ps.executeUpdate();
 //                ps.clearParameters();
 //            }
-            for(int i = 0; i < list.size();i++){
-             ps = con.prepareStatement(query2);
+            for (int i = 0; i < list.size(); i++) {
+                ps = con.prepareStatement(query2);
                 ps.setInt(1, order_id);
                 ps.setInt(2, list.get(i).getProduct().getId());
                 ps.setInt(3, list.get(i).getQuantity());
                 ps.executeUpdate();
                 ps.clearParameters();
             }
-            
         } catch (Exception e) {
             System.out.println("Insert Order Fail");
             System.out.println(e.toString());
