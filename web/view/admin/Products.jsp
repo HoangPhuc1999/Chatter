@@ -132,7 +132,7 @@
                     </div>
                 </div>
 
-                <form class="col input-group justify-content-end" action="/Chatter/admin/edit_product" method="get" id="searchForm">
+                <form class="col input-group justify-content-end" action="/Chatter/admin/products" method="get" id="searchForm">
                     <div class="form-floating">
                         <select onchange="selectForm();" class="form-select" name="searchtype" id="floatingSelectGrid" >
                             <option selected value="0">Product ID</option>
@@ -149,7 +149,7 @@
                         <label for="">Product ID</label>
                     </div>
                     <div class="form-floating col-sm-3"  id="searchByName" >
-                        <input  type="text" class="form-control" name="productname" placeholder="ProductID" aria-label="ProductID" aria-describedby="button-addon2" >
+                        <input  type="search" class="form-control" name="productname" placeholder="ProductID" aria-label="ProductID" aria-describedby="button-addon2" >
                         <label for="">Product Name</label>
                     </div>
                     <div class="form-floating col-sm-2"  id="searchByMinPrice" >
@@ -231,6 +231,26 @@
                     ${product}<br><br>
                 </c:forEach>
             </div>
+            
+            <!--pagination-->
+            <nav aria-label="...">
+                <ul class="pagination">
+                    <li class="page-item disabled">
+                        <a class="page-link">Previous</a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">First Page</a></li>
+                    <li class="page-item active" aria-current="page">
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item active" aria-current="page">
+                        <a class="page-link" href="#">2</a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Next</a>
+                    </li>
+                </ul>
+            </nav>
+            
         </div>
         <script>
             document.getElementById('products_page').classList.add('active');
