@@ -32,8 +32,7 @@ public class DeleteController extends HttpServlet {
         CategoryDAO categoryDAO = new CategoryDAO();
         int categoryId = Integer.parseInt(request.getParameter("category_id"));
 //        response.getWriter().print(categoryId);
-        categoryDAO.delete(categoryId);
-        categoryDAO.deleteInProductsCategory(categoryId);
+        log(categoryDAO.delete(categoryId));
         response.sendRedirect("../admin/list_category");
         
     } 
