@@ -52,6 +52,7 @@ public class SignUpServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        
         String user = request.getParameter("username");
         String pass = request.getParameter("password");
         //String re_pass = request.getParameter("repassword");
@@ -65,66 +66,6 @@ public class SignUpServlet extends HttpServlet {
         String gender = request.getParameter("gender");
         String avapath="";
         
-//        String saveFolder = System.getProperty("user.dir")+ File.separator +"web"+File.separator +"avatar";
-//        //Part part = request.getPart("avatar");
-//                
-//        File fileUploadDirectory = new File(saveFolder + part.getSubmittedFileName());        
-//        if (!fileUploadDirectory.exists()) {
-//            fileUploadDirectory.mkdirs();
-//        }
-
-//        Part filePart = request.getPart("avatar"); 
-//            String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
-//            InputStream fileContent = filePart.getInputStream();
-//            avapath = "avatar"+File.separator + fileName;
-//            
-//        if (ServletFileUpload.isMultipartContent(request)) {
-//
-//            DiskFileItemFactory factory = new DiskFileItemFactory();
-//            factory.setRepository(new File(System.getProperty("user.dir")));
-//            ServletFileUpload upload = new ServletFileUpload(factory);
-//            String uploadPath = System.getProperty("user.dir")+ File.separator +"web"+File.separator +"avatar";
-//            File uploadDir = new File(uploadPath);
-//            if (!uploadDir.exists()) {
-//                uploadDir.mkdir();
-//            }  
-//            try{
-//            List<FileItem> formItems = upload.parseRequest(request);
-//            if (formItems != null && formItems.size() > 0) {
-//                for (FileItem item : formItems) {
-//                    if (!item.isFormField()) {
-//                        String fileName = new File(item.getName()).getName();
-//                        String filePath = uploadPath + File.separator + fileName;
-//                        File storeFile = new File(filePath);
-//                        item.write(storeFile);
-//                    }
-//            }
-//            }
-//            
-//            }
-//            catch(Exception e){
-//                
-//            }
-//        }
-
-//        
-//        String savePath = saveFolder + File.separator + fileName;
-//        part.write(savePath + File.separator);
-//        
-// 
-//        //upload image to project 's avatar under web folder and save path to avapath
-//        try{
-//            Part part = request.getPart("file");
-//            part.write(extractFileName(part));
-//            avapath=("avatar\\"+extractFileName(part)).toString();
-//
-//            }
-//            catch (Exception e) {
-//                System.out.println(e.getClass());
-//                
-//            }
-//              
-
         // Create path components to save the file
         final String path = "C:\\Users\\khuat\\OneDrive\\Desktop\\FPTUniversity\\2022\\SEMESTER 5\\SWP391\\Chatter\\Chatter\\Chatter\\web\\avatar";
         final Part filePart = request.getPart("avatar");
