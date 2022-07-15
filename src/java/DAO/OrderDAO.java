@@ -45,8 +45,7 @@ public class OrderDAO extends MyDAO {
             ps.clearParameters();
 
             //insert to order details
- //           Iterator<Item> iterator = list.iterator();
-           
+//           Iterator<Item> iterator = list.iterator();
 //            while (iterator.hasNext()) {
 //                ps = con.prepareStatement(query2);
 //                ps.setInt(1, order_id);
