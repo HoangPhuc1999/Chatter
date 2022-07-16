@@ -91,7 +91,9 @@
                             <div class="col-md-4">
                                 <label for="inputPrice" class="col-form-label">Product price</label>
                                 <div class="btn-group">
-                                    <input id="inputPrice" name="price" value="${product.price}"  type="text" class="form-control" pattern="[0-9]+(.?[0-9]+)?" title="Please input a number!" placeholder="" value=${last}>
+                                    <input id="inputPrice" name="price" class="form-control" title="Please input a number!" placeholder="" min="0" max="65536">
+
+                                    <input id="inputPrice" name="price" value="${product.price}"  type="number" step="0.01" class="form-control" min="0" max="65536" title="Please input a number!" placeholder="">
                                     <span class="input-group-text" id="basic-addon2">$</span>
                                 </div>
                             </div>
@@ -107,8 +109,8 @@
                             <div class="col-md-6 p-3">
                                 <label for="inputDescription" class="col-sm-2 col-form-label">Description </label>
                                 <textarea id="inputDescription" name="description" value="${product.description}" 
-                                          type="text" class="form-control" placeholder="Enter product description" required
-                                          >${product.description}</textarea>
+                                          type="text" class="form-control" placeholder="Enter product description" required>
+                                    ${product.description}</textarea>
 
                             </div>
                             <div class="col-md-6">
