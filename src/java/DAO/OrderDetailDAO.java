@@ -86,8 +86,7 @@ public class OrderDetailDAO extends DAO {
                 + "from orders_details \n"
                 + "join products on orders_details.order_product_id = products.product_id\n"
                 + "group by orders_details.order_product_id,products.product_price, products.product_name\n"
-                + "order by orders_details.order_product_id ASC";
-
+                + "order by revenue DESC";
         try {
             ps = con.prepareStatement(xSql);
 
