@@ -200,7 +200,7 @@
                             <th>Price</th>
                             <th class="">Quantity</th>
                             <th>Category</th>
-                            <th class=" text-center">Modify time</th>
+                            <th class=" text-center">Modified time</th>
                             <th class=" text-center">Action</th>
                         </tr>
                     </thead>
