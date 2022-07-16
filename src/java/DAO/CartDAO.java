@@ -20,6 +20,7 @@ public class CartDAO extends MyDAO {
     //xoa gio hang sau khi mua va da them vao order details
     //author an 
     public void deleteCartAfterBuy(User a) {
+        System.out.println("Delete user cart after buy");
         String query = "delete from users_cart WHERE users_id=?";
         try {
             ps = con.prepareStatement(query);

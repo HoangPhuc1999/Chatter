@@ -132,41 +132,41 @@
                     </div>
                 </div>
 
-                <form class="col input-group justify-content-end" action="/Chatter/admin/edit_product" method="get" id="searchForm">
+                <form class="col input-group justify-content-end" action="/Chatter/admin/products" method="get" id="searchForm">
                     <div class="form-floating">
                         <select onchange="selectForm();" class="form-select" name="searchtype" id="floatingSelectGrid" >
-                            <option selected value="0">Product ID</option>
-                            <option value="1">Product name</option>
-                            <option value="2">Product price</option>
-                            <option value="3">Modify date</option>
+                            <option ${requestScope.searchtype eq '0' || requestScope.searchtype == null ? "selected" :"" } value="0">Product ID</option>
+                            <option ${requestScope.searchtype eq '1'? "selected" :""} value="1">Product name</option>
+                            <option ${requestScope.searchtype eq '2'? "selected" :""} value="2">Product price</option>
+                            <option ${requestScope.searchtype eq '3'? "selected" :""} value="3">Modify date</option>
                         </select>
 
 
                         <label for="floatingSelectGrid">Search by</label>
                     </div>
                     <div class="form-floating"  id="searchByID" >
-                        <input  type="number" class="form-control" name="productid" placeholder="ProductID" aria-label="ProductID" min="0" max="65536"  aria-describedby="button-addon2">
+                        <input  type="number" class="form-control" name="productid" value="${requestScope.productid}" placeholder="ProductID" aria-label="ProductID" min="0" max="65536"  aria-describedby="button-addon2">
                         <label for="">Product ID</label>
                     </div>
                     <div class="form-floating col-sm-3"  id="searchByName" >
-                        <input  type="text" class="form-control" name="productname" placeholder="ProductID" aria-label="ProductID" aria-describedby="button-addon2" >
+                        <input  type="search" class="form-control" name="productname"  value="${requestScope.productname}" placeholder="ProductID" aria-label="ProductID" aria-describedby="button-addon2" >
                         <label for="">Product Name</label>
                     </div>
                     <div class="form-floating col-sm-2"  id="searchByMinPrice" >
-                        <input  type="number" step="0.01" class="form-control" name="minprice" placeholder="ProductPrice" aria-label="ProductPrice" min="0" max="65536" aria-describedby="button-addon2">
+                        <input  type="number" step="0.01" class="form-control" name="minprice" value="${requestScope.minprice}" placeholder="ProductPrice" aria-label="ProductPrice" min="0" max="65536" aria-describedby="button-addon2">
                         <label for="">Min Price</label>
                     </div>
                     <div class="form-floating col-sm-2"  id="searchByMaxPrice" >
-                        <input  type="number" step="0.01" class="form-control" name="maxprice" placeholder="ProductPrice" aria-label="ProductPrice" min="0" max="65536" aria-describedby="button-addon2">
+                        <input  type="number" step="0.01" class="form-control" name="maxprice" value="${requestScope.maxprice}" placeholder="ProductPrice" aria-label="ProductPrice" min="0" max="65536" aria-describedby="button-addon2">
                         <label for="">Max Price</label>
                     </div>
                     <div class="form-floating col-sm-2"  id="searchByStartDate" >
-                        <input  type="date" value="2018-06-12" class="form-control" name="startdate" placeholder="ProductID" 
+                        <input  type="date" value="${requestScope.startdate!=null?requestScope.startdate:"2018-06-12"}" class="form-control" name="startdate" placeholder="ProductID" 
                                 aria-label="ProductID" min="2018-06-07" max="2218-06-07"   aria-describedby="button-addon2">
                         <label for="">Start Date</label>
                     </div>
                     <div class="form-floating col-sm-2"  id="searchByEndDate" >
-                        <input  type="date" value="2018-06-12"  class="form-control" name="enddate" placeholder="ProductID"
+                        <input  type="date" value="${requestScope.enddate!=null?requestScope.enddate:"2018-06-12"}"  class="form-control" name="enddate" placeholder="ProductID"
                                 aria-label="ProductID" min="2018-06-07" max="2218-06-07" aria-describedby="button-addon2">
                         <label for="">End Date</label>
                     </div>
@@ -181,14 +181,12 @@
                 <div class="text-center display-6 text-info">
                     <i class="fa-thin fa-list-tree"></i>
                     List Products</div>
-                <table class="table table-hover table-striped table-responsive-md card-body text-center">
+                <table onload="selectForm();" class="table table-hover table-striped table-responsive-md card-body text-center">
                     <thead>
                         <tr>
                             <th>ID</th>
                             <th>Image</th>
                             <th class=" ">Name</th>
-                            <!--<th class="col-sm-3 ">Title</th>-->
-                            <!--<th class="col-sm-3 ">Description</th>-->
                             <th>Price</th>
                             <th class="">Quantity</th>
                             <th>Category</th>
@@ -202,8 +200,7 @@
                                 <td>${product.id}</td>
                                 <td><img class="avatar img-thumbnail" src="/Chatter/${product.image}" alt="product ${product.name} image"/></td>
                                 <td class="col-sm-2"><a href="/Chatter/productdetail?id=${product.id}" class="text-decoration-none text-danger" >${product.name}</a></td>
-                                <!--<td>${product.title}</td>-->
-                                <!--<td class="overflow-hidden">${product.description}</td>-->
+
                                 <td>${product.price}</td>
                                 <td>${product.quantity}</td>
                                 <td class="col-sm-2">
@@ -212,11 +209,14 @@
                                     </c:forEach>
                                 </td>
                                 <td class="text-center">${product.modifyAt}</td>
+                                
                                 <td class="text-lg-center">
                                     <button type="submit" class="btn btn-outline-warning btn-box">
                                         <i class="fa-duotone fa-file-lines"></i>
                                         Edit
                                     </button>
+                                    
+                                    
 
                                     <button type="reset" class="btn btn-outline-danger btn-box" onclick="controlEditmode(0);controlViewmode(1);">
                                         <i class="fa-duotone fa-eraser"></i>
@@ -231,17 +231,47 @@
                     ${product}<br><br>
                 </c:forEach>
             </div>
+
+            <!--pagination-->
+
+            <nav aria-label="pages" class="d-flex justify-content-center">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <button type="submit" name="page" form="searchForm" class="page-link btn"  ${requestScope.currentpage le 2? "hidden":""} value="1">First page</button>
+                    </li>
+                    <li class="page-item ${requestScope.currentpage eq 1? "disabled":""}">
+                        <button class="page-link" type="submit" name="page" form="searchForm"  value="${requestScope.currentpage-1}"  ><<</button>
+                    </li>
+                    <li class="page-item">
+                        <button class="page-link" name="page" form="searchForm" type="submit" value="${requestScope.currentpage-1}" ${requestScope.currentpage eq 1? "hidden":""}>${requestScope.currentpage-1}
+                        </button>
+                    </li>
+                    <li class="page-item active" aria-current="page">
+                        <a class="page-link">${requestScope.currentpage}</a>
+                    </li>
+                    <li class="page-item">
+                        <button class="page-link btn" form="searchForm" name="page" ${requestScope.currentpage+1 gt requestScope.totalpage? "hidden":""} value="${requestScope.currentpage + 1}" >
+                            ${requestScope.currentpage + 1}</button>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link disabled "  ${requestScope.currentpage+3 gt requestScope.totalpage? "hidden":""}>...</a></li>
+
+                    <li class="page-item">
+                        <button class="page-link"  type="submit" name="page" form="searchForm"  value="${requestScope.totalpage}" ${requestScope.currentpage + 2 gt requestScope.totalpage? "hidden":""} >${requestScope.totalpage}</button>
+                    </li>
+                    <li class="page-item ${requestScope.currentpage eq requestScope.totalpage? "disabled":""}">
+                        <button class="page-link" type="submit" name="page" form="searchForm"  value="${requestScope.currentpage+1}" >>></button>
+                    </li>
+                </ul>
+            </nav>
         </div>
         <script>
             document.getElementById('products_page').classList.add('active');
             document.getElementById('products_page').classList.remove('link-dark');
 
-            document.getElementById("searchByID").style.display = "inline";
-            document.getElementById("searchByName").style.display = "none";
-            document.getElementById("searchByMinPrice").style.display = "none";
-            document.getElementById("searchByMaxPrice").style.display = "none";
-            document.getElementById("searchByStartDate").style.display = "none";
-            document.getElementById("searchByEndDate").style.display = "none";
+
+            selectForm();
+
 
             function selectForm() {
                 var type = document.getElementById("floatingSelectGrid").value;
