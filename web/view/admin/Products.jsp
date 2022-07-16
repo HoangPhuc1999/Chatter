@@ -208,7 +208,7 @@
                         <c:forEach items="${requestScope.productDetailses}" var="product">
                             <tr>
                                 <td>${product.id}</td>
-                                <td><img class="avatar img-thumbnail" src="/Chatter/${product.image}" alt="product ${product.name} image"/></td>
+                                <td class="col-sm-1"><img class="avatar img-thumbnail" src="/Chatter/${product.image}" alt="product ${product.name} image"/></td>
                                 <td class="col-sm-2"><a href="/Chatter/productdetail?id=${product.id}" class="text-decoration-none text-danger" >${product.name}</a></td>
 
                                 <td>${product.price}</td>
