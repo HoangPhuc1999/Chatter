@@ -73,7 +73,7 @@
                                 <a href="/Chatter/admin/orders" class="text-reset text-decoration-none">Order History</a>
                             </li>
                             <li class="list-group-item py-1">
-                                <a href="/Chatter/admin/orders" class="text-reset text-decoration-none">Order Analysis </a>
+                                <a href="/Chatter/admin/orderanalysis" class="text-reset text-decoration-none">Order Analysis </a>
                             </li>
                           
                         </ul>

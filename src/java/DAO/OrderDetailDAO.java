@@ -7,6 +7,7 @@ package DAO;
 
 import java.util.ArrayList;
 import java.util.List;
+import model.OrderAnalysis;
 import model.OrderDetail;
 
 /**
@@ -66,6 +67,38 @@ public class OrderDetailDAO extends DAO {
                 x.setOrderDate(rs.getDate("order_date"));
                 x.setProductName(rs.getString("product_name"));
                 x.setProductImagePath(rs.getString("product_image_path"));
+                list.add(x);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            System.out.println("Get Order Detail Fail");
+            e.printStackTrace();
+        }
+        return (list);
+
+    }
+
+    public List<OrderAnalysis> getOrderAnalysisTop5() {
+        List<OrderAnalysis> list = new ArrayList<>();
+        xSql = "select orders_details.order_product_id, products.product_price, products.product_name,sum(orders_details.order_amount) as totalamount,\n"
+                + "(product_price * sum(orders_details.order_amount)) as revenue\n"
+                + "from orders_details \n"
+                + "join products on orders_details.order_product_id = products.product_id\n"
+                + "group by orders_details.order_product_id,products.product_price, products.product_name\n"
+                + "order by orders_details.order_product_id ASC";
+
+        try {
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                OrderAnalysis x = new OrderAnalysis();
+
+                x.setOrderProductId(rs.getInt("order_product_id"));
+                x.setProductPrice(rs.getInt("product_price"));
+                x.setProductName(rs.getString("product_name"));
+                x.setTotalAmount(rs.getInt("totalamount"));
+                x.setRevenue(rs.getDouble("revenue"));
                 list.add(x);
             }
             rs.close();
