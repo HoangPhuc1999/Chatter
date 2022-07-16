@@ -27,6 +27,7 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <link rel="shortcut icon" href="images/favicon.png" type="">
+        <script src="https://cdn.anychart.com/releases/8.0.0/js/anychart-base.min.js"></script>
 
         <title> Chatter </title>
 
@@ -173,15 +174,55 @@
 
             <div class="shopping-cart">
                 <div class="px-4 px-lg-0">
+                    <div class="container">
+                        <div class="row d-flex">
+                            <div class="col-md-6 d-flex">
+                                <div id="container" style="width: 100%; height: 100%"></div>
+                                <script>
+                                    anychart.onDocumentReady(function () {
 
-                    <div class="pb-5">
-                        <div class="container">
-                            
-                          
+                                        // set the data
+                                        var data = {
+                                            header: ["Product Name", "Revenue"],
+                                            rows: [
+                                    <%
+                                        for (OrderAnalysis orderItem : list) {%>
+                                                ["<%=orderItem.getProductName()%>",<%=orderItem.getRevenue()%>],
+                                    <%
+                                        }
+                                    %>
 
+                                            ]};
 
+                                        // create the chart
+                                        var chart = anychart.bar();
+
+                                        // add the data
+                                        chart.data(data);
+
+                                        // set the chart title
+                                        chart.title("Top 5 most famous item on the menu by revenue");
+
+                                        // draw
+                                        chart.container("container");
+                                        chart.draw();
+                                    });
+                                </script>
+                            </div>
+                            <div class="col-md-6 ftco-animate makereservation p-4 p-md-5">
+                                <div class="heading-section ftco-animate mb-5">
+                                    <h2 >Perfect Ingredients</h2>
+                                    <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.
+                                    </p>
+                                    <p><a href="#" class="btn btn-primary">Learn more</a></p>
+                                </div>
+                            </div>
                         </div>
                     </div>
+
+
+
+
                 </div>
             </div>
         </section>

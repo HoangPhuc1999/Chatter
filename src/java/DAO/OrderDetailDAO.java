@@ -81,7 +81,7 @@ public class OrderDetailDAO extends DAO {
 
     public List<OrderAnalysis> getOrderAnalysisTop5() {
         List<OrderAnalysis> list = new ArrayList<>();
-        xSql = "select orders_details.order_product_id, products.product_price, products.product_name,sum(orders_details.order_amount) as totalamount,\n"
+        xSql = "select top 5 orders_details.order_product_id, products.product_price, products.product_name,sum(orders_details.order_amount) as totalamount,\n"
                 + "(product_price * sum(orders_details.order_amount)) as revenue\n"
                 + "from orders_details \n"
                 + "join products on orders_details.order_product_id = products.product_id\n"
@@ -90,6 +90,7 @@ public class OrderDetailDAO extends DAO {
 
         try {
             ps = con.prepareStatement(xSql);
+
             rs = ps.executeQuery();
             while (rs.next()) {
                 OrderAnalysis x = new OrderAnalysis();
