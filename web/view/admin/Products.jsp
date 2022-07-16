@@ -45,6 +45,16 @@
         <link href="/Chatter/css/adminstyle.css" rel="stylesheet" />
         <title>JSP Page</title>
 
+        <script>
+            function deleteProduct(pid)
+            {
+                var result = confirm("Are you sure?");
+                if (result)
+                {
+                    window.location.href = "/Chatter/admin/delete_product?productid=" + pid;
+                }
+            }
+        </script>
     </head>
     <body class="row">
 
@@ -215,10 +225,8 @@
                                         <i class="fa-duotone fa-file-lines"></i>
                                         Edit
                                     </button>
-                                    
-                                    
 
-                                    <button type="reset" class="btn btn-outline-danger btn-box" onclick="controlEditmode(0);controlViewmode(1);">
+                                    <button type="reset" class="btn btn-outline-danger btn-box" onclick="deleteProduct(${product.id});">
                                         <i class="fa-duotone fa-eraser"></i>
                                         Delete
                                     </button>
