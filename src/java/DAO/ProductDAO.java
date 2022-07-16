@@ -220,13 +220,11 @@ public class ProductDAO extends DAO {
      */
     public List<ProductDetails> getAllProductDetailses(int type, String[] strings, int pageindex, int pagesize) {
         ArrayList<ProductDetails> productDetailses = new ArrayList<>();
-       
+
         String sql = "SELECT *\n"
                 + "FROM products p \n"
                 + "LEFT JOIN products_inventory pin ON p.product_id = pin.product_id\n"
-                + " LEFT JOIN products_image pi ON p.product_id  = pi.product_id\n"
-                + "LEFT JOIN products_category pc ON p.product_id = pc.product_id\n"
-                + "JOIN category c ON pc.category_id = c.category_id\n";
+                + " LEFT JOIN products_image pi ON p.product_id  = pi.product_id\n";
 
         sql += handleString(type, strings);
 
@@ -262,56 +260,50 @@ public class ProductDAO extends DAO {
                     ps.setInt(1, pageindex);
                     ps.setInt(2, pagesize);
                 }
-            }else {
-                    ps.setInt(1, pageindex);
-                    ps.setInt(2, pagesize);
-                }
+            } else {
+                ps.setInt(1, pageindex);
+                ps.setInt(2, pagesize);
+            }
 
             rs = ps.executeQuery();
             ProductDetails productDetailsTemp = new ProductDetails();
             productDetailsTemp.setId(0);
 
             while (rs.next()) {
-                if (productDetailsTemp.getId() != rs.getInt("product_id")) {
-                    productDetailsTemp.setId(rs.getInt("product_id"));
+                productDetailsTemp.setId(rs.getInt("product_id"));
 
-                    ProductDetails productDetails = new ProductDetails();
+                ProductDetails productDetails = new ProductDetails();
 
-                    productDetails.setId(rs.getInt("product_id"));
-                    productDetails.setName(rs.getString("product_name"));
-                    productDetails.setTitle(rs.getString("product_title"));
-                    productDetails.setQuantity(rs.getInt("product_quantity"));
-                    productDetails.setPrice(rs.getDouble("product_price"));
-                    productDetails.setDescription(rs.getString("product_description"));
-                    productDetails.setImageUrl(rs.getString("product_image_path"));
-                    if (rs.getTimestamp("modified_at") != null) {
-                        productDetails.setModifyAt(rs.getTimestamp("modified_at").toLocalDateTime());
-                    }
-
-                    productDetails.setCreateAt(
-                            rs.getTimestamp("created_at") != null
-                            ? rs.getTimestamp("created_at").toLocalDateTime() : null);
-
-                    if (rs.getInt("category_id") != 0) {
-                        productDetails.setCategorys(new ArrayList<>());
-                        productDetails.getCategorys().add(
-                                new Category(rs.getInt("category_id"),
-                                        rs.getString("category_name")));
-                        productDetails.setCname(rs.getString("category_name"));
-
-                    }
-
-                    productDetailses.add(productDetails);
-
-                } else {
-                    productDetailses.get(productDetailses.size() - 1).getCategorys()
-                            .add(new Category(rs.getInt("category_id"), rs.getString("category_name")));
+                productDetails.setId(rs.getInt("product_id"));
+                productDetails.setName(rs.getString("product_name"));
+                productDetails.setTitle(rs.getString("product_title"));
+                productDetails.setQuantity(rs.getInt("product_quantity"));
+                productDetails.setPrice(rs.getDouble("product_price"));
+                productDetails.setDescription(rs.getString("product_description"));
+                productDetails.setImageUrl(rs.getString("product_image_path"));
+                if (rs.getTimestamp("modified_at") != null) {
+                    productDetails.setModifyAt(rs.getTimestamp("modified_at").toLocalDateTime());
                 }
+
+                productDetails.setCreateAt(
+                        rs.getTimestamp("created_at") != null
+                        ? rs.getTimestamp("created_at").toLocalDateTime() : null);
+
+                productDetailses.add(productDetails);
             }
 
         } catch (SQLException e) {
         }
         return productDetailses;
+    }
+
+    public List<ProductDetails> getAllProductDetailsesWithCategorys(int type, String[] strings, int pageindex, int pagesize) {
+        ArrayList<ProductDetails> allProductDetailses = (ArrayList<ProductDetails>) getAllProductDetailses(type, strings, pageindex, pagesize);
+        for (ProductDetails productDetails : allProductDetailses) {
+            CategoryDAO categoryDAO = new CategoryDAO();
+            productDetails.setCategorys((ArrayList<Category>) categoryDAO.getCategorysForProductByProductID(productDetails.getId()));
+        }
+        return allProductDetailses;
     }
 
     public String handleString(int type, String[] strings) {
@@ -331,8 +323,7 @@ public class ProductDAO extends DAO {
                 return "WHERE product_price  BETWEEN ? AND ? \n";
             case 3:
                 return "WHERE (pin.modified_at  BETWEEN ?  AND ?)\n"
-                        + "OR pin.modified_at IS NULL\n"
-                        ;
+                        + "OR pin.modified_at IS NULL\n";
             case 5:
                 return "WHERE p.product_id = ?\n";
             default:
@@ -355,9 +346,7 @@ public class ProductDAO extends DAO {
             String sql = "SELECT p.product_id as product_id\n"
                     + "FROM products p \n"
                     + "LEFT JOIN products_inventory pin ON p.product_id = pin.product_id\n"
-                    + " LEFT JOIN products_image pi ON p.product_id  = pi.product_id\n"
-                    + "LEFT JOIN products_category pc ON p.product_id = pc.product_id\n"
-                    + "JOIN category c ON pc.category_id = c.category_id\n";
+                    + " LEFT JOIN products_image pi ON p.product_id  = pi.product_id\n";
 
             sql = "SELECT COUNT(DISTINCT product_id) Total\n"
                     + "FROM(\n" + sql + handleString(type, strings) + ") pd";
@@ -707,18 +696,18 @@ public class ProductDAO extends DAO {
      * @param pd
      * @return boolean: is executeUpdate successful deleted to Database
      */
-    public boolean deleteProductDetailsToProductsCategory(ProductDetails pd) {
+    public int deleteProductDetailsToProductsCategory(ProductDetails pd) {
         try {
             String sql = "DELETE FROM [products_category]\n"
                     + "      WHERE product_id = ?";
 
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, pd.getId());
-            return statement.executeUpdate() != 0;
+            return statement.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return false;
+        return 0;
     }
 
     /**
@@ -759,6 +748,115 @@ public class ProductDAO extends DAO {
                 + "\nProduct_image table:" + updateProductDetailsToProductsImage(pd)
                 + "\nInventory table: " + updateProductDetailsToProductsInventory(pd)
                 + "\nProduct_category table: " + updateProductDetailsToProductsCategory(pd);
+    }
+
+    /**
+     * Do Tuan Phong xoa tat ca du lieu ve product
+     *
+     * @param productid
+     * @return
+     */
+    public String deleteAllProductDetails(int productid) {
+        return "table products_image: " + deleteProductDetailsInProductsImage(productid)
+                + "\ntable products_inventory: " + deleteProductDetailsInProductsInventory(productid)
+                + "\ntable products_category: " + deleteProductDetailsInProductsCategory(productid)
+                + "\ntable products_review: " + deleteProductDetailsInProductsReview(productid)
+                + "\ntable products: " + deleteProductDetailsInProducts(productid);
+    }
+
+    /**
+     * Do Tuan Phong du lieu ve product trong bang products
+     *
+     * @param productid
+     * @return
+     */
+    public int deleteProductDetailsInProducts(int productid) {
+        xSql = "DELETE FROM [products]\n"
+                + "      WHERE product_id =?";
+        try {
+            ps = connection.prepareStatement(xSql);
+            ps.setInt(1, productid);
+            return ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+    /**
+     * Do Tuan Phong du lieu ve product trong bang products_inventory
+     *
+     * @param productid
+     * @return
+     */
+    public int deleteProductDetailsInProductsInventory(int productid) {
+        xSql = "DELETE FROM [products_inventory]\n"
+                + "      WHERE product_id = ?";
+        try {
+            ps = connection.prepareStatement(xSql);
+            ps.setInt(1, productid);
+            return ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+    /**
+     * Do Tuan Phong du lieu ve product trong bang products_image
+     *
+     * @param productid
+     * @return
+     */
+    public int deleteProductDetailsInProductsImage(int productid) {
+        xSql = "DELETE FROM [products_image]\n"
+                + "      WHERE product_id = ?";
+        try {
+            ps = connection.prepareStatement(xSql);
+            ps.setInt(1, productid);
+            return ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+    /**
+     * Do Tuan Phong du lieu ve product trong bang products_category
+     *
+     * @param productid
+     * @return
+     */
+    public int deleteProductDetailsInProductsCategory(int productid) {
+        xSql = "DELETE FROM [products_category]\n"
+                + "      WHERE product_id = ?";
+        try {
+            ps = connection.prepareStatement(xSql);
+            ps.setInt(1, productid);
+            return ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+    /**
+     * Do Tuan Phong du lieu ve product trong bang products_review
+     *
+     * @param productid
+     * @return
+     */
+    public int deleteProductDetailsInProductsReview(int productid) {
+        xSql = "DELETE FROM [products_review]\n"
+                + "      WHERE product_id = ?";
+        try {
+            ps = connection.prepareStatement(xSql);
+            ps.setInt(1, productid);
+            return ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
     }
 
     public static void main(String[] args) {
