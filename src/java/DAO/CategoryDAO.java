@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Category;
@@ -26,7 +27,7 @@ public class CategoryDAO extends MyDAO {
     public ArrayList<Category> listAllCategory() {
         ArrayList<Category> categorys = new ArrayList<>();
         try {
-            xSql = "SELECT * from Category";
+            xSql = "SELECT * FROM Category";
             ps = connection.prepareStatement(xSql);
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -115,11 +116,32 @@ public class CategoryDAO extends MyDAO {
         }
         return 0;
     }
-    
-    public String delete(int categoryId){
+
+    public String delete(int categoryId) {
         return "ProductsCategory table: " + deleteInProductsCategory(categoryId)
                 + "\nCategory table: " + deleteInCategory(categoryId);
     }
-    
+
+    public List<Category> getCategorysForProductByProductID(int productid) {
+        ArrayList<Category> categorys = new ArrayList<>();
+        String sql = "SELECT *\n"
+                + "FROM products p \n"
+                + "LEFT JOIN products_category pc ON p.product_id = pc.product_id\n"
+                + "LEFT JOIN category c ON pc.category_id = c. category_id\n"
+                + "WHERE p.product_id = ?";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, productid);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                categorys.add(new Category(rs.getInt("category_id")
+                        , rs.getString("category_name")));
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return categorys;
+    }
 
 }

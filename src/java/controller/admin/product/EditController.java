@@ -52,7 +52,7 @@ ProductDAO productDAO = new ProductDAO();
         CategoryDAO categoryDAO = new CategoryDAO();
         ArrayList<Category> categorys = categoryDAO.listAllCategory();
         String [] str = {request.getParameter("productid")};
-        ArrayList<ProductDetails> productDetailses = (ArrayList<ProductDetails>) productDAO.getAllProductDetailses(0,str ,0,1);
+        ArrayList<ProductDetails> productDetailses = (ArrayList<ProductDetails>) productDAO.getAllProductDetailsesWithCategorys(0,str ,0,1);
         request.setAttribute("product", productDetailses.get(0));
         request.setAttribute("categorys", categorys);
         request.getRequestDispatcher("../view/admin/EditProduct.jsp").forward(request, response);
