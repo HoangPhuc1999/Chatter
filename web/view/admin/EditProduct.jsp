@@ -65,82 +65,90 @@
             </h3>
             <c:set var = "product" scope = "session" value = "${requestScope.product}"/>
             ${product}
-            <p class="h5 text-danger">
-                ${product.name} <em class="display-6 blockquote-footer">(Product ID: ${product.id})</em>
-            </p>
+            <c:if test="${product == null}">
+                <p >
+                    <em><mark><strong class="lead text-secondary ">Product not found!</strong></mark></em>
+                </p>
+            </c:if>
+            <c:if test="${product != null}">
 
-            <div class="form_container g-lg-6">
-                <form action="edit_product" method="POST" class="row g-3 form-control" enctype="multipart/form-data" >
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label for="inputProductname" class="col-form-label">Product name</label>
-                            <input id="productname"  name="productname" value="${product.name}" type="text" class="form-control" placeholder="Enter the product name" onkeyup="checkProductName()" required autofocus>
-                            <span id="dumlicate_productname"></span>
-                        </div> 
-                        <div class="col-md-2">
-                            <label for="inputQuantity" class=" col-form-label">Quantity</label>
-                            <input id="inputQuantity" name="quantity" value="${product.quantity}" type="number" class="form-control" placeholder="" min="0" max="65536">
-                        </div>
-                        <div class="col-md-4">
-                            <label for="inputPrice" class="col-form-label">Product price</label>
-                            <div class="btn-group">
-                                <input id="inputPrice" name="price" value="${product.price}"  type="text" class="form-control" pattern="[0-9]+(.?[0-9]+)?" title="Please input a number!" placeholder="" value=${last}>
-                                <span class="input-group-text" id="basic-addon2">$</span>
+                <p class="h5 text-danger">
+                    ${product.name} <em class="display-6 blockquote-footer">(Product ID: ${product.id})</em>
+                </p>
+
+                <div class="form_container g-lg-6">
+                    <form action="edit_product" method="POST" class="row g-3 form-control" enctype="multipart/form-data" >
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="inputProductname" class="col-form-label">Product name</label>
+                                <input id="productname"  name="productname" value="${product.name}" type="text" class="form-control" placeholder="Enter the product name" onkeyup="checkProductName()" required autofocus>
+                                <span id="dumlicate_productname"></span>
+                            </div> 
+                            <div class="col-md-2">
+                                <label for="inputQuantity" class=" col-form-label">Quantity</label>
+                                <input id="inputQuantity" name="quantity" value="${product.quantity}" type="number" class="form-control" placeholder="" min="0" max="65536">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="inputPrice" class="col-form-label">Product price</label>
+                                <div class="btn-group">
+                                    <input id="inputPrice" name="price" value="${product.price}"  type="text" class="form-control" pattern="[0-9]+(.?[0-9]+)?" title="Please input a number!" placeholder="" value=${last}>
+                                    <span class="input-group-text" id="basic-addon2">$</span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="inputTitle" class="col-sm-2 col-form-label">Title</label>
+                                <input id="inputTitle" name="title" value="${product.title}"  type="text" class="form-control" placeholder="Example title" required value="">
+                            </div>
+
+                            <div class="col">
+                            </div>
+
+                            <div class="col-md-6 p-3">
+                                <label for="inputDescription" class="col-sm-2 col-form-label">Description </label>
+                                <textarea id="inputDescription" name="description" value="${product.description}" 
+                                          type="text" class="form-control" placeholder="Enter product description" required
+                                          >${product.description}</textarea>
+
+                            </div>
+                            <div class="col-md-6">
+                            </div>
+
+                            <div class="g-0 p-3">
+
+                                <label class="form-check-label" for="form-check">
+                                    Category 
+                                </label>
+                                <c:forEach items="${requestScope.categorys}" var="category">
+                                    <c:set var="checked" value=""></c:set>
+                                    <c:forEach items="${product.categorys}" var="pcategory">
+                                        <c:if test="${category.cid eq pcategory.cid}">
+                                            <c:set var="checked" value="checked"></c:set>
+                                        </c:if>
+                                    </c:forEach>
+                                    <input type="checkbox" class="btn-check" ${checked} name="category" value="${category.cid}" id="btnradio${category.cid}">
+                                    <label class="btn btn-outline-primary rounded-pill" for="btnradio${category.cid}">${category.cname}</label>
+                                </c:forEach>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="formFile" class="form-label">Product Image</label>
+                                <input accept="image/*" class="form-control" type="file" id="formFile" name="image">
+                                <img id="img-preview" class="img-thumbnail" src="/Chatter/${product.image}" />
                             </div>
                         </div>
 
-                        <div class="col-md-6">
-                            <label for="inputTitle" class="col-sm-2 col-form-label">Title</label>
-                            <input id="inputTitle" name="title" value="${product.title}"  type="text" class="form-control" placeholder="Example title" required value="">
+                        <div class="text-center">
+                            <input id="inputTitle" name="productid" value="${product.id}"  type="hidden">
+
+                            <button class="btn btn-box btn-outline-success col-2" type="submit" id="add-product">
+                                Edit Product
+                            </button>
                         </div>
-
-                        <div class="col">
-                        </div>
-
-                        <div class="col-md-6 p-3">
-                            <label for="inputDescription" class="col-sm-2 col-form-label">Description </label>
-                            <textarea id="inputDescription" name="description" value="${product.description}" 
-                                      type="text" class="form-control" placeholder="Enter product description" required
-                                      >${product.description}</textarea>
-
-                        </div>
-                        <div class="col-md-6">
-                        </div>
-
-                        <div class="g-0 p-3">
-
-                            <label class="form-check-label" for="form-check">
-                                Category 
-                            </label>
-                            <c:forEach items="${requestScope.categorys}" var="category">
-                                <c:set var="checked" value=""></c:set>
-                                <c:forEach items="${product.categorys}" var="pcategory">
-                                    <c:if test="${category.cid eq pcategory.cid}">
-                                        <c:set var="checked" value="checked"></c:set>
-                                    </c:if>
-                                </c:forEach>
-                                <input type="checkbox" class="btn-check" ${checked} name="category" value="${category.cid}" id="btnradio${category.cid}">
-                                <label class="btn btn-outline-primary rounded-pill" for="btnradio${category.cid}">${category.cname}</label>
-                            </c:forEach>
-                        </div>
-
-                        <div class="col-md-6">
-                            <label for="formFile" class="form-label">Product Image</label>
-                            <input accept="image/*" class="form-control" type="file" id="formFile" name="image">
-                            <img id="img-preview" class="img-thumbnail" src="/Chatter/${product.image}" />
-                        </div>
-                    </div>
-
-                    <div class="text-center">
-                        <input id="inputTitle" name="productid" value="${product.id}"  type="hidden">
-
-                        <button class="btn btn-box btn-outline-success col-2" type="submit" id="add-product">
-                            Edit Product
-                        </button>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
-        </div>
+        </c:if>
 
         <div class=" btn-dark g-md-2 row" >
             <div class="col-2">

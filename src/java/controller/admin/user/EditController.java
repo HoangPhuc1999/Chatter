@@ -23,7 +23,7 @@ import model.UserDetails;
  */
 @WebServlet(name = "EditUserDetailsController", urlPatterns = {"/admin/edit_user"})
 @MultipartConfig(
-        location = "F:\\FPTU\\FPT class\\Semester 5\\SWP391\\Week 8\\Code\\Chatter\\web\\avatar",
+        location = "F:\\FPTU\\FPT class\\Semester 5\\SWP391\\Week 9\\Code\\Chatter\\web\\avatar",
         fileSizeThreshold = 1024 * 1024 * 1, // 1 MB
         maxFileSize = 1024 * 1024 * 10, // 10 MB
         maxRequestSize = 1024 * 1024 * 100 // 100 MB
