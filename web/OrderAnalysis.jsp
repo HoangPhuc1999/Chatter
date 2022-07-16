@@ -4,9 +4,16 @@
     Author     : Hoang Phuc
 --%>
 
+<%@page import="model.OrderAnalysis"%>
+<%@page import="java.util.List"%>
 <%@page import="model.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%
+    List<OrderAnalysis> list = (List<OrderAnalysis>) request.getAttribute("top5");
+
+    // If you use EL or JSTL, the above statement is not necessary. 
+%> 
 <html>
 
     <head>

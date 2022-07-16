@@ -219,9 +219,110 @@
                                     </c:forEach>
                                 </td>
                                 <td class="text-center">${product.modifyAt}</td>
-                                
+
                                 <td class="text-lg-center">
-                                    <button type="submit" class="btn btn-outline-warning btn-box">
+
+                                    <!-- Edit Modal -->
+                                    <div class="modal modal-xl fade" id="editModal${product.id}" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header text-bg-warning">
+                                                    <h5 class="modal-title" id="editModalLabel">
+                                                        <span class="text-info fa-duotone fa-candy-corn"></span>
+                                                        Edit product</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+
+                                                    <p class="h5 text-danger">
+                                                        ${product.name}  <em class="display-6 blockquote-footer">(Product ID: ${product.id})</em>
+                                                    </p>
+
+                                                    <div class="form_container g-lg-6">
+                                                        <form action="edit_product" method="POST" class="row g-3 form-control" enctype="multipart/form-data" id="editFormModal${product.id}" >
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <label for="inputProductname" class="col-form-label">Product name</label>
+                                                                    <input id="productname"  name="productname" value="${product.name}" type="text" class="form-control" placeholder="Enter the product name" onkeyup="checkProductName()" required autofocus>
+                                                                    <span id="dumlicate_productname"></span>
+                                                                </div> 
+                                                                <div class="col-md-2">
+                                                                    <label for="inputQuantity" class=" col-form-label">Quantity</label>
+                                                                    <input id="inputQuantity" name="quantity" value="${product.quantity}" type="number" class="form-control" placeholder="" min="0" max="65536">
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <label for="inputPrice" class="col-form-label">Product price</label>
+                                                                    <div class="btn-group">
+                                                                        <input id="inputPrice" name="price" value="${product.price}"  type="text" class="form-control" pattern="[0-9]+(.?[0-9]+)?" title="Please input a number!" placeholder="" value=${last}>
+                                                                        <span class="input-group-text" id="basic-addon2">$</span>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-md-6">
+                                                                    <label for="inputTitle" class="col-sm-2 col-form-label">Title</label>
+                                                                    <input id="inputTitle" name="title" value="${product.title}"  type="text" class="form-control" placeholder="Example title" required value="">
+                                                                </div>
+
+                                                                <div class="col">
+                                                                </div>
+
+                                                                <div class="col-md-6 p-3">
+                                                                    <label for="inputDescription" class="col-sm-2 col-form-label">Description </label>
+                                                                    <textarea id="inputDescription" name="description" value="${product.description}" 
+                                                                              type="text" class="form-control" placeholder="Enter product description" required
+                                                                              >${product.description}</textarea>
+
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                </div>
+
+                                                                <div class="col-md-6">
+                                                                    <label class="col-md-12 col-form-label">Category</label>
+                                                                </div>
+                                                                <div class ="col-md-6"></div>
+                                                                <div class="col-md-12 d-flex justify-content-start" >
+                                                                <c:forEach items="${requestScope.categorys}" var="category">
+                                                                    <c:set var="checked" value=""></c:set>
+                                                                    <c:forEach items="${product.categorys}" var="pcategory">
+                                                                        <c:if test="${category.cid eq pcategory.cid}">
+                                                                            <c:set var="checked" value="checked"></c:set>
+                                                                        </c:if>
+                                                                    </c:forEach>
+                                                                    <input type="checkbox" class="btn-check" ${checked} name="category" value="${category.cid}" id="editbtnradio${product.id}${category.cid}">
+                                                                    <label class="btn btn-outline-primary rounded-pill" for="editbtnradio${product.id}${category.cid}">${category.cname}</label>
+                                                                </c:forEach>
+                                                            </div>
+
+                                                            <div class="col-md-6">
+                                                                <label for="formFile" class="form-label">Product Image</label>
+                                                                <input accept="image/*" onchange="previewImage(${product.id});" class="form-control" type="file" name="image" >
+                                                                <img id="img-preview${product.id}" class="img-thumbnail" src="/Chatter/${product.image}" />
+                                                            </div>
+                                                    </div>
+
+                                                    <div class="text-center">
+                                                        <input id="inputTitle" name="productid" value="${product.id}"  type="hidden">
+
+                                                    </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-outline-warning" form="editFormModal${product.id}">
+                                                    <i class="fa-duotone fa-floppy-disk-pen "></i>
+                                                    Save changes</button>
+                                                <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
+                                                    <i class="fa-duotone fa-circle-xmark"></i>
+                                                    Close</button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    </div>
+
+
+
+                                    <button type="button" class="btn btn-outline-warning btn-box"  data-bs-toggle="modal" data-bs-target="#editModal${product.id}">
                                         <i class="fa-duotone fa-file-lines"></i>
                                         Edit
                                     </button>
@@ -235,10 +336,15 @@
                         </c:forEach>
                     </tbody>
                 </table>
+
+
+
                 <c:forEach items="${requestScope.productDetailses}" var="product">
                     ${product}<br><br>
                 </c:forEach>
             </div>
+
+
 
             <!--pagination-->
 
@@ -304,6 +410,14 @@
                     image.src = src;
                 }
             });
+            function previewImage(productid) {
+                var output = document.getElementById('img-preview' + productid);
+                output.src = URL.createObjectURL(event.target.files[0]);
+                output.onload = function () {
+                    URL.revokeObjectURL(output.src) // free memory
+                }
+            }
+
 
 
 
