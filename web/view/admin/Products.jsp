@@ -69,6 +69,7 @@
                         <i class="fa-duotone fa-blueberries"></i>
                         Add Product</button>
 
+                    <!--Add Modal-->
                     <div class="modal fade" id="AddProductModal" tabindex="-1" aria-labelledby="addProductModal" aria-hidden="true">
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
@@ -250,17 +251,17 @@
                                                                     <label for="inputQuantity" class=" col-form-label">Quantity</label>
                                                                     <input id="inputQuantity" name="quantity" value="${product.quantity}" type="number" class="form-control" placeholder="" min="0" max="65536">
                                                                 </div>
-                                                                <div class="col-md-4">
+                                                                <div class="col-md-3">
                                                                     <label for="inputPrice" class="col-form-label">Product price</label>
                                                                     <div class="btn-group">
-                                                                        <input id="inputPrice" name="price" value="${product.price}"  type="text" class="form-control" pattern="[0-9]+(.?[0-9]+)?" title="Please input a number!" placeholder="" value=${last}>
+                                                                        <input id="inputPrice" name="price" value="${product.price}" step="0.01" type="number" class="form-control" title="Please input a number!" min="0" max="65536" placeholder="" >
                                                                         <span class="input-group-text" id="basic-addon2">$</span>
                                                                     </div>
                                                                 </div>
 
                                                                 <div class="col-md-6">
                                                                     <label for="inputTitle" class="col-sm-2 col-form-label">Title</label>
-                                                                    <input id="inputTitle" name="title" value="${product.title}"  type="text" class="form-control" placeholder="Example title" required value="">
+                                                                    <input id="inputTitle" name="title" value="${product.title}"  type="text" class="form-control" placeholder="Example title" required >
                                                                 </div>
 
                                                                 <div class="col">
@@ -281,43 +282,43 @@
                                                                 </div>
                                                                 <div class ="col-md-6"></div>
                                                                 <div class="col-md-12 d-flex justify-content-start" >
-                                                                <c:forEach items="${requestScope.categorys}" var="category">
-                                                                    <c:set var="checked" value=""></c:set>
-                                                                    <c:forEach items="${product.categorys}" var="pcategory">
-                                                                        <c:if test="${category.cid eq pcategory.cid}">
-                                                                            <c:set var="checked" value="checked"></c:set>
-                                                                        </c:if>
+                                                                    <c:forEach items="${requestScope.categorys}" var="category">
+                                                                        <c:set var="checked" value=""></c:set>
+                                                                        <c:forEach items="${product.categorys}" var="pcategory">
+                                                                            <c:if test="${category.cid eq pcategory.cid}">
+                                                                                <c:set var="checked" value="checked"></c:set>
+                                                                            </c:if>
+                                                                        </c:forEach>
+                                                                        <input type="checkbox" class="btn-check" ${checked} name="category" value="${category.cid}" id="editbtnradio${product.id}${category.cid}">
+                                                                        <label class="btn btn-outline-primary rounded-pill" for="editbtnradio${product.id}${category.cid}">${category.cname}</label>
                                                                     </c:forEach>
-                                                                    <input type="checkbox" class="btn-check" ${checked} name="category" value="${category.cid}" id="editbtnradio${product.id}${category.cid}">
-                                                                    <label class="btn btn-outline-primary rounded-pill" for="editbtnradio${product.id}${category.cid}">${category.cname}</label>
-                                                                </c:forEach>
+                                                                </div>
+
+                                                                <div class="col-md-6">
+                                                                    <label for="formFile" class="form-label">Product Image</label>
+                                                                    <input accept="image/*" onchange="previewImage(${product.id});" class="form-control" type="file" name="image" >
+                                                                    <img id="img-preview${product.id}" class="img-thumbnail" src="/Chatter/${product.image}" />
+                                                                </div>
                                                             </div>
 
-                                                            <div class="col-md-6">
-                                                                <label for="formFile" class="form-label">Product Image</label>
-                                                                <input accept="image/*" onchange="previewImage(${product.id});" class="form-control" type="file" name="image" >
-                                                                <img id="img-preview${product.id}" class="img-thumbnail" src="/Chatter/${product.image}" />
+                                                            <div class="text-center">
+                                                                <input id="inputTitle" name="productid" value="${product.id}"  type="hidden">
+
                                                             </div>
+                                                        </form>
                                                     </div>
-
-                                                    <div class="text-center">
-                                                        <input id="inputTitle" name="productid" value="${product.id}"  type="hidden">
-
-                                                    </div>
-                                                    </form>
                                                 </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="submit" class="btn btn-outline-warning" form="editFormModal${product.id}">
-                                                    <i class="fa-duotone fa-floppy-disk-pen "></i>
-                                                    Save changes</button>
-                                                <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
-                                                    <i class="fa-duotone fa-circle-xmark"></i>
-                                                    Close</button>
-                                            </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-outline-warning" form="editFormModal${product.id}">
+                                                        <i class="fa-duotone fa-floppy-disk-pen "></i>
+                                                        Save changes</button>
+                                                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
+                                                        <i class="fa-duotone fa-circle-xmark"></i>
+                                                        Close</button>
+                                                </div>
 
+                                            </div>
                                         </div>
-                                    </div>
                                     </div>
 
 
