@@ -579,6 +579,7 @@ public class ProductDAO extends DAO {
             if (column != 0) {
                 return column;
             }
+            pd.setCreateAt(pd.getModifyAt());
             return addProductDetailsToProductsImage(pd);
 
         } catch (SQLException ex) {
