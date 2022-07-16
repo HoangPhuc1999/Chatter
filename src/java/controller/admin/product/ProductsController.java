@@ -24,7 +24,7 @@ import model.ProductDetails;
  *
  * @author Tuan Phong
  */
-@WebServlet(name = "ProductsSevrlet", urlPatterns = {"/admin/products"})
+@WebServlet(name = "ProductsSevrlet", urlPatterns = {"/admin/products","/admin/view_products","/admin/list_products"})
 @MultipartConfig(
         fileSizeThreshold = 1024 * 1024 * 1, // 1 MB
         maxFileSize = 1024 * 1024 * 10, // 10 MB
@@ -51,7 +51,7 @@ public class ProductsController extends HttpServlet {
         String[] searchValue = new String[6];
         int type;
         int page = 1;
-        int pagesize = 5;
+        int pagesize = 20;
         
         if (request.getParameter("searchtype") == null) {
             type = 0;
@@ -97,8 +97,7 @@ public class ProductsController extends HttpServlet {
                 break;
         }
 
-        log(String.valueOf("???????" + searchValue.length));
-        ArrayList<ProductDetails> productDetailses = (ArrayList<ProductDetails>) productDAO.getAllProductDetailses(type, searchValue, (page - 1) * pagesize, pagesize);
+        ArrayList<ProductDetails> productDetailses = (ArrayList<ProductDetails>) productDAO.getAllProductDetailsesWithCategorys(type, searchValue, (page - 1) * pagesize, pagesize);
 
         int numberentries = productDAO.countproducts(type, searchValue);
         request.setAttribute("categorys", categorys);
