@@ -24,15 +24,17 @@ import model.ProductDetails;
  *
  * @author Tuan Phong
  */
-@WebServlet(name = "EditProductController", urlPatterns = {"/admin/edit_product"})
+@WebServlet(name = "EditProductController", urlPatterns = {"/admin/edit_product", "/admin/update_product"})
 @MultipartConfig(
-        location = "F:\\FPTU\\FPT class\\Semester 5\\SWP391\\Week 8\\Code\\Chatter\\web\\images",
+        location = "F:\\FPTU\\FPT class\\Semester 5\\SWP391\\Week 9\\Code\\Chatter\\web\\images",
         fileSizeThreshold = 1024 * 1024 * 1, // 1 MB
         maxFileSize = 1024 * 1024 * 10, // 10 MB
         maxRequestSize = 1024 * 1024 * 100 // 100 MB
 )
 public class EditController extends HttpServlet {
-ProductDAO productDAO = new ProductDAO();
+
+    ProductDAO productDAO = new ProductDAO();
+
     /**
      * *
      * //
@@ -48,12 +50,18 @@ ProductDAO productDAO = new ProductDAO();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         CategoryDAO categoryDAO = new CategoryDAO();
         ArrayList<Category> categorys = categoryDAO.listAllCategory();
-        String [] str = {request.getParameter("productid")};
-        ArrayList<ProductDetails> productDetailses = (ArrayList<ProductDetails>) productDAO.getAllProductDetailsesWithCategorys(0,str ,0,1);
-        request.setAttribute("product", productDetailses.get(0));
+        String[] str = {request.getParameter("productid")};
+        ArrayList<ProductDetails> productDetailses = (ArrayList<ProductDetails>) productDAO.getAllProductDetailsesWithCategorys(0, str, 0, 1);
+        if (!productDetailses.isEmpty()) {
+            request.setAttribute("product", productDetailses.get(0));
+
+        } else {
+            request.setAttribute("product", null);
+
+        }
         request.setAttribute("categorys", categorys);
         request.getRequestDispatcher("../view/admin/EditProduct.jsp").forward(request, response);
     }
@@ -89,7 +97,6 @@ ProductDAO productDAO = new ProductDAO();
         }
         productDetails.setCategorys(categorys);
 
-
         //set image
 //        String fullPath = request.getServletContext().getRealPath("").replace("\\", File.separator) + File.separator + "images";
 //        response.getWriter().println("Write attachment to file: " + fullPath);
@@ -106,7 +113,7 @@ ProductDAO productDAO = new ProductDAO();
                 productDetails.setImageUrl("images/" + "product" + productDetails.getId() + '_' + productDetails.getName() + extension);
             }
         }
-        
+
         log(productDAO.updateProductDetails(productDetails));
 //        try {
 //            TimeUnit.MILLISECONDS.sleep(500);
