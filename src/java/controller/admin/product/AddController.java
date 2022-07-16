@@ -29,7 +29,7 @@ import model.ProductDetails;
  */
 @WebServlet(name = "AddProductController", urlPatterns = {"/admin/add_product"})
 @MultipartConfig(
-        location = "F:\\FPTU\\FPT class\\Semester 5\\SWP391\\Week 8\\Code\\Chatter\\web\\images",
+        location = "F:\\FPTU\\FPT class\\Semester 5\\SWP391\\Week 9\\Code\\Chatter\\web\\images",
         fileSizeThreshold = 1024 * 1024 * 1, // 1 MB
         maxFileSize = 1024 * 1024 * 10, // 10 MB
         maxRequestSize = 1024 * 1024 * 100 // 100 MB
@@ -48,11 +48,11 @@ public class AddController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ProductDAO productDAO = new ProductDAO();
+//        ProductDAO productDAO = new ProductDAO();
         CategoryDAO categoryDAO = new CategoryDAO();
         ArrayList<Category> categorys = categoryDAO.listAllCategory();
-        ArrayList<ProductDetails> products = (ArrayList<ProductDetails>) productDAO.getAllProductDetailses(0,"");
-        request.setAttribute("products", products);
+//        ArrayList<ProductDetails> products = (ArrayList<ProductDetails>) productDAO.getAllProductDetailses(0,"");
+//        request.setAttribute("products", products);
         request.setAttribute("categorys", categorys);
         request.getRequestDispatcher("../view/admin/AddProduct.jsp").forward(request, response);
     }

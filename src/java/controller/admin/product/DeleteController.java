@@ -3,10 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller.admin.category;
+package controller.admin.product;
 
-import DAO.CategoryDAO;
+import DAO.ProductDAO;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Tuan Phong
  */
-@WebServlet(name="DeleteCategoryController", urlPatterns={"/admin/delete_category","/admin/del_cat"})
+@WebServlet(name="DeleteProductController", urlPatterns={"/admin/delete_product"})
 public class DeleteController extends HttpServlet {
    
     /** 
@@ -29,12 +30,9 @@ public class DeleteController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        CategoryDAO categoryDAO = new CategoryDAO();
-        int categoryId = Integer.parseInt(request.getParameter("category_id"));
-//        response.getWriter().print(categoryId);
-        log(categoryDAO.delete(categoryId));
-        response.sendRedirect("../admin/list_category");
-        
+        ProductDAO productDAO = new ProductDAO();
+        log(productDAO.deleteAllProductDetails(Integer.parseInt(request.getParameter("productid"))));
+        response.sendRedirect("view_products");
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

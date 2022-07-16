@@ -7,11 +7,9 @@ package controller.admin.product;
 import DAO.CategoryDAO;
 import DAO.ProductDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -26,11 +24,11 @@ import model.ProductDetails;
  *
  * @author Tuan Phong
  */
-@WebServlet(name = "ProductsSevrlet", urlPatterns = {"/admin/products"})
+@WebServlet(name = "ProductsSevrlet", urlPatterns = {"/admin/products","/admin/view_products","/admin/list_products"})
 @MultipartConfig(
-  fileSizeThreshold = 1024 * 1024 * 1, // 1 MB
-  maxFileSize = 1024 * 1024 * 10,      // 10 MB
-  maxRequestSize = 1024 * 1024 * 100   // 100 MB
+        fileSizeThreshold = 1024 * 1024 * 1, // 1 MB
+        maxFileSize = 1024 * 1024 * 10, // 10 MB
+        maxRequestSize = 1024 * 1024 * 100 // 100 MB
 )
 
 public class ProductsController extends HttpServlet {
@@ -50,10 +48,63 @@ public class ProductsController extends HttpServlet {
         ProductDAO productDAO = new ProductDAO();
         CategoryDAO categoryDAO = new CategoryDAO();
         ArrayList<Category> categorys = categoryDAO.listAllCategory();
-        ArrayList<ProductDetails> productDetailses = (ArrayList<ProductDetails>) productDAO.getAllProductDetailses(0,"",40,10);
-//        response.getWriter().print();
+        String[] searchValue = new String[6];
+        int type;
+        int page = 1;
+        int pagesize = 20;
+        
+        if (request.getParameter("searchtype") == null) {
+            type = 0;
+        } else {
+            type = Integer.parseInt(request.getParameter("searchtype"));
+            request.setAttribute("searchtype", type);
+        }
+        if (request.getParameter("page") != null) {
+            page = Integer.parseInt(request.getParameter("page"));
+        }
+
+        if (request.getParameter("pagesize") != null) {
+            page = Integer.parseInt(request.getParameter("page"));
+        }
+
+        switch (type) {
+            case 0:
+                searchValue[0] = request.getParameter("productid");
+                request.setAttribute("productid", searchValue[0]);
+//                log("\n\n\n??????????"+searchValue[0].trim().length());
+                break;
+            case 1:
+                searchValue[0] = request.getParameter("productname");
+                request.setAttribute("productname", searchValue[0]);
+                break;
+            case 2:
+                searchValue[0] = request.getParameter("minprice");
+                searchValue[1] = request.getParameter("maxprice");
+                request.setAttribute("minprice", searchValue[0]);
+                request.setAttribute("maxprice", searchValue[1]);
+                searchValue[0] = searchValue[0].length() == 0 ? "0" : searchValue[0];
+                searchValue[1] = searchValue[1].length() == 0 ? "65536" : searchValue[1];
+                break;
+            case 3:
+                searchValue[0] = request.getParameter("startdate") + " 00:00:00.000";
+                searchValue[1] = request.getParameter("enddate") + " 23:59:59.999";
+                request.setAttribute("startdate", request.getParameter("startdate"));
+                request.setAttribute("enddate", request.getParameter("enddate"));
+                searchValue[0] = searchValue[0].length() == 0 ? "2018-06-07" : searchValue[0];
+                searchValue[1] = searchValue[1].length() == 0 ? "2218-06-07" : searchValue[1];
+                break;
+            default:
+                break;
+        }
+
+        ArrayList<ProductDetails> productDetailses = (ArrayList<ProductDetails>) productDAO.getAllProductDetailsesWithCategorys(type, searchValue, (page - 1) * pagesize, pagesize);
+
+        int numberentries = productDAO.countproducts(type, searchValue);
         request.setAttribute("categorys", categorys);
         request.setAttribute("productDetailses", productDetailses);
+        request.setAttribute("numberentries", numberentries);
+        request.setAttribute("totalpage", numberentries / pagesize + 1);
+        request.setAttribute("currentpage", page);
         request.getRequestDispatcher("../view/admin/Products.jsp").forward(request, response);
     }
 
@@ -68,7 +119,7 @@ public class ProductsController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                        response.getWriter().println('a');
+        response.getWriter().println('a');
 
 //        String action = request.getParameter("action");
 //
@@ -123,11 +174,10 @@ public class ProductsController extends HttpServlet {
             categorys.add(new Category(Integer.parseInt(categoryid), null));
         }
         productDetails.setCategorys(categorys);
-        
+
         response.getWriter().print(productDetails);
 
 //        response.sendRedirect("../ProductDetails.jsp");
-
     }
 
     private void deleteProduct(HttpServletRequest request, HttpServletResponse response) {
