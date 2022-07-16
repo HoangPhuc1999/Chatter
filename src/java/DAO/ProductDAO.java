@@ -220,6 +220,7 @@ public class ProductDAO extends DAO {
      */
     public List<ProductDetails> getAllProductDetailses(int type, String[] strings, int pageindex, int pagesize) {
         ArrayList<ProductDetails> productDetailses = new ArrayList<>();
+       
         String sql = "SELECT *\n"
                 + "FROM products p \n"
                 + "LEFT JOIN products_inventory pin ON p.product_id = pin.product_id\n"
@@ -257,11 +258,14 @@ public class ProductDAO extends DAO {
                             break;
 
                     }
+                } else {
+                    ps.setInt(1, pageindex);
+                    ps.setInt(2, pagesize);
                 }
-            } else {
-                ps.setInt(1, pageindex);
-                ps.setInt(2, pagesize);
-            }
+            }else {
+                    ps.setInt(1, pageindex);
+                    ps.setInt(2, pagesize);
+                }
 
             rs = ps.executeQuery();
             ProductDetails productDetailsTemp = new ProductDetails();
@@ -311,6 +315,7 @@ public class ProductDAO extends DAO {
     }
 
     public String handleString(int type, String[] strings) {
+
         if (strings[0] == null) {
             return "";
         }
@@ -326,7 +331,8 @@ public class ProductDAO extends DAO {
                 return "WHERE product_price  BETWEEN ? AND ? \n";
             case 3:
                 return "WHERE (pin.modified_at  BETWEEN ?  AND ?)\n"
-                        + "OR pin.modified_at IS NULL\n";
+                        + "OR pin.modified_at IS NULL\n"
+                        ;
             case 5:
                 return "WHERE p.product_id = ?\n";
             default:
@@ -334,16 +340,16 @@ public class ProductDAO extends DAO {
         }
         return "";
     }
-    
-    /** Do Tuan Phong
-     * 
+
+    /**
+     * Do Tuan Phong
+     *
      * tra ve so luong product trong ham getAllProducts
-     * 
+     *
      * @param type
      * @param strings
-     * @return 
+     * @return
      */
-
     public int countproducts(int type, String[] strings) {
         try {
             String sql = "SELECT p.product_id as product_id\n"
@@ -354,10 +360,32 @@ public class ProductDAO extends DAO {
                     + "JOIN category c ON pc.category_id = c.category_id\n";
 
             sql = "SELECT COUNT(DISTINCT product_id) Total\n"
-                    + "FROM(" + sql + handleString(type, strings) + ") pd";
+                    + "FROM(\n" + sql + handleString(type, strings) + ") pd";
 
-            PreparedStatement stm = connection.prepareStatement(sql);
-            ResultSet rs = stm.executeQuery();
+            ps = connection.prepareStatement(sql);
+            if (strings[0] != null) {
+                if (strings[0].trim().length() != 0) {
+                    switch (type) {
+                        case 0:
+                        case 1:
+                            ps.setString(1, strings[0]);
+                            break;
+                        case 2:
+                            ps.setDouble(1, Double.parseDouble(strings[0]));
+                            ps.setDouble(2, Double.parseDouble(strings[1]));
+                            break;
+                        case 3:
+                            ps.setTimestamp(1, Timestamp.valueOf(strings[0]));
+                            ps.setTimestamp(2, Timestamp.valueOf(strings[1]));
+                            break;
+                        default:
+                            break;
+
+                    }
+                }
+            }
+
+            rs = ps.executeQuery();
             if (rs.next()) {
                 return rs.getInt("Total");
             }
