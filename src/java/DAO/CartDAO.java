@@ -76,7 +76,6 @@ public class CartDAO extends MyDAO {
             System.out.println(e.toString());
         }
     }
-
     //Lay gio hang cua nguoi dung moi khi sign in
     //author an 
     //20/6/2022
