@@ -45,6 +45,16 @@
         <link href="/Chatter/css/adminstyle.css" rel="stylesheet" />
         <title>JSP Page</title>
 
+        <script>
+            function deleteProduct(pid)
+            {
+                var result = confirm("Are you sure?");
+                if (result)
+                {
+                    window.location.href = "/Chatter/admin/delete_product?productid=" + pid;
+                }
+            }
+        </script>
     </head>
     <body class="row">
 
@@ -190,7 +200,7 @@
                             <th>Price</th>
                             <th class="">Quantity</th>
                             <th>Category</th>
-                            <th class=" text-center">Modify time</th>
+                            <th class=" text-center">Modified time</th>
                             <th class=" text-center">Action</th>
                         </tr>
                     </thead>
@@ -198,7 +208,7 @@
                         <c:forEach items="${requestScope.productDetailses}" var="product">
                             <tr>
                                 <td>${product.id}</td>
-                                <td><img class="avatar img-thumbnail" src="/Chatter/${product.image}" alt="product ${product.name} image"/></td>
+                                <td class="col-sm-1"><img class="avatar img-thumbnail" src="/Chatter/${product.image}" alt="product ${product.name} image"/></td>
                                 <td class="col-sm-2"><a href="/Chatter/productdetail?id=${product.id}" class="text-decoration-none text-danger" >${product.name}</a></td>
 
                                 <td>${product.price}</td>
@@ -215,10 +225,8 @@
                                         <i class="fa-duotone fa-file-lines"></i>
                                         Edit
                                     </button>
-                                    
-                                    
 
-                                    <button type="reset" class="btn btn-outline-danger btn-box" onclick="controlEditmode(0);controlViewmode(1);">
+                                    <button type="reset" class="btn btn-outline-danger btn-box" onclick="deleteProduct(${product.id});">
                                         <i class="fa-duotone fa-eraser"></i>
                                         Delete
                                     </button>
