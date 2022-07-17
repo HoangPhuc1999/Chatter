@@ -76,7 +76,6 @@ public class OrderDetailServlet extends HttpServlet {
             lst = u.getAllOrderDetail();
         } else {
             lst = u.getAllOrderDetailByID(order_id);
-
         }
         request.setAttribute("orderdetaillist", lst);
         request.getRequestDispatcher("../OrderDetail.jsp").forward(request, response);
