@@ -12,11 +12,12 @@
 <!DOCTYPE html>
 <%
     List<OrderAnalysis> list = (List<OrderAnalysis>) request.getAttribute("top5");
+    List<SaleInfo> totalSaleList = (List<SaleInfo>) request.getAttribute("listoftotalsale");
     SaleInfo saleInfo = (SaleInfo) request.getAttribute("todaysale");
     SaleInfo totalSale = (SaleInfo) request.getAttribute("totalsale");
     double todayRevenue = saleInfo.getTotalRevenue() * 30 / 100;
-    double totalRevenue = totalSale.getTotalRevenue() * 30 /100;
-    
+    double totalRevenue = totalSale.getTotalRevenue() * 30 / 100;
+
     // If you use EL or JSTL, the above statement is not necessary. 
 %> 
 <html>
@@ -269,7 +270,7 @@
                                         <h2 >Top 5 most famous food item rank by sale</h2>
                                         <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.
                                         </p>
-                                       
+
                                     </div>
                                 </div>
                             </div>
@@ -284,11 +285,11 @@
 
                                             // set the data
                                             var data = {
-                                                header: ["Product Name", "Revenue"],
+                                                header: ["Day", "Total Sale"],
                                                 rows: [
                                         <%
-                                            for (OrderAnalysis orderItem : list) {%>
-                                                    ["<%=orderItem.getProductName()%>",<%=orderItem.getRevenue()%>],
+                                            for (SaleInfo o : totalSaleList) {%>
+                                                    ["<%=o.getOrderDate()%>",<%=o.getTotalRevenue()%>],
                                         <%
                                             }
                                         %>
@@ -296,13 +297,13 @@
                                                 ]};
 
                                             // create the chart
-                                            var chart = anychart.column();
+                                            var chart = anychart.line();
 
                                             // add the data
                                             chart.data(data);
 
                                             // set the chart title
-                                            chart.title("Top 5  famous item on the menu by revenue");
+                                            chart.title("Total Sale of recent 5 days");
 
                                             // draw
                                             chart.container("container1");

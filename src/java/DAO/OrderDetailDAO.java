@@ -174,8 +174,6 @@ public class OrderDetailDAO extends DAO {
         xSql = "select top 5 sum(subquery.revenue) as total_revenue, subquery.order_date\n"
                 + "from  \n"
                 + "(\n"
-                + "from \n"
-                + "(\n"
                 + "select orders_details.order_product_id, products.product_price, products.product_name,sum(orders_details.order_amount) as totalamount,\n"
                 + "(product_price * sum(orders_details.order_amount)) as revenue, CAST(orders_details.order_date AS DATE)as order_date\n"
                 + "from orders_details  \n"
