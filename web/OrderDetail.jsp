@@ -178,17 +178,20 @@
 
                     <div class="pb-5">
                         <div class="container">
-                            <form action="../admin/orders" method="post" id="search-box" class="form-row">
-                                <input type="search" name="order_id" id="search-text"
-                                       placeholder="Tra order bằng order id"
-                                       required>
-                                <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit" id="search-btn">
-                                    <i class="fa fa-search" aria-hidden="true"></i>
-                                </button>
-                            </form>
+                            <h1 >Order history</h1>
+                            <div class="row">
+                                <div class="p-2 px-3 text-uppercase">Search Order by id</div>
+                                <form action="../admin/orders" method="post" id="search-box" class="form-row">
+                                    <input type="search" name="order_id" id="search-text"
+                                           placeholder="Tra order bằng order id"
+                                           required>
+                                    <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit" id="search-btn">
+                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                    </button>
+                                </form>
+                            </div>
                             <div class="row">
                                 <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">
-
                                     <!-- Shopping cart table -->
                                     <div class="table-responsive">
                                         <table class="table">

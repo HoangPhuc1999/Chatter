@@ -158,7 +158,7 @@
                                 <div class="col-md-6 ftco-animate makereservation p-4 p-md-5">
                                     <div class="heading-section ftco-animate mb-5">
                                         <h2 >Sale of recent 5 days</h2>
-                                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.
+                                        <p>From order details database, calculate total sale of each day, then get the most recent 5 day to draw this chart.
                                         </p>
                                     </div>
                                 </div>
@@ -202,7 +202,7 @@
                                 <div class="col-md-6 ftco-animate makereservation p-4 p-md-5">
                                     <div class="heading-section ftco-animate mb-5">
                                         <h2 >Top 5 most famous food item rank by sale</h2>
-                                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.
+                                        <p> From order detail database, find top 5 most famous food item rank by sales.
                                         </p>
 
                                     </div>
