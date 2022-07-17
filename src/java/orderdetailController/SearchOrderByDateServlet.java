@@ -5,13 +5,19 @@
  */
 package orderdetailController;
 
+import DAO.OrderDetailDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.OrderDetail;
+import model.SaleInfo;
 
 /**
  *
@@ -32,18 +38,11 @@ public class SearchOrderByDateServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet SearchOrderByDateServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet SearchOrderByDateServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        PrintWriter pr = response.getWriter();
+        OrderDetailDAO u = new OrderDetailDAO();
+        List<OrderDetail> lst = u.getAllOrderDetail();
+        request.setAttribute("orderbydate", lst);
+        request.getRequestDispatcher("../SearchOrderByDate.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -72,7 +71,21 @@ public class SearchOrderByDateServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        PrintWriter pr = response.getWriter();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDateTime now = LocalDateTime.now();
+        String dob;
+        dob = request.getParameter("dob");
+        System.out.println(dob);
+        if (dob == null || dob.isEmpty()) {
+            dob = dtf.format(now);
+        }
+        OrderDetailDAO u = new OrderDetailDAO();
+        List<OrderDetail> lst = u.getAllOrderDetailByDate(dob);
+        SaleInfo saleInfo = u.getSaleByDate(dob);
+        request.setAttribute("orderbydate", lst);
+        request.setAttribute("salebydate", saleInfo);
+        request.getRequestDispatcher("../SearchOrderByDate.jsp").forward(request, response);
     }
 
     /**

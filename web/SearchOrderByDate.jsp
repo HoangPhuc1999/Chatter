@@ -4,14 +4,22 @@
     Author     : Hoang Phuc
 --%>
 
+<%@page import="java.text.NumberFormat"%>
+<%@page import="java.text.DecimalFormat"%>
+<%@page import="model.SaleInfo"%>
 <%@page import="java.util.List"%>
 <%@page import="model.OrderDetail"%>
 <%@page import="model.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
-    List<OrderDetail> list = (List<OrderDetail>) request.getAttribute("orderdetaillist");
-
+    List<OrderDetail> list = (List<OrderDetail>) request.getAttribute("orderbydate");
+    SaleInfo saleInfo = (SaleInfo) request.getAttribute("salebydate");
+    NumberFormat formatter = new DecimalFormat("#0.00");
+    double totalSale = 0;
+    if (saleInfo != null) {
+        totalSale = saleInfo.getTotalRevenue();
+    }
     // If you use EL or JSTL, the above statement is not necessary. 
 %> 
 <html>
@@ -177,18 +185,20 @@
 
                     <div class="pb-5">
                         <div class="container">
-                            <h1 >Order history</h1>
-                            <div class="row">
-                                <div class="p-2 px-3 text-uppercase">Search Order by id</div>
-                                <form action="../admin/orders" method="post" id="search-box" class="form-row">
-                                    <input type="search" name="order_id" id="search-text"
-                                           placeholder="Tra order bằng order id"
-                                           required>
-                                    <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit" id="search-btn">
-                                        <i class="fa fa-search" aria-hidden="true"></i>
-                                    </button>
+                            <h1 >Search orders by date</h1>
+                            <div class="form_container">
+                                <form action="../admin/ordersbydate" method="post">
+                                    <div>
+                                        <input type="date" class="form-control" name ="dob">
+                                    </div>
+                                    <div class="btn_box">
+                                        <button>
+                                            Search
+                                        </button>
+                                    </div>
                                 </form>
                             </div>
+                            <div class="p-2 px-3 text-uppercase">Total Sale: $ <%=formatter.format(totalSale)%></div>
                             <div class="row">
                                 <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">
                                     <!-- Shopping cart table -->

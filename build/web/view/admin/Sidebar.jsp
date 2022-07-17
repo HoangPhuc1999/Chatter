@@ -75,7 +75,10 @@
                             <li class="list-group-item py-1">
                                 <a href="/Chatter/admin/orderanalysis" class="text-reset text-decoration-none">Order Analysis </a>
                             </li>
-                          
+                            <li class="list-group-item py-1">
+                                <a href="/Chatter/admin/ordersbydate" class="text-reset text-decoration-none">Search orders by date </a>
+                            </li>
+
                         </ul>
                     </li>
                     <li>
