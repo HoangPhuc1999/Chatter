@@ -4,6 +4,8 @@
     Author     : Hoang Phuc
 --%>
 
+<%@page import="java.text.NumberFormat"%>
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="model.SaleInfo"%>
 <%@page import="model.OrderAnalysis"%>
 <%@page import="java.util.List"%>
@@ -17,7 +19,7 @@
     SaleInfo totalSale = (SaleInfo) request.getAttribute("totalsale");
     double todayRevenue = saleInfo.getTotalRevenue() * 30 / 100;
     double totalRevenue = totalSale.getTotalRevenue() * 30 / 100;
-
+    NumberFormat formatter = new DecimalFormat("#0.00");
     // If you use EL or JSTL, the above statement is not necessary. 
 %> 
 <html>
@@ -60,6 +62,7 @@
         <!-- Icon Font Stylesheet -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
 
     </head>
 
@@ -197,7 +200,7 @@
                                         <i class="fa fa-chart-line fa-3x text-primary"></i>
                                         <div class="ms-3">
                                             <p class="mb-2">Today Sale</p>
-                                            <h6 class="mb-0">$<%=saleInfo.getTotalRevenue()%></h6>
+                                            <h6 class="mb-0">$<%=formatter.format(saleInfo.getTotalRevenue())%></h6>
                                         </div>
                                     </div>
                                 </div>
@@ -206,7 +209,7 @@
                                         <i class="fa fa-chart-bar fa-3x text-primary"></i>
                                         <div class="ms-3">
                                             <p class="mb-2">Total Sale</p>
-                                            <h6 class="mb-0">$<%=totalSale.getTotalRevenue()%></h6>
+                                            <h6 class="mb-0">$<%=formatter.format(totalSale.getTotalRevenue())%></h6>
                                         </div>
                                     </div>
                                 </div>
@@ -215,7 +218,7 @@
                                         <i class="fa fa-chart-area fa-3x text-primary"></i>
                                         <div class="ms-3">
                                             <p class="mb-2">Today Revenue</p>
-                                            <h6 class="mb-0">$<%= todayRevenue%></h6>
+                                            <h6 class="mb-0">$<%=formatter.format(todayRevenue)%></h6>
                                         </div>
                                     </div>
                                 </div>
@@ -224,8 +227,56 @@
                                         <i class="fa fa-chart-pie fa-3x text-primary"></i>
                                         <div class="ms-3">
                                             <p class="mb-2">Total Revenue</p>
-                                            <h6 class="mb-0">$<%=totalRevenue%></h6>
+                                            <h6 class="mb-0">$<%=formatter.format(totalRevenue)%></h6>
                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container-fluid pt-4 px-4">
+                            <div class="row g-4">
+                                <div class="col-sm-12 col-xl-6">
+                                    <div id="container1" style="width: 100%; height: 100%"></div>
+
+                                    <script>
+                                        anychart.onDocumentReady(function () {
+
+                                            // set the data
+                                            var data = {
+                                                header: ["Day", "Total Sale"],
+                                                rows: [
+                                        <%
+                                            for (SaleInfo o : totalSaleList) {%>
+                                                    ["<%=o.getOrderDate()%>",<%=o.getTotalRevenue()%>],
+                                        <%
+                                            }
+                                        %>
+
+                                                ]};
+
+                                            // create the chart
+                                            var chart = anychart.line();
+                                            var options = {
+                                                //Boolean - Whether the line is curved between points
+                                                bezierCurve: true
+                                            };
+                                            // add the data
+                                            chart.data(data);
+                                            // set the chart title
+                                            chart.title("Sale of recent 5 days");
+
+                                            // draw
+                                            chart.container("container1");
+                                            chart.draw();
+                                        });
+                                    </script>
+                                </div>
+                                <div class="col-md-6 ftco-animate makereservation p-4 p-md-5">
+                                    <div class="heading-section ftco-animate mb-5">
+                                        <h2 >Perfect Ingredients</h2>
+                                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.
+                                        </p>
+                                        <p><a href="#" class="btn btn-primary">Learn more</a></p>
                                     </div>
                                 </div>
                             </div>
@@ -275,53 +326,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="container-fluid pt-4 px-4">
-                            <div class="row g-4">
-                                <div class="col-sm-12 col-xl-6">
-                                    <div id="container1" style="width: 100%; height: 100%"></div>
-                                    <script>
-                                        anychart.onDocumentReady(function () {
-
-                                            // set the data
-                                            var data = {
-                                                header: ["Day", "Total Sale"],
-                                                rows: [
-                                        <%
-                                            for (SaleInfo o : totalSaleList) {%>
-                                                    ["<%=o.getOrderDate()%>",<%=o.getTotalRevenue()%>],
-                                        <%
-                                            }
-                                        %>
-
-                                                ]};
-
-                                            // create the chart
-                                            var chart = anychart.bar();
-
-                                            // add the data
-                                            chart.data(data);
-
-                                            // set the chart title
-                                            chart.title("Total Sale of recent 5 days");
-
-                                            // draw
-                                            chart.container("container1");
-                                            chart.draw();
-                                        });
-                                    </script>
-                                </div>
-                                <div class="col-md-6 ftco-animate makereservation p-4 p-md-5">
-                                    <div class="heading-section ftco-animate mb-5">
-                                        <h2 >Perfect Ingredients</h2>
-                                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.
-                                        </p>
-                                        <p><a href="#" class="btn btn-primary">Learn more</a></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
 
 
                     </div>
