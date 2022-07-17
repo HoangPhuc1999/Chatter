@@ -184,7 +184,7 @@ public class OrderDetailDAO extends DAO {
         try {
             ps = con.prepareStatement(xSql);
             rs = ps.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 SaleInfo x = new SaleInfo();
                 x.setTotalRevenue(rs.getDouble("total_revenue"));
                 x.setOrderDate(rs.getDate("order_date"));

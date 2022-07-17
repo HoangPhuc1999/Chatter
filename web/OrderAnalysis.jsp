@@ -297,7 +297,7 @@
                                                 ]};
 
                                             // create the chart
-                                            var chart = anychart.line();
+                                            var chart = anychart.bar();
 
                                             // add the data
                                             chart.data(data);
