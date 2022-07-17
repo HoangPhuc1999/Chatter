@@ -121,7 +121,6 @@
                                                 <%                           for (int i = 0; i < Integer.parseInt(y.getRating()); i++) {
                                                 %>
                                                 <i class="fas fa-star"></i>
-
                                                 <% }%> 
                                             </div>
                                             <p><%=y.getReviewContent()%></p>

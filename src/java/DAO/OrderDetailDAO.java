@@ -5,6 +5,7 @@
  */
 package DAO;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import model.OrderAnalysis;
@@ -143,6 +144,39 @@ public class OrderDetailDAO extends DAO {
         return (x);
     }
 
+    public SaleInfo getSaleByDate(String date) {
+        SaleInfo x = new SaleInfo();
+        xSql = "select * from \n"
+                + "(\n"
+                + "select sum(subquery.revenue) as total_revenue, subquery.order_date\n"
+                + "from \n"
+                + "(\n"
+                + "select orders_details.order_product_id, products.product_price, products.product_name,sum(orders_details.order_amount) as totalamount,\n"
+                + "(product_price * sum(orders_details.order_amount)) as revenue, CAST(orders_details.order_date AS DATE)as order_date \n"
+                + "from orders_details \n"
+                + "join products on orders_details.order_product_id = products.product_id\n"
+                + "group by orders_details.order_product_id,products.product_price, products.product_name, CAST(orders_details.order_date AS DATE)\n"
+                + ") as subquery\n"
+                + "group by  subquery.order_date\n"
+                + ") as subtable\n"
+                + "where  subtable.order_date = ? ";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, date);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                x.setTotalRevenue(rs.getDouble("total_revenue"));
+                x.setOrderDate(rs.getDate("order_date"));
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            System.out.println("Get Total Sale Fail");
+            e.printStackTrace();
+        }
+        return (x);
+    }
+
     public SaleInfo getTotalSale() {
         SaleInfo x = new SaleInfo();
         xSql = "select sum(subquery.revenue) as total_revenue\n"
@@ -197,6 +231,38 @@ public class OrderDetailDAO extends DAO {
             e.printStackTrace();
         }
         return list;
+    }
+
+    public List<OrderDetail> getAllOrderDetailByDate(String date) {
+        List<OrderDetail> list = new ArrayList<>();
+        xSql = "select orders_details.order_id, orders_details.order_product_id,orders_details.order_amount,orders_details.order_date,products.product_name,products_image.product_image_path\n"
+                + "from orders_details\n"
+                + "join products on orders_details.order_product_id = products.product_id\n"
+                + "join products_image on orders_details.order_product_id = products_image.product_id\n"
+                + "where CAST(orders_details.order_date AS DATE) =  ? ";
+
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, date);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                OrderDetail x = new OrderDetail();
+                x.setOrderId(rs.getInt("order_id"));
+                x.setOrderProductId(rs.getInt("order_product_id"));
+                x.setOrderAmount(rs.getInt("order_amount"));
+                x.setOrderDate(rs.getDate("order_date"));
+                x.setProductName(rs.getString("product_name"));
+                x.setProductImagePath(rs.getString("product_image_path"));
+                list.add(x);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            System.out.println("Get Order Detail Fail");
+            e.printStackTrace();
+        }
+        return (list);
+
     }
 
 }
