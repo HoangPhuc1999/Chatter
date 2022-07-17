@@ -6,6 +6,7 @@
 package DAO;
 
 import java.sql.Date;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.Book;
@@ -28,8 +29,8 @@ public class BookDAO extends DAO {
             ps.setDate(5, x.getDob());
             ps.executeUpdate();
             ps.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            System.out.println(e.toString());
         }
     }
 
@@ -61,8 +62,8 @@ public class BookDAO extends DAO {
             rs.close();
 
             ps.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            System.out.println(e.toString());
         }
         return (t);
     }
@@ -92,8 +93,8 @@ public class BookDAO extends DAO {
             }
             rs.close();
             ps.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            System.out.println(e.toString());
         }
         return (t);
     }
