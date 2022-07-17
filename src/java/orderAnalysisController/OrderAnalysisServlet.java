@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.OrderAnalysis;
+import model.SaleInfo;
 
 /**
  *
@@ -37,7 +38,13 @@ public class OrderAnalysisServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         OrderDetailDAO u = new OrderDetailDAO();
         List<OrderAnalysis> lst = u.getOrderAnalysisTop5();
+        List<SaleInfo> listOfTotalSale = u.getMostRecentTotalSale();
+        SaleInfo saleInfo = u.getTodaySale();
+        SaleInfo totalSale = u.getTotalSale();
         request.setAttribute("top5", lst);
+        request.setAttribute("listoftotalsale", listOfTotalSale);
+        request.setAttribute("todaysale", saleInfo);
+        request.setAttribute("totalsale", totalSale);
         request.getRequestDispatcher("../OrderAnalysis.jsp").forward(request, response);
 
     }
