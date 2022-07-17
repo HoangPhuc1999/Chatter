@@ -5,7 +5,8 @@
  */
 package DAO;
 
-import java.sql.Date;
+
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.OrderAnalysis;
@@ -41,9 +42,10 @@ public class OrderDetailDAO extends DAO {
             }
             rs.close();
             ps.close();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println("Get Order Detail Fail");
-            e.printStackTrace();
+            System.out.println(e.toString());
+          //  e.printStackTrace();
         }
         return (list);
 
@@ -73,9 +75,10 @@ public class OrderDetailDAO extends DAO {
             }
             rs.close();
             ps.close();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println("Get Order Detail Fail");
-            e.printStackTrace();
+            System.out.println(e.toString());
+           // e.printStackTrace();
         }
         return (list);
 
@@ -105,9 +108,9 @@ public class OrderDetailDAO extends DAO {
             }
             rs.close();
             ps.close();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println("Get Order Detail Fail");
-            e.printStackTrace();
+            System.out.println(e.toString());
         }
         return (list);
     }
@@ -137,9 +140,9 @@ public class OrderDetailDAO extends DAO {
             }
             rs.close();
             ps.close();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println("Get Total Sale Fail");
-            e.printStackTrace();
+            System.out.println(e.toString());
         }
         return (x);
     }
@@ -170,9 +173,10 @@ public class OrderDetailDAO extends DAO {
             }
             rs.close();
             ps.close();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println("Get Total Sale Fail");
-            e.printStackTrace();
+            System.out.println(e.toString());
+            //  e.printStackTrace();
         }
         return (x);
     }
@@ -196,9 +200,10 @@ public class OrderDetailDAO extends DAO {
             }
             rs.close();
             ps.close();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println("Get Total Sale Fail");
-            e.printStackTrace();
+            System.out.println(e.toString());
+          //  e.printStackTrace();
         }
         return (x);
     }
@@ -226,9 +231,10 @@ public class OrderDetailDAO extends DAO {
             }
             rs.close();
             ps.close();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println("Get Recent Sale Fail");
-            e.printStackTrace();
+            System.out.println(e.toString());
+            //e.printStackTrace();
         }
         return list;
     }
@@ -257,9 +263,10 @@ public class OrderDetailDAO extends DAO {
             }
             rs.close();
             ps.close();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println("Get Order Detail Fail");
-            e.printStackTrace();
+            System.out.println(e.toString());
+            //e.printStackTrace();
         }
         return (list);
 

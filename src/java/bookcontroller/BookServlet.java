@@ -9,7 +9,6 @@ import DAO.BookDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
-import java.text.SimpleDateFormat;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +21,7 @@ import model.Book;
  */
 public class BookServlet extends HttpServlet {
 
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
