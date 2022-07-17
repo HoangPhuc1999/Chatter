@@ -4,6 +4,7 @@
     Author     : Hoang Phuc
 --%>
 
+<%@page import="model.SaleInfo"%>
 <%@page import="model.OrderAnalysis"%>
 <%@page import="java.util.List"%>
 <%@page import="model.User"%>
@@ -11,7 +12,11 @@
 <!DOCTYPE html>
 <%
     List<OrderAnalysis> list = (List<OrderAnalysis>) request.getAttribute("top5");
-
+    SaleInfo saleInfo = (SaleInfo) request.getAttribute("todaysale");
+    SaleInfo totalSale = (SaleInfo) request.getAttribute("totalsale");
+    double todayRevenue = saleInfo.getTotalRevenue() * 30 / 100;
+    double totalRevenue = totalSale.getTotalRevenue() * 30 /100;
+    
     // If you use EL or JSTL, the above statement is not necessary. 
 %> 
 <html>
@@ -191,7 +196,7 @@
                                         <i class="fa fa-chart-line fa-3x text-primary"></i>
                                         <div class="ms-3">
                                             <p class="mb-2">Today Sale</p>
-                                            <h6 class="mb-0">$1234</h6>
+                                            <h6 class="mb-0">$<%=saleInfo.getTotalRevenue()%></h6>
                                         </div>
                                     </div>
                                 </div>
@@ -200,7 +205,7 @@
                                         <i class="fa fa-chart-bar fa-3x text-primary"></i>
                                         <div class="ms-3">
                                             <p class="mb-2">Total Sale</p>
-                                            <h6 class="mb-0">$1234</h6>
+                                            <h6 class="mb-0">$<%=totalSale.getTotalRevenue()%></h6>
                                         </div>
                                     </div>
                                 </div>
@@ -209,7 +214,7 @@
                                         <i class="fa fa-chart-area fa-3x text-primary"></i>
                                         <div class="ms-3">
                                             <p class="mb-2">Today Revenue</p>
-                                            <h6 class="mb-0">$1234</h6>
+                                            <h6 class="mb-0">$<%= todayRevenue%></h6>
                                         </div>
                                     </div>
                                 </div>
@@ -218,7 +223,7 @@
                                         <i class="fa fa-chart-pie fa-3x text-primary"></i>
                                         <div class="ms-3">
                                             <p class="mb-2">Total Revenue</p>
-                                            <h6 class="mb-0">$1234</h6>
+                                            <h6 class="mb-0">$<%=totalRevenue%></h6>
                                         </div>
                                     </div>
                                 </div>
@@ -261,15 +266,15 @@
                                 </div>
                                 <div class="col-md-6 ftco-animate makereservation p-4 p-md-5">
                                     <div class="heading-section ftco-animate mb-5">
-                                        <h2 >Perfect Ingredients</h2>
+                                        <h2 >Top 5 most famous food item rank by sale</h2>
                                         <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.
                                         </p>
-                                        <p><a href="#" class="btn btn-primary">Learn more</a></p>
+                                       
                                     </div>
                                 </div>
                             </div>
                         </div>
-                
+
                         <div class="container-fluid pt-4 px-4">
                             <div class="row g-4">
                                 <div class="col-sm-12 col-xl-6">
