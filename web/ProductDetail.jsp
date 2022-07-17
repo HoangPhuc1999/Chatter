@@ -149,12 +149,12 @@
                                                 <label class = "full" for="star1" title="Sucks big time - 1 star"></label>
                                             </div>
                                         </div>
-                                        <div class="form-group">
+<!--                                        <div class="form-group">
                                             <label>Add image</label> 
                                             <input name="avatar" type="file" class="form-control" placeholder="reviewImage"
                                                    onchange="document.getElementById('avatar').src = window.URL.createObjectURL(this.files[0])"/>
                                             <img id="avatar" class="img-fluid" />
-                                        </div>
+                                        </div>-->
                                         <div class="form-group">
                                             <label for="message">Title </label>
                                             <textarea id="message" cols="30" rows="5" class="form-control" name="reviewtitle"></textarea>
