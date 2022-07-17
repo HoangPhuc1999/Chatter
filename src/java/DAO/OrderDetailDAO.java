@@ -23,7 +23,7 @@ public class OrderDetailDAO extends DAO {
                 + "from orders_details\n"
                 + "join products on orders_details.order_product_id = products.product_id\n"
                 + "join products_image on orders_details.order_product_id = products_image.product_id\n"
-                + "ORDER BY order_id ASC";
+                + "ORDER BY orders_details.order_date DESC";
 
         try {
             ps = con.prepareStatement(xSql);
