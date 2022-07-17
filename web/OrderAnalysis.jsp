@@ -135,15 +135,9 @@
                                         <%
                                             }
                                         %>
-
                                                 ]};
-
                                             // create the chart
                                             var chart = anychart.line();
-                                            var options = {
-                                                //Boolean - Whether the line is curved between points
-                                                bezierCurve: true
-                                            };
                                             // add the data
                                             chart.data(data);
                                             // set the chart title
@@ -183,7 +177,6 @@
                                         %>
 
                                                 ]};
-
                                             // create the chart
                                             var chart = anychart.bar();
 
