@@ -20,7 +20,6 @@
     if (saleInfo != null) {
         totalSale = saleInfo.getTotalRevenue();
     }
-    // If you use EL or JSTL, the above statement is not necessary. 
 %> 
 <html>
 
@@ -37,7 +36,6 @@
         <link rel="shortcut icon" href="images/favicon.png" type="">
 
         <title> Chatter </title>
-
         <!-- bootstrap core css -->
         <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
 
@@ -165,7 +163,6 @@
                                 </a>
                                 <%
                                     }
-
                                 %>
 
                             </div>
