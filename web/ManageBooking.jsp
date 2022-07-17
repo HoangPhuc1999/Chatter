@@ -112,7 +112,6 @@
                                                 </div>
                                             </div>
                                             </tbody>
-
                                             <%                                              } else {
 
                                             %>
@@ -132,9 +131,6 @@
                                                         <button type="button" class="btn btn-danger">Hoàn thành</button>
                                                         </a>
                                                     </td>
-
-
-
 
                                                 </tr> 
                                                 <% }%> 
