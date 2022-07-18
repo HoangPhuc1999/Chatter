@@ -58,13 +58,11 @@
                 </button>
             </form>
 
-
             <h3 class="text-info" >
                 <span class="text-info fa-duotone fa-candy-corn"></span>
                 Edit product
             </h3>
             <c:set var = "product" scope = "session" value = "${requestScope.product}"/>
-            ${product}
             <c:if test="${product == null}">
                 <p >
                     <em><mark><strong class="lead text-secondary ">Product not found!</strong></mark></em>
@@ -88,10 +86,10 @@
                                 <label for="inputQuantity" class=" col-form-label">Quantity</label>
                                 <input id="inputQuantity" name="quantity" value="${product.quantity}" type="number" class="form-control" placeholder="" min="0" max="65536">
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <label for="inputPrice" class="col-form-label">Product price</label>
                                 <div class="btn-group">
-                                    <input id="inputPrice" name="price" value="${product.price}"  type="text" class="form-control" pattern="[0-9]+(.?[0-9]+)?" title="Please input a number!" placeholder="" value=${last}>
+                                    <input id="inputPrice" name="price" value="${product.price}"  type="number" step="0.01" class="form-control" min="0" max="65536" title="Please input a number!" placeholder="">
                                     <span class="input-group-text" id="basic-addon2">$</span>
                                 </div>
                             </div>
@@ -106,9 +104,8 @@
 
                             <div class="col-md-6 p-3">
                                 <label for="inputDescription" class="col-sm-2 col-form-label">Description </label>
-                                <textarea id="inputDescription" name="description" value="${product.description}" 
-                                          type="text" class="form-control" placeholder="Enter product description" required
-                                          >${product.description}</textarea>
+                                <textarea id="inputDescription" name="description"
+                                          type="text" class="form-control" placeholder="Enter product description" required>${product.description}</textarea>
 
                             </div>
                             <div class="col-md-6">
