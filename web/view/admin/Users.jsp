@@ -466,8 +466,8 @@
             </nav>
         </div>
         <script>
-            document.getElementById('products_page').classList.add('active');
-            document.getElementById('products_page').classList.remove('link-dark');
+            document.getElementById('users_page').classList.add('active');
+            document.getElementById('users_page').classList.remove('link-dark');
 
 
             selectForm();
