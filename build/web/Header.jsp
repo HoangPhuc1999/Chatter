@@ -24,12 +24,11 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav  mx-auto ">
-                    <c:if test="${sessionScope.user_account.role == 'admin'}">
+                    <c:if test="${sessionScope.user_account.role eq 'admin'}">
                         <li class="nav-item">
-                            <a class="nav-link" href="admin/dashboard">Admin Dashboard </a>
+                            <a class="nav-link" href="admin/dashboard">Admin</a>
                         </li>
                     </c:if>
-                        
                     <li class="nav-item active">
                         <a class="nav-link" href="home">Home <span class="sr-only">(current)</span></a>
                     </li>
