@@ -219,11 +219,10 @@ public class UserDAOTest {
     @Test
     public void testGetUserRoleByIdTrue() {
         System.out.println("getUserRoleById");
-        int users_id = 0;
+        int users_id = 1;
         UserDAO instance = new UserDAO();
-        UserRole expResult = new UserRole();
         UserRole result = instance.getUserRoleById(users_id);
-        assertEquals(expResult, result);
+        assertEquals(users_id, result.getUsers_id());
     }
     /**
      * Test of getUserRoleById method, of class UserDAO.
@@ -231,7 +230,7 @@ public class UserDAOTest {
     @Test
     public void testGetUserRoleByIdFalse() {
         System.out.println("getUserRoleById");
-        int users_id = 1;
+        int users_id = 0;
         UserDAO instance = new UserDAO();
         UserRole expResult = null;
         UserRole result = instance.getUserRoleById(users_id);
