@@ -20,6 +20,7 @@ public class CartDAO extends MyDAO {
     //xoa gio hang sau khi mua va da them vao order details
     //author an 
     public void deleteCartAfterBuy(User a) {
+        System.out.println("Delete user cart after buy");
         String query = "delete from users_cart WHERE users_id=?";
         try {
             ps = con.prepareStatement(query);
@@ -75,7 +76,6 @@ public class CartDAO extends MyDAO {
             System.out.println(e.toString());
         }
     }
-
     //Lay gio hang cua nguoi dung moi khi sign in
     //author an 
     //20/6/2022

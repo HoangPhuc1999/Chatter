@@ -8,6 +8,8 @@ package orderdetailController;
 import DAO.OrderDetailDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,13 +17,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.OrderDetail;
+import model.SaleInfo;
 
 /**
  *
  * @author Hoang Phuc
  */
-@WebServlet(name = "OrderDetailServlet", urlPatterns = {"/admin/orders"})
-public class OrderDetailServlet extends HttpServlet {
+@WebServlet(name = "SearchOrderByDateServlet", urlPatterns = {"/admin/ordersbydate"})
+public class SearchOrderByDateServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,8 +41,8 @@ public class OrderDetailServlet extends HttpServlet {
         PrintWriter pr = response.getWriter();
         OrderDetailDAO u = new OrderDetailDAO();
         List<OrderDetail> lst = u.getAllOrderDetail();
-        request.setAttribute("orderdetaillist", lst);
-        request.getRequestDispatcher("../OrderDetail.jsp").forward(request, response);
+        request.setAttribute("orderbydate", lst);
+        request.getRequestDispatcher("../SearchOrderByDate.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -69,16 +72,20 @@ public class OrderDetailServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         PrintWriter pr = response.getWriter();
-        String order_id = request.getParameter("order_id");
-        OrderDetailDAO u = new OrderDetailDAO();
-        List<OrderDetail> lst;
-        if (order_id == null || order_id.isEmpty() || order_id.equals("all")) {
-            lst = u.getAllOrderDetail();
-        } else {
-            lst = u.getAllOrderDetailByID(order_id);
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDateTime now = LocalDateTime.now();
+        String dob;
+        dob = request.getParameter("dob");
+        System.out.println(dob);
+        if (dob == null || dob.isEmpty()) {
+            dob = dtf.format(now);
         }
-        request.setAttribute("orderdetaillist", lst);
-        request.getRequestDispatcher("../OrderDetail.jsp").forward(request, response);
+        OrderDetailDAO u = new OrderDetailDAO();
+        List<OrderDetail> lst = u.getAllOrderDetailByDate(dob);
+        SaleInfo saleInfo = u.getSaleByDate(dob);
+        request.setAttribute("orderbydate", lst);
+        request.setAttribute("salebydate", saleInfo);
+        request.getRequestDispatcher("../SearchOrderByDate.jsp").forward(request, response);
     }
 
     /**

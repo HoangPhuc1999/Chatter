@@ -81,7 +81,7 @@
 
         <div class="col-sm-9 gy-2">
 
-            ${user}
+
 
             <c:set var = "user" scope = "session" value = "${requestScope.user}"/>
             <c:if test="${user == null}">
@@ -243,7 +243,7 @@
                                                         First name
                                                     </div>
                                                     <div class="col">
-                                                        <input type="text" class="form-control" autofocus pattern="[A-Z][a-z]+$" value="${user.firstname}" name="firstname"/>
+                                                        <input type="text" class="form-control" autofocus pattern="([A-Z][a-z]+)( [A-Z][a-z]+)*$" value="${user.firstname}" name="firstname"/>
                                                     </div>
 
                                                     <div class="col">
@@ -251,7 +251,7 @@
                                                         Last name
                                                     </div>
                                                     <div class="col">
-                                                        <input type="text" class="form-control" pattern="[A-Z][a-z]+$"  value="${user.lastname}" name="lastname"/>
+                                                        <input type="text" class="form-control" pattern="([A-Z][a-z]+)( [A-Z][a-z]+)*$"  value="${user.lastname}" name="lastname"/>
                                                     </div>
 
                                                     <div class="col">
@@ -304,7 +304,7 @@
                                                         Email
                                                     </div>
                                                     <div class="col">
-                                                        <input id="inputEmail" name="email" type="email" value="${user.email}" class="form-control" placeholder="mee@example.com" required value=${email}>
+                                                        <input id="inputEmail" name="email" pattern="^[a-zA-Z0-9.! #$%&'*+=? ^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$" type="email" value="${user.email}" class="form-control" placeholder="mee@example.com" required value=${email}>
                                                     </div>
 
                                                     <div class="col">
@@ -383,7 +383,7 @@
                     </div>
 
                     <div class="tab-pane fade" id="order" role="tabpanel" aria-labelledby="order-tab">
-                        aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                        Need some think
                     </div>
                     <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                         ...

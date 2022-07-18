@@ -45,6 +45,16 @@
         <link href="/Chatter/css/adminstyle.css" rel="stylesheet" />
         <title>JSP Page</title>
 
+        <script>
+            function deleteProduct(pid)
+            {
+                var result = confirm("Are you sure?");
+                if (result)
+                {
+                    window.location.href = "/Chatter/admin/delete_product?productid=" + pid;
+                }
+            }
+        </script>
     </head>
     <body class="row">
 
@@ -59,6 +69,7 @@
                         <i class="fa-duotone fa-blueberries"></i>
                         Add Product</button>
 
+                    <!--Add Modal-->
                     <div class="modal fade" id="AddProductModal" tabindex="-1" aria-labelledby="addProductModal" aria-hidden="true">
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
@@ -132,41 +143,41 @@
                     </div>
                 </div>
 
-                <form class="col input-group justify-content-end" action="/Chatter/admin/edit_product" method="get" id="searchForm">
+                <form class="col input-group justify-content-end" action="/Chatter/admin/products" method="get" id="searchForm">
                     <div class="form-floating">
                         <select onchange="selectForm();" class="form-select" name="searchtype" id="floatingSelectGrid" >
-                            <option selected value="0">Product ID</option>
-                            <option value="1">Product name</option>
-                            <option value="2">Product price</option>
-                            <option value="3">Modify date</option>
+                            <option ${requestScope.searchtype eq '0' || requestScope.searchtype == null ? "selected" :"" } value="0">Product ID</option>
+                            <option ${requestScope.searchtype eq '1'? "selected" :""} value="1">Product name</option>
+                            <option ${requestScope.searchtype eq '2'? "selected" :""} value="2">Product price</option>
+                            <option ${requestScope.searchtype eq '3'? "selected" :""} value="3">Modify date</option>
                         </select>
 
 
                         <label for="floatingSelectGrid">Search by</label>
                     </div>
                     <div class="form-floating"  id="searchByID" >
-                        <input  type="number" class="form-control" name="productid" placeholder="ProductID" aria-label="ProductID" min="0" max="65536"  aria-describedby="button-addon2">
+                        <input  type="number" class="form-control" name="productid" value="${requestScope.productid}" placeholder="ProductID" aria-label="ProductID" min="0" max="65536"  aria-describedby="button-addon2">
                         <label for="">Product ID</label>
                     </div>
                     <div class="form-floating col-sm-3"  id="searchByName" >
-                        <input  type="text" class="form-control" name="productname" placeholder="ProductID" aria-label="ProductID" aria-describedby="button-addon2" >
+                        <input  type="search" class="form-control" name="productname"  value="${requestScope.productname}" placeholder="ProductID" aria-label="ProductID" aria-describedby="button-addon2" >
                         <label for="">Product Name</label>
                     </div>
                     <div class="form-floating col-sm-2"  id="searchByMinPrice" >
-                        <input  type="number" step="0.01" class="form-control" name="minprice" placeholder="ProductPrice" aria-label="ProductPrice" min="0" max="65536" aria-describedby="button-addon2">
+                        <input  type="number" step="0.01" class="form-control" name="minprice" value="${requestScope.minprice}" placeholder="ProductPrice" aria-label="ProductPrice" min="0" max="65536" aria-describedby="button-addon2">
                         <label for="">Min Price</label>
                     </div>
                     <div class="form-floating col-sm-2"  id="searchByMaxPrice" >
-                        <input  type="number" step="0.01" class="form-control" name="maxprice" placeholder="ProductPrice" aria-label="ProductPrice" min="0" max="65536" aria-describedby="button-addon2">
+                        <input  type="number" step="0.01" class="form-control" name="maxprice" value="${requestScope.maxprice}" placeholder="ProductPrice" aria-label="ProductPrice" min="0" max="65536" aria-describedby="button-addon2">
                         <label for="">Max Price</label>
                     </div>
                     <div class="form-floating col-sm-2"  id="searchByStartDate" >
-                        <input  type="date" value="2018-06-12" class="form-control" name="startdate" placeholder="ProductID" 
+                        <input  type="date" value="${requestScope.startdate!=null?requestScope.startdate:"2018-06-12"}" class="form-control" name="startdate" placeholder="ProductID" 
                                 aria-label="ProductID" min="2018-06-07" max="2218-06-07"   aria-describedby="button-addon2">
                         <label for="">Start Date</label>
                     </div>
                     <div class="form-floating col-sm-2"  id="searchByEndDate" >
-                        <input  type="date" value="2018-06-12"  class="form-control" name="enddate" placeholder="ProductID"
+                        <input  type="date" value="${requestScope.enddate!=null?requestScope.enddate:"2018-06-12"}"  class="form-control" name="enddate" placeholder="ProductID"
                                 aria-label="ProductID" min="2018-06-07" max="2218-06-07" aria-describedby="button-addon2">
                         <label for="">End Date</label>
                     </div>
@@ -181,18 +192,16 @@
                 <div class="text-center display-6 text-info">
                     <i class="fa-thin fa-list-tree"></i>
                     List Products</div>
-                <table class="table table-hover table-striped table-responsive-md card-body text-center">
+                <table onload="selectForm();" class="table table-hover table-striped table-responsive-md card-body text-center">
                     <thead>
                         <tr>
                             <th>ID</th>
                             <th>Image</th>
                             <th class=" ">Name</th>
-                            <!--<th class="col-sm-3 ">Title</th>-->
-                            <!--<th class="col-sm-3 ">Description</th>-->
                             <th>Price</th>
                             <th class="">Quantity</th>
                             <th>Category</th>
-                            <th class=" text-center">Modify time</th>
+                            <th class=" text-center">Modified time</th>
                             <th class=" text-center">Action</th>
                         </tr>
                     </thead>
@@ -200,10 +209,9 @@
                         <c:forEach items="${requestScope.productDetailses}" var="product">
                             <tr>
                                 <td>${product.id}</td>
-                                <td><img class="avatar img-thumbnail" src="/Chatter/${product.image}" alt="product ${product.name} image"/></td>
+                                <td class="col-sm-1"><img class="avatar img-thumbnail" src="/Chatter/${product.image}" alt="product ${product.name} image"/></td>
                                 <td class="col-sm-2"><a href="/Chatter/productdetail?id=${product.id}" class="text-decoration-none text-danger" >${product.name}</a></td>
-                                <!--<td>${product.title}</td>-->
-                                <!--<td class="overflow-hidden">${product.description}</td>-->
+
                                 <td>${product.price}</td>
                                 <td>${product.quantity}</td>
                                 <td class="col-sm-2">
@@ -212,13 +220,115 @@
                                     </c:forEach>
                                 </td>
                                 <td class="text-center">${product.modifyAt}</td>
+
                                 <td class="text-lg-center">
-                                    <button type="submit" class="btn btn-outline-warning btn-box">
+
+                                    <!-- Edit Modal -->
+                                    <div class="modal modal-xl fade" id="editModal${product.id}" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header text-bg-warning">
+                                                    <h5 class="modal-title" id="editModalLabel">
+                                                        <span class="text-info fa-duotone fa-candy-corn"></span>
+                                                        Edit product</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+
+                                                    <p class="h5 text-danger">
+                                                        ${product.name}  <em class="display-6 blockquote-footer">(Product ID: ${product.id})</em>
+                                                    </p>
+
+                                                    <div class="form_container g-lg-6">
+                                                        <form action="edit_product" method="POST" class="row g-3 form-control" enctype="multipart/form-data" id="editFormModal${product.id}" >
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <label for="inputProductname" class="col-form-label">Product name</label>
+                                                                    <input id="productname"  name="productname" value="${product.name}" type="text" class="form-control" placeholder="Enter the product name" onkeyup="checkProductName()" required autofocus>
+                                                                    <span id="dumlicate_productname"></span>
+                                                                </div> 
+                                                                <div class="col-md-2">
+                                                                    <label for="inputQuantity" class=" col-form-label">Quantity</label>
+                                                                    <input id="inputQuantity" name="quantity" value="${product.quantity}" type="number" class="form-control" placeholder="" min="0" max="65536">
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <label for="inputPrice" class="col-form-label">Product price</label>
+                                                                    <div class="btn-group">
+                                                                        <input id="inputPrice" name="price" value="${product.price}" step="0.01" type="number" class="form-control" title="Please input a number!" min="0" max="65536" placeholder="" >
+                                                                        <span class="input-group-text" id="basic-addon2">$</span>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-md-6">
+                                                                    <label for="inputTitle" class="col-sm-2 col-form-label">Title</label>
+                                                                    <input id="inputTitle" name="title" value="${product.title}"  type="text" class="form-control" placeholder="Example title" required >
+                                                                </div>
+
+                                                                <div class="col">
+                                                                </div>
+
+                                                                <div class="col-md-6 p-3">
+                                                                    <label for="inputDescription" class="col-sm-2 col-form-label">Description </label>
+                                                                    <textarea id="inputDescription" name="description" value="${product.description}" 
+                                                                              type="text" class="form-control" placeholder="Enter product description" required
+                                                                              >${product.description}</textarea>
+
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                </div>
+
+                                                                <div class="col-md-6">
+                                                                    <label class="col-md-12 col-form-label">Category</label>
+                                                                </div>
+                                                                <div class ="col-md-6"></div>
+                                                                <div class="col-md-12 d-flex justify-content-start" >
+                                                                    <c:forEach items="${requestScope.categorys}" var="category">
+                                                                        <c:set var="checked" value=""></c:set>
+                                                                        <c:forEach items="${product.categorys}" var="pcategory">
+                                                                            <c:if test="${category.cid eq pcategory.cid}">
+                                                                                <c:set var="checked" value="checked"></c:set>
+                                                                            </c:if>
+                                                                        </c:forEach>
+                                                                        <input type="checkbox" class="btn-check" ${checked} name="category" value="${category.cid}" id="editbtnradio${product.id}${category.cid}">
+                                                                        <label class="btn btn-outline-primary rounded-pill" for="editbtnradio${product.id}${category.cid}">${category.cname}</label>
+                                                                    </c:forEach>
+                                                                </div>
+
+                                                                <div class="col-md-6">
+                                                                    <label for="formFile" class="form-label">Product Image</label>
+                                                                    <input accept="image/*" onchange="previewImage(${product.id});" class="form-control" type="file" name="image" >
+                                                                    <img id="img-preview${product.id}" class="img-thumbnail" src="/Chatter/${product.image}" />
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="text-center">
+                                                                <input id="inputTitle" name="productid" value="${product.id}"  type="hidden">
+
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-outline-warning" form="editFormModal${product.id}">
+                                                        <i class="fa-duotone fa-floppy-disk-pen "></i>
+                                                        Save changes</button>
+                                                    <button type="reset" class="btn btn-outline-danger" data-bs-dismiss="modal" form="editFormModal${product.id}">
+                                                        <i class="fa-duotone fa-circle-xmark"></i>
+                                                        Close</button>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <button type="button" class="btn btn-outline-warning btn-box"  data-bs-toggle="modal" data-bs-target="#editModal${product.id}">
                                         <i class="fa-duotone fa-file-lines"></i>
                                         Edit
                                     </button>
 
-                                    <button type="reset" class="btn btn-outline-danger btn-box" onclick="controlEditmode(0);controlViewmode(1);">
+                                    <button type="reset" class="btn btn-outline-danger btn-box" onclick="deleteProduct(${product.id});">
                                         <i class="fa-duotone fa-eraser"></i>
                                         Delete
                                     </button>
@@ -227,21 +337,51 @@
                         </c:forEach>
                     </tbody>
                 </table>
-                <c:forEach items="${requestScope.productDetailses}" var="product">
-                    ${product}<br><br>
-                </c:forEach>
+
             </div>
+
+
+
+            <!--pagination-->
+
+            <nav aria-label="pages" class="d-flex justify-content-center">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <button type="submit" name="page" form="searchForm" class="page-link btn"  ${requestScope.currentpage le 2? "hidden":""} value="1">First page</button>
+                    </li>
+                    <li class="page-item ${requestScope.currentpage eq 1? "disabled":""}">
+                        <button class="page-link" type="submit" name="page" form="searchForm"  value="${requestScope.currentpage-1}"  ><<</button>
+                    </li>
+                    <li class="page-item">
+                        <button class="page-link" name="page" form="searchForm" type="submit" value="${requestScope.currentpage-1}" ${requestScope.currentpage eq 1? "hidden":""}>${requestScope.currentpage-1}
+                        </button>
+                    </li>
+                    <li class="page-item active" aria-current="page">
+                        <a class="page-link">${requestScope.currentpage}</a>
+                    </li>
+                    <li class="page-item">
+                        <button class="page-link btn" form="searchForm" name="page" ${requestScope.currentpage+1 gt requestScope.totalpage? "hidden":""} value="${requestScope.currentpage + 1}" >
+                            ${requestScope.currentpage + 1}</button>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link disabled "  ${requestScope.currentpage+3 gt requestScope.totalpage? "hidden":""}>...</a></li>
+
+                    <li class="page-item">
+                        <button class="page-link"  type="submit" name="page" form="searchForm"  value="${requestScope.totalpage}" ${requestScope.currentpage + 2 gt requestScope.totalpage? "hidden":""} >${requestScope.totalpage}</button>
+                    </li>
+                    <li class="page-item ${requestScope.currentpage eq requestScope.totalpage? "disabled":""}">
+                        <button class="page-link" type="submit" name="page" form="searchForm"  value="${requestScope.currentpage+1}" >>></button>
+                    </li>
+                </ul>
+            </nav>
         </div>
         <script>
             document.getElementById('products_page').classList.add('active');
             document.getElementById('products_page').classList.remove('link-dark');
 
-            document.getElementById("searchByID").style.display = "inline";
-            document.getElementById("searchByName").style.display = "none";
-            document.getElementById("searchByMinPrice").style.display = "none";
-            document.getElementById("searchByMaxPrice").style.display = "none";
-            document.getElementById("searchByStartDate").style.display = "none";
-            document.getElementById("searchByEndDate").style.display = "none";
+
+            selectForm();
+
 
             function selectForm() {
                 var type = document.getElementById("floatingSelectGrid").value;
@@ -266,6 +406,14 @@
                     image.src = src;
                 }
             });
+            function previewImage(productid) {
+                var output = document.getElementById('img-preview' + productid);
+                output.src = URL.createObjectURL(event.target.files[0]);
+                output.onload = function () {
+                    URL.revokeObjectURL(output.src) // free memory
+                }
+            }
+
 
 
 

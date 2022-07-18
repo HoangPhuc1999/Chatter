@@ -51,7 +51,7 @@ public class ProductsController extends HttpServlet {
         String[] searchValue = new String[6];
         int type;
         int page = 1;
-        int pagesize = 20;
+        int pagesize = 10;
         
         if (request.getParameter("searchtype") == null) {
             type = 0;

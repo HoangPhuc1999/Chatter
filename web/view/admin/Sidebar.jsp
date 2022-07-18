@@ -101,7 +101,7 @@
                         <!-- Collapse 2 -->
                     </li>
                     <li>
-                        <a href="list_category" class="nav-link link-dark" id="categories_page">
+                        <a href="/Chatter/admin/list_category" class="nav-link link-dark" id="categories_page">
                             <i class="fa-solid fa-qrcode"></i>
                             Categories
                         </a>
@@ -152,3 +152,4 @@
 
     </body>
 </html>
+

@@ -4,7 +4,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpSession;
@@ -132,12 +135,12 @@ public class UserDAO extends DAO {
     //edit user profile.jsp
     //29/6 
     public void editProfile(int users_id, User editUser, UserAccount editUserAccount, UserAddress editUserAddress) {
-        String query = "UPDATE users\n" +
-                        "SET firstname = ? , lastname= ? , phonenumber= ?, email= ?, gender= ?, avatar= ?\n" +
-                        "WHERE users_id = ?";
-        String query2 = "UPDATE users_account\n" +
-                        "SET username = ?  ,password =?\n" +
-                        "WHERE users_id = ? ";
+        String query = "UPDATE users\n"
+                + "SET firstname = ? , lastname= ? , phonenumber= ?, email= ?, gender= ?, avatar= ?\n"
+                + "WHERE users_id = ?";
+        String query2 = "UPDATE users_account\n"
+                + "SET username = ?  ,password =?\n"
+                + "WHERE users_id = ? ";
         String query3 = "UPDATE users_address"
                 + "SET home_address = ? , district = ? , city = ? "
                 + "WHERE users_id = ?";
@@ -377,9 +380,9 @@ public class UserDAO extends DAO {
     //reset mat khau table UserAccount 
     //Created by An at 27/5
     public void resetPassword(String username) {
-        String query = "Update users_account\n" +
-                        "Set password = '12345'\n" +
-                        "Where username = ?";
+        String query = "Update users_account\n"
+                + "Set password = '12345'\n"
+                + "Where username = ?";
         try {
             ps = con.prepareStatement(query);
             ps.setString(1, username);
@@ -552,7 +555,7 @@ public class UserDAO extends DAO {
      * @param user
      * @return cot vua duoc sua
      */
-    public int updateUserDetailsTousersaddress(UserDetails user) {
+    public String updateUserDetailsTousersaddress(UserDetails user) {
         try {
             String sql = "UPDATE [users_address]\n"
                     + "   SET [home_address] = ?\n"
@@ -565,6 +568,45 @@ public class UserDAO extends DAO {
             statement.setString(2, user.getDistrict());
             statement.setString(3, user.getCity());
             statement.setInt(4, user.getUsers_id());
+
+            int updateStat = statement.executeUpdate();
+            if (updateStat == 0) {
+                return "\nUpdate to users_address: " + updateStat
+                        + "\nAdd to users_address: "
+                        + addUserDetailsTousersaddress(user);
+            }
+            return "\nUpdate to users_address: " + updateStat;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "\nUpdate to users_address: 0";
+    }
+
+    /**
+     * DoTuanPhong: addUser dung de them user moi vao bang users_address
+     *
+     * @param user
+     * @return cot vua duoc sua
+     */
+    public int addUserDetailsTousersaddress(UserDetails user) {
+        try {
+            String sql = "INSERT INTO [users_address]\n"
+                    + "           ([users_id]\n"
+                    + "           ,[home_address]\n"
+                    + "           ,[district]\n"
+                    + "           ,[city])\n"
+                    + "     VALUES\n"
+                    + "           (?\n"
+                    + "           ,?\n"
+                    + "           ,?\n"
+                    + "           ,?)";
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            statement.setInt(1, user.getUsers_id());
+            statement.setString(2, user.getHome_address());
+            statement.setString(3, user.getDistrict());
+            statement.setString(4, user.getCity());
 
             return statement.executeUpdate();
 
@@ -630,64 +672,408 @@ public class UserDAO extends DAO {
             rs = ps.executeQuery();
 
             if (rs.next()) {
-                if (rs.getInt(1) == 0) {
+                if (rs.getInt("users_id") == 0) {
                     return null;
-                } else {
-                    details.setUsers_id(userid);
-                    details.setFirstname(rs.getString("firstname"));
-                    details.setLastname(rs.getString("lastname"));
-                    details.setPhonenumber(rs.getString("phonenumber"));
-                    details.setEmail(rs.getString("email"));
-                    details.setGender(rs.getBoolean("gender") ? "male" : "female");
-                    details.setAvatar(rs.getString("avatar"));
-                    details.setRole(rs.getString("user_role"));
-                    details.setAccount(new UserAccount(userid, rs.getString("username"), null));
-                    details.setHome_address(rs.getString("home_address"));
-                    details.setDistrict(rs.getString("district"));
-                    details.setCity(rs.getString("city"));
-
-                    if (rs.getInt(17) == 0) {
-                        return details;
-                    }
-
-                    order.setOrderid(rs.getInt(17));
-                    order.setOrderpid(rs.getInt("order_product_id"));
-                    order.setOrderamount(rs.getInt("order_amount"));
-                    order.setOrderdate(rs.getDate("order_date"));
-                    order.setName(rs.getString("product_name"));
-                    order.setPrice(rs.getDouble("product_price"));
-                    order.setTitle(rs.getString("product_title"));
-                    order.setDescription(rs.getString("product_description"));
-                    order.setImageUrl(rs.getString("product_image_path"));
-                    order.setDate(rs.getDate("modified_at"));
-
-                    orders.add(order);
-                    details.setOrders(orders);
-
                 }
-                while (rs.next()) {
-                    Order order1 = new Order();
-                    order1.setOrderid(rs.getInt(17));
-                    order1.setOrderpid(rs.getInt("order_product_id"));
-                    order1.setOrderamount(rs.getInt("order_amount"));
-                    order1.setOrderdate(rs.getDate("order_date"));
-                    order1.setName(rs.getString("product_name"));
-                    order1.setPrice(rs.getDouble("product_price"));
-                    order1.setTitle(rs.getString("product_title"));
-                    order1.setDescription(rs.getString("product_description"));
-                    order1.setImageUrl(rs.getString("product_image_path"));
-                    order1.setDate(rs.getDate("modified_at"));
 
-                    orders.add(order1);
-                    details.setOrders(orders);
+                details.setUsers_id(userid);
+                details.setFirstname(rs.getString("firstname"));
+                details.setLastname(rs.getString("lastname"));
+                details.setPhonenumber(rs.getString("phonenumber"));
+                details.setEmail(rs.getString("email"));
+                details.setGender(rs.getBoolean("gender") ? "male" : "female");
+                details.setAvatar(rs.getString("avatar"));
+                details.setRole(rs.getString("user_role"));
+                details.setAccount(new UserAccount(userid, rs.getString("username"), null));
+                details.setHome_address(rs.getString("home_address"));
+                details.setDistrict(rs.getString("district"));
+                details.setCity(rs.getString("city"));
+
+                if (rs.getInt(17) == 0) {
+                    return details;
                 }
-                return details;
+
+                order.setOrderid(rs.getInt(17));
+                order.setOrderpid(rs.getInt("order_product_id"));
+                order.setOrderamount(rs.getInt("order_amount"));
+                order.setOrderdate(rs.getDate("order_date"));
+                order.setName(rs.getString("product_name"));
+                order.setPrice(rs.getDouble("product_price"));
+                order.setTitle(rs.getString("product_title"));
+                order.setDescription(rs.getString("product_description"));
+                order.setImageUrl(rs.getString("product_image_path"));
+                order.setDate(rs.getDate("modified_at"));
+
+                orders.add(order);
+                details.setOrders(orders);
+
             }
+            while (rs.next()) {
+                Order order1 = new Order();
+                order1.setOrderid(rs.getInt(17));
+                order1.setOrderpid(rs.getInt("order_product_id"));
+                order1.setOrderamount(rs.getInt("order_amount"));
+                order1.setOrderdate(rs.getDate("order_date"));
+                order1.setName(rs.getString("product_name"));
+                order1.setPrice(rs.getDouble("product_price"));
+                order1.setTitle(rs.getString("product_title"));
+                order1.setDescription(rs.getString("product_description"));
+                order1.setImageUrl(rs.getString("product_image_path"));
+                order1.setDate(rs.getDate("modified_at"));
+
+                orders.add(order1);
+                details.setOrders(orders);
+            }
+            return details;
+
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
 
         }
         return null;
+    }
+
+    /**
+     *
+     * Do Tuan Phong: lay du lieu day du cua user bang userid
+     *
+     * @param userid
+     * @return UserDetails
+     */
+    public List<UserDetails> getAllUserDetailses(int type, String[] searchValues, int pageindex, int pagesize) {
+        ArrayList<UserDetails> userDetailses = new ArrayList<>();
+        String sql = "SELECT *\n"
+                + "FROM users u LEFT JOIN users_role ur ON u.users_id = ur.users_id\n"
+                + "RIGHT JOIN users_account uac ON u.users_id = uac.users_id\n"
+                + "LEFT JOIN users_address uar ON u.users_id = uar.users_id\n";
+        sql += "ORDER BY u.users_id OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, pageindex);
+            ps.setInt(2, pagesize);
+
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                UserDetails details = new UserDetails();
+
+                details.setUsers_id(rs.getInt("users_id"));
+                details.setFirstname(rs.getString("firstname"));
+                details.setLastname(rs.getString("lastname"));
+                details.setPhonenumber(rs.getString("phonenumber"));
+                details.setEmail(rs.getString("email"));
+                details.setGender(rs.getBoolean("gender") ? "male" : "female");
+                details.setAvatar(rs.getString("avatar"));
+                details.setRole(rs.getString("user_role"));
+                details.setAccount(new UserAccount(details.getUsers_id(), rs.getString("username"), null));
+                details.setHome_address(rs.getString("home_address"));
+                details.setDistrict(rs.getString("district"));
+                details.setCity(rs.getString("city"));
+
+                userDetailses.add(details);
+            }
+            return userDetailses;
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+        return null;
+    }
+
+    /**
+     * Do Tuan Phong
+     *
+     * tra ve so luong product trong ham getAllProducts
+     *
+     * @param type
+     * @param strings
+     * @return
+     */
+    public int countproducts(int type, String[] strings) {
+        try {
+            String sql = "SELECT *\n"
+                    + "FROM users u LEFT JOIN users_role ur ON u.users_id = ur.users_id\n"
+                    + "RIGHT JOIN users_account uac ON u.users_id = uac.users_id\n"
+                    + "LEFT JOIN users_address uar ON u.users_id = uar.users_id\n";
+
+            sql = "SELECT COUNT(DISTINCT product_id) Total\n"
+                    + "FROM(\n" + sql + ") pd";
+
+            ps = connection.prepareStatement(sql);
+//            if (strings[0] != null) {
+//                if (strings[0].trim().length() != 0) {
+//                    switch (type) {
+//                        case 0:
+//                        case 1:
+//                            ps.setString(1, strings[0]);
+//                            break;
+//                        case 2:
+//                            ps.setDouble(1, Double.parseDouble(strings[0]));
+//                            ps.setDouble(2, Double.parseDouble(strings[1]));
+//                            break;
+//                        case 3:
+//                            ps.setTimestamp(1, Timestamp.valueOf(strings[0]));
+//                            ps.setTimestamp(2, Timestamp.valueOf(strings[1]));
+//                            break;
+//                        default:
+//                            break;
+//
+//                    }
+//                }
+//            }
+
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("Total");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return -1;
+    }
+
+    public List<UserDetails> getAllUserDetailsesWithOrders(int type, String[] searchValues, int pageindex, int pagesize) {
+
+        ArrayList<UserDetails> userDetailses = (ArrayList< UserDetails>) getAllUserDetailses(type, searchValues, pageindex, pagesize);
+        for (UserDetails userDetails : userDetailses) {
+            userDetails = getUserDetailsById(userDetails.getUsers_id());
+        }
+        return userDetailses;
+    }
+
+    /**
+     * Do Tuan Phong
+     *
+     * All deleted method
+     *
+     * @param userID
+     * @return
+     */
+    public int deleteInUsersAddress(int userID) {
+        try {
+            xSql = "DELETE FROM [users_address]\n"
+                    + "      WHERE users_id =?";
+            ps = connection.prepareStatement(xSql);
+            ps.setInt(1, userID);
+            return ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+    /**
+     * Do Tuan Phong
+     *
+     * All deleted method
+     *
+     * @param userID
+     * @return
+     */
+    public int deleteInUsersAccount(int userID) {
+        try {
+            xSql = "DELETE FROM [users_account]\n"
+                    + "      WHERE users_id =?";
+            ps = connection.prepareStatement(xSql);
+            ps.setInt(1, userID);
+            return ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+    /**
+     * Do Tuan Phong
+     *
+     * All deleted method
+     *
+     * @param userID
+     * @return
+     */
+    public int deleteInUsersRole(int userID) {
+        try {
+            xSql = "DELETE FROM [users_role]\n"
+                    + "      WHERE users_id =?";
+            ps = connection.prepareStatement(xSql);
+            ps.setInt(1, userID);
+            return ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+    /**
+     * Do Tuan Phong
+     *
+     * All deleted method
+     *
+     * @param userID
+     * @return
+     */
+    public int deleteInMessanges(int userID) {
+        try {
+            xSql = "DELETE FROM [messanges]\n"
+                    + "      WHERE sender =? OR receiver =?";
+            ps = connection.prepareStatement(xSql);
+            ps.setInt(1, userID);
+            ps.setInt(2, userID);
+            return ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+    /**
+     * Do Tuan Phong
+     *
+     * All deleted method
+     *
+     * @param userID
+     * @return
+     */
+    public int deleteInUsersFriends(int userID) {
+        try {
+            xSql = "DELETE FROM [users_friends]\n"
+                    + "      WHERE user_id =? OR receiver =?";
+            ps = connection.prepareStatement(xSql);
+            ps.setInt(1, userID);
+            return ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+    /**
+     * Do Tuan Phong
+     *
+     * All deleted method
+     *
+     * @param userID
+     * @return
+     */
+    public int deleteInUsersPayment(int userID) {
+        try {
+            xSql = "DELETE FROM [users_payment]\n"
+                    + "      WHERE user_id =? ";
+            ps = connection.prepareStatement(xSql);
+            ps.setInt(1, userID);
+            return ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+    /**
+     * Do Tuan Phong
+     *
+     * All deleted method
+     *
+     * @param userID
+     * @return
+     */
+    public int deleteInUsersGroup(int userID) {
+        try {
+            xSql = "DELETE FROM [groups]\n"
+                    + "      WHERE user_id =? ";
+            ps = connection.prepareStatement(xSql);
+            ps.setInt(1, userID);
+            return ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+    /**
+     * Do Tuan Phong
+     *
+     * All deleted method
+     *
+     * @param userID
+     * @return
+     */
+    public int deleteInOrders(int userID) {
+        try {
+            xSql = "DELETE FROM [orders]\n"
+                    + "      WHERE order_by =? ";
+            ps = connection.prepareStatement(xSql);
+            ps.setInt(1, userID);
+            return ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+    /**
+     * Do Tuan Phong
+     *
+     * All deleted method
+     *
+     *
+     * @param userID
+     * @return
+     */
+    public int deleteInUserCart(int userID) {
+        try {
+            xSql = "DELETE FROM [users_cart]\n"
+                    + "      WHERE user_id =? ";
+            ps = connection.prepareStatement(xSql);
+            ps.setInt(1, userID);
+            return ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+    /**
+     * Do Tuan Phong
+     *
+     * All deleted method
+     *
+     * @param userID
+     * @return
+     */
+
+    public int deleteInUsers(int userID) {
+        try {
+            xSql = "DELETE FROM [users]\n"
+                    + "      WHERE user_id =? ";
+            ps = connection.prepareStatement(xSql);
+            ps.setInt(1, userID);
+            return ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+    /**
+     * Do Tuan Phong
+     *
+     * delete a user from database
+     *
+     * @param userID
+     * @return
+     */
+    public String deleteUser(int userID) {
+        return "/n Delete user" +userID +" in users_address: " + deleteInUsersAddress(userID)
+                + "/n Delete user in users_account: " +  deleteInUsersAccount(userID)
+                + "/n Delete user in users_role: " +  deleteInUsersRole(userID)
+                + "/n Delete user in message: " +  deleteInMessanges(userID)
+                + "/n Delete user in user_payment: " +  deleteInUsersPayment(userID)
+                + "/n Delete user in users_friends: " +  deleteInUsersFriends(userID)
+                + "/n Delete user in orders: " +  deleteInOrders(userID)
+                + "/n Delete user in groups: " +  deleteInUsersGroup(userID)
+                + "/n Delete user in users_cart: " +  deleteInUserCart(userID)
+                + "/n Delete user in users: " +  deleteInUsers(userID);
     }
 
     public static void main(String[] args) throws SQLException {
@@ -720,7 +1106,6 @@ public class UserDAO extends DAO {
 //        User eAccUser = new User("make", "gg", "0675565454", "user3@fpt.edu.vn", "0", null);
 //        dao.editProfile(1, eAccUser, editAcc, eAccAddress);
 //        System.out.println(dao.getUserFromId(1));
-
     }
 
 }

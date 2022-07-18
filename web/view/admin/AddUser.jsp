@@ -62,32 +62,32 @@
                     <div class="row">
                         <div class="col-md-6">
                             <label for="inputUsername" class="col-sm-2 col-form-label">Username</label>
-                            <input id="username"  name="username"  type="text" class="form-control" placeholder="Enter username" onkeyup="checkUsername()" required autofocus value=${user} >
+                            <input id="username"  name="username"  type="text" class="form-control" placeholder="Enter username" onkeyup="checkUsername()" required autofocus>
                             <span id="dumlicate_username"></span>
                         </div> 
                         <div class="col-md-6">
                             <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
-                            <input id="inputPassword" name="password" type="password" class="form-control" placeholder="Enter password" required value=${pass}>
+                            <input id="inputPassword" name="password" type="password" class="form-control" placeholder="Enter password" required>
                         </div>
                         <div class="col-md-6">
                             <label for="inputFirstname" class=" col-form-label">First name</label>
-                            <input id="inputFirstname" name="firstname" type="text" class="form-control" placeholder="User's first name" value=${first}>
+                            <input id="inputFirstname" name="firstname" type="text" class="form-control" placeholder="User's first name">
                         </div>
                         <div class="col-md-6">
                             <label for="inputLastname" class="col-form-label">Last name</label>
-                            <input id="inputLastname" name="lastname" type="text" class="form-control" placeholder="User's last name" value=${last}>
+                            <input id="inputLastname" name="lastname" type="text" class="form-control" placeholder="User's last name">
                         </div>
 
                         <div class="col-md-6">
                             <label for="inputPhonenumber" class="col-form-label">Phone number</label>
-                            <input id="inputPhonenumber" name="phonenumber" type="tel" required class="form-control" placeholder="0906111111" pattern="^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$" title="Please input a phone number in Vietnam (10 digits)" value=${phone} >
+                            <input id="inputPhonenumber" name="phonenumber" type="tel" required class="form-control" placeholder="0906111111" pattern="^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$" title="Please input a phone number in Vietnam (10 digits)">
                         </div>
 
                         <div class="col-md-6">
                         </div>
                         <div class="col-md-6">
                             <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
-                            <input id="inputEmail" name="email" type="email" class="form-control" placeholder="mee@example.com" required value=${email}>
+                            <input id="inputEmail" name="email" type="email" pattern="^[a-zA-Z0-9.! #$%&'*+=? ^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$" class="form-control" placeholder="mee@example.com" required >
 
                         </div>
                         <div class="col-md-6">

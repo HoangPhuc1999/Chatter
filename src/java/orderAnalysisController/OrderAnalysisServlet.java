@@ -3,25 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package orderdetailController;
+package orderAnalysisController;
 
 import DAO.OrderDetailDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.OrderDetail;
+import model.OrderAnalysis;
+import model.SaleInfo;
 
 /**
  *
  * @author Hoang Phuc
  */
-@WebServlet(name = "OrderDetailServlet", urlPatterns = {"/admin/orders"})
-public class OrderDetailServlet extends HttpServlet {
+@WebServlet(name = "OrderAnalysis", urlPatterns = {"/admin/orderanalysis"})
+public class OrderAnalysisServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,11 +35,17 @@ public class OrderDetailServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter pr = response.getWriter();
         OrderDetailDAO u = new OrderDetailDAO();
-        List<OrderDetail> lst = u.getAllOrderDetail();
-        request.setAttribute("orderdetaillist", lst);
-        request.getRequestDispatcher("../OrderDetail.jsp").forward(request, response);
+        List<OrderAnalysis> lst = u.getOrderAnalysisTop5();
+        List<SaleInfo> listOfTotalSale = u.getMostRecentTotalSale();
+        SaleInfo saleInfo = u.getTodaySale();
+        SaleInfo totalSale = u.getTotalSale();
+        request.setAttribute("top5", lst);
+        request.setAttribute("listoftotalsale", listOfTotalSale);
+        request.setAttribute("todaysale", saleInfo);
+        request.setAttribute("totalsale", totalSale);
+        request.getRequestDispatcher("../OrderAnalysis.jsp").forward(request, response);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -68,17 +74,7 @@ public class OrderDetailServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        PrintWriter pr = response.getWriter();
-        String order_id = request.getParameter("order_id");
-        OrderDetailDAO u = new OrderDetailDAO();
-        List<OrderDetail> lst;
-        if (order_id == null || order_id.isEmpty() || order_id.equals("all")) {
-            lst = u.getAllOrderDetail();
-        } else {
-            lst = u.getAllOrderDetailByID(order_id);
-        }
-        request.setAttribute("orderdetaillist", lst);
-        request.getRequestDispatcher("../OrderDetail.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**

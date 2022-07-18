@@ -5,6 +5,7 @@
  */
 package DAO;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.Review;
@@ -31,8 +32,9 @@ public class ReviewDAO extends DAO {
             ps.executeUpdate();
             ps.close();
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+
         }
     }
 
@@ -57,7 +59,7 @@ public class ReviewDAO extends DAO {
             }
             rs.close();
             ps.close();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e.toString());
         }
         return (list);
@@ -86,7 +88,8 @@ public class ReviewDAO extends DAO {
             }
             rs.close();
             ps.close();
-        } catch (Exception e) {
+        } catch (SQLException e) {
+            System.out.println(e.toString());
         }
         return (list);
 
@@ -106,7 +109,8 @@ public class ReviewDAO extends DAO {
             rs.close();
             ps.close();
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
+            System.out.println(e.toString());
         }
 
         return name;
