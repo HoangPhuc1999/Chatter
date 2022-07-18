@@ -312,7 +312,7 @@
                                                     <button type="submit" class="btn btn-outline-warning" form="editFormModal${product.id}">
                                                         <i class="fa-duotone fa-floppy-disk-pen "></i>
                                                         Save changes</button>
-                                                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
+                                                    <button type="reset" class="btn btn-outline-danger" data-bs-dismiss="modal" form="editFormModal${product.id}">
                                                         <i class="fa-duotone fa-circle-xmark"></i>
                                                         Close</button>
                                                 </div>
@@ -338,11 +338,6 @@
                     </tbody>
                 </table>
 
-
-
-                <c:forEach items="${requestScope.productDetailses}" var="product">
-                    ${product}<br><br>
-                </c:forEach>
             </div>
 
 
