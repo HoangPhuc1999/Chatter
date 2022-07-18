@@ -81,7 +81,7 @@
 
         <div class="col-sm-9 gy-2">
 
-            ${user}
+
 
             <c:set var = "user" scope = "session" value = "${requestScope.user}"/>
             <c:if test="${user == null}">

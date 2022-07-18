@@ -780,8 +780,8 @@ public class UserDAO extends DAO {
         }
         return null;
     }
-    
-        /**
+
+    /**
      * Do Tuan Phong
      *
      * tra ve so luong product trong ham getAllProducts
@@ -793,9 +793,9 @@ public class UserDAO extends DAO {
     public int countproducts(int type, String[] strings) {
         try {
             String sql = "SELECT *\n"
-                + "FROM users u LEFT JOIN users_role ur ON u.users_id = ur.users_id\n"
-                + "RIGHT JOIN users_account uac ON u.users_id = uac.users_id\n"
-                + "LEFT JOIN users_address uar ON u.users_id = uar.users_id\n";
+                    + "FROM users u LEFT JOIN users_role ur ON u.users_id = ur.users_id\n"
+                    + "RIGHT JOIN users_account uac ON u.users_id = uac.users_id\n"
+                    + "LEFT JOIN users_address uar ON u.users_id = uar.users_id\n";
 
             sql = "SELECT COUNT(DISTINCT product_id) Total\n"
                     + "FROM(\n" + sql + ") pd";
@@ -840,6 +840,240 @@ public class UserDAO extends DAO {
             userDetails = getUserDetailsById(userDetails.getUsers_id());
         }
         return userDetailses;
+    }
+
+    /**
+     * Do Tuan Phong
+     *
+     * All deleted method
+     *
+     * @param userID
+     * @return
+     */
+    public int deleteInUsersAddress(int userID) {
+        try {
+            xSql = "DELETE FROM [users_address]\n"
+                    + "      WHERE users_id =?";
+            ps = connection.prepareStatement(xSql);
+            ps.setInt(1, userID);
+            return ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+    /**
+     * Do Tuan Phong
+     *
+     * All deleted method
+     *
+     * @param userID
+     * @return
+     */
+    public int deleteInUsersAccount(int userID) {
+        try {
+            xSql = "DELETE FROM [users_account]\n"
+                    + "      WHERE users_id =?";
+            ps = connection.prepareStatement(xSql);
+            ps.setInt(1, userID);
+            return ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+    /**
+     * Do Tuan Phong
+     *
+     * All deleted method
+     *
+     * @param userID
+     * @return
+     */
+    public int deleteInUsersRole(int userID) {
+        try {
+            xSql = "DELETE FROM [users_role]\n"
+                    + "      WHERE users_id =?";
+            ps = connection.prepareStatement(xSql);
+            ps.setInt(1, userID);
+            return ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+    /**
+     * Do Tuan Phong
+     *
+     * All deleted method
+     *
+     * @param userID
+     * @return
+     */
+    public int deleteInMessanges(int userID) {
+        try {
+            xSql = "DELETE FROM [messanges]\n"
+                    + "      WHERE sender =? OR receiver =?";
+            ps = connection.prepareStatement(xSql);
+            ps.setInt(1, userID);
+            ps.setInt(2, userID);
+            return ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+    /**
+     * Do Tuan Phong
+     *
+     * All deleted method
+     *
+     * @param userID
+     * @return
+     */
+    public int deleteInUsersFriends(int userID) {
+        try {
+            xSql = "DELETE FROM [users_friends]\n"
+                    + "      WHERE user_id =? OR receiver =?";
+            ps = connection.prepareStatement(xSql);
+            ps.setInt(1, userID);
+            return ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+    /**
+     * Do Tuan Phong
+     *
+     * All deleted method
+     *
+     * @param userID
+     * @return
+     */
+    public int deleteInUsersPayment(int userID) {
+        try {
+            xSql = "DELETE FROM [users_payment]\n"
+                    + "      WHERE user_id =? ";
+            ps = connection.prepareStatement(xSql);
+            ps.setInt(1, userID);
+            return ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+    /**
+     * Do Tuan Phong
+     *
+     * All deleted method
+     *
+     * @param userID
+     * @return
+     */
+    public int deleteInUsersGroup(int userID) {
+        try {
+            xSql = "DELETE FROM [groups]\n"
+                    + "      WHERE user_id =? ";
+            ps = connection.prepareStatement(xSql);
+            ps.setInt(1, userID);
+            return ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+    /**
+     * Do Tuan Phong
+     *
+     * All deleted method
+     *
+     * @param userID
+     * @return
+     */
+    public int deleteInOrders(int userID) {
+        try {
+            xSql = "DELETE FROM [orders]\n"
+                    + "      WHERE order_by =? ";
+            ps = connection.prepareStatement(xSql);
+            ps.setInt(1, userID);
+            return ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+    /**
+     * Do Tuan Phong
+     *
+     * All deleted method
+     *
+     *
+     * @param userID
+     * @return
+     */
+    public int deleteInUserCart(int userID) {
+        try {
+            xSql = "DELETE FROM [users_cart]\n"
+                    + "      WHERE user_id =? ";
+            ps = connection.prepareStatement(xSql);
+            ps.setInt(1, userID);
+            return ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+    /**
+     * Do Tuan Phong
+     *
+     * All deleted method
+     *
+     * @param userID
+     * @return
+     */
+
+    public int deleteInUsers(int userID) {
+        try {
+            xSql = "DELETE FROM [users]\n"
+                    + "      WHERE user_id =? ";
+            ps = connection.prepareStatement(xSql);
+            ps.setInt(1, userID);
+            return ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+    /**
+     * Do Tuan Phong
+     *
+     * delete a user from database
+     *
+     * @param userID
+     * @return
+     */
+    public String deleteUser(int userID) {
+        return "/n Delete user" +userID +" in users_address: " + deleteInUsersAddress(userID)
+                + "/n Delete user in users_account: " +  deleteInUsersAccount(userID)
+                + "/n Delete user in users_role: " +  deleteInUsersRole(userID)
+                + "/n Delete user in message: " +  deleteInMessanges(userID)
+                + "/n Delete user in user_payment: " +  deleteInUsersPayment(userID)
+                + "/n Delete user in users_friends: " +  deleteInUsersFriends(userID)
+                + "/n Delete user in orders: " +  deleteInOrders(userID)
+                + "/n Delete user in groups: " +  deleteInUsersGroup(userID)
+                + "/n Delete user in users_cart: " +  deleteInUserCart(userID)
+                + "/n Delete user in users: " +  deleteInUsers(userID);
     }
 
     public static void main(String[] args) throws SQLException {
