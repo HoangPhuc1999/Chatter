@@ -1,5 +1,5 @@
 <%-- 
-    Document   : ListProduct
+    Document   : ListUsers
     Created on : Jun 15, 2022, 11:09:38 AM
     Author     : Tuan Phong
 --%>
@@ -43,12 +43,12 @@
         <title>JSP Page</title>
 
         <script>
-            function deleteUser(uid)
+            function deleteUser(userid)
             {
                 var result = confirm("Are you sure?");
                 if (result)
                 {
-                    window.location.href = "/Chatter/admin/delete_user?userid=" + pid;
+                    window.location.href = "/Chatter/admin/delete_user?userid=" + userid;
                 }
             }
             var usernames = [];
@@ -85,7 +85,7 @@
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
                                 <div class="modal-header text-bg-success">
-                                    <h5 class="modal-title" id="addProductModalLabel">
+                                    <h5 class="modal-title" id="addUserModalLabel">
                                         <i class="fa-solid fa-people-robbery"></i>
                                         Add new User</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -159,7 +159,7 @@
                     </div>
                 </div>
 
-                <form class="col input-group justify-content-end" action="/Chatter/admin/products" method="get" id="searchForm">
+                <form class="col input-group justify-content-end" action="/Chatter/admin/users" method="get" id="searchForm">
                     <div class="form-floating">
                         <select onchange="selectForm();" class="form-select" name="searchtype" id="floatingSelectGrid" >
                             <option ${requestScope.searchtype eq '0' || requestScope.searchtype == null ? "selected" :"" } value="0">User ID</option>
@@ -418,7 +418,7 @@
                                         Edit
                                     </button>
 
-                                    <button type="reset" class="btn btn-outline-danger btn-box" onclick="deleteProduct(${product.id});">
+                                    <button type="submit" class="btn btn-outline-danger btn-box" onclick="deleteUser(${user.users_id});">
                                         <i class="fa-duotone fa-eraser"></i>
                                         Delete
                                     </button>
