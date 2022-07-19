@@ -1081,12 +1081,17 @@ public class UserDAO extends DAO {
 //        UserAccount a = new UserAccount();
 //        a = dao.checkAccountExist("user1");
 
-//        //check sign up
-//        UserAccount newAcc = new UserAccount("x","x");  
-//        UserAddress newAccAddress= new UserAddress("x","x","x");
-//        User newAccUser = new User("femmmmm","gqw","0675565454","user3@fpt.edu.vn","0",null);
-//        
-//        dao.singup(newAccUser,newAcc,newAccAddress); //them user
+        //check sign up
+        UserAccount newAcc = new UserAccount("user99","user99");  
+        UserAddress newAccAddress= new UserAddress("x","x","x");
+        User newAccUser = new User();
+        newAccUser.setEmail("user3@fpt.edu.vn");
+        newAccUser.setPhonenumber("0672345234");
+        newAccUser.setFirstname("heee");
+        newAccUser.setLastname("heee");
+        newAccUser.setGender("0");
+        
+        dao.singup(newAccUser,newAcc,newAccAddress); //them user
 //        
 //        
 //       ArrayList<UserAccount> b = dao.getAllAccounts();
