@@ -115,7 +115,15 @@ public class SignUpServlet extends HttpServlet {
                 //dc signup
                 UserAccount newAcc = new UserAccount(user, pass);
                 UserAddress newAccAddress = new UserAddress(home_address, district, city);
-                User newUser = new User(firstname, lastname, phone, email, gender, avapath);
+                User newUser = new User();
+                
+                newUser.setFirstname(firstname);
+                newUser.setLastname(lastname);
+                newUser.setPhonenumber(phone);
+                newUser.setEmail(email);
+                newUser.setGender(gender);
+                newUser.setAvatar(avapath);
+               
                 dao.singup(newUser, newAcc, newAccAddress); //them user
 
                 request.setAttribute("message", "Sign up Success!");
