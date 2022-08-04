@@ -121,7 +121,7 @@
 				<div class="list-user">
 					<ul>
 						<c:forEach var="friend" items="${friends}">
-                                                    <li id=${friend.username } onclick="setReceiver(this);"></li>
+                                                    <li id=""${friend.username }" onclick="setReceiver(this);"></li>
 								<div class="user-contain">
 									<div class="user-img">
 										<img id="img-${friend.username}"
@@ -142,7 +142,5 @@
 		</div>
 	</div>
 
-
-	<script type="text/javascript" src="js/chatbox.js" />" charset="utf-8"></script>
 </body>
 </html>
