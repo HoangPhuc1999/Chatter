@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.*;
+import model.ProductDetails;
 
 /**
  *
@@ -605,6 +606,8 @@ public class ProductDAO extends DAO {
                     + "           (?\n"
                     + "           ,?\n"
                     + "           ,?)";
+            if(pd.getImageUrl()==null)
+                return 0;
             PreparedStatement statement = connection.prepareStatement(sql);
 
             statement.setInt(1, pd.getId());
