@@ -75,8 +75,8 @@ public class AddController extends HttpServlet {
         LocalDateTime createAt = LocalDateTime.now();
         productDetails.setCreateAt(createAt);
         productDetails.setModifyAt(createAt);
-        productDetails.setQuantity(Integer.parseInt(request.getParameter("quantity")));
-        productDetails.setPrice(Double.parseDouble(request.getParameter("price")));
+        productDetails.setQuantity(Integer.parseInt(request.getParameter("quantity").isEmpty()?"0":request.getParameter("quantity")));
+        productDetails.setPrice(Double.parseDouble(request.getParameter("price").isEmpty()?"0":request.getParameter("price")));
         productDetails.setTitle(request.getParameter("title"));
         productDetails.setDescription(request.getParameter("description"));
 
@@ -121,6 +121,7 @@ public class AddController extends HttpServlet {
 //            Logger.getLogger(AddController.class.getName()).log(Level.SEVERE, null, ex);
 //        }
 
+//        response.sendRedirect("/Chatter/admin/edit_product?productid=" + productDetails.getId());
         response.sendRedirect("../productdetail?id=" + productDetails.getId());
     }
 
