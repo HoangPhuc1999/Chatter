@@ -103,7 +103,7 @@ public class ProductsController extends HttpServlet {
         request.setAttribute("categorys", categorys);
         request.setAttribute("productDetailses", productDetailses);
         request.setAttribute("numberentries", numberentries);
-        request.setAttribute("totalpage", numberentries / pagesize + 1);
+        request.setAttribute("totalpage", (numberentries-1) / pagesize + 1);
         request.setAttribute("currentpage", page);
         request.getRequestDispatcher("../view/admin/Products.jsp").forward(request, response);
     }

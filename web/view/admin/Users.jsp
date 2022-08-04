@@ -73,7 +73,7 @@
             <div class="row">
                 <div class="col-2">
                     <button class="btn btn-outline-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
-                        Menu</button>
+                        <i class="fa-duotone fa-bars"></i></button>
                 </div>
                 <div class="col-sm-3">
                     <button class="btn btn-outline-success"  data-bs-toggle="modal" data-bs-target="#addModal">
@@ -236,7 +236,7 @@
                                 <td>${user.role}</td>
                                 <td>${user.phonenumber}</td>
                                 <td>${user.email}</td>
-                                <td class="text-center col-3">${user.home_address}${", "}${user.district}${", "}${user.city}</td>
+                                <td class="text-center col-3">${user.home_address!=null?user.home_address:", "}${user.district!=null?user.district:", "}${user.city}</td>
 
                                 <td class="text-lg-center">
 
@@ -464,6 +464,14 @@
                     </li>
                 </ul>
             </nav>
+        </div>
+        <div class=" text-bg-dark g-md-2 row" >
+            <div class="col-2">
+            </div>
+            <div class="col-10">
+                <br>
+                <jsp:include page="../../Footer.jsp" />
+            </div>
         </div>
         <script>
             document.getElementById('users_page').classList.add('active');

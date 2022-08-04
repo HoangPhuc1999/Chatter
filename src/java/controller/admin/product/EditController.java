@@ -120,6 +120,7 @@ public class EditController extends HttpServlet {
 //        } catch (InterruptedException ex) {
 //            Logger.getLogger(AddController.class.getName()).log(Level.SEVERE, null, ex);
 //        }
+//        response.sendRedirect("/Chatter/admin/edit_product?productid=" + productDetails.getId());
         response.sendRedirect("../productdetail?id=" + productDetails.getId());
     }
 

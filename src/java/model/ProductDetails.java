@@ -5,6 +5,8 @@
 package model;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 
 /**
  *
@@ -14,6 +16,7 @@ public class ProductDetails extends ProductImage{
     private int quantity;
     private LocalDateTime modifyAt;
     private LocalDateTime createAt;
+    private Date modifyAtDate;
 
     public int getQuantity() {
         return quantity;
@@ -29,6 +32,9 @@ public class ProductDetails extends ProductImage{
 
     public void setModifyAt(LocalDateTime modifyAt) {
         this.modifyAt = modifyAt;
+        this.modifyAtDate = Date
+      .from(modifyAt.atZone(ZoneId.systemDefault())
+      .toInstant());
     }
 
     public LocalDateTime getCreateAt() {
@@ -38,6 +44,15 @@ public class ProductDetails extends ProductImage{
     public void setCreateAt(LocalDateTime createAt) {
         this.createAt = createAt;
     }
+
+    public Date getModifyAtDate() {
+        return modifyAtDate;
+    }
+
+    public void setModifyAtDate(Date modifyAtDate) {
+        this.modifyAtDate = modifyAtDate;
+    }
+    
 
     @Override
     public String toString() {

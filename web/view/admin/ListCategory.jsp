@@ -181,9 +181,14 @@
                 </div>
             </div>
 
-            <!-- footer section -->
-            <jsp:include page="../../Footer.jsp" />
-            <!-- footer section -->
+            <div class=" text-bg-dark g-md-2 row" >
+                <div class="col-2">
+                </div>
+                <div class="col-10">
+                    <br>
+                    <jsp:include page="../../Footer.jsp" />
+                </div>
+            </div>
             <script>
 
                 for (var i = 0; i < cids.length; i++)

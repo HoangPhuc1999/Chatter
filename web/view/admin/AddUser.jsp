@@ -116,6 +116,14 @@
                 </form>
             </div>
         </div>
+            <div class=" text-bg-dark g-md-2 row" >
+            <div class="col-2">
+            </div>
+            <div class="col-10">
+                <br>
+                <jsp:include page="../../Footer.jsp" />
+            </div>
+        </div>
 
         <script>
             document.getElementById('users_page').classList.add('active');

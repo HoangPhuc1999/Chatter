@@ -117,7 +117,7 @@
             </div>
         </div>
 
-        <div class=" btn-dark g-md-2 row" >
+        <div class=" text-bg-dark g-md-2 row" >
             <div class="col-2">
             </div>
             <div class="col-10">
