@@ -4,7 +4,9 @@
     Author     : Tuan Phong
 --%>
 
+<%@page import="java.util.Date"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -62,6 +64,8 @@
             <jsp:include page="Sidebar.jsp" />
         </div>
         <div class="col-sm-9 gy-2">
+            <c:set var="ourDate" value="<%=new Date()%>"/>
+            <fmt:formatDate pattern = "yyyy-MM-dd" value = "${ourDate}" var="today"/>
 
             <div class="row">
                 <div class="col-sm-3">
@@ -149,7 +153,7 @@
                             <option ${requestScope.searchtype eq '0' || requestScope.searchtype == null ? "selected" :"" } value="0">Product ID</option>
                             <option ${requestScope.searchtype eq '1'? "selected" :""} value="1">Product name</option>
                             <option ${requestScope.searchtype eq '2'? "selected" :""} value="2">Product price</option>
-                            <option ${requestScope.searchtype eq '3'? "selected" :""} value="3">Modify date</option>
+                            <option ${requestScope.searchtype eq '3'? "selected" :""} value="3">Modified date</option>
                         </select>
 
 
@@ -177,7 +181,7 @@
                         <label for="">Start Date</label>
                     </div>
                     <div class="form-floating col-sm-2"  id="searchByEndDate" >
-                        <input  type="date" value="${requestScope.enddate!=null?requestScope.enddate:"2018-06-12"}"  class="form-control" name="enddate" placeholder="ProductID"
+                        <input  type="date" value="${requestScope.enddate!=null?requestScope.enddate:today}"  class="form-control" name="enddate" placeholder="ProductID"
                                 aria-label="ProductID" min="2018-06-07" max="2218-06-07" aria-describedby="button-addon2">
                         <label for="">End Date</label>
                     </div>
@@ -219,7 +223,10 @@
                                         <span class="badge rounded-pill bg-info">${category.cname}</span>
                                     </c:forEach>
                                 </td>
-                                <td class="text-center">${product.modifyAt}</td>
+                                <td class="text-center">
+                                    <!--type = "both" 
+                                                                                        dateStyle = "medium" timeStyle = "short"-->
+                                    <fmt:formatDate pattern = "k:mm:ss  EEE dd-MMM-yyyy"  value = "${product.modifyAtDate}" /></td>
 
                                 <td class="text-lg-center">
 
@@ -374,6 +381,14 @@
                     </li>
                 </ul>
             </nav>
+        </div>
+        <div class=" text-bg-dark g-md-2 row" >
+            <div class="col-2">
+            </div>
+            <div class="col-10">
+                <br>
+                <jsp:include page="../../Footer.jsp" />
+            </div>
         </div>
         <script>
             document.getElementById('products_page').classList.add('active');
