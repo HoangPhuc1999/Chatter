@@ -59,12 +59,27 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="/Chatter/admin/orders" class="nav-link link-dark" id="orders_page">
-                            <i class="fa-solid fa-cart-shopping"></i>
+                       <a href="#collapseOrders" class="nav-link link-dark list-group-item list-group-item-action py-2 p-3 ripple" id="products_page"
+                           data-bs-toggle="collapse">
+                            <i class="fa-solid fa-bowl-food"></i>
                             Orders
                         </a>
                         <!-- Collapsed content -->
-
+ <ul
+                            id="collapseOrders"
+                            class="collapse list-group list-group-flush"
+                            >
+                            <li class="list-group-item py-1">
+                                <a href="/Chatter/admin/orders" class="text-reset text-decoration-none">Order</a>
+                            </li>
+                            <li class="list-group-item py-1">
+                                <a href="/Chatter/admin/orderanalysis" class="text-reset text-decoration-none">Order Analysis</a>
+                            </li>
+                            <li class="list-group-item py-1">
+                                <a href="/Chatter/admin/ordersbydate" class="text-reset text-decoration-none">Search Order by date</a>
+                            </li>
+                            
+                        </ul>
                     </li>
                     <li>
                         <a href="/Chatter/admin/booking" class="nav-link link-dark" id="bookings_page">
@@ -101,7 +116,7 @@
                         <!-- Collapse 2 -->
                     </li>
                     <li>
-                        <a href="list_category" class="nav-link link-dark" id="categories_page">
+                        <a href="/Chatter/admin/list_category" class="nav-link link-dark" id="categories_page">
                             <i class="fa-solid fa-qrcode"></i>
                             Categories
                         </a>
@@ -152,3 +167,4 @@
 
     </body>
 </html>
+

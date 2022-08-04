@@ -7,10 +7,12 @@ package reviewController;
 
 import DAO.ProductDAO;
 import DAO.ReviewDAO;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

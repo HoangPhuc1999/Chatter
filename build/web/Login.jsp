@@ -11,7 +11,7 @@
 <%
     String message = (String) request.getAttribute("message");
     if (message == null) {
-        request.setAttribute("message", "Sign up");
+        request.setAttribute("message", "Login");
     }
     // If you use EL or JSTL, the above statement is not necessary. 
 %>  
