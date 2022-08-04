@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.Product;
-import model.ProductImage;
+import model.ProductDetails;
 import model.Review;
 import model.User;
 
@@ -32,13 +32,14 @@ public class ProductDetailServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter pr = response.getWriter();
         String id = request.getParameter("id");
         ProductDAO d = new ProductDAO();
-        ProductImage pd = d.getProductImageById(id);
-        Product x = d.getProductById(id);
-        String imageUrl = pd.getImageUrl();
-
+        
+        String [] strings = new String[6];
+        strings[0] = id;
+        ProductDetails pd = ((ProductDetails) d.getAllProductDetailses(0, strings, 0, 1).get(0));
+        Product x = pd;
+        
         ReviewDAO dao = new ReviewDAO();
         List<Review> list = new ArrayList<>();
         list = dao.getAllReviewsFromId(id);
@@ -52,12 +53,11 @@ public class ProductDetailServlet extends HttpServlet {
             }
             averageRating = (totalRating / list.size());
         }
-
-        x.setImage(imageUrl);
-        System.out.println(x.getImage());
+        
         request.setAttribute("product_detail", x);
         request.setAttribute("reviewproductlist", list);
         request.setAttribute("ratting", averageRating);
+        response.getWriter().println(x);
         request.getRequestDispatcher("ProductDetail.jsp").forward(request, response);
     }
 
